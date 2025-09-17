@@ -1,0 +1,30 @@
+image: node:20-alpine  
+
+stages:
+  - test
+  - build
+
+cache:
+  paths:
+    - node_modules/
+
+test:
+  stage: test
+  script:
+    - npm ci  # Clean install (faster than npm install)
+    - npm run test  # Runs Jest or your test command
+  artifacts:
+    reports:
+      junit: coverage/junit.xml  # Optional: For test reports in GitLab UI (if using Jest coverage)
+
+build:
+  stage: build
+  script:
+    - npm ci
+    - npm run build  # Compiles to /dist
+  artifacts:
+    paths:
+      - dist/  # Pass built files to next stages
+    expire_in: 1 hour  # Keep artifacts short-lived
+  only:
+    - main  # Run only on main branch (adjust as needed)

@@ -1,9 +1,9 @@
-
 # Node modules
 node_modules/
 
 # Environment files
 .env
+.env.*
 
 # Logs
 logs
@@ -22,3 +22,7 @@ build/
 
 # Coverage
 coverage/
+
+# Local database files (SQLite)
+*.db
+*.db-journal
