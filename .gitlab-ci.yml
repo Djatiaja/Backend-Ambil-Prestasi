@@ -13,9 +13,6 @@ test:
   script:
     - npm ci  # Clean install (faster than npm install)
     - npm run test  # Runs Jest or your test command
-  artifacts:
-    reports:
-      junit: coverage/junit.xml  # Optional: For test reports in GitLab UI (if using Jest coverage)
 
 build:
   stage: build
