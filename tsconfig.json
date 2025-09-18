@@ -1,15 +1,18 @@
 {
   "compilerOptions": {
-    "target": "ES2020", // Modern JS features
-    "module": "CommonJS", // Node.js style imports/exports
-    "rootDir": "src", // Main app code lives in src/
-    "outDir": "dist", // Compiled output goes here
-    "strict": true, // Enables strict type-checking
-    "esModuleInterop": true, // Lets you import CommonJS modules cleanly
-    "skipLibCheck": true // Speeds up compilation (ignores .d.ts checks)
+    "target": "ES2020",
+    "module": "CommonJS",
+    "rootDir": "src",
+    "outDir": "dist",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true
   },
   "include": [
-    "src", // Include your main app code
-    "src/database/seed.ts" // ✅ Explicit exception so Prisma can live outside src
+    "src"
+  ],
+  "exclude": [
+    "tests",
+    "dist"
   ]
 }

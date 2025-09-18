@@ -10,7 +10,7 @@
     "dev": "nodemon --watch src --exec ts-node src/server.ts",
     "build": "tsc",
     "start": "node dist/server.js",
-    "test": "jest NODE_ENV=test --runInBand",
+    "test": "NODE_ENV=test jest --runInBand",
     "seed": "ts-node src/database/seed.ts"
   },
   "keywords": [],
