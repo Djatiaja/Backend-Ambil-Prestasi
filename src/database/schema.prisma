@@ -1,0 +1,256 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+enum xp_source {
+  Quiz
+  Assignment
+}
+
+enum class_role {
+  Student
+  Teacher
+  Admin
+}
+
+enum quiz_question_type {
+  MultipleChoice
+  TrueFalse
+  Essay
+}
+
+model Role {
+  id        Int      @id @default(autoincrement())
+  name      String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  users     User[]
+}
+
+model User {
+  id              String            @id @default(uuid())
+  email           String            @unique
+  username        String            @unique
+  name            String
+  password        String
+  profileImage    String
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+  role            Role              @relation(fields: [roleId], references: [id])
+  roleId          Int
+  xps             XP[]
+  User_Class      User_Class[]
+  User_Material   User_Material[]
+  user_assignment User_Assignment[]
+  quiz_attempt    Quiz_Attempt[]
+}
+
+model XP {
+  id        String    @id @default(uuid())
+  source    xp_source
+  sourceId  String
+  points    Int
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  userId String
+  User   User   @relation(fields: [userId], references: [id])
+}
+
+model Class {
+  id          Int          @id @default(autoincrement())
+  name        String
+  description String
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+  User_Class  User_Class[]
+}
+
+model User_Class {
+  id        Int        @id @default(autoincrement())
+  role      class_role
+  userId    String
+  classId   Int
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+
+  user  User  @relation(fields: [userId], references: [id])
+  class Class @relation(fields: [classId], references: [id])
+
+  @@unique([userId, classId])
+}
+
+model Section {
+  id          Int          @id @default(autoincrement())
+  title       String
+  description String
+  order       Int
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+  Material    Material[]
+  Assignment  Assignment[]
+}
+
+model Material {
+  id        Int      @id @default(autoincrement())
+  title     String
+  content   String
+  xp        Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  sectionId     Int
+  Section       Section         @relation(fields: [sectionId], references: [id])
+  Material_File Material_File[]
+  User_Material User_Material[]
+}
+
+model Material_File {
+  id        Int      @id @default(autoincrement())
+  path      String
+  type      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  materialId Int
+  Material   Material @relation(fields: [materialId], references: [id])
+}
+
+model User_Material {
+  id           Int      @id @default(autoincrement())
+  is_completed Boolean
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  userId       String
+  materialId   Int
+  User         User     @relation(fields: [userId], references: [id])
+  Material     Material @relation(fields: [materialId], references: [id])
+
+  @@unique([userId, materialId])
+}
+
+model Assignment {
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String
+  open_at     DateTime
+  close_at    DateTime
+  xp          Int
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  sectionId       Int
+  Section         Section           @relation(fields: [sectionId], references: [id])
+  user_assignment User_Assignment[]
+}
+
+model User_Assignment {
+  id           Int      @id @default(autoincrement())
+  submission   String
+  is_graded    Boolean  @default(false)
+  grade        Int?
+  path         String?
+  submitted_at DateTime @default(now())
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  userId       String
+  assignmentId Int
+  User         User       @relation(fields: [userId], references: [id])
+  Assignment   Assignment @relation(fields: [assignmentId], references: [id])
+
+  @@unique([userId, assignmentId])
+}
+
+model Quiz {
+  id            Int             @id @default(autoincrement())
+  title         String
+  description   String
+  max_attempts  Int
+  time_limit    Int // in minutes
+  open_at       DateTime
+  close_at      DateTime
+  passing_grade Int
+  xp            Int
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+  quiz_question Quiz_Question[]
+  quiz_attempt  Quiz_Attempt[]
+}
+
+model Quiz_Question {
+  id        Int      @id @default(autoincrement())
+  question  String
+  type      String
+  points    Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  quizId        Int
+  quiz          Quiz            @relation(fields: [quizId], references: [id])
+  quiz_answer   Quiz_Answer[]
+  attemp_answer Attemp_Answer[]
+}
+
+model Quiz_Answer {
+  id         Int      @id @default(autoincrement())
+  answer     String
+  is_correct Boolean
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  questionId             Int
+  quiz_question          Quiz_Question            @relation(fields: [questionId], references: [id])
+  attemp_multiple_answer Attemp_Multiple_Answer[]
+}
+
+model Quiz_Attempt {
+  id        Int      @id @default(autoincrement())
+  score     Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  userId        String
+  quizId        Int
+  User          User            @relation(fields: [userId], references: [id])
+  quiz          Quiz            @relation(fields: [quizId], references: [id])
+  attemp_answer Attemp_Answer[]
+}
+
+model Attemp_Answer {
+  id        Int      @id @default(autoincrement())
+  path      String?
+  answer    String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  attemptId              Int
+  questionId             Int
+  quiz_attempt           Quiz_Attempt             @relation(fields: [attemptId], references: [id])
+  quiz_question          Quiz_Question            @relation(fields: [questionId], references: [id])
+  attemp_multiple_answer Attemp_Multiple_Answer[]
+}
+
+model Attemp_Multiple_Answer {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  attempt_answerId Int
+  answerId         Int
+  attemp_answer    Attemp_Answer @relation(fields: [attempt_answerId], references: [id])
+  quiz_answer      Quiz_Answer   @relation(fields: [answerId], references: [id])
+
+  @@unique([attempt_answerId, answerId])
+}

@@ -13,6 +13,9 @@ test:
   script:
     - npm ci  # Clean install (faster than npm install)
     - npm run test  # Runs Jest or your test command
+  only:
+    - merge_requests  # Run tests on MRs
+    - main  # Also run on main branch (adjust as needed)
 
 build:
   stage: build
