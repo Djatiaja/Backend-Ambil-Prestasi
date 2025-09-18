@@ -28,6 +28,7 @@ run_tests:
   only:
     - merge_requests
     - main
+    - dev
 
 build_project:
   image: node:${NODE_VERSION}-alpine
