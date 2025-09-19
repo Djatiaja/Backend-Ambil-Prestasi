@@ -1,13 +1,9 @@
 import express, { Request, Response } from "express";
+import router from "./api/v1/routes";
 
 const app = express();
 
-// Middleware
 app.use(express.json());
-
-// Routes
-app.get("/", (req: Request, res: Response) => {
-  res.send("It works!");
-});
+app.use("/api/v1", router);
 
 export default app;

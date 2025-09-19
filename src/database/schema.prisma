@@ -16,6 +16,7 @@ datasource db {
 enum xp_source {
   Quiz
   Assignment
+  Material
 }
 
 enum class_role {
@@ -45,18 +46,19 @@ model User {
   name            String
   password        String
   profileImage    String
+  verified_at     DateTime?
   createdAt       DateTime          @default(now())
   updatedAt       DateTime          @updatedAt
   role            Role              @relation(fields: [roleId], references: [id])
   roleId          Int
-  xps             XP[]
+  xps             Xp[]
   User_Class      User_Class[]
   User_Material   User_Material[]
   user_assignment User_Assignment[]
   quiz_attempt    Quiz_Attempt[]
 }
 
-model XP {
+model Xp {
   id        String    @id @default(uuid())
   source    xp_source
   sourceId  String
@@ -71,10 +73,11 @@ model XP {
 model Class {
   id          Int          @id @default(autoincrement())
   name        String
-  description String
+  description String       @db.LongText
   createdAt   DateTime     @default(now())
   updatedAt   DateTime     @updatedAt
   User_Class  User_Class[]
+  Section     Section[]
 }
 
 model User_Class {
@@ -94,10 +97,12 @@ model User_Class {
 model Section {
   id          Int          @id @default(autoincrement())
   title       String
-  description String
+  description String       @db.LongText
   order       Int
   createdAt   DateTime     @default(now())
   updatedAt   DateTime     @updatedAt
+  classId     Int
+  Class       Class        @relation(fields: [classId], references: [id])
   Material    Material[]
   Assignment  Assignment[]
 }
@@ -105,7 +110,7 @@ model Section {
 model Material {
   id        Int      @id @default(autoincrement())
   title     String
-  content   String
+  content   String   @db.LongText
   xp        Int
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -117,12 +122,10 @@ model Material {
 }
 
 model Material_File {
-  id        Int      @id @default(autoincrement())
-  path      String
-  type      String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
+  id         Int      @id @default(autoincrement())
+  path       String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
   materialId Int
   Material   Material @relation(fields: [materialId], references: [id])
 }
