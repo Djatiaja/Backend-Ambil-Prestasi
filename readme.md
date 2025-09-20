@@ -1,7 +1,14 @@
-# Backend Project
+<h1 align="center">Backend LMS Sekolah Alam</h1>
 
-## Description
-This is a Node.js backend project built with TypeScript, Express, and Prisma. It provides a robust setup for developing, testing, and deploying a backend application. The project includes scripts for development, testing, linting, and database seeding, along with a configured CI/CD pipeline using Husky for commit linting.
+## Description  
+This is a **Node.js backend project** built with **TypeScript, Express, and Prisma** to support the **Sekolah Alam Learning Management System (LMS)**.  
+The platform focuses on delivering accessible education, particularly around **environmental awareness** and **food security**, for students in rural areas.  
+
+## Key Features  
+- **User Management**: Students, teachers, and volunteers.  
+- **Learning Materials**: Delivery of videos, texts, and images.  
+- **Collaboration**: Tools to enable community-based learning.  
+- **Progress Tracking**: Monitor achievements and learning outcomes.  
 
 ## Table of Contents
 - [Prerequisites](#prerequisites)
