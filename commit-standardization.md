@@ -1,84 +1,55 @@
-# Commit Message Standardization with Husky and Commitlint
+# Panduan Menulis Commit Message
 
-This guide explains how to set up commit message standardization using the **Conventional Commits** standard with **Husky** and **Commitlint** in a Node.js project.
-
-## Prerequisites
-- Node.js and npm installed
-- A Git repository initialized in your project
-
-## Steps
-
-### 1. Install Dependencies
-Install Commitlint and Husky as dev dependencies.
-
-```bash
-npm install --save-dev @commitlint/cli @commitlint/config-conventional husky
-```
-
-### 2. Configure Commitlint
-Create a Commitlint configuration file to enforce the Conventional Commits standard.
-
-```bash
-echo "module.exports = { extends: ['@commitlint/config-conventional'] };" > commitlint.config.js
-```
-
-### 3. Set Up Husky
-Initialize Husky to manage Git hooks.
-
-```bash
-npx husky install
-```
-
-Add a `commit-msg` hook to validate commit messages using Commitlint.
-
-```bash
-npx husky add .husky/commit-msg 'npx --no -- commitlint --edit $1'
-```
-
-### 4. Update package.json
-Add a script to ensure Husky is set up when dependencies are installed.
-
-```json
-{
-  "scripts": {
-    "prepare": "husky install"
-  }
-}
-```
-
-### 5. Test the Setup
-Try a commit with a valid Conventional Commits message:
-
-```bash
-git commit -m "feat(config): add commitlint with husky"
-```
-
-Try an invalid message to verify enforcement:
-
-```bash
-git commit -m "Added new feature"
-```
-
-This should fail with a Commitlint error.
-
-## Commit Message Format
-Follow the **Conventional Commits** standard:
+## Format Commit Message (Conventional Commits)
+Gunakan format berikut untuk setiap *commit message*:
 
 ```
 <type>(<scope>): <subject>
 ```
 
-- **type**: `feat`, `fix`, `docs`, `style`, `refactor`, `perf`, `test`, `build`, `ci`, `chore`, `revert`
-- **scope**: Optional, e.g., `auth`, `db`, `api`
-- **subject**: Short, imperative, under 50 characters, no period
+### Penjelasan Komponen
+- **type**: Jenis perubahan yang dilakukan. Pilihan umum meliputi:
+  - `feat`: Fitur baru.
+  - `fix`: Perbaikan bug.
+  - `docs`: Perubahan pada dokumentasi.
+  - `style`: Perubahan format kode (tanpa mengubah logika).
+  - `refactor`: Refaktor kode tanpa menambah fitur atau memperbaiki bug.
+  - `perf`: Peningkatan performa.
+  - `test`: Penambahan atau perbaikan tes.
+  - `build`: Perubahan pada sistem build atau dependensi.
+  - `ci`: Perubahan pada konfigurasi CI/CD.
+  - `chore`: Perubahan kecil lainnya (misalnya, pembaruan dependensi).
+  - `revert`: Membatalkan commit sebelumnya.
+- **scope**: (Opsional) Bagian proyek yang terpengaruh, misalnya `auth`, `db`, `api`.
+- **subject**: Deskripsi singkat (maksimal 50 karakter), ditulis dalam kalimat perintah, tanpa tanda titik di akhir.
 
-### Examples
-- `feat(api): add user signup endpoint`
-- `fix(db): resolve connection timeout issue`
-- `docs: update README with setup guide`
-- `chore: update dependencies`
+### Contoh Commit Message
+- `feat(api): menambahkan endpoint registrasi pengguna`
+- `fix(db): memperbaiki masalah timeout koneksi`
+- `docs: memperbarui panduan instalasi di README`
+- `chore: memperbarui dependensi ke versi terbaru`
 
-## Troubleshooting
-- **Husky not running**: Ensure `husky install` ran and `.husky/` exists.
-- **Commitlint errors**: Verify `commitlint.config.js` is correctly set up.
-- **Permissions issue**: Run `chmod +x .husky/commit-msg` to make the hook executable.
+## Aturan Penulisan Commit Message
+1. **Gunakan kalimat perintah**: Tulis *subject* dalam bentuk imperatif, misalnya "tambahkan" bukan "menambahkan" atau "ditambahkan".
+2. **Pendek dan jelas**: Jaga *subject* di bawah 50 karakter untuk kejelasan.
+3. **Gunakan huruf kecil**: Kecuali untuk nama khusus, gunakan huruf kecil untuk *type* dan *scope*.
+4. **Sertakan detail jika perlu**: Tambahkan penjelasan lebih lanjut di *body* commit (opsional) setelah baris kosong.
+   - Contoh:
+     ```
+     feat(auth): menambahkan login dengan OAuth
+
+     Menambahkan integrasi OAuth 2.0 untuk autentikasi pengguna.
+     Memperbarui dokumentasi API dan menambahkan tes unit.
+     ```
+
+## Pemecahan Masalah
+- **Husky tidak berjalan**: Pastikan `husky install` telah dijalankan dan folder `.husky/` ada.
+- **Error Commitlint**: Periksa apakah file `commitlint.config.js` dikonfigurasi dengan benar.
+- **Masalah izin**: Jalankan `chmod +x .husky/commit-msg` untuk memastikan *hook* dapat dieksekusi.
+
+## Tips Tambahan
+- **Gunakan alat bantu**: Pertimbangkan alat seperti `commitizen` untuk memandu penulisan *commit message*.
+- **Konsisten**: Pastikan semua anggota tim mengikuti standar yang sama.
+- **Periksa riwayat**: Gunakan `git log` untuk memastikan *commit message* jelas dan terstruktur.
+
+Dengan mengikuti panduan ini, Anda dapat memastikan *commit message* yang konsisten, informatif, dan mendukung kolaborasi tim yang lebih baik.
