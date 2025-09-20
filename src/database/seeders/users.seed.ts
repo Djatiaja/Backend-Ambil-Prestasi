@@ -1,6 +1,6 @@
 import { hash } from "crypto";
 import prisma from "..";
-import { randUserName } from "@ngneat/falso";
+import { randPastDate, randUserName } from "@ngneat/falso";
 
 const hashedPassword = hash("sha256", "password123");
 
@@ -15,7 +15,6 @@ export const usersSeed = async () => {
         throw new Error("Roles must be seeded before seeding users.");
     }
 
-    // FIXME: Change to createdAt to scatter on different times
     await prisma.user.create({
         data: {
             username: "admin",
@@ -23,7 +22,8 @@ export const usersSeed = async () => {
             name: "Admin User",
             roleId: adminRole.id,
             profileImage: "https://ui-avatars.com/api/?name=Admin+User&background=random",
-            password: hashedPassword
+            password: hashedPassword,
+            createdAt: randPastDate({ years: 1 }),
         }
     });
 
@@ -35,7 +35,8 @@ export const usersSeed = async () => {
                 name: randUserName(),
                 roleId: teacherRole.id,
                 profileImage: `https://ui-avatars.com/api/?name=Teacher+${index + 1}&background=random`,
-                password: hashedPassword
+                password: hashedPassword,
+                createdAt: randPastDate({ years: 1 }),
             }
         });
     }
@@ -47,7 +48,8 @@ export const usersSeed = async () => {
                 name: randUserName(),
                 roleId: studentRole.id,
                 profileImage: `https://ui-avatars.com/api/?name=Student+${index + 1}&background=random`,
-                password: hashedPassword
+                password: hashedPassword,
+                createdAt: randPastDate({ years: 1 }),
             }
         });
     }

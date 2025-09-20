@@ -95,17 +95,18 @@ model User_Class {
 }
 
 model Section {
-  id          Int          @id @default(autoincrement())
+  id          Int      @id @default(autoincrement())
   title       String
-  description String       @db.LongText
+  description String   @db.LongText
   order       Int
-  createdAt   DateTime     @default(now())
-  updatedAt   DateTime     @updatedAt
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
   classId     Int
-  Class       Class        @relation(fields: [classId], references: [id])
-  Material    Material[]
-  Assignment  Assignment[]
-  Quiz        Quiz[]
+  Class       Class    @relation(fields: [classId], references: [id])
+
+  Material   Material[]
+  Assignment Assignment[]
+  Quiz       Quiz[]
 }
 
 model Material {
@@ -196,12 +197,12 @@ model Quiz {
 }
 
 model Quiz_Question {
-  id        Int      @id @default(autoincrement())
+  id        Int                @id @default(autoincrement())
   question  String
-  type      String
+  type      quiz_question_type
   points    Int
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt DateTime           @default(now())
+  updatedAt DateTime           @updatedAt
 
   quizId        Int
   quiz          Quiz            @relation(fields: [quizId], references: [id])
@@ -257,6 +258,4 @@ model Attemp_Multiple_Answer {
   answerId         Int
   attemp_answer    Attemp_Answer @relation(fields: [attempt_answerId], references: [id])
   quiz_answer      Quiz_Answer   @relation(fields: [answerId], references: [id])
-
-  @@unique([attempt_answerId, answerId])
 }

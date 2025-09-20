@@ -30,7 +30,7 @@ CREATE TABLE `User` (
 -- CreateTable
 CREATE TABLE `Xp` (
     `id` VARCHAR(191) NOT NULL,
-    `source` ENUM('Quiz', 'Assignment') NOT NULL,
+    `source` ENUM('Quiz', 'Assignment', 'Material') NOT NULL,
     `sourceId` VARCHAR(191) NOT NULL,
     `points` INTEGER NOT NULL,
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
@@ -132,7 +132,6 @@ CREATE TABLE `Assignment` (
 -- CreateTable
 CREATE TABLE `User_Assignment` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
-    `submission` VARCHAR(191) NOT NULL,
     `is_graded` BOOLEAN NOT NULL DEFAULT false,
     `grade` INTEGER NULL,
     `path` VARCHAR(191) NULL,
@@ -150,7 +149,7 @@ CREATE TABLE `User_Assignment` (
 CREATE TABLE `Quiz` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `title` VARCHAR(191) NOT NULL,
-    `description` VARCHAR(191) NOT NULL,
+    `description` LONGTEXT NOT NULL,
     `max_attempts` INTEGER NOT NULL,
     `time_limit` INTEGER NOT NULL,
     `open_at` DATETIME(3) NOT NULL,
@@ -159,6 +158,7 @@ CREATE TABLE `Quiz` (
     `xp` INTEGER NOT NULL,
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updatedAt` DATETIME(3) NOT NULL,
+    `sectionId` INTEGER NOT NULL,
 
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
@@ -167,7 +167,7 @@ CREATE TABLE `Quiz` (
 CREATE TABLE `Quiz_Question` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `question` VARCHAR(191) NOT NULL,
-    `type` VARCHAR(191) NOT NULL,
+    `type` ENUM('MultipleChoice', 'TrueFalse', 'Essay') NOT NULL,
     `points` INTEGER NOT NULL,
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updatedAt` DATETIME(3) NOT NULL,
@@ -221,7 +221,6 @@ CREATE TABLE `Attemp_Multiple_Answer` (
     `attempt_answerId` INTEGER NOT NULL,
     `answerId` INTEGER NOT NULL,
 
-    UNIQUE INDEX `Attemp_Multiple_Answer_attempt_answerId_answerId_key`(`attempt_answerId`, `answerId`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
@@ -260,6 +259,9 @@ ALTER TABLE `User_Assignment` ADD CONSTRAINT `User_Assignment_userId_fkey` FOREI
 
 -- AddForeignKey
 ALTER TABLE `User_Assignment` ADD CONSTRAINT `User_Assignment_assignmentId_fkey` FOREIGN KEY (`assignmentId`) REFERENCES `Assignment`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `Quiz` ADD CONSTRAINT `Quiz_sectionId_fkey` FOREIGN KEY (`sectionId`) REFERENCES `Section`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE `Quiz_Question` ADD CONSTRAINT `Quiz_Question_quizId_fkey` FOREIGN KEY (`quizId`) REFERENCES `Quiz`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
