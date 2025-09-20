@@ -105,6 +105,7 @@ model Section {
   Class       Class        @relation(fields: [classId], references: [id])
   Material    Material[]
   Assignment  Assignment[]
+  Quiz        Quiz[]
 }
 
 model Material {
@@ -160,7 +161,6 @@ model Assignment {
 
 model User_Assignment {
   id           Int      @id @default(autoincrement())
-  submission   String
   is_graded    Boolean  @default(false)
   grade        Int?
   path         String?
@@ -177,17 +177,20 @@ model User_Assignment {
 }
 
 model Quiz {
-  id            Int             @id @default(autoincrement())
+  id            Int      @id @default(autoincrement())
   title         String
-  description   String
+  description   String   @db.LongText
   max_attempts  Int
   time_limit    Int // in minutes
   open_at       DateTime
   close_at      DateTime
   passing_grade Int
   xp            Int
-  createdAt     DateTime        @default(now())
-  updatedAt     DateTime        @updatedAt
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  sectionId     Int
+  Section       Section         @relation(fields: [sectionId], references: [id])
   quiz_question Quiz_Question[]
   quiz_attempt  Quiz_Attempt[]
 }

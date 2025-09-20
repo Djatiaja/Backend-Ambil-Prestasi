@@ -15,6 +15,7 @@ export const usersSeed = async () => {
         throw new Error("Roles must be seeded before seeding users.");
     }
 
+    // FIXME: Change to createdAt to scatter on different times
     await prisma.user.create({
         data: {
             username: "admin",
