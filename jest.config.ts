@@ -7,7 +7,8 @@ const config: Config.InitialOptions = {
     "**/__tests__/**/*.ts",
     "**/?(*.)+(spec|test).ts"
   ],
-  clearMocks: true
+  clearMocks: true,
+  setupFiles: ['./jest.setup.js'],
 };
 
 export default config;
