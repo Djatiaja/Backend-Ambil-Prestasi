@@ -6,7 +6,7 @@ type SendResponseParams<Tdata> = {
     success: boolean;
     message: string;
     data: Tdata;
-    error?: string[];
+    errors?: Record<string, string[]>;
     meta?: {
         totalItems: number;
         itemCount: number;
@@ -22,7 +22,7 @@ export function sendResponse<Tdata>({
     success,
     message,
     data,
-    error,
+    errors,
     meta,
 }: SendResponseParams<Tdata>) {
     const response: BaseResponse<Tdata> = {
@@ -30,7 +30,7 @@ export function sendResponse<Tdata>({
         message,
         data,
         meta,
-        error: error ? [...error] : [],
+        errors: errors ?? undefined,
     };
     return res.status(statusCode).json(response);
 }

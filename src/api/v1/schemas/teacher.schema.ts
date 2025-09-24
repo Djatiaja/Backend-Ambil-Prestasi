@@ -1,11 +1,40 @@
 import z from "zod";
+import { userRepository } from "../repositories/user.repository";
 
-const teacherSchema = z.object({
-    id: z.string().uuid(),
-    name: z.string().min(2).max(100),
+export const teacherCreateSchema = z.object({
+    name: z.string().min(4).max(100),
+    username: z.string().min(4).max(50).optional(),
     email: z.string().email(),
-    subject: z.string().min(2).max(100),
-    yearsOfExperience: z.number().min(0).optional()
-});
+    password: z.string().min(8).max(100),
+    passwordConfirmation: z.string().min(8).max(100),
+}).superRefine(async (data, ctx) => {
+    if (data.password !== data.passwordConfirmation) {
+        ctx.addIssue({
+            code: "custom",
+            message: "Passwords don't match",
+            path: ["passwordConfirmation"],
+        });
+    }
 
-export default teacherSchema;
+    // Check if email is already taken
+    const existingEmail = await userRepository.getUser({ email: data.email });
+    if (existingEmail) {
+        ctx.addIssue({
+            code: "custom",
+            message: "Email is already in use",
+            path: ["email"],
+        });
+    }
+
+    // Check if username is already taken (if provided)
+    if (data.username) {
+        const existingUsername = await userRepository.getUser({ username: data.username });
+        if (existingUsername) {
+            ctx.addIssue({
+                code: "custom",
+                message: "Username is already in use",
+                path: ["username"],
+            });
+        }
+    }
+});

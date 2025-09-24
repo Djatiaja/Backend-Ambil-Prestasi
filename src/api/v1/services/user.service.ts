@@ -1,30 +1,20 @@
 import { User } from "@prisma/client";
 import prisma from "../../../database";
 import { BaseResponse } from "../types/responseType";
+import { userRepository } from "../repositories/user.repository";
 class UserService {
     async getAllUsers(data: { role: string, limit?: number, page?: number, isDeleted?: boolean }) {
         const { role, limit, page, isDeleted } = data;
-        const users = await prisma.user.findMany({
-            where: {
-                role: {
-                    name: role,
-                },
-            },
-            include: { role: true }
-        });
+        const users = await userRepository.getUsers(role, limit ?? 10, page ?? 1);
+        const userCount = await userRepository.countUsersByRole(role);
 
         const meta: BaseResponse<User>["meta"] = {
-            itemCount: limit && page ? users.slice((page - 1) * limit, page * limit).length : users.length,
-            totalItems: users.length,
-            itemsPerPage: limit || users.length,
-            totalPages: limit ? Math.ceil(users.length / limit) : 1,
+            itemCount: userCount,
+            totalItems: userCount,
+            itemsPerPage: limit ?? 10,
+            totalPages: limit ? Math.ceil(userCount / limit) : 1,
             currentPage: page || 1
         };
-        if (limit && page) {
-            const startIndex = (page - 1) * limit;
-            const endIndex = page * limit;
-            return { users: users.slice(startIndex, endIndex), meta: meta };
-        }
 
         return { users, meta };
     }

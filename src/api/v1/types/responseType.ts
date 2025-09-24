@@ -9,5 +9,5 @@ export interface BaseResponse<Tdata> {
         totalPages: number;
         currentPage: number;
     };
-    error: string[];
+    errors?: Record<string, string[]>;
 }

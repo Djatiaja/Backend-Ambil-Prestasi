@@ -10,7 +10,7 @@
     "dev": "nodemon --watch src --exec ts-node src/server.ts",
     "build": "tsc",
     "start": "node dist/server.js",
-    "test": "jest --detectOpenHandles --watch",
+    "test": "jest --watch",
     "test:unit": "NODE_ENV=test jest --runInBand tests/unit",
     "test:feature": "NODE_ENV=test jest --runInBand tests/feature",
     "seed": "ts-node src/database/seed.ts",
@@ -28,6 +28,7 @@
   "dependencies": {
     "@ngneat/falso": "^8.0.2",
     "@prisma/client": "^6.16.2",
+    "body-parser": "^2.2.0",
     "express": "^5.1.0",
     "prisma": "^6.16.2",
     "zod": "^4.1.11"

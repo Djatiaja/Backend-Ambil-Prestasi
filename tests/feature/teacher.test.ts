@@ -234,6 +234,7 @@ describe("Feature Guru", () => {
                     .expect(200)
                     .expect("Content-Type", /json/)
                     .expect((res) => {
+                        console.log(res.body)
                         expect(res.body).toHaveProperty("success", true);
                         expect(res.body).toHaveProperty("message");
                         expect(res.body).toHaveProperty("data");

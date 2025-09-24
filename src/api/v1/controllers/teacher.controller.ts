@@ -2,6 +2,7 @@ import userService from "../services/user.service";
 import { sendResponse } from "../helpers/baseResponse";
 import { Request, Response } from "express";
 import { User } from "@prisma/client";
+
 // TODO: Implement zod for validation
 
 export const getAllTeachers = async (req: Request, res: Response) => {
@@ -33,6 +34,7 @@ export const createTeacher = async (req: Request, res: Response) => {
         const newTeacher = await userService.createUser({ name, email, password, role: "Teacher", username: username || email });
         sendResponse({ res, statusCode: 201, success: true, message: "Teacher created successfully", data: newTeacher });
     } catch (error) {
+        console.error(req.body, error);
         sendResponse({ res, statusCode: 500, success: false, message: "Error creating teacher", data: null });
     }
 };
