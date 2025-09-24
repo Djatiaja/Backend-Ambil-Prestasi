@@ -2,6 +2,8 @@ import supertest from "supertest";
 import app from "../../src";
 import { User } from "@prisma/client";
 import prisma from "../../src/database";
+import { error } from "console";
+import { string } from "zod";
 
 const generateToken = async (role: string, userId?: string) => {
     return role === "Admin" ? "mock-admin-token" : `mock-teacher-token-${userId}`;
@@ -133,6 +135,7 @@ describe("Feature Guru", () => {
                     email: "new.teacher@example.com",
                     username: "newteacher",
                     password: "password",
+                    passwordConfirmation: "password",
                     profileImage: "http://example.com/profile.jpg",
                 };
 
@@ -167,12 +170,18 @@ describe("Feature Guru", () => {
                         name: "New Teacher",
                         email: "existing.teacher@example.com",
                         username: "newteacher",
+                        password: "password",
+                        passwordConfirmation: "password"
                     })
                     .expect(400)
                     .expect("Content-Type", /json/)
                     .expect((res) => {
+
                         expect(res.body.success).toBe(false);
-                        expect(res.body.message).toContain("email");
+                        expect(res.body.message).toContain("validation");
+                        res.body.errors["email"].forEach((err: any) => {
+                            expect(err).toContain("in use")
+                        });
                     });
             });
 
@@ -188,13 +197,15 @@ describe("Feature Guru", () => {
                         name: "New Teacher",
                         email: "new.teacher@example.com",
                         username: "existingteacher",
+                        password: "password",
+                        passwordConfirmation: "password"
                     })
                     .expect(400)
                     .expect("Content-Type", /json/)
                     .expect((res) => {
                         expect(res.body.success).toBe(false);
-                        res.body.error.forEach((err: string) => {
-                            expect(err).toContain("username");
+                        res.body.errors["username"].forEach((err: any) => {
+                            expect(err).toContain("in use")
                         });
                     });
             });
@@ -207,17 +218,21 @@ describe("Feature Guru", () => {
                         name: "",
                         email: "new.teacher@example.com",
                         username: "newteacher",
+                        password: "password",
+                        passwordConfirmation: "password"
                     })
                     .expect(400)
                     .expect("Content-Type", /json/)
                     .expect((res) => {
                         expect(res.body.success).toBe(false);
-                        res.body.error.forEach((err: string) => {
-                            expect(err).toContain("name");
+                        const errors: Record<string, string[]>[] = res.body.errors;
+                        res.body.errors["name"].forEach((err: any) => {
+                            expect(err).toContain("Too small")
                         });
                     });
             });
         });
+
 
         describe("GET /api/v1/teachers/:id", () => {
             it("Harus mengembalikan detail guru berupa nama, username, email, dan profile berdasarkan ID", async () => {
@@ -234,7 +249,6 @@ describe("Feature Guru", () => {
                     .expect(200)
                     .expect("Content-Type", /json/)
                     .expect((res) => {
-                        console.log(res.body)
                         expect(res.body).toHaveProperty("success", true);
                         expect(res.body).toHaveProperty("message");
                         expect(res.body).toHaveProperty("data");

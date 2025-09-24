@@ -23,15 +23,18 @@ class UserRepository {
         return users;
     }
 
-    async getUser(data: { email?: string, username?: string, id?: string }): Promise<User | null> {
-        return await prisma.user.findUnique({
+    async getUser(data: { email?: string; username?: string; id?: string }): Promise<User | null> {
+        return await prisma.user.findFirst({
             where: {
-                email: data.email,
-                username: data.username,
-                id: data.id
-            }
-        })
+                OR: [
+                    data.email ? { email: data.email } : {},
+                    data.username ? { username: data.username } : {},
+                    data.id ? { id: data.id } : {},
+                ],
+            },
+        });
     }
+
 
     async createUser(data: { name: string; email: string; password: string; role: string; username: string; profileImage?: string; }) {
         const { name, email, password, role, username, profileImage } = data;

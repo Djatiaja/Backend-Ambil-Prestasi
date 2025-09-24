@@ -1,16 +1,14 @@
-import { NextFunction, Request, RequestHandler, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import { ZodError, ZodSchema } from "zod";
 import { sendResponse } from "../helpers/baseResponse";
 
 export const validateBody =
-    (schema: ZodSchema) => (request: Request, response: Response, next: NextFunction) => {
+    (schema: ZodSchema) => async (request: Request, response: Response, next: NextFunction) => {
         try {
-            schema.parse(request.body);
+            await schema.parseAsync(request.body);
             next();
         } catch (err: unknown) {
             if (err instanceof ZodError) {
-
-                // Group issues by field
                 const errors: Record<string, string[]> = {};
 
                 err.issues.forEach(issue => {
@@ -22,7 +20,7 @@ export const validateBody =
                 });
 
                 sendResponse({
-                    res: response, statusCode: 500, success: false, message: "Request validation fail", data: null, errors: errors
+                    res: response, statusCode: 400, success: false, message: "Request validation fail", data: null, errors: errors
                 });
             }
         }

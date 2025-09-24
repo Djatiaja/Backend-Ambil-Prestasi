@@ -25,12 +25,7 @@ export const getAllTeachers = async (req: Request, res: Response) => {
 export const createTeacher = async (req: Request, res: Response) => {
     try {
         const { name, email, password, username } = req.body;
-
-        if (!name || !email || !password) {
-            return sendResponse({ res: res, statusCode: 400, success: false, message: "Name, email, and password are required", data: null });
-        }
         // TODO: Add username generator
-        // TODO: Add validation for email and password strength
         const newTeacher = await userService.createUser({ name, email, password, role: "Teacher", username: username || email });
         sendResponse({ res, statusCode: 201, success: true, message: "Teacher created successfully", data: newTeacher });
     } catch (error) {
