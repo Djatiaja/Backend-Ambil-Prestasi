@@ -6,8 +6,8 @@ import { userRepository } from "../repositories/user.repository";
 class UserService {
     async getAllUsers(data: { role: string, limit?: number, page?: number, isDeleted?: boolean, search?: string }) {
         const { role, limit, page, isDeleted, search } = data;
-        const users = await userRepository.getUsers(role, limit ?? 10, page ?? 1, search == undefined ? search : "");
-        const userCount = await userRepository.countUsers({ roleName: role });
+        const users = await userRepository.getUsers(role, limit ?? 10, page ?? 1, search);
+        const userCount = await userRepository.countUsers({ roleName: role, search });
 
         const meta: BaseResponse<User>["meta"] = {
             itemCount: userCount,
