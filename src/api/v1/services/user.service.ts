@@ -4,9 +4,9 @@ import { BaseResponse } from "../types/responseType";
 import { userRepository } from "../repositories/user.repository";
 
 class UserService {
-    async getAllUsers(data: { role: string, limit?: number, page?: number, isDeleted?: boolean }) {
-        const { role, limit, page, isDeleted } = data;
-        const users = await userRepository.getUsers(role, limit ?? 10, page ?? 1);
+    async getAllUsers(data: { role: string, limit?: number, page?: number, isDeleted?: boolean, search?: string }) {
+        const { role, limit, page, isDeleted, search } = data;
+        const users = await userRepository.getUsers(role, limit ?? 10, page ?? 1, search == undefined ? search : "");
         const userCount = await userRepository.countUsers({ roleName: role });
 
         const meta: BaseResponse<User>["meta"] = {
@@ -108,7 +108,6 @@ class UserService {
                 yearlyCounts[year] += 1;
             }
 
-            console.log(year, month)
         });
 
         return {

@@ -9,8 +9,27 @@ class UserRepository {
         });
     }
 
-    async getUsers(roleName?: string, limit: number = 10, page: number = 1): Promise<User[]> {
-        const users = await prisma.user.findMany({
+    async getUsers(roleName?: string, limit: number = 10, page: number = 1, search?: string): Promise<User[]> {
+        if (search) {
+
+            return await prisma.user.findMany({
+                take: limit,
+                skip: page > 0 ? (page - 1) * limit : 0,
+                where: {
+                    role: {
+                        name: roleName,
+                    },
+                    OR: [
+                        { name: { contains: search } },
+                        { email: { contains: search } },
+                        { username: { contains: search } },
+                    ],
+                },
+                include: { role: true }
+            });
+
+        }
+        return await prisma.user.findMany({
             take: limit,
             skip: page > 0 ? (page - 1) * limit : 0,
             where: {
@@ -20,7 +39,6 @@ class UserRepository {
             },
             include: { role: true }
         });
-        return users;
     }
 
     async getUser(data: { email?: string; username?: string; id?: string }): Promise<User | null> {

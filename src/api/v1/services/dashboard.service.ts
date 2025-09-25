@@ -28,7 +28,6 @@ class DashboardService {
             }
         }
         return data
-
     }
 
 }
