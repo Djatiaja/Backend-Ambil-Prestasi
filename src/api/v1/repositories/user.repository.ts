@@ -62,14 +62,18 @@ class UserRepository {
         });
     }
 
-    async countUsersByRole(roleName: string): Promise<number> {
-        return await prisma.user.count({
-            where: {
-                role: {
-                    name: roleName,
+    async countUsers(data: { roleName?: string }): Promise<number> {
+        if (data.roleName) {
+            return await prisma.user.count({
+                where: {
+                    role: {
+                        name: data.roleName,
+                    },
                 },
-            },
-        });
+            });
+        }
+
+        return await prisma.user.count({});
     }
 }
 

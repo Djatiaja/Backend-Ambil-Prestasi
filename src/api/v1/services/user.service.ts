@@ -2,11 +2,12 @@ import { User } from "@prisma/client";
 import prisma from "../../../database";
 import { BaseResponse } from "../types/responseType";
 import { userRepository } from "../repositories/user.repository";
+
 class UserService {
     async getAllUsers(data: { role: string, limit?: number, page?: number, isDeleted?: boolean }) {
         const { role, limit, page, isDeleted } = data;
         const users = await userRepository.getUsers(role, limit ?? 10, page ?? 1);
-        const userCount = await userRepository.countUsersByRole(role);
+        const userCount = await userRepository.countUsers({ roleName: role });
 
         const meta: BaseResponse<User>["meta"] = {
             itemCount: userCount,
@@ -56,6 +57,66 @@ class UserService {
             where: { id },
         });
     }
+
+    async getUserCount(data: { roleName?: string }) {
+        return await userRepository.countUsers({ roleName: data.roleName });
+    }
+
+    async getUserChart(data: { roleName?: string }) {
+        const { roleName } = data;
+        const currentYear = new Date().getFullYear();
+        const startYear = currentYear - 4; // last 5 years
+
+        // Base where clause
+        const whereClause: any = {};
+        if (roleName) {
+            whereClause.role = { name: roleName };
+        }
+
+        // Fetch users for last 5 years
+        const users = await prisma.user.findMany({
+            where: {
+                ...whereClause,
+                createdAt: { gte: new Date(`${startYear}-01-01`) },
+            },
+            select: { createdAt: true },
+        });
+
+        // Initialize monthly counts for current year
+        const monthlyCounts: Record<number, number> = {};
+        for (let month = 1; month <= 12; month++) {
+            monthlyCounts[month] = 0;
+        }
+
+        // Initialize yearly counts for last 5 years
+        const yearlyCounts: Record<number, number> = {};
+        for (let year = startYear; year <= currentYear; year++) {
+            yearlyCounts[year] = 0;
+        }
+
+        // Populate counts
+        users.forEach(user => {
+            const created = user.createdAt;
+            const year = created.getFullYear();
+            const month = created.getMonth() + 1; // JS months: 0-11
+
+            if (year === currentYear) {
+                monthlyCounts[month] += 1;
+            }
+
+            if (year >= startYear) {
+                yearlyCounts[year] += 1;
+            }
+
+            console.log(year, month)
+        });
+
+        return {
+            oneYear: monthlyCounts,
+            fiveYear: yearlyCounts,
+        };
+    }
+
 }
 
 export default new UserService();
