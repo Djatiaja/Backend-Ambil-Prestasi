@@ -1,5 +1,5 @@
 import { Router } from "express";
-import teacherRouter from "./teacher.router";
+import teacherRouter from "./teacher.route";
 import dashboardRouter from "./dashboard.route";
 
 const router = Router();

@@ -7,9 +7,9 @@ export const teacherCreateSchema = z.object({
     email: z.string().email(),
     password: z.string().min(8).max(100),
     passwordConfirmation: z.string().min(8).max(100),
-}).superRefine(async (data, ctx) => {
+}).superRefine(async (data, context) => {
     if (data.password !== data.passwordConfirmation) {
-        ctx.addIssue({
+        context.addIssue({
             code: "custom",
             message: "Passwords don't match",
             path: ["passwordConfirmation"],
@@ -19,7 +19,7 @@ export const teacherCreateSchema = z.object({
     // Check if email is already taken
     const existingEmail = await userRepository.getUser({ email: data.email });
     if (existingEmail) {
-        ctx.addIssue({
+        context.addIssue({
             code: "custom",
             message: "Email is already in use",
             path: ["email"],
@@ -30,7 +30,7 @@ export const teacherCreateSchema = z.object({
     if (data.username) {
         const existingUsername = await userRepository.getUser({ username: data.username });
         if (existingUsername) {
-            ctx.addIssue({
+            context.addIssue({
                 code: "custom",
                 message: "Username is already in use",
                 path: ["username"],

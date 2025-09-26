@@ -27,7 +27,7 @@ export const usersSeed = async () => {
         }
     });
 
-    for (let index = 0; index < 10; index++) {
+    for (let index = 0; index < 200; index++) {
         await prisma.user.create({
             data: {
                 username: `teacher${index + 1}`,
@@ -36,11 +36,11 @@ export const usersSeed = async () => {
                 roleId: teacherRole.id,
                 profileImage: `https://ui-avatars.com/api/?name=Teacher+${index + 1}&background=random`,
                 password: hashedPassword,
-                createdAt: randPastDate({ years: 1 }),
+                createdAt: randPastDate({ years: 5 }),
             }
         });
     }
-    for (let index = 0; index < 100; index++) {
+    for (let index = 0; index < 1000; index++) {
         await prisma.user.create({
             data: {
                 username: `student${index + 1}`,
@@ -49,7 +49,7 @@ export const usersSeed = async () => {
                 roleId: studentRole.id,
                 profileImage: `https://ui-avatars.com/api/?name=Student+${index + 1}&background=random`,
                 password: hashedPassword,
-                createdAt: randPastDate({ years: 1 }),
+                createdAt: randPastDate({ years: 5 }),
             }
         });
     }
