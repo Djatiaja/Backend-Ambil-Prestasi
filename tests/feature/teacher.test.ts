@@ -45,7 +45,7 @@ describe("Feature Guru", () => {
         let teacherRole: any;
 
         beforeAll(async () => {
-            adminToken = await generateToken("Admin");
+            adminToken = await generateToken("Admin", "asdfadsf");
             teacherRole = await prisma.role.findFirst({ where: { name: "Teacher" } });
         });
 
