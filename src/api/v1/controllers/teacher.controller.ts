@@ -64,7 +64,7 @@ export const updateTeacher = async (req: Request, res: Response) => {
             return sendResponse({ res, statusCode: 404, success: false, message: "Teacher not found", data: null });
         }
 
-        const updatedTeacher = await userService.updateUser(id, { name, email, password, username, profileImage });
+        const updatedTeacher = await userService.updateUser(id, { name, email, username });
         sendResponse({ res, statusCode: 200, success: true, message: "Teacher updated successfully", data: updatedTeacher });
     } catch (error) {
         sendResponse({ res, statusCode: 500, success: false, message: "Error updating teacher", data: null });

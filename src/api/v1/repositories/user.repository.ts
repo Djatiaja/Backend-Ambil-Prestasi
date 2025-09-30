@@ -1,15 +1,24 @@
 import { User } from "@prisma/client";
 import prisma from "../../../database";
+import { hash } from "bcrypt";
 
+
+const SALT_ROUNDS = 10
 class UserRepository {
     async findUserById(userId: string) {
         return await prisma.user.findUnique({
             where: { id: userId },
-            include: { role: true }
+            select: {
+                id: true,
+                name: true,
+                email: true,
+                username: true,
+                profileImage: true
+            },
         });
     }
 
-    async getUsers(roleName?: string, limit: number = 10, page: number = 1, search?: string): Promise<User[]> {
+    async getUsers(roleName?: string, limit: number = 10, page: number = 1, search?: string): Promise<Partial<User>[]> {
         if (search) {
 
             return await prisma.user.findMany({
@@ -25,7 +34,14 @@ class UserRepository {
                         { username: { contains: search } },
                     ],
                 },
-                include: { role: true }
+                select: {
+                    id: true,
+                    name: true,
+                    email: true,
+                },
+                orderBy: {
+                    name: "asc"
+                }
             });
 
         }
@@ -37,7 +53,14 @@ class UserRepository {
                     name: roleName,
                 },
             },
-            include: { role: true }
+            select: {
+                id: true,
+                name: true,
+                email: true,
+            },
+            orderBy: {
+                name: "asc"
+            }
         });
     }
 
@@ -58,12 +81,13 @@ class UserRepository {
         const { name, email, password, role, username, profileImage } = data;
         const roleData = await prisma.role.findUnique({ where: { name: role } });
         if (!roleData) throw new Error("Role not found");
+        const hashedPassword = await hash(password, SALT_ROUNDS);
 
         return await prisma.user.create({
             data: {
                 name,
                 email,
-                password,
+                password: hashedPassword,
                 username,
                 profileImage: profileImage || "https://ui-avatars.com/api/?name=" + encodeURIComponent(name) + "&background=random",
                 roleId: roleData.id,
