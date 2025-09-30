@@ -1,7 +1,6 @@
 import userService from "../services/user.service";
 import { sendResponse } from "../helpers/baseResponse";
 import { Request, Response } from "express";
-import { User } from "@prisma/client";
 import { TeacherCreateDTO, TeacherUpdateDTO } from "../schemas/teacher.schema";
 
 // TODO: Implement zod for validation

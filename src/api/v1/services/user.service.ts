@@ -54,9 +54,7 @@ class UserService {
         const { roleName } = data;
         const currentYear = new Date().getFullYear();
         const startYear = currentYear - 4; // last 5 years
-
-        // Base where clause
-        const whereClause: any = {};
+        const whereClause: { role?: { name: string } } = {};
         if (roleName) {
             whereClause.role = { name: roleName };
         }

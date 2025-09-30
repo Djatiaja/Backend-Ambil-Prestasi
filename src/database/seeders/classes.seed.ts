@@ -1,4 +1,4 @@
-import { randParagraph, randWord } from "@ngneat/falso";
+import { randWord } from "@ngneat/falso";
 import prisma from "..";
 
 export const classesSeed = async () => {

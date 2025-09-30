@@ -4,8 +4,8 @@ import { User } from "@prisma/client";
 import prisma from "../../src/database";
 
 
-const generateToken = async (role: string, userId?: string) => {
-    return role === "Admin" ? "mock-admin-token" : `mock-teacher-token-${userId}`;
+const generateToken = async (role: string, userId: string) => {
+    return role === "Admin" ? "mock-admin-token" : `mock-teacher-token-${userId}`
 };
 
 const createTestUser = async (roleName: string, overrides: Partial<User> = {}) => {
@@ -212,7 +212,6 @@ describe("Feature Guru", () => {
                     .expect("Content-Type", /json/)
                     .expect((res) => {
                         expect(res.body.success).toBe(false);
-                        const errors: Record<string, string[]>[] = res.body.errors;
                         res.body.errors["name"].forEach((err: any) => {
                             expect(err).toContain("Too small")
                         });

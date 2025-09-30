@@ -5,13 +5,21 @@ import jest from 'eslint-plugin-jest';
 
 export default tseslint.config(
   {
-    ignores: ['**/build/**', '**/tmp/**', '**/coverage/**'],
+    ignores: [
+      '**/build/**',
+      '**/tmp/**',
+      '**/coverage/**',
+      'jest.setup.js',
+      'dist/**',
+      '**/dist/**',
+      '**/dist/tests/**', // Added to ignore compiled test files
+    ],
   },
   eslint.configs.recommended,
   {
     extends: [...tseslint.configs.recommended],
 
-    files: ['**/*.ts', '**/*.mts'],
+    files: ['src/**/*.ts', 'src/**/*.mts'],
 
     plugins: {
       '@typescript-eslint': tseslint.plugin,
@@ -35,7 +43,7 @@ export default tseslint.config(
     },
   },
   {
-    files: ['tests/**', '**/*.test.ts', '**/*.spec.ts'],
+    files: ['tests/**/*.ts', 'tests/**/*.mts', '**/*.test.ts', '**/*.spec.ts'],
 
     plugins: {
       jest,
@@ -46,9 +54,17 @@ export default tseslint.config(
     },
 
     languageOptions: {
+      parser: tseslint.parser, // <-- Add this
+      parserOptions: {
+        ecmaVersion: 2020,
+        sourceType: 'module',
+        project: './tsconfig.json', // optional, enables type-aware linting
+      },
       globals: {
         ...globals.jest,
+        ...globals.node, // for process, etc.
       },
     },
-  },
+  }
+
 );

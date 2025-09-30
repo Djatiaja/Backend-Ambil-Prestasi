@@ -1,7 +1,8 @@
+import { Response } from "express";
 import { BaseResponse } from "../types/responseType";
 
 type SendResponseParams<Tdata> = {
-    res: any;
+    res: Response;
     statusCode: number;
     success: boolean;
     message: string;

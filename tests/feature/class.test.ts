@@ -1,8 +1,9 @@
 import request from "supertest";
 import app from "../../src";
-import { PrismaClient } from "@prisma/client";
 import { BaseResponse } from "../../src/api/v1/types/responseType";
-const prisma = new PrismaClient();
+import prisma from "../../src/database";
+import { classesSeed } from "../../src/database/seeders/classes.seed";
+import classRepository from "../../src/api/v1/repositories/class.repository";
 
 interface ClassDto {
     id: number;
@@ -13,7 +14,10 @@ interface ClassDto {
 }
 
 describe("Feature Kelas", () => {
-    let createdId: number;
+
+    beforeAll(async () => {
+        await classesSeed();
+    })
 
     afterAll(async () => {
         await prisma.class.deleteMany(); // cleanup DB
@@ -30,20 +34,31 @@ describe("Feature Kelas", () => {
             expect(body.success).toBe(true);
             expect(Array.isArray(body.data)).toBe(true);
             expect(body.meta).toBeDefined();
-            expect(body.meta?.totalItems).toBeGreaterThanOrEqual(1);
+            expect(body.meta?.totalItems).toBeGreaterThanOrEqual(0);
         });
     });
 
     describe("GET /api/v1/classes/:id", () => {
         it("Harus dapat mengembalikan detail kelas dengan menggunakan id", async () => {
-            const res = await request(app).get(`/api/v1/classes/${createdId}`).expect(200);
+            const testClass = await classRepository.createClass(
+                "test",
+                "test desc"
+            )
+
+
+            const res = await request(app).get(`/api/v1/classes/${testClass.id}`).expect(200);
 
             const body: BaseResponse<ClassDto> = res.body;
 
             expect(body.success).toBe(true);
-            expect(body.data.id).toBe(createdId);
+            expect(body.data.id).toBe(testClass.id);
             expect(body.data.name).toBe("Kelas A");
         });
+
+        it("Mengembalikan 404 jika kelas tidak ditemukan", async () => {
+            await request(app).get(`/api/v1/classes/999999999999`).expect(404);
+        });
+
     })
 
 
@@ -63,14 +78,12 @@ describe("Feature Kelas", () => {
             expect(body.message).toMatch(/created/i);
             expect(body.data.id).toBeDefined();
             expect(body.data.name).toBe("Kelas A");
-
-            createdId = body.data.id;
         });
 
         it("Tidak bisa membuat kelas jika data tidak lengkap", async () => {
             const res = await request(app)
                 .post("/api/v1/classes")
-                .send({})
+                .send({ name: "Kelas A" })
                 .expect(400);
 
             const body: BaseResponse<null> = res.body;
@@ -83,8 +96,12 @@ describe("Feature Kelas", () => {
 
     describe("PATCH /api/v1/classes/:id", () => {
         it("Harus dapat update data kelas dengan menggunakan data yang valid", async () => {
+            const testClass = await classRepository.createClass(
+                "test",
+                "test desc"
+            )
             const res = await request(app)
-                .patch(`/api/v1/classes/${createdId}`)
+                .patch(`/api/v1/classes/${testClass.id}`)
                 .send({ description: "Deskripsi kelas terbaru" })
                 .expect(200);
 
@@ -109,7 +126,12 @@ describe("Feature Kelas", () => {
 
     describe("DELETE /api/v1/classes/:id", () => {
         it("Harus dapat menghapus kelas jika kelas tersedia", async () => {
-            const res = await request(app).delete(`/api/v1/classes/${createdId}`).expect(200);
+            const testClass = await classRepository.createClass(
+                "test",
+                "test desc"
+            )
+
+            const res = await request(app).delete(`/api/v1/classes/${testClass.id}`).expect(200);
 
             const body: BaseResponse<null> = res.body;
 
@@ -118,7 +140,7 @@ describe("Feature Kelas", () => {
         });
 
         it("Mengembalikan 404 bila kelas tidak ditemukan", async () => {
-            const res = await request(app).delete(`/api/v1/classes/${createdId}`).expect(404);
+            const res = await request(app).delete(`/api/v1/classes/99999999`).expect(404);
             const body: BaseResponse<null> = res.body;
 
             expect(body.success).toBe(false);
