@@ -12,7 +12,7 @@ interface ClassDto {
     updatedAt: string;
 }
 
-describe("Manajemen Kelas (Guru)", () => {
+describe("Feature Kelas", () => {
     let createdId: number;
 
     afterAll(async () => {
@@ -20,8 +20,35 @@ describe("Manajemen Kelas (Guru)", () => {
         await prisma.$disconnect();
     });
 
-    describe("1. Create Class", () => {
-        it("should create a new class with valid data", async () => {
+
+    describe("GET /api/v1/classes", () => {
+        it("Harus dapat mengembalikan list kelas dengan menggunakan pagination", async () => {
+            const res = await request(app).get("/api/v1/classes?page=1&limit=10").expect(200);
+
+            const body: BaseResponse<ClassDto[]> = res.body;
+
+            expect(body.success).toBe(true);
+            expect(Array.isArray(body.data)).toBe(true);
+            expect(body.meta).toBeDefined();
+            expect(body.meta?.totalItems).toBeGreaterThanOrEqual(1);
+        });
+    });
+
+    describe("GET /api/v1/classes/:id", () => {
+        it("Harus dapat mengembalikan detail kelas dengan menggunakan id", async () => {
+            const res = await request(app).get(`/api/v1/classes/${createdId}`).expect(200);
+
+            const body: BaseResponse<ClassDto> = res.body;
+
+            expect(body.success).toBe(true);
+            expect(body.data.id).toBe(createdId);
+            expect(body.data.name).toBe("Kelas A");
+        });
+    })
+
+
+    describe("POST /api/v1/classes", () => {
+        it("Harus dapat membuat kelas baru dengan data valid", async () => {
             const res = await request(app)
                 .post("/api/v1/classes")
                 .send({
@@ -40,7 +67,7 @@ describe("Manajemen Kelas (Guru)", () => {
             createdId = body.data.id;
         });
 
-        it("should fail if required fields are missing", async () => {
+        it("Tidak bisa membuat kelas jika data tidak lengkap", async () => {
             const res = await request(app)
                 .post("/api/v1/classes")
                 .send({})
@@ -53,31 +80,9 @@ describe("Manajemen Kelas (Guru)", () => {
         });
     });
 
-    describe("2. Get Classes", () => {
-        it("should return paginated list of classes", async () => {
-            const res = await request(app).get("/api/v1/classes?page=1&limit=10").expect(200);
 
-            const body: BaseResponse<ClassDto[]> = res.body;
-
-            expect(body.success).toBe(true);
-            expect(Array.isArray(body.data)).toBe(true);
-            expect(body.meta).toBeDefined();
-            expect(body.meta?.totalItems).toBeGreaterThanOrEqual(1);
-        });
-
-        it("should return class detail by id", async () => {
-            const res = await request(app).get(`/api/v1/classes/${createdId}`).expect(200);
-
-            const body: BaseResponse<ClassDto> = res.body;
-
-            expect(body.success).toBe(true);
-            expect(body.data.id).toBe(createdId);
-            expect(body.data.name).toBe("Kelas A");
-        });
-    });
-
-    describe("3. Update Class", () => {
-        it("should update only provided fields", async () => {
+    describe("PATCH /api/v1/classes/:id", () => {
+        it("Harus dapat update data kelas dengan menggunakan data yang valid", async () => {
             const res = await request(app)
                 .patch(`/api/v1/classes/${createdId}`)
                 .send({ description: "Deskripsi kelas terbaru" })
@@ -89,7 +94,7 @@ describe("Manajemen Kelas (Guru)", () => {
             expect(body.data.description).toBe("Deskripsi kelas terbaru");
         });
 
-        it("should return 404 if class not found", async () => {
+        it("Tidak boleh mengupdate jika kelas tidak tersedia", async () => {
             const res = await request(app)
                 .patch("/api/v1/classes/99999")
                 .send({ description: "Update gagal" })
@@ -102,8 +107,8 @@ describe("Manajemen Kelas (Guru)", () => {
         });
     });
 
-    describe("4. Delete Class", () => {
-        it("should delete class if exists", async () => {
+    describe("DELETE /api/v1/classes/:id", () => {
+        it("Harus dapat menghapus kelas jika kelas tersedia", async () => {
             const res = await request(app).delete(`/api/v1/classes/${createdId}`).expect(200);
 
             const body: BaseResponse<null> = res.body;
@@ -112,9 +117,8 @@ describe("Manajemen Kelas (Guru)", () => {
             expect(body.message).toMatch(/deleted/i);
         });
 
-        it("should return 404 if class not found", async () => {
+        it("Mengembalikan 404 bila kelas tidak ditemukan", async () => {
             const res = await request(app).delete(`/api/v1/classes/${createdId}`).expect(404);
-
             const body: BaseResponse<null> = res.body;
 
             expect(body.success).toBe(false);
