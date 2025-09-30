@@ -94,11 +94,10 @@ model User_Class {
   @@unique([userId, classId])
 }
 
-// TODO: Make it description nullable
 model Section {
   id          Int      @id @default(autoincrement())
   title       String
-  description String   @db.LongText
+  description String?  @db.LongText
   order       Int
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
