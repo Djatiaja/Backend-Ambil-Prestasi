@@ -94,6 +94,7 @@ model User_Class {
   @@unique([userId, classId])
 }
 
+// TODO: Make it description nullable
 model Section {
   id          Int      @id @default(autoincrement())
   title       String

@@ -54,16 +54,11 @@ export const getTeacherById = async (req: Request, res: Response) => {
 export const updateTeacher = async (req: Request, res: Response) => {
     try {
         const { id } = req.params;
-        const { name, email, password, username, profileImage }: Partial<User> = req.body;
-
-        if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-            return sendResponse({ res, statusCode: 400, success: false, message: "Invalid email format", data: null });
-        }
+        const { name, email, username }: Partial<User> = req.body;
         const existingTeacher = await userService.getUserById(id);
         if (!existingTeacher || existingTeacher.role.name !== "Teacher") {
             return sendResponse({ res, statusCode: 404, success: false, message: "Teacher not found", data: null });
         }
-
         const updatedTeacher = await userService.updateUser(id, { name, email, username });
         sendResponse({ res, statusCode: 200, success: true, message: "Teacher updated successfully", data: updatedTeacher });
     } catch (error) {

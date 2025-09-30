@@ -92,7 +92,11 @@ class UserRepository {
                 profileImage: profileImage || "https://ui-avatars.com/api/?name=" + encodeURIComponent(name) + "&background=random",
                 roleId: roleData.id,
             },
-            include: { role: true }
+            select: {
+                id: true,
+                name: true,
+                email: true,
+            },
         });
     }
 
@@ -100,7 +104,12 @@ class UserRepository {
         return await prisma.user.update({
             where: { id: userId },
             data,
-            include: { role: true }
+            select: {
+                id: true,
+                name: true,
+                email: true,
+                username: true
+            },
         });
     }
 

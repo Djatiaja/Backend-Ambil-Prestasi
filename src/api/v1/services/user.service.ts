@@ -24,6 +24,7 @@ class UserService {
         return await prisma.user.findUnique({
             where: { id },
             include: { role: true }
+
         });
     }
 
@@ -31,25 +32,11 @@ class UserService {
         const { name, email, password, role, username, profileImage } = pdata;
         const roleData = await prisma.role.findFirst({ where: { name: role } });
         if (!roleData) throw new Error("Role not found");
-
-        return await prisma.user.create({
-            data: {
-                name,
-                email,
-                password,
-                username,
-                profileImage: profileImage || "https://ui-avatars.com/api/?name=" + encodeURIComponent(name) + "&background=random",
-                roleId: roleData.id,
-            },
-            include: { role: true }
-        });
+        return await userRepository.createUser({ name, email, password, role, username, profileImage })
     }
 
     async updateUser(id: string, data: Partial<User>) {
-        return await prisma.user.update({
-            where: { id },
-            data,
-        });
+        return await userRepository.updateUser(id, data)
     }
 
     async deleteUser(id: string) {
