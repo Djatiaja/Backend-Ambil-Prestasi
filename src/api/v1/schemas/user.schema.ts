@@ -1,11 +1,21 @@
 import z from "zod";
 import { userRepository } from "../repositories/user.repository";
 
-export const teacherCreateSchema = z.object({
+export const userCreateSchema = z.object({
     name: z.string().min(4).max(100),
     username: z.string().min(4).max(50).optional(),
-    email: z.email(),
+    email: z.string().email(),
+    password: z.string().min(8).max(100),
+    passwordConfirmation: z.string().min(8).max(100),
 }).superRefine(async (data, context) => {
+    if (data.password !== data.passwordConfirmation) {
+        context.addIssue({
+            code: "custom",
+            message: "Passwords don't match",
+            path: ["passwordConfirmation"],
+        });
+    }
+
     // Check if email is already taken
     const existingEmail = await userRepository.getUser({ email: data.email });
     if (existingEmail) {
