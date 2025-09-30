@@ -10,7 +10,7 @@
     "dev": "nodemon --watch src --exec ts-node src/server.ts",
     "build": "tsc",
     "start": "node dist/server.js",
-    "test": "jest --watch",
+    "test": "jest --watch --detectOpenHandles",
     "test:unit": "NODE_ENV=test jest --runInBand tests/unit",
     "test:feature": "NODE_ENV=test jest --runInBand tests/feature",
     "seed": "ts-node src/database/seed.ts",

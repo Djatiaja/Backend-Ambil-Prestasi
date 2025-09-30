@@ -2,6 +2,7 @@ import { User } from "@prisma/client";
 import prisma from "../../../database";
 import { BaseResponse } from "../types/responseType";
 import { userRepository } from "../repositories/user.repository";
+import { TeacherUpdateDTO } from "../schemas/teacher.schema";
 
 class UserService {
     async getAllUsers(data: { role: string, limit?: number, page?: number, isDeleted?: boolean, search?: string }) {
@@ -35,7 +36,7 @@ class UserService {
         return await userRepository.createUser({ name, email, password, role, username, profileImage })
     }
 
-    async updateUser(id: string, data: Partial<User>) {
+    async updateUser(id: string, data: TeacherUpdateDTO) {
         return await userRepository.updateUser(id, data)
     }
 

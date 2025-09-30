@@ -1,12 +1,11 @@
-import z from "zod";
+import { z } from "zod";
 import { userRepository } from "../repositories/user.repository";
 
 export const teacherCreateSchema = z.object({
     name: z.string().min(4).max(100),
     username: z.string().min(4).max(50),
-    email: z.email(),
+    email: z.string().email(),
 }).superRefine(async (data, context) => {
-    // Check if email is already taken
     const existingEmail = await userRepository.getUser({ email: data.email });
     if (existingEmail) {
         context.addIssue({
@@ -16,7 +15,6 @@ export const teacherCreateSchema = z.object({
         });
     }
 
-    // Check if username is already taken (if provided)
     if (data.username) {
         const existingUsername = await userRepository.getUser({ username: data.username });
         if (existingUsername) {
@@ -35,7 +33,7 @@ export const teacherUpdateSchema = (userId: string) =>
         username: z.string().min(4).max(50).optional(),
         email: z.string().email().optional(),
     }).superRefine(async (data, context) => {
-        // Check if email is already taken (but not by this user)
+        // Check email uniqueness
         if (data.email) {
             const existingEmail = await userRepository.getUser({ email: data.email });
             if (existingEmail && existingEmail.id !== userId) {
@@ -47,7 +45,7 @@ export const teacherUpdateSchema = (userId: string) =>
             }
         }
 
-        // Check if username is already taken (but not by this user)
+        // Check username uniqueness
         if (data.username) {
             const existingUsername = await userRepository.getUser({ username: data.username });
             if (existingUsername && existingUsername.id !== userId) {
@@ -59,3 +57,6 @@ export const teacherUpdateSchema = (userId: string) =>
             }
         }
     });
+
+export type TeacherCreateDTO = z.infer<typeof teacherCreateSchema>;
+export type TeacherUpdateDTO = z.infer<ReturnType<typeof teacherUpdateSchema>>;

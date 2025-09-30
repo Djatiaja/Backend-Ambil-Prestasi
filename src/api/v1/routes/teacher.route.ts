@@ -10,7 +10,11 @@ router.post("/", validateBody(teacherCreateSchema), (req, res) => createTeacher(
 
 router.get("/:id", (req, res) => getTeacherById(req, res));
 
-router.patch("/:id", (req, res) => validateBody(teacherUpdateSchema(req.params.id)), (req, res) => updateTeacher(req, res));
+router.patch(
+    "/:id",
+    (req, res, next) => validateBody(teacherUpdateSchema(req.params.id))(req, res, next),
+    (req, res) => updateTeacher(req, res)
+);
 
 router.delete("/:id", (req, res) => deleteTeacher(req, res));
 

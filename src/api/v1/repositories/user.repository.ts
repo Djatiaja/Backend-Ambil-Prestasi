@@ -96,6 +96,7 @@ class UserRepository {
                 id: true,
                 name: true,
                 email: true,
+                username: true
             },
         });
     }

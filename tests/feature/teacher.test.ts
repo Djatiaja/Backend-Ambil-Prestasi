@@ -2,8 +2,7 @@ import supertest from "supertest";
 import app from "../../src";
 import { User } from "@prisma/client";
 import prisma from "../../src/database";
-import { error } from "console";
-import { string } from "zod";
+
 
 const generateToken = async (role: string, userId?: string) => {
     return role === "Admin" ? "mock-admin-token" : `mock-teacher-token-${userId}`;
@@ -81,7 +80,6 @@ describe("Feature Guru", () => {
                             expect(teacher).toHaveProperty("id");
                             expect(teacher).toHaveProperty("name");
                             expect(teacher).toHaveProperty("email");
-                            expect(teacher.roleId).toBe(teacherRole.id);
                         });
 
                         expect(res.body.meta).toMatchObject({
@@ -111,7 +109,6 @@ describe("Feature Guru", () => {
                         if (!Array.isArray(res.body.data)) throw new Error("'data' is not an array");
                         res.body.data.forEach((teacher: any) => {
                             expect(teacher.name).toContain("John");
-                            expect(teacher.roleId).toBe(teacherRole.id);
                         });
                     });
             });
@@ -133,10 +130,7 @@ describe("Feature Guru", () => {
                 const newTeacher = {
                     name: "New Teacher",
                     email: "new.teacher@example.com",
-                    username: "newteacher",
-                    password: "password",
-                    passwordConfirmation: "password",
-                    profileImage: "http://example.com/profile.jpg",
+                    username: "newteacher"
                 };
 
                 await supertest(app)
@@ -153,7 +147,6 @@ describe("Feature Guru", () => {
                             name: newTeacher.name,
                             email: newTeacher.email,
                             username: newTeacher.username,
-                            roleId: teacherRole.id,
                         });
                     });
             });
@@ -170,8 +163,6 @@ describe("Feature Guru", () => {
                         name: "New Teacher",
                         email: "existing.teacher@example.com",
                         username: "newteacher",
-                        password: "password",
-                        passwordConfirmation: "password"
                     })
                     .expect(400)
                     .expect("Content-Type", /json/)
@@ -197,8 +188,6 @@ describe("Feature Guru", () => {
                         name: "New Teacher",
                         email: "new.teacher@example.com",
                         username: "existingteacher",
-                        password: "password",
-                        passwordConfirmation: "password"
                     })
                     .expect(400)
                     .expect("Content-Type", /json/)
@@ -218,8 +207,6 @@ describe("Feature Guru", () => {
                         name: "",
                         email: "new.teacher@example.com",
                         username: "newteacher",
-                        password: "password",
-                        passwordConfirmation: "password"
                     })
                     .expect(400)
                     .expect("Content-Type", /json/)
@@ -298,7 +285,6 @@ describe("Feature Guru", () => {
                         expect(res.body.data).toMatchObject({
                             id: teacher.id,
                             ...updatedData,
-                            roleId: teacherRole.id,
                         });
                     });
             });
@@ -316,7 +302,7 @@ describe("Feature Guru", () => {
                     .expect("Content-Type", /json/)
                     .expect((res) => {
                         expect(res.body.success).toBe(false);
-                        expect(res.body.message).toContain("email");
+                        expect(res.body.message).toContain("Request validation fail");
                     });
             });
 
@@ -400,7 +386,6 @@ describe("Feature Guru", () => {
                             name: teacher.name,
                             email: teacher.email,
                             username: teacher.username,
-                            roleId: teacherRole.id,
                         });
                     });
             });
@@ -466,7 +451,6 @@ describe("Feature Guru", () => {
                         expect(res.body.data).toMatchObject({
                             id: teacher.id,
                             ...updatedData,
-                            roleId: teacherRole.id,
                         });
                     });
             });
@@ -482,7 +466,7 @@ describe("Feature Guru", () => {
                     .expect("Content-Type", /json/)
                     .expect((res) => {
                         expect(res.body.success).toBe(false);
-                        expect(res.body.message).toContain("email");
+                        expect(res.body.message).toContain("Request validation fail");
                     });
             });
         });

@@ -2,6 +2,7 @@ import userService from "../services/user.service";
 import { sendResponse } from "../helpers/baseResponse";
 import { Request, Response } from "express";
 import { User } from "@prisma/client";
+import { TeacherCreateDTO, TeacherUpdateDTO } from "../schemas/teacher.schema";
 
 // TODO: Implement zod for validation
 
@@ -25,7 +26,7 @@ export const getAllTeachers = async (req: Request, res: Response) => {
 
 export const createTeacher = async (req: Request, res: Response) => {
     try {
-        const { name, email, username } = req.body;
+        const { name, email, username } = req.body as TeacherCreateDTO;
 
         const newTeacher = await userService.createUser({ name, email, password: username, role: "Teacher", username: username || email });
         sendResponse({ res, statusCode: 201, success: true, message: "Teacher created successfully", data: newTeacher });
@@ -54,7 +55,8 @@ export const getTeacherById = async (req: Request, res: Response) => {
 export const updateTeacher = async (req: Request, res: Response) => {
     try {
         const { id } = req.params;
-        const { name, email, username }: Partial<User> = req.body;
+        const { name, email, username } = req.body as TeacherUpdateDTO;
+
         const existingTeacher = await userService.getUserById(id);
         if (!existingTeacher || existingTeacher.role.name !== "Teacher") {
             return sendResponse({ res, statusCode: 404, success: false, message: "Teacher not found", data: null });
