@@ -54,5 +54,18 @@ export const usersSeed = async () => {
         });
     }
 
+    // TODO: remove this after implementing auth
+    await prisma.user.create({
+        data: {
+            username: `teachertestacc`,
+            email: `teachertestaccexample.com`,
+            name: 'teachertestacc',
+            roleId: teacherRole.id,
+            profileImage: `https://ui-avatars.com/api/?name=teachertestacc&background=random`,
+            password: hashedPassword,
+            createdAt: randPastDate({ years: 5 }),
+        }
+    })
+
     console.log("✅ Users seeded.");
 };

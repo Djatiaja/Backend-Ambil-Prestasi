@@ -11,7 +11,6 @@ class UserService {
         const userCount = await userRepository.countUsers({ roleName: role, search });
 
         const meta: BaseResponse<User>["meta"] = {
-            itemCount: userCount,
             totalItems: userCount,
             itemsPerPage: limit ?? 10,
             totalPages: limit ? Math.ceil(userCount / limit) : 1,
@@ -22,7 +21,7 @@ class UserService {
     }
 
     async getUserById(id: string) {
-        return await prisma.user.findUnique({
+        return await prisma.user.findFirst({
             where: { id },
             include: { role: true }
 

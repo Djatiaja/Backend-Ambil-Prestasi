@@ -10,7 +10,6 @@ type SendResponseParams<Tdata> = {
     errors?: Record<string, string[]>;
     meta?: {
         totalItems: number;
-        itemCount: number;
         itemsPerPage: number;
         totalPages: number;
         currentPage: number;

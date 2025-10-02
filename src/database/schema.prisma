@@ -74,6 +74,7 @@ model Class {
   id          Int          @id @default(autoincrement())
   name        String
   description String       @db.LongText
+  image_path  String
   createdAt   DateTime     @default(now())
   updatedAt   DateTime     @updatedAt
   User_Class  User_Class[]

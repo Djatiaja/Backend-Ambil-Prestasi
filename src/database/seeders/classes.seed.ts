@@ -1,6 +1,8 @@
 import { randWord } from "@ngneat/falso";
 import prisma from "..";
 
+export const matkuls = ["PPK", "Pancasila", "Agama", "Bahasa Indonesia"]
+
 export const classesSeed = async () => {
 
     console.log("\n🌱 Seeding classes...");
@@ -9,10 +11,12 @@ export const classesSeed = async () => {
         await prisma.class.create({
             data: {
                 name: randWord(),
-                description: randWord({ length: 30 }).join(" ")
+                description: randWord({ length: 30 }).join(" "),
+                image_path: "/test.png"
             }
         });
     }
+
 
     console.log("✅ Classes seeded.");
 };

@@ -3,6 +3,7 @@ import { PrismaClient } from "@prisma/client";
 import { rolesSeed } from "./seeders/roles.seed";
 import { usersSeed } from "./seeders/users.seed";
 import { classesSeed } from "./seeders/classes.seed";
+import { user_classesSeed } from "./seeders/user_classes.seed";
 
 const prisma = new PrismaClient();
 
@@ -12,6 +13,8 @@ async function main() {
     await rolesSeed();
     await usersSeed();
     await classesSeed();
+    await user_classesSeed();
+
 
     console.log("✅ Seeding finished.");
 }

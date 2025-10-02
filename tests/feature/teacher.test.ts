@@ -2,6 +2,7 @@ import supertest from "supertest";
 import app from "../../src";
 import { User } from "@prisma/client";
 import prisma from "../../src/database";
+import { usersSeed } from "../../src/database/seeders/users.seed";
 
 
 const generateToken = async (role: string, userId: string) => {
@@ -50,8 +51,12 @@ describe("Feature Guru", () => {
         });
 
         beforeEach(async () => {
+            await prisma.user_Class.deleteMany({});
             await prisma.user.deleteMany({}); // Clean users before each test
         });
+
+        afterAll(async () => {
+        })
 
         describe("GET /api/v1/teachers", () => {
             it("Harus mengembalikan daftar guru berupa nama dan email dengan pagination 10", async () => {
@@ -84,7 +89,6 @@ describe("Feature Guru", () => {
 
                         expect(res.body.meta).toMatchObject({
                             totalItems: expect.any(Number),
-                            itemCount: expect.any(Number),
                             itemsPerPage: 10,
                             totalPages: expect.any(Number),
                             currentPage: expect.any(Number),

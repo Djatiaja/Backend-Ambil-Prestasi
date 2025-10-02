@@ -45,6 +45,7 @@ CREATE TABLE `Class` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `name` VARCHAR(191) NOT NULL,
     `description` LONGTEXT NOT NULL,
+    `image_path` VARCHAR(191) NOT NULL,
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updatedAt` DATETIME(3) NOT NULL,
 
@@ -68,7 +69,7 @@ CREATE TABLE `User_Class` (
 CREATE TABLE `Section` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `title` VARCHAR(191) NOT NULL,
-    `description` LONGTEXT NOT NULL,
+    `description` LONGTEXT NULL,
     `order` INTEGER NOT NULL,
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updatedAt` DATETIME(3) NOT NULL,

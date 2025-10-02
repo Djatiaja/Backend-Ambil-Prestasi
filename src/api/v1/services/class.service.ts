@@ -1,27 +1,64 @@
-import { error } from "console";
+import { class_role } from "@prisma/client";
 import classRepository from "../repositories/class.repository";
 import userService from "./user.service";
 import userClassService from "./userClass.service";
-import { class_role } from "@prisma/client";
 
-
-class ClassService {
-
-    async getClassCount() {
-        return await classRepository.getCount()
-    }
-
-    async createClass(userid: string, data: { name: string, description: string }) {
-        const user = await userService.getUserById(userid);
-        const createdClass = await classRepository.createClass(data.name, data.description);
-        if (!user) {
-            throw error("User Not Found")
-        }
-
-        const userClass = await userClassService.assignClass(user.id, createdClass.id, class_role.Teacher)
-        return
-    }
-
+interface ClassData {
+    name?: string;
+    description?: string;
 }
 
-export default new ClassService()
+class ClassService {
+    async getClassCount() {
+        return await classRepository.getCount();
+    }
+
+    async getClasses(userId: string, page: number, limit: number) {
+        const skip = (page - 1) * limit;
+        const [classes, totalItems] = await Promise.all([
+            classRepository.getClasses(userId, skip, limit),
+            classRepository.getCount(userId),
+        ]);
+        return { classes, totalItems };
+    }
+
+    async getClassById(classId: number) {
+        return await classRepository.findClassById(classId);
+    }
+
+    async createClass(teacherId: string, data: { name: string; description: string, image_url: string }) {
+        const user = await userService.getUserById(teacherId);
+        if (!user) {
+            throw new Error("User not found");
+        }
+
+        const createdClass = await classRepository.createClass(data.name, data.description, data.image_url);
+        await userClassService.assignClass(user.id, createdClass.id, class_role.Teacher);
+
+        return createdClass;
+    }
+
+    async updateClass(classId: number, data: ClassData) {
+        const existingClass = await classRepository.findClassById(classId);
+        if (!existingClass) {
+            return null;
+        }
+
+        return await classRepository.updateClass(classId, {
+            name: data.name || existingClass.name,
+            description: data.description || existingClass.description,
+        });
+    }
+
+    async deleteClass(classId: number) {
+        const existingClass = await classRepository.findClassById(classId);
+        if (!existingClass) {
+            return false;
+        }
+
+        await classRepository.deleteClass(classId);
+        return true;
+    }
+}
+
+export default new ClassService();
