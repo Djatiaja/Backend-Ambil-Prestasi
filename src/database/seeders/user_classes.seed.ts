@@ -52,7 +52,7 @@ export const user_classesSeed = async () => {
             data: {
                 name: matkul,
                 description: randWord({ length: 30 }).join(" "),
-                image_path: "",
+                image_path: "/test.png",
             },
         });
         matakuliahs.push(newClass);

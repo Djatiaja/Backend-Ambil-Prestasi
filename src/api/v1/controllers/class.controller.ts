@@ -4,11 +4,13 @@ import { BaseResponse } from "../types/responseType";
 import { sendResponse } from "../helpers/baseResponse";
 import prisma from "../../../database";
 import { error } from "console";
+import { teacherCreateSchema } from "../schemas/teacher.schema";
 
 interface ClassDto {
     id: number;
     name: string;
     description: string;
+    image_path: string;
     createdAt: string;
     updatedAt: string;
 }
@@ -27,8 +29,9 @@ export const getClasses = async (req: Request, res: Response) => {
         const page = parseInt(req.query.page as string) || 1;
         const limit = 10;
         const teacher = await getTestTeacher();
+
         if (!teacher) {
-            throw error
+            throw new Error("Test teacher not found");
         }
         const userId = teacher.id
 
@@ -43,17 +46,18 @@ export const getClasses = async (req: Request, res: Response) => {
             id: cls.id,
             name: cls.name,
             description: cls.description,
-            createdAt: cls.createdAt.toISOString(),
-            updatedAt: cls.updatedAt.toISOString(),
+            image_path: cls.image_path
         }))
 
         sendResponse({ res, statusCode: 200, success: true, message: "Get Classes", data: data, meta: meta })
     } catch (error) {
-        console.log(error)
+        console.error("Error in getClasses:", error);
         res.status(500).json({
             success: false,
-            message: "Internal server error",
-            errors: { server: (error as Error).message },
+            message: "Failed to retrieve classes",
+            errors: {
+                server: (error as Error).message,
+            },
         });
     }
 };
@@ -74,8 +78,7 @@ export const getClassById = async (req: Request, res: Response) => {
             id: classData.id,
             name: classData.name,
             description: classData.description,
-            createdAt: classData.createdAt.toISOString(),
-            updatedAt: classData.updatedAt.toISOString(),
+            image_path: classData.image_path
         }
 
         sendResponse({ res, statusCode: 200, message: "Class found", success: true, data })
@@ -106,15 +109,15 @@ export const createClass = async (req: Request, res: Response) => {
 
         const createdClass = await classService.createClass(userId, { name, description, image_url: "/image.png" });
 
-        const response: BaseResponse<ClassDto> = {
+        const response: BaseResponse<Partial<ClassDto>> = {
             success: true,
             message: "Class created successfully",
             data: {
                 id: createdClass.id,
                 name: createdClass.name,
                 description: createdClass.description,
-                createdAt: createdClass.createdAt.toISOString(),
-                updatedAt: createdClass.updatedAt.toISOString(),
+                image_path: createdClass.image_path
+
             },
         };
 
@@ -144,15 +147,14 @@ export const updateClass = async (req: Request, res: Response) => {
             });
         }
 
-        const response: BaseResponse<ClassDto> = {
+        const response: BaseResponse<Partial<ClassDto>> = {
             success: true,
             message: "Class updated successfully",
             data: {
                 id: updatedClass.id,
                 name: updatedClass.name,
                 description: updatedClass.description,
-                createdAt: updatedClass.createdAt.toISOString(),
-                updatedAt: updatedClass.updatedAt.toISOString(),
+                image_path: updatedClass.image_path
             },
         };
 

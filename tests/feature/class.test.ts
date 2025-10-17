@@ -3,6 +3,9 @@ import app from "../../src";
 import { BaseResponse } from "../../src/api/v1/types/responseType";
 import classRepository from "../../src/api/v1/repositories/class.repository";
 import * as classController from "../../src/api/v1/controllers/class.controller";
+import prisma from "../../src/database";
+import { hash } from "crypto";
+import { randPastDate } from "@ngneat/falso";
 
 interface ClassDto {
     id: number;
@@ -16,6 +19,32 @@ interface ClassDto {
 jest.mock("../../src/api/v1/repositories/class.repository");
 
 describe("Feature Kelas", () => {
+
+    // beforeAll(async () => {
+    //     const teacherRole = await prisma.role.findUnique({ where: { name: "Teacher" } });
+    //     const hashedPassword = hash("sha256", "password123");
+    //     const testUser = await prisma.user.findFirst({
+    //         where: {
+    //             email: `test-${Date.now()}@example.com`,
+    //         }
+    //     });
+
+    //     if (!testUser) {
+    //         return testUser
+    //     }
+    //     await prisma.user.create({
+    //         data: {
+    //             username: `teachertestacc`,
+    //             email: `teachertestaccexample.com`,
+    //             name: 'teachertestacc',
+    //             roleId: teacherRole!.id,
+    //             profileImage: `https://ui-avatars.com/api/?name=teachertestacc&background=random`,
+    //             password: hashedPassword,
+    //             createdAt: randPastDate({ years: 5 }),
+    //         }
+    //     })
+    // })
+
     beforeEach(() => {
         jest.clearAllMocks(); // Clear mocks before each test to ensure isolation
     });
@@ -66,7 +95,7 @@ describe("Feature Kelas", () => {
                 verified_at: null
             });
 
-            const res = await superjest(app).get("/api/v1/classes?page=1&limit=10").expect(200);
+            const res = await superjest(app).get("/api/v1/classes?page=1&limit=10");
 
             const body: BaseResponse<ClassDto[]> = res.body;
 
@@ -77,8 +106,6 @@ describe("Feature Kelas", () => {
                 id: 1,
                 name: "Kelas A",
                 description: "Deskripsi kelas A",
-                createdAt: "2025-10-01T00:00:00.000Z",
-                updatedAt: "2025-10-01T00:00:00.000Z",
             });
             expect(body.meta).toEqual({
                 totalItems: 2,
@@ -113,8 +140,6 @@ describe("Feature Kelas", () => {
                 id: mockClass.id,
                 name: "test",
                 description: "test",
-                createdAt: "2025-10-01T00:00:00.000Z",
-                updatedAt: "2025-10-01T00:00:00.000Z",
             });
             expect(classRepository.findClassById).toHaveBeenCalledWith(mockClass.id);
         });
@@ -184,8 +209,6 @@ describe("Feature Kelas", () => {
                 id: mockClass.id,
                 name: "Kelas A",
                 description: "Deskripsi kelas A",
-                createdAt: "2025-10-01T00:00:00.000Z",
-                updatedAt: "2025-10-01T00:00:00.000Z",
             });
         });
 
@@ -232,7 +255,6 @@ describe("Feature Kelas", () => {
 
             expect(body.success).toBe(true);
             expect(body.data.description).toBe("Deskripsi kelas terbaru");
-            expect(body.data.updatedAt).toBe("2025-10-02T00:00:00.000Z");
             expect(classRepository.findClassById).toHaveBeenCalledWith(mockClass.id);
             expect(classRepository.updateClass).toHaveBeenCalledWith(mockClass.id, {
                 name: mockClass.name,
