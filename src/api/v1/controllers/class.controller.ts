@@ -49,7 +49,6 @@ export const getClasses = async (req: Request, res: Response) => {
 
         sendResponse({ res, statusCode: 200, success: true, message: "Get Classes", data: data, meta: meta })
     } catch (error) {
-        console.log(error)
         res.status(500).json({
             success: false,
             message: "Internal server error",
@@ -120,8 +119,6 @@ export const createClass = async (req: Request, res: Response) => {
 
         res.status(201).json(response);
     } catch (error) {
-        console.log(error);
-
         res.status(500).json({
             success: false,
             message: "Internal server error",

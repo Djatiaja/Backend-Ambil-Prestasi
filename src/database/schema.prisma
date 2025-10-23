@@ -31,6 +31,11 @@ enum quiz_question_type {
   Essay
 }
 
+enum token_type {
+  Verification
+  ResetPassword
+}
+
 model Role {
   id        Int      @id @default(autoincrement())
   name      String   @unique
@@ -56,6 +61,7 @@ model User {
   User_Material   User_Material[]
   user_assignment User_Assignment[]
   quiz_attempt    Quiz_Attempt[]
+  token           token[]
 }
 
 model Xp {
@@ -259,4 +265,15 @@ model Attemp_Multiple_Answer {
   answerId         Int
   attemp_answer    Attemp_Answer @relation(fields: [attempt_answerId], references: [id])
   quiz_answer      Quiz_Answer   @relation(fields: [answerId], references: [id])
+}
+
+model token {
+  id        Int        @id @default(autoincrement())
+  token     String     @unique
+  type      token_type
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+
+  userId String
+  User   User   @relation(fields: [userId], references: [id])
 }

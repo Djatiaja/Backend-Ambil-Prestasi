@@ -20,6 +20,20 @@ class UserService {
         return { users, meta };
     }
 
+    async findUser(data: { username?: string; email?: string }) {
+        const { username, email } = data;
+        if (!username && !email) throw new Error("username or email is required");
+
+        const where = username && email ? { OR: [{ username }, { email }] } :
+            username ? { username } :
+                { email };
+
+        return await prisma.user.findFirst({
+            where,
+            include: { role: true }
+        });
+    }
+
     async getUserById(id: string) {
         return await prisma.user.findFirst({
             where: { id },
@@ -35,7 +49,7 @@ class UserService {
         return await userRepository.createUser({ name, email, password, role, username, profileImage })
     }
 
-    async updateUser(id: string, data: TeacherUpdateDTO) {
+    async updateUser(id: string, data: Partial<User>) {
         return await userRepository.updateUser(id, data)
     }
 
@@ -99,7 +113,9 @@ class UserService {
             oneYear: monthlyCounts,
             fiveYear: yearlyCounts,
         };
-    }
+    };
+
+
 
 }
 

@@ -1,11 +1,11 @@
-import { hash } from "crypto";
 import prisma from "..";
 import { randPastDate, randUserName } from "@ngneat/falso";
-
-const hashedPassword = hash("sha256", "password123");
+import bcrypt from 'bcrypt';
 
 export const usersSeed = async () => {
+
     console.log("\n🌱 Seeding users...");
+    const hashedPassword = await bcrypt.hash('password123', 10);
 
     const adminRole = await prisma.role.findUnique({ where: { name: "Admin" } });
     const teacherRole = await prisma.role.findUnique({ where: { name: "Teacher" } });
@@ -40,6 +40,7 @@ export const usersSeed = async () => {
             }
         });
     }
+
     for (let index = 0; index < 1000; index++) {
         await prisma.user.create({
             data: {
@@ -54,7 +55,6 @@ export const usersSeed = async () => {
         });
     }
 
-    // TODO: remove this after implementing auth
     await prisma.user.create({
         data: {
             username: `teachertestacc`,
