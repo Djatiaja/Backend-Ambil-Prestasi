@@ -2,7 +2,7 @@ import z from "zod";
 import { userRepository } from "../repositories/user.repository";
 
 export const loginSchema = z.object({
-    username: z.string().min(4, 'Username is required'),
+    usernameoremail: z.string().min(4, 'username or email is required'),
     password: z.string().min(8, 'Password is required'),
 });
 

@@ -13,8 +13,8 @@ export class AuthController {
 
     login = async (req: Request, res: Response) => {
         try {
-            const { username, password } = req.body;
-            const { user, isSameCredentials } = await this.authService.login(username, password);
+            const { usernameoremail, password } = req.body;
+            const { user, isSameCredentials } = await this.authService.login(usernameoremail, password);
 
 
             const payload: JwtPayload = { user_id: user.id };
