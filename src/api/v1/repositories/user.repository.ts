@@ -37,6 +37,7 @@ class UserRepository {
                 select: {
                     id: true,
                     name: true,
+                    username: true,
                     email: true,
                 },
                 orderBy: {
@@ -57,6 +58,7 @@ class UserRepository {
                 id: true,
                 name: true,
                 email: true,
+                username: true,
             },
             orderBy: {
                 name: "asc"

@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { getClasses, getClassById, createClass, updateClass, deleteClass } from "../controllers/class.controller";
+import { validateBody } from "../middlewares/schema.middleware";
 
 const classRouter = Router();
 

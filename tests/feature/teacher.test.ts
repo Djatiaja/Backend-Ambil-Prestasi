@@ -36,8 +36,9 @@ beforeAll(async () => {
 });
 
 afterAll(async () => {
-    // await prisma.user.deleteMany({});
-    // await prisma.role.deleteMany({});
+    await prisma.user.deleteMany({
+    });
+    await prisma.role.deleteMany({});
 });
 
 describe("Feature Guru", () => {
