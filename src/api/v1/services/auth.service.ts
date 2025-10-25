@@ -6,8 +6,8 @@ import tokenService from './token.service';
 import otpService from './otp.service';
 
 export class AuthService {
-    async login(username: string, password: string): Promise<{ user: User; isSameCredentials: boolean }> {
-        const user = await userService.findUser({ username: username });
+    async login(usernameoremail: string, password: string): Promise<{ user: User; isSameCredentials: boolean }> {
+        const user = await userService.findUser({ username: usernameoremail }) || await userService.findUser({ email: usernameoremail });
         if (!user || !(await bcrypt.compare(password, user.password))) {
             throw new Error('Invalid credentials');
         }
@@ -16,11 +16,14 @@ export class AuthService {
             throw new Error('Account not verified');
         }
 
-        const isSameCredentials = username === password;
+        const isSameCredentials = user.username === password;
         return { user, isSameCredentials };
     }
 
-    async register(username: string, name: string, email: string, password: string): Promise<Partial<User>> {
+    async register(name: string, email: string, password: string, username?: string,): Promise<Partial<User>> {
+        if (!username) {
+            username = email.split('@')[0];
+        }
         const user = await userService.createUser({
             username,
             name,
