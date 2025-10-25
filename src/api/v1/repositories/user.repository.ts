@@ -6,7 +6,7 @@ import { hash } from "bcrypt";
 const SALT_ROUNDS = 10
 class UserRepository {
     async findUserById(userId: string) {
-        return await prisma.user.findUnique({
+        return await prisma.user.findFirst({
             where: { id: userId },
             select: {
                 id: true,
@@ -131,6 +131,14 @@ class UserRepository {
                 }),
             },
         });
+    }
+
+    async getUserRole(userId: string): Promise<string> {
+        const user = await prisma.user.findUnique({
+            where: { id: userId },
+            include: { role: true },
+        });
+        return user?.role.name || "Student";
     }
 
 }
