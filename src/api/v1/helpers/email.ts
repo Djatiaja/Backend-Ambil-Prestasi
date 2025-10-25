@@ -1,6 +1,6 @@
 import nodemailer from 'nodemailer';
 
-export const sendResetPasswordEmail = async (email: string, token: string): Promise<void> => {
+export const sendOTPEmail = async (email: string, otp: string): Promise<void> => {
     const transporter = nodemailer.createTransport({
         host: process.env.EMAIL_HOST,
         port: Number(process.env.EMAIL_PORT),
@@ -13,7 +13,7 @@ export const sendResetPasswordEmail = async (email: string, token: string): Prom
     await transporter.sendMail({
         from: process.env.EMAIL_FROM,
         to: email,
-        subject: 'Password Reset Request',
-        text: `Use this token to reset your password: ${token}`,
+        subject: 'OTP',
+        text: `Use this OTP: ${otp}`,
     });
 };

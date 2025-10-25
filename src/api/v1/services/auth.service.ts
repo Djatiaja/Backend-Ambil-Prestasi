@@ -1,8 +1,9 @@
 import bcrypt from 'bcrypt';
 import { token_type, User } from '@prisma/client';
-import { sendResetPasswordEmail } from '../helpers/email';
+import { sendOTPEmail } from '../helpers/email';
 import userService from './user.service';
 import tokenService from './token.service';
+import prisma from '../../../database';
 
 export class AuthService {
     async login(username: string, password: string): Promise<{ user: User; isSameCredentials: boolean }> {
@@ -14,11 +15,26 @@ export class AuthService {
         return { user, isSameCredentials };
     }
 
+    async register(username: string, name: string, email: string, password: string): Promise<Partial<User>> {
+        const hashedPassword = await bcrypt.hash(password, 10);
+        const user = await userService.createUser({
+            username,
+            name,
+            email,
+            password: hashedPassword,
+            role: "Student",
+        });
+
+        // await sendOTPEmail(email, token.token);
+
+        return user;
+    }
+
     async forgotPassword(email: string): Promise<void> {
         const user = await userService.findUser({ email: email });
         if (user) {
             const token = await tokenService.generateToken({ userId: user.id, tokenType: token_type.ResetPassword });
-            await sendResetPasswordEmail(email, token.token);
+            await sendOTPEmail(email, token.token);
         }
     }
 

@@ -46,6 +46,13 @@ class UserService {
         const { name, email, password, role, username, profileImage } = pdata;
         const roleData = await prisma.role.findFirst({ where: { name: role } });
         if (!roleData) throw new Error("Role not found");
+        if (await this.findUser({ email })) {
+            throw new Error("Email already exists");
+        }
+        if (await this.findUser({ username })) {
+            throw new Error("Username already exists");
+        }
+
         return await userRepository.createUser({ name, email, password, role, username, profileImage })
     }
 

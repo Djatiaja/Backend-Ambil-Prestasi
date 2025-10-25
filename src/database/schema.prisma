@@ -61,7 +61,8 @@ model User {
   User_Material   User_Material[]
   user_assignment User_Assignment[]
   quiz_attempt    Quiz_Attempt[]
-  token           token[]
+  token           Token[]
+  OTP             OTP[]
 }
 
 model Xp {
@@ -267,12 +268,21 @@ model Attemp_Multiple_Answer {
   quiz_answer      Quiz_Answer   @relation(fields: [answerId], references: [id])
 }
 
-model token {
+model Token {
   id        Int        @id @default(autoincrement())
   token     String     @unique
   type      token_type
   createdAt DateTime   @default(now())
   updatedAt DateTime   @updatedAt
+
+  userId String
+  User   User   @relation(fields: [userId], references: [id])
+}
+
+model OTP {
+  id        Int      @id @default(autoincrement())
+  code      String
+  createdAt DateTime @default(now())
 
   userId String
   User   User   @relation(fields: [userId], references: [id])

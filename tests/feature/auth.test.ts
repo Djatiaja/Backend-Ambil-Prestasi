@@ -140,13 +140,27 @@ describe('Feature Auth', () => {
 
     describe('POST /api/v1/register', () => {
         it('should register a new user successfully', async () => {
+            const user = await prisma.user.findUnique({
+                where: { email: 'newuser@example.com' }
+            });
+            if (user) {
+                await prisma.user.delete({
+                    where: { email: 'newuser@example.com' }
+                });
+            }
+
             const res = await superjest(app)
                 .post(`${baseUrl}/register`)
                 .send({
                     username: 'newuser',
                     email: 'newuser@example.com',
-
+                    name: 'New User',
+                    password: 'NewUserPass123',
+                    passwordConfirmation: 'NewUserPass123',
                 });
+            console.log("Register response:", res.body);
+            expect(res.status).toBe(201);
+            expect(res.body.data).toBeDefined();
         });
 
     });

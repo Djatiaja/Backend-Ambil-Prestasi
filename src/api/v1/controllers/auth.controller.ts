@@ -1,6 +1,5 @@
 import { Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
-import { JwtPayload } from '../types/auth.type';
 import { AuthService } from '../services/auth.service';
 import { sendResponse } from '../helpers/baseResponse';
 
@@ -118,14 +117,14 @@ export class AuthController {
 
     register = async (req: Request, res: Response) => {
         try {
-            const { username, email } = req.body;
-            // const user = await this.authService.register(username, email);
+            const { username, name, email, password } = req.body;
+            const user = await this.authService.register(username, name, email, password);
             return sendResponse({
                 res,
                 statusCode: 201,
                 success: true,
                 message: 'User registered successfully',
-                data: null, //user
+                data: user,
             });
         } catch (error: any) {
             return sendResponse({
