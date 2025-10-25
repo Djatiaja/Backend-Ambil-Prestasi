@@ -1,8 +1,9 @@
 import { User } from "@prisma/client";
+import bcrypt from 'bcrypt';
+
 import prisma from "../../../database";
 import { BaseResponse } from "../types/responseType";
 import { userRepository } from "../repositories/user.repository";
-import { TeacherUpdateDTO } from "../schemas/teacher.schema";
 
 class UserService {
     async getAllUsers(data: { role: string, limit?: number, page?: number, isDeleted?: boolean, search?: string }) {
@@ -20,6 +21,20 @@ class UserService {
         return { users, meta };
     }
 
+    async findUser(data: { username?: string; email?: string }) {
+        const { username, email } = data;
+        if (!username && !email) throw new Error("username or email is required");
+
+        const where = username && email ? { OR: [{ username }, { email }] } :
+            username ? { username } :
+                { email };
+
+        return await prisma.user.findFirst({
+            where,
+            include: { role: true }
+        });
+    }
+
     async getUserById(id: string) {
         return await prisma.user.findFirst({
             where: { id },
@@ -30,12 +45,20 @@ class UserService {
 
     async createUser(pdata: { name: string; email: string; password: string; role: string; username: string; profileImage?: string; }) {
         const { name, email, password, role, username, profileImage } = pdata;
+        const hashedPassword = await bcrypt.hash(password, 10);
         const roleData = await prisma.role.findFirst({ where: { name: role } });
         if (!roleData) throw new Error("Role not found");
-        return await userRepository.createUser({ name, email, password, role, username, profileImage })
+        if (await this.findUser({ email })) {
+            throw new Error("Email already exists");
+        }
+        if (await this.findUser({ username })) {
+            throw new Error("Username already exists");
+        }
+
+        return await userRepository.createUser({ name, email, password: hashedPassword, role, username, profileImage })
     }
 
-    async updateUser(id: string, data: TeacherUpdateDTO) {
+    async updateUser(id: string, data: Partial<User>) {
         return await userRepository.updateUser(id, data)
     }
 
@@ -99,7 +122,9 @@ class UserService {
             oneYear: monthlyCounts,
             fiveYear: yearlyCounts,
         };
-    }
+    };
+
+
 
 }
 

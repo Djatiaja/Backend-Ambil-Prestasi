@@ -1,6 +1,6 @@
 import supertest from "supertest";
 import app from "../../src";
-import { User } from "@prisma/client";
+import { Role, User } from "@prisma/client";
 import prisma from "../../src/database";
 import { usersSeed } from "../../src/database/seeders/users.seed";
 
@@ -52,8 +52,8 @@ describe("Feature Guru", () => {
         });
 
         beforeEach(async () => {
-            await prisma.user_Class.deleteMany({});
-            await prisma.user.deleteMany({}); // Clean users before each test
+            // await prisma.user_Class.deleteMany({});
+            // await prisma.user.deleteMany({}); // Clean users before each test
         });
 
         afterAll(async () => {
@@ -361,10 +361,13 @@ describe("Feature Guru", () => {
     describe("Role: Guru", () => {
         let teacherToken: string;
         let teacher: User;
-        let teacherRole: any;
+        let teacherRole: Role | null;
 
         beforeEach(async () => {
-            await prisma.user.deleteMany({});
+            const existing = await prisma.user.findUnique({ where: { username: "teacheruser" } });
+            if (existing) {
+                await prisma.user.delete({ where: { id: existing.id } });
+            }
             teacherRole = await prisma.role.findFirst({ where: { name: "Teacher" } });
             teacher = await createTestUser("Teacher", {
                 name: "Teacher User",

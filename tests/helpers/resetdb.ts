@@ -1,7 +1,4 @@
-import { PrismaClient } from "@prisma/client";
-
-const prisma = new PrismaClient();
-
+import prisma from "../../src/database";
 export async function resetDatabase() {
     await prisma.$transaction([
         prisma.attemp_Multiple_Answer.deleteMany(),

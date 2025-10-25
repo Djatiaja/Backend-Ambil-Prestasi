@@ -6,7 +6,7 @@ import { hash } from "bcrypt";
 const SALT_ROUNDS = 10
 class UserRepository {
     async findUserById(userId: string) {
-        return await prisma.user.findUnique({
+        return await prisma.user.findFirst({
             where: { id: userId },
             select: {
                 id: true,
@@ -83,13 +83,12 @@ class UserRepository {
         const { name, email, password, role, username, profileImage } = data;
         const roleData = await prisma.role.findUnique({ where: { name: role } });
         if (!roleData) throw new Error("Role not found");
-        const hashedPassword = await hash(password, SALT_ROUNDS);
 
         return await prisma.user.create({
             data: {
                 name,
                 email,
-                password: hashedPassword,
+                password: password,
                 username,
                 profileImage: profileImage || "https://ui-avatars.com/api/?name=" + encodeURIComponent(name) + "&background=random",
                 roleId: roleData.id,
@@ -133,6 +132,14 @@ class UserRepository {
                 }),
             },
         });
+    }
+
+    async getUserRole(userId: string): Promise<string> {
+        const user = await prisma.user.findUnique({
+            where: { id: userId },
+            include: { role: true },
+        });
+        return user?.role.name || "Student";
     }
 
 }

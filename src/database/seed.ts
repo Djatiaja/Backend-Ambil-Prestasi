@@ -1,12 +1,9 @@
 import "dotenv/config"; // ⬅️ ini akan load .env
-import { PrismaClient } from "@prisma/client";
 import { rolesSeed } from "./seeders/roles.seed";
 import { usersSeed } from "./seeders/users.seed";
 import { classesSeed } from "./seeders/classes.seed";
 import { user_classesSeed } from "./seeders/user_classes.seed";
-
-const prisma = new PrismaClient();
-
+import prisma from "../database";
 async function main() {
     console.log("🌱 Seeding database...");
 

@@ -51,7 +51,7 @@ export const getClasses = async (req: Request, res: Response) => {
 
         sendResponse({ res, statusCode: 200, success: true, message: "Get Classes", data: data, meta: meta })
     } catch (error) {
-        console.error("Error in getClasses:", error);
+        console.error("Error fetching classes:", error);
         res.status(500).json({
             success: false,
             message: "Failed to retrieve classes",
@@ -83,6 +83,7 @@ export const getClassById = async (req: Request, res: Response) => {
 
         sendResponse({ res, statusCode: 200, message: "Class found", success: true, data })
     } catch (error) {
+        console.error("Error fetching class:", error);
         res.status(500).json({
             success: false,
             message: "Internal server error",
@@ -123,8 +124,7 @@ export const createClass = async (req: Request, res: Response) => {
 
         res.status(201).json(response);
     } catch (error) {
-        console.log(error);
-
+        console.error("Error creating class:", error);
         res.status(500).json({
             success: false,
             message: "Internal server error",
