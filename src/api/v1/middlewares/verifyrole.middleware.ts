@@ -4,12 +4,13 @@ import { sendResponse } from "../helpers/baseResponse";
 export const verifyRole =
     (roles: string[]) => async (request: Request, response: Response, next: NextFunction) => {
         try {
-            const user = request.body.user;
-            if (!user || !roles.includes(user.role)) {
+            const role = request.role;
+            if (!role || !roles.includes(role)) {
                 return response.sendStatus(404);
             }
             next();
         } catch (err: unknown) {
+            console.error("Role verification error:", err);
             sendResponse({
                 res: response,
                 statusCode: 500,

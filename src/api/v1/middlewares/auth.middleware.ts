@@ -3,11 +3,12 @@ import { NextFunction, Request, Response } from "express";
 import { sendResponse } from "../helpers/baseResponse";
 import { JwtPayload } from "../types/auth.type";
 import { userRepository } from "../repositories/user.repository";
+import roleRepository from "../repositories/role.repository";
 
 const JWT_SECRET = process.env.JWT_SECRET ?? "";
 
 export const authMiddleware = async (
-    req: any,
+    req: Request,
     res: Response,
     next: NextFunction
 ) => {
@@ -43,6 +44,7 @@ export const authMiddleware = async (
         }
 
         const rootuser = await userRepository.findUserById(payload.user_id);
+        const userRole = await userRepository.getUserRole(payload.user_id);
 
         if (!rootuser) {
             return sendResponse({
@@ -56,6 +58,7 @@ export const authMiddleware = async (
 
         req.user = rootuser;
         req.token = token;
+        req.role = userRole ?? "";
         next();
     } catch (error) {
         return sendResponse({
