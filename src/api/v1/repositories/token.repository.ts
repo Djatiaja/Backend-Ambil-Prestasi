@@ -1,10 +1,10 @@
-import { Reset_Token, token_type } from "@prisma/client";
+import { Reset_Token } from "@prisma/client";
 import prisma from "../../../database";
 
 
 class TokenRepository {
-    async createToken(userId: string, resetToken: string, tokenType: token_type) {
-        const token = await prisma.reset_Token.create({ data: { userId, token: resetToken, type: tokenType } });
+    async createToken(userId: string, resetToken: string) {
+        const token = await prisma.reset_Token.create({ data: { userId, token: resetToken } });
         return token;
     }
 

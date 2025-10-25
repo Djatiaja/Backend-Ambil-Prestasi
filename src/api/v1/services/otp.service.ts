@@ -1,10 +1,11 @@
+import { otp_type } from "@prisma/client";
 import otpRepository from "../repositories/otp.repository";
 
 class OTPService {
-    async generateOTP(email: string): Promise<string> {
+    async generateOTP(email: string, type: otp_type): Promise<string> {
         const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
         const otpCode = Array.from({ length: 6 }, () => chars[Math.floor(Math.random() * chars.length)]).join('')
-        await otpRepository.createOTP(email, otpCode);
+        await otpRepository.createOTP(email, otpCode, type);
         return otpCode;
     }
 
@@ -21,7 +22,9 @@ class OTPService {
         return true;
     }
 
-
+    findOTPByEmail(email: string) {
+        return otpRepository.findOTPByEmail(email);
+    }
 
 }
 export default new OTPService();

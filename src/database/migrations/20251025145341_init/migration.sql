@@ -229,7 +229,6 @@ CREATE TABLE `Attemp_Multiple_Answer` (
 CREATE TABLE `Reset_Token` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `token` VARCHAR(191) NOT NULL,
-    `type` ENUM('Verification', 'ResetPassword') NOT NULL,
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updatedAt` DATETIME(3) NOT NULL,
     `userId` VARCHAR(191) NOT NULL,
@@ -242,6 +241,7 @@ CREATE TABLE `Reset_Token` (
 CREATE TABLE `OTP_Token` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `code` VARCHAR(191) NOT NULL,
+    `type` ENUM('PasswordReset', 'EmailVerification') NOT NULL,
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `userId` VARCHAR(191) NOT NULL,
 

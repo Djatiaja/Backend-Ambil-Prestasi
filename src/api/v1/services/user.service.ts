@@ -1,8 +1,9 @@
 import { User } from "@prisma/client";
+import bcrypt from 'bcrypt';
+
 import prisma from "../../../database";
 import { BaseResponse } from "../types/responseType";
 import { userRepository } from "../repositories/user.repository";
-import { TeacherUpdateDTO } from "../schemas/teacher.schema";
 
 class UserService {
     async getAllUsers(data: { role: string, limit?: number, page?: number, isDeleted?: boolean, search?: string }) {
@@ -44,6 +45,7 @@ class UserService {
 
     async createUser(pdata: { name: string; email: string; password: string; role: string; username: string; profileImage?: string; }) {
         const { name, email, password, role, username, profileImage } = pdata;
+        const hashedPassword = await bcrypt.hash(password, 10);
         const roleData = await prisma.role.findFirst({ where: { name: role } });
         if (!roleData) throw new Error("Role not found");
         if (await this.findUser({ email })) {
@@ -53,7 +55,7 @@ class UserService {
             throw new Error("Username already exists");
         }
 
-        return await userRepository.createUser({ name, email, password, role, username, profileImage })
+        return await userRepository.createUser({ name, email, password: hashedPassword, role, username, profileImage })
     }
 
     async updateUser(id: string, data: Partial<User>) {

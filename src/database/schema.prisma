@@ -31,9 +31,9 @@ enum quiz_question_type {
   Essay
 }
 
-enum token_type {
-  Verification
-  ResetPassword
+enum otp_type {
+  PasswordReset
+  EmailVerification
 }
 
 model Role {
@@ -269,11 +269,10 @@ model Attemp_Multiple_Answer {
 }
 
 model Reset_Token {
-  id        Int        @id @default(autoincrement())
-  token     String     @unique
-  type      token_type
-  createdAt DateTime   @default(now())
-  updatedAt DateTime   @updatedAt
+  id        Int      @id @default(autoincrement())
+  token     String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   userId String
   User   User   @relation(fields: [userId], references: [id])
@@ -282,6 +281,7 @@ model Reset_Token {
 model OTP_Token {
   id        Int      @id @default(autoincrement())
   code      String
+  type      otp_type
   createdAt DateTime @default(now())
 
   userId String

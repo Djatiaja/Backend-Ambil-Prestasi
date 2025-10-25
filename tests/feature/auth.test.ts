@@ -141,7 +141,7 @@ describe('Feature Auth', () => {
             const res = await superjest(app)
                 .patch(`${baseUrl}/reset-password`)
                 .send({
-                    token: token.token,
+                    reset_token: token.token,
                     newPassword: 'NewPass123',
                     confirmPassword: 'NewPass123',
                 });

@@ -1,5 +1,5 @@
 import bcrypt from 'bcrypt';
-import { Reset_Token, token_type, User } from '@prisma/client';
+import { otp_type, Reset_Token, User } from '@prisma/client';
 import { sendOTPEmail } from '../helpers/email';
 import userService from './user.service';
 import tokenService from './token.service';
@@ -11,38 +11,41 @@ export class AuthService {
         if (!user || !(await bcrypt.compare(password, user.password))) {
             throw new Error('Invalid credentials');
         }
+
+        if (!user.verified_at) {
+            throw new Error('Account not verified');
+        }
+
         const isSameCredentials = username === password;
         return { user, isSameCredentials };
     }
 
     async register(username: string, name: string, email: string, password: string): Promise<Partial<User>> {
-        const hashedPassword = await bcrypt.hash(password, 10);
         const user = await userService.createUser({
             username,
             name,
             email,
-            password: hashedPassword,
+            password: password,
             role: "Student",
         });
 
-        const otp: string = await otpService.generateOTP(email);
-        await sendOTPEmail(email, otp, "verify your account");
+        const otp: string = await otpService.generateOTP(email, otp_type.EmailVerification);
+        sendOTPEmail(email, otp, "verify your account");
         return user;
     }
 
-    async forgotPassword(email: string): Promise<void> {
+    async forgotPassword(email: string): Promise<boolean> {
         const user = await userService.findUser({ email: email });
-        if (user) {
-            const otp: string = await otpService.generateOTP(email);
-            await sendOTPEmail(email, otp, "reset your password");
+        if (!user) {
+            return false;
         }
+        const otp: string = await otpService.generateOTP(email, otp_type.PasswordReset);
+        sendOTPEmail(email, otp, "reset your password");
+        return true;
     }
 
-    async resetPassword(token: string, newPassword: string, confirmPassword: string): Promise<void> {
-        if (newPassword !== confirmPassword) {
-            throw new Error('Passwords do not match');
-        }
-        const user = await tokenService.findUserByToken(token);
+    async resetPassword(reset_token: string, newPassword: string): Promise<void> {
+        const user = await tokenService.findUserByToken(reset_token);
         if (!user) {
             throw new Error('Invalid or expired token');
         }
@@ -50,14 +53,42 @@ export class AuthService {
         await userService.updateUser(user.id, { password: hashedPassword });
     }
 
-    async verifyOTP(email: string, otp: string): Promise<string> {
+    async verifyOTP(email: string, otp: string): Promise<string | null> {
         const user = await userService.findUser({ email: email });
         if (!user) {
             throw new Error('User not found');
         }
         const isValidOTP = await otpService.verifyOTP(email, otp);
+        if (!isValidOTP) {
+            throw new Error('Invalid or expired OTP');
+        }
+        const otpRecord = await otpService.findOTPByEmail(email);
+        if (!otpRecord) {
+            return null;
+        }
 
-        const token: Reset_Token = await tokenService.generateToken({ userId: user.id, tokenType: token_type.ResetPassword });
-        return token.token;
+        switch (otpRecord.type) {
+            case otp_type.PasswordReset: {
+                const resetToken: Reset_Token = await tokenService.generateToken({ userId: user.id });
+                return resetToken.token;
+            }
+
+            case otp_type.EmailVerification: {
+                await userService.updateUser(user.id, { verified_at: new Date() });
+                return null;
+            }
+
+            default:
+                return null;
+        }
+    }
+
+    async resendOTP(email: string): Promise<void> {
+        const user = await userService.findUser({ email: email });
+        if (!user) {
+            throw new Error('User not found');
+        }
+        const otp: string = await otpService.generateOTP(email, otp_type.EmailVerification);
+        sendOTPEmail(email, otp, "verify your account");
     }
 }

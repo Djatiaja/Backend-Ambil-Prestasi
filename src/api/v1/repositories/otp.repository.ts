@@ -1,3 +1,4 @@
+import { otp_type } from "@prisma/client";
 import prisma from "../../../database";
 
 
@@ -10,11 +11,12 @@ class OTPRepository {
         });
     }
 
-    async createOTP(email: string, otp: string) {
+    async createOTP(email: string, otp: string, type: otp_type) {
         return await prisma.oTP_Token.create({
             data: {
                 User: { connect: { email: email } },
                 code: otp,
+                type: type,
             },
         });
     }

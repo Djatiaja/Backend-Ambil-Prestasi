@@ -52,12 +52,22 @@ export class AuthController {
     forgotPassword = async (req: Request, res: Response) => {
         try {
             const { email } = req.body;
-            await this.authService.forgotPassword(email);
+            const isSent = await this.authService.forgotPassword(email);
+            if (!isSent) {
+                return sendResponse({
+                    res,
+                    statusCode: 404,
+                    success: false,
+                    message: 'Invalid credentials',
+                    data: null,
+                });
+            }
+
             return sendResponse({
                 res,
                 statusCode: 200,
                 success: true,
-                message: 'If the email exists, a reset link has been sent',
+                message: 'Password reset OTP sent',
                 data: null,
             });
         } catch (error: any) {
@@ -83,7 +93,7 @@ export class AuthController {
                 statusCode: 200,
                 success: true,
                 message: 'OTP verified successfully',
-                data: { token },
+                data: token ? { reset_token: token } : null,
             });
         } catch (error: any) {
             return sendResponse({
@@ -98,8 +108,8 @@ export class AuthController {
 
     resetPassword = async (req: Request, res: Response) => {
         try {
-            const { token, newPassword, confirmPassword } = req.body;
-            await this.authService.resetPassword(token, newPassword, confirmPassword);
+            const { reset_token, newPassword } = req.body;
+            await this.authService.resetPassword(reset_token, newPassword);
             return sendResponse({
                 res,
                 statusCode: 200,
@@ -140,4 +150,26 @@ export class AuthController {
             });
         }
     }
+
+    resendOTP = async (req: Request, res: Response) => {
+        try {
+            const { email } = req.body;
+            await this.authService.resendOTP(email);
+            return sendResponse({
+                res,
+                statusCode: 200,
+                success: true,
+                message: 'OTP resent successfully',
+                data: null,
+            });
+        } catch (error: any) {
+            return sendResponse({
+                res,
+                statusCode: 400,
+                success: false,
+                message: error.message || 'User not found',
+                data: null,
+            });
+        }
+    };
 }

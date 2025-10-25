@@ -11,11 +11,11 @@ export const forgotPasswordSchema = z.object({
 });
 
 export const resetTokenSchema = z.object({
-    token: z.string().min(1, 'Token is required'),
+    reset_token: z.string().min(1, 'Token is required'),
 });
 
 export const resetPasswordSchema = z.object({
-    token: z.string().min(1, 'Token is required'),
+    reset_token: z.string().min(1, 'Token is required'),
     newPassword: z.string().min(6, 'Password must be at least 6 characters'),
     confirmPassword: z.string().min(6, 'Confirm password must be at least 6 characters'),
 }).refine((data) => data.newPassword === data.confirmPassword, {
@@ -64,6 +64,10 @@ export const registerSchema = z.object({
 export const OTPSchema = z.object({
     email: z.email(),
     code: z.string().length(6),
+});
+
+export const resendOTPSchema = z.object({
+    email: z.email(),
 });
 
 export type OTPInput = z.infer<typeof OTPSchema>;

@@ -1,12 +1,12 @@
-import { Reset_Token, token_type, User } from "@prisma/client";
+import { Reset_Token, User } from "@prisma/client";
 import { generateResetToken } from "../helpers/token";
 import tokenRepository from "../repositories/token.repository";
 import userService from "./user.service";
 
 
 class TokenService {
-    async generateToken(data: { userId: string, tokenType: token_type }) {
-        const { userId, tokenType } = data;
+    async generateToken(data: { userId: string }) {
+        const { userId } = data;
         const user = await userService.getUserById(userId);
 
         if (!user) {
@@ -14,7 +14,7 @@ class TokenService {
         }
 
         const resetToken = await generateResetToken();
-        const token = await tokenRepository.createToken(user.id, resetToken, tokenType);
+        const token = await tokenRepository.createToken(user.id, resetToken);
 
         return token;
     }
@@ -35,10 +35,10 @@ class TokenService {
         return true;
     }
 
-    async findUserByToken(token: string) {
-        const foundToken: Reset_Token | null = await tokenRepository.findToken(token);
+    async findUserByToken(reset_token: string) {
+        const foundToken: Reset_Token | null = await tokenRepository.findToken(reset_token);
 
-        if (!foundToken) {
+        if (!foundToken || foundToken.createdAt.getTime() + 5 * 60 * 1000 < Date.now()) {
             return null;
         }
 
