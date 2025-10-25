@@ -1,7 +1,7 @@
 import prisma from '../../src/database';
 import { randPastDate, randUserName } from '@ngneat/falso';
 import bcrypt from 'bcrypt';
-import { User, token } from '@prisma/client';
+import { User } from '@prisma/client';
 import superjest from 'supertest';
 import app from "../../src";
 
@@ -20,6 +20,12 @@ describe('Feature Auth', () => {
         password = 'test user';
         const hashedPassword = await bcrypt.hash(password, 10);
 
+        const existingUser = await prisma.user.findUnique({ where: { email: 'testuser@example.com' } });
+        if (existingUser) {
+            user = existingUser;
+            return;
+        }
+
         user = await prisma.user.create({
             data: {
                 username: `test user`,
@@ -37,7 +43,13 @@ describe('Feature Auth', () => {
     });
 
     afterAll(async () => {
-        await prisma.token.deleteMany({
+        await prisma.reset_Token.deleteMany({
+            where: {
+                userId: user.id
+            }
+        });
+
+        await prisma.oTP_Token.deleteMany({
             where: {
                 userId: user.id
             }
@@ -90,34 +102,34 @@ describe('Feature Auth', () => {
             console.log("Forgot password response:", res.body);
             expect(res.status).toBe(200);
         });
-
-
     })
 
-    describe('POST /api/v1/verify-token', () => {
-        it('should verify valid reset token', async () => {
-
-
-            const token = await prisma.token.findFirst({
-                where: {
-                    userId: user.id,
-                },
+    describe('POST /api/v1/verify-otp', () => {
+        it('should verify OTP and return reset token', async () => {
+            const otpRecord = await prisma.oTP_Token.findFirst({
+                where: { userId: user.id },
                 orderBy: { createdAt: 'desc' },
             });
-            if (!token) {
-                throw new Error("Reset token not found for testing");
-            }
-            const res = await superjest(app)
-                .post(`${baseUrl}/verify-token`)
-                .send({ token: token.token });
-            expect(res.status).toBe(200);
-        });
 
-    })
+            if (!otpRecord) {
+                throw new Error("OTP record not found for testing");
+            }
+
+            const res = await superjest(app)
+                .post(`${baseUrl}/verify-otp`)
+                .send({
+                    email: user.email,
+                    code: otpRecord.code,
+                });
+            console.log("Verify OTP response:", res.body);
+            expect(res.status).toBe(200);
+            expect(res.body.data["token"]).toBeDefined();
+        });
+    });
 
     describe('POST /api/v1/reset-password', () => {
         it('should reset password successfully', async () => {
-            const token = await prisma.token.findFirst({
+            const token = await prisma.reset_Token.findFirst({
                 where: {
                     userId: user.id,
                 },
@@ -144,6 +156,12 @@ describe('Feature Auth', () => {
                 where: { email: 'newuser@example.com' }
             });
             if (user) {
+                await prisma.oTP_Token.deleteMany({
+                    where: {
+                        userId: user.id
+                    }
+                });
+
                 await prisma.user.delete({
                     where: { email: 'newuser@example.com' }
                 });
@@ -158,11 +176,13 @@ describe('Feature Auth', () => {
                     password: 'NewUserPass123',
                     passwordConfirmation: 'NewUserPass123',
                 });
+
             console.log("Register response:", res.body);
             expect(res.status).toBe(201);
             expect(res.body.data).toBeDefined();
         });
-
     });
+
+
 });
 

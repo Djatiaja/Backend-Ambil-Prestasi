@@ -226,7 +226,7 @@ CREATE TABLE `Attemp_Multiple_Answer` (
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
-CREATE TABLE `token` (
+CREATE TABLE `Reset_Token` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `token` VARCHAR(191) NOT NULL,
     `type` ENUM('Verification', 'ResetPassword') NOT NULL,
@@ -234,7 +234,17 @@ CREATE TABLE `token` (
     `updatedAt` DATETIME(3) NOT NULL,
     `userId` VARCHAR(191) NOT NULL,
 
-    UNIQUE INDEX `token_token_key`(`token`),
+    UNIQUE INDEX `Reset_Token_token_key`(`token`),
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
+CREATE TABLE `OTP_Token` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `code` VARCHAR(191) NOT NULL,
+    `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `userId` VARCHAR(191) NOT NULL,
+
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
@@ -302,4 +312,7 @@ ALTER TABLE `Attemp_Multiple_Answer` ADD CONSTRAINT `Attemp_Multiple_Answer_atte
 ALTER TABLE `Attemp_Multiple_Answer` ADD CONSTRAINT `Attemp_Multiple_Answer_answerId_fkey` FOREIGN KEY (`answerId`) REFERENCES `Quiz_Answer`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE `token` ADD CONSTRAINT `token_userId_fkey` FOREIGN KEY (`userId`) REFERENCES `User`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE `Reset_Token` ADD CONSTRAINT `Reset_Token_userId_fkey` FOREIGN KEY (`userId`) REFERENCES `User`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `OTP_Token` ADD CONSTRAINT `OTP_Token_userId_fkey` FOREIGN KEY (`userId`) REFERENCES `User`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;

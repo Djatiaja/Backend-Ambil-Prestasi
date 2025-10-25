@@ -1,9 +1,9 @@
 import bcrypt from 'bcrypt';
-import { token_type, User } from '@prisma/client';
+import { Reset_Token, token_type, User } from '@prisma/client';
 import { sendOTPEmail } from '../helpers/email';
 import userService from './user.service';
 import tokenService from './token.service';
-import prisma from '../../../database';
+import otpService from './otp.service';
 
 export class AuthService {
     async login(username: string, password: string): Promise<{ user: User; isSameCredentials: boolean }> {
@@ -25,16 +25,16 @@ export class AuthService {
             role: "Student",
         });
 
-        // await sendOTPEmail(email, token.token);
-
+        const otp: string = await otpService.generateOTP(email);
+        await sendOTPEmail(email, otp, "verify your account");
         return user;
     }
 
     async forgotPassword(email: string): Promise<void> {
         const user = await userService.findUser({ email: email });
         if (user) {
-            const token = await tokenService.generateToken({ userId: user.id, tokenType: token_type.ResetPassword });
-            await sendOTPEmail(email, token.token);
+            const otp: string = await otpService.generateOTP(email);
+            await sendOTPEmail(email, otp, "reset your password");
         }
     }
 
@@ -50,11 +50,14 @@ export class AuthService {
         await userService.updateUser(user.id, { password: hashedPassword });
     }
 
-    async verifyToken(token: string): Promise<boolean> {
-        const isValid = await tokenService.verifyToken(token);
-        if (!isValid) {
-            throw new Error('Invalid or expired token');
+    async verifyOTP(email: string, otp: string): Promise<string> {
+        const user = await userService.findUser({ email: email });
+        if (!user) {
+            throw new Error('User not found');
         }
-        return true;
+        const isValidOTP = await otpService.verifyOTP(email, otp);
+
+        const token: Reset_Token = await tokenService.generateToken({ userId: user.id, tokenType: token_type.ResetPassword });
+        return token.token;
     }
 }

@@ -69,24 +69,24 @@ export class AuthController {
         }
     };
 
-    verifyResetToken = async (req: Request, res: Response) => {
+    verifyOTP = async (req: Request, res: Response) => {
         try {
-            const { token } = req.body;
-            await this.authService.verifyToken(token);
+            const { email, code } = req.body;
+            const token = await this.authService.verifyOTP(email, code);
 
             return sendResponse({
                 res,
                 statusCode: 200,
                 success: true,
-                message: 'Token is valid',
-                data: null,
+                message: 'OTP verified successfully',
+                data: { token },
             });
         } catch (error: any) {
             return sendResponse({
                 res,
                 statusCode: 400,
                 success: false,
-                message: error.message || 'Invalid or expired token',
+                message: error.message || 'Invalid or expired OTP',
                 data: null,
             });
         }

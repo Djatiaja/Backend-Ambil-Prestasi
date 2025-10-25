@@ -1,4 +1,4 @@
-import { token, token_type, User } from "@prisma/client";
+import { Reset_Token, token_type, User } from "@prisma/client";
 import { generateResetToken } from "../helpers/token";
 import tokenRepository from "../repositories/token.repository";
 import userService from "./user.service";
@@ -20,7 +20,7 @@ class TokenService {
     }
 
     async verifyToken(token: string) {
-        const foundToken: token | null = await tokenRepository.findToken(token);
+        const foundToken: Reset_Token | null = await tokenRepository.findToken(token);
 
         if (!foundToken) {
             throw new Error("Invalid or expired token");
@@ -36,7 +36,7 @@ class TokenService {
     }
 
     async findUserByToken(token: string) {
-        const foundToken: token | null = await tokenRepository.findToken(token);
+        const foundToken: Reset_Token | null = await tokenRepository.findToken(token);
 
         if (!foundToken) {
             return null;

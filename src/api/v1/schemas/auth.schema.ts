@@ -60,3 +60,10 @@ export const registerSchema = z.object({
         }
     }
 });
+
+export const OTPSchema = z.object({
+    email: z.email(),
+    code: z.string().length(6),
+});
+
+export type OTPInput = z.infer<typeof OTPSchema>;

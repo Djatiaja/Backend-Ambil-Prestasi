@@ -1,6 +1,6 @@
 import nodemailer from 'nodemailer';
 
-export const sendOTPEmail = async (email: string, otp: string): Promise<void> => {
+export const sendOTPEmail = async (email: string, otp: string, message: string): Promise<void> => {
     const transporter = nodemailer.createTransport({
         host: process.env.EMAIL_HOST,
         port: Number(process.env.EMAIL_PORT),
@@ -14,6 +14,6 @@ export const sendOTPEmail = async (email: string, otp: string): Promise<void> =>
         from: process.env.EMAIL_FROM,
         to: email,
         subject: 'OTP',
-        text: `Use this OTP: ${otp}`,
+        text: `${message}: ${otp}`,
     });
 };
