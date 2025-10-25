@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
 import { AuthService } from '../services/auth.service';
 import { sendResponse } from '../helpers/baseResponse';
+import { JwtPayload } from '../types/auth.type';
 
 export class AuthController {
     private authService: AuthService;
@@ -14,7 +15,10 @@ export class AuthController {
         try {
             const { username, password } = req.body;
             const { user, isSameCredentials } = await this.authService.login(username, password);
-            const token = jwt.sign({ user_id: user.id }, process.env.JWT_SECRET!, { expiresIn: '1h' });
+
+
+            const payload: JwtPayload = { user_id: user.id };
+            const token = jwt.sign(payload, process.env.JWT_SECRET!, { expiresIn: '1h' });
 
             if (isSameCredentials) {
                 return sendResponse({
