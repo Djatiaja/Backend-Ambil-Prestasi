@@ -54,7 +54,7 @@ model User {
   verified_at     DateTime?
   createdAt       DateTime          @default(now())
   updatedAt       DateTime          @updatedAt
-  role            Role              @relation(fields: [roleId], references: [id])
+  role            Role              @relation(fields: [roleId], references: [id], onDelete: Cascade)
   roleId          Int
   xps             Xp[]
   User_Class      User_Class[]
@@ -72,9 +72,8 @@ model Xp {
   points    Int
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
-
-  userId String
-  User   User   @relation(fields: [userId], references: [id])
+  userId    String
+  User      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model Class {
@@ -95,38 +94,35 @@ model User_Class {
   classId   Int
   createdAt DateTime   @default(now())
   updatedAt DateTime   @updatedAt
-
-  user  User  @relation(fields: [userId], references: [id])
-  class Class @relation(fields: [classId], references: [id])
+  user      User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  class     Class      @relation(fields: [classId], references: [id], onDelete: Cascade)
 
   @@unique([userId, classId])
 }
 
 model Section {
-  id          Int      @id @default(autoincrement())
+  id          Int          @id @default(autoincrement())
   title       String
-  description String?  @db.LongText
+  description String?      @db.LongText
   order       Int
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
   classId     Int
-  Class       Class    @relation(fields: [classId], references: [id])
-
-  Material   Material[]
-  Assignment Assignment[]
-  Quiz       Quiz[]
+  Class       Class        @relation(fields: [classId], references: [id], onDelete: Cascade)
+  Material    Material[]
+  Assignment  Assignment[]
+  Quiz        Quiz[]
 }
 
 model Material {
-  id        Int      @id @default(autoincrement())
-  title     String
-  content   String   @db.LongText
-  xp        Int
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
+  id            Int             @id @default(autoincrement())
+  title         String
+  content       String          @db.LongText
+  xp            Int             @default(10)
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
   sectionId     Int
-  Section       Section         @relation(fields: [sectionId], references: [id])
+  Section       Section         @relation(fields: [sectionId], references: [id], onDelete: Cascade)
   Material_File Material_File[]
   User_Material User_Material[]
 }
@@ -137,7 +133,7 @@ model Material_File {
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
   materialId Int
-  Material   Material @relation(fields: [materialId], references: [id])
+  Material   Material @relation(fields: [materialId], references: [id], onDelete: Cascade)
 }
 
 model User_Material {
@@ -147,125 +143,117 @@ model User_Material {
   updatedAt    DateTime @updatedAt
   userId       String
   materialId   Int
-  User         User     @relation(fields: [userId], references: [id])
-  Material     Material @relation(fields: [materialId], references: [id])
+  User         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  Material     Material @relation(fields: [materialId], references: [id], onDelete: Cascade)
 
   @@unique([userId, materialId])
 }
 
 model Assignment {
-  id          Int      @id @default(autoincrement())
-  title       String
-  description String
-  open_at     DateTime
-  close_at    DateTime
-  xp          Int
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-
+  id              Int               @id @default(autoincrement())
+  title           String
+  description     String
+  open_at         DateTime
+  close_at        DateTime
+  xp              Int
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
   sectionId       Int
-  Section         Section           @relation(fields: [sectionId], references: [id])
+  Section         Section           @relation(fields: [sectionId], references: [id], onDelete: Cascade)
   user_assignment User_Assignment[]
 }
 
 model User_Assignment {
-  id           Int      @id @default(autoincrement())
-  is_graded    Boolean  @default(false)
+  id           Int        @id @default(autoincrement())
+  is_graded    Boolean    @default(false)
   grade        Int?
   path         String?
-  submitted_at DateTime @default(now())
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
-
+  submitted_at DateTime   @default(now())
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
   userId       String
   assignmentId Int
-  User         User       @relation(fields: [userId], references: [id])
-  Assignment   Assignment @relation(fields: [assignmentId], references: [id])
+  User         User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  Assignment   Assignment @relation(fields: [assignmentId], references: [id], onDelete: Cascade)
 
   @@unique([userId, assignmentId])
 }
 
 model Quiz {
-  id            Int      @id @default(autoincrement())
+  id            Int             @id @default(autoincrement())
   title         String
-  description   String   @db.LongText
+  description   String          @db.LongText
   max_attempts  Int
   time_limit    Int // in minutes
   open_at       DateTime
   close_at      DateTime
   passing_grade Int
   xp            Int
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
-
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
   sectionId     Int
-  Section       Section         @relation(fields: [sectionId], references: [id])
+  Section       Section         @relation(fields: [sectionId], references: [id], onDelete: Cascade)
   quiz_question Quiz_Question[]
   quiz_attempt  Quiz_Attempt[]
 }
 
 model Quiz_Question {
-  id        Int                @id @default(autoincrement())
-  question  String
-  type      quiz_question_type
-  points    Int
-  createdAt DateTime           @default(now())
-  updatedAt DateTime           @updatedAt
-
+  id            Int                @id @default(autoincrement())
+  question      String
+  type          quiz_question_type
+  points        Int
+  createdAt     DateTime           @default(now())
+  updatedAt     DateTime           @updatedAt
   quizId        Int
-  quiz          Quiz            @relation(fields: [quizId], references: [id])
+  quiz          Quiz               @relation(fields: [quizId], references: [id], onDelete: Cascade)
   quiz_answer   Quiz_Answer[]
   attemp_answer Attemp_Answer[]
 }
 
 model Quiz_Answer {
-  id         Int      @id @default(autoincrement())
-  answer     String
-  is_correct Boolean
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
-
+  id                     Int                      @id @default(autoincrement())
+  answer                 String
+  is_correct             Boolean
+  createdAt              DateTime                 @default(now())
+  updatedAt              DateTime                 @updatedAt
   questionId             Int
-  quiz_question          Quiz_Question            @relation(fields: [questionId], references: [id])
+  quiz_question          Quiz_Question            @relation(fields: [questionId], references: [id], onDelete: Cascade)
   attemp_multiple_answer Attemp_Multiple_Answer[]
 }
 
 model Quiz_Attempt {
-  id        Int      @id @default(autoincrement())
-  score     Int
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
+  id            Int             @id @default(autoincrement())
+  score         Int
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
   userId        String
   quizId        Int
-  User          User            @relation(fields: [userId], references: [id])
-  quiz          Quiz            @relation(fields: [quizId], references: [id])
+  User          User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  quiz          Quiz            @relation(fields: [quizId], references: [id], onDelete: Cascade)
   attemp_answer Attemp_Answer[]
 }
 
 model Attemp_Answer {
-  id        Int      @id @default(autoincrement())
-  path      String?
-  answer    String?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
+  id                     Int                      @id @default(autoincrement())
+  path                   String?
+  answer                 String?
+  createdAt              DateTime                 @default(now())
+  updatedAt              DateTime                 @updatedAt
   attemptId              Int
   questionId             Int
-  quiz_attempt           Quiz_Attempt             @relation(fields: [attemptId], references: [id])
-  quiz_question          Quiz_Question            @relation(fields: [questionId], references: [id])
+  quiz_attempt           Quiz_Attempt             @relation(fields: [attemptId], references: [id], onDelete: Cascade)
+  quiz_question          Quiz_Question            @relation(fields: [questionId], references: [id], onDelete: Cascade)
   attemp_multiple_answer Attemp_Multiple_Answer[]
 }
 
 model Attemp_Multiple_Answer {
-  id        Int      @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
+  id               Int           @id @default(autoincrement())
+  createdAt        DateTime      @default(now())
+  updatedAt        DateTime      @updatedAt
   attempt_answerId Int
   answerId         Int
-  attemp_answer    Attemp_Answer @relation(fields: [attempt_answerId], references: [id])
-  quiz_answer      Quiz_Answer   @relation(fields: [answerId], references: [id])
+  attemp_answer    Attemp_Answer @relation(fields: [attempt_answerId], references: [id], onDelete: Cascade)
+  quiz_answer      Quiz_Answer   @relation(fields: [answerId], references: [id], onDelete: Cascade)
 }
 
 model Reset_Token {
@@ -273,9 +261,8 @@ model Reset_Token {
   token     String   @unique
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-
-  userId String
-  User   User   @relation(fields: [userId], references: [id])
+  userId    String
+  User      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model OTP_Token {
@@ -283,7 +270,6 @@ model OTP_Token {
   code      String
   type      otp_type
   createdAt DateTime @default(now())
-
-  userId String
-  User   User   @relation(fields: [userId], references: [id])
+  userId    String
+  User      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
