@@ -28,3 +28,6 @@ coverage/
 *.db-journal
 
 /src/generated/prisma
+
+uploads/*
+!uploads/.gitkeep
