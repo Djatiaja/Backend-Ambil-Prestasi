@@ -22,6 +22,7 @@ export const usersSeed = async () => {
             name: "Admin User",
             roleId: adminRole.id,
             profileImage: "https://ui-avatars.com/api/?name=Admin+User&background=random",
+            verified_at: new Date(),
             password: hashedPassword,
             createdAt: randPastDate({ years: 1 }),
         }
@@ -35,6 +36,7 @@ export const usersSeed = async () => {
                 name: randUserName(),
                 roleId: teacherRole.id,
                 profileImage: `https://ui-avatars.com/api/?name=Teacher+${index + 1}&background=random`,
+                verified_at: new Date(),
                 password: hashedPassword,
                 createdAt: randPastDate({ years: 5 }),
             }
@@ -49,6 +51,7 @@ export const usersSeed = async () => {
                 name: randUserName(),
                 roleId: studentRole.id,
                 profileImage: `https://ui-avatars.com/api/?name=Student+${index + 1}&background=random`,
+                verified_at: new Date(),
                 password: hashedPassword,
                 createdAt: randPastDate({ years: 5 }),
             }
@@ -62,6 +65,7 @@ export const usersSeed = async () => {
             name: 'teachertestacc',
             roleId: teacherRole.id,
             profileImage: `https://ui-avatars.com/api/?name=teachertestacc&background=random`,
+            verified_at: new Date(),
             password: hashedPassword,
             createdAt: randPastDate({ years: 5 }),
         }
