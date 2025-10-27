@@ -1,4 +1,3 @@
-// controllers/materialController.ts
 import { Request, Response } from 'express';
 import { sendResponse } from '../helpers/baseResponse';
 import { NotFoundError } from '../errors/notfound.error';
@@ -123,4 +122,3 @@ export class MaterialController {
         }
     }
 }
-

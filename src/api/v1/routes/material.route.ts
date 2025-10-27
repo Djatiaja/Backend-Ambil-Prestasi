@@ -1,7 +1,7 @@
 import { Router } from "express";
-import { MaterialController } from "../controllers/material.controller";
 import { validateBody } from "../middlewares/schema.middleware";
 import { createMaterialSchema, updateMaterialSchema } from "../schemas/material.schema";
+import { MaterialController } from "../controllers/material.controller";
 
 const materialRouter = Router({ mergeParams: true });
 const materialController = new MaterialController();

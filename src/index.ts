@@ -5,8 +5,10 @@ import cors from "cors";
 const app = express();
 
 app.use(express.json());
+app.use(express.urlencoded({ extended: true, limit: "500mb" }));
+
 const allowedOrigins = [
-    "http://localhost:3000",     // Dev
+    "http://localhost:3000",
 ];
 
 app.use(
@@ -22,7 +24,6 @@ app.use(
     })
 );
 
-app.use(express.urlencoded({ extended: true }));
 app.use("/api/v1", router);
 
 export default app;

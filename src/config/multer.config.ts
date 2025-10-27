@@ -4,11 +4,11 @@ import { uuidv4 } from "zod";
 // Define storage configuration
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, "uploads/"); // Save files to the 'uploads' directory
+        cb(null, "./uploads/"); // Save files to the 'uploads' directory
     },
     filename: (req, file, cb) => {
-        const uniqueSuffix = `${uuidv4()}${path.extname(file.originalname)}`;
-        cb(null, uniqueSuffix); // Generate unique filename
+        const unique = Date.now() + "-" + Math.round(Math.random() * 1e9);
+        cb(null, `${unique}-${file.originalname}`);
     },
 });
 
@@ -30,6 +30,9 @@ const fileFilter = (req: Express.Request, file: Express.Multer.File, cb: multer.
 };
 
 export const upload = multer({
-    storage,
-    fileFilter,
+    storage: storage,
+    fileFilter: fileFilter,
+    limits: {
+        fileSize: 100 * 1024 * 1024, // 100 MB file size limit
+    },
 });

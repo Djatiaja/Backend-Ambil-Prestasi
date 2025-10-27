@@ -15,6 +15,7 @@ export const material_filesSeed = async () => {
         for (let i = 1; i <= randCount; i++) {
             await prisma.material_File.create({
                 data: {
+                    title: `Material File ${i} for Material ${material.id}`,
                     path: `https://example.com/files/file_${i}.pdf`,
                     materialId: material.id
                 }
