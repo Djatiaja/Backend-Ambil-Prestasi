@@ -3,10 +3,10 @@ import prisma from '../../../database';
 
 export class MaterialRepository {
 
-    async findAll(): Promise<Material[]> {
+    async findAll(sectionId: number): Promise<Material[]> {
         return await prisma.material.findMany({
+            where: { sectionId },
             include: {
-                Section: true,
                 Material_File: true,
             },
         });
@@ -32,7 +32,6 @@ export class MaterialRepository {
         return await prisma.material.create({
             data,
             include: {
-                Section: true,
                 Material_File: true,
             },
         });
@@ -48,7 +47,6 @@ export class MaterialRepository {
             where: { id },
             data,
             include: {
-                Section: true,
                 Material_File: true,
             },
         });

@@ -3,7 +3,7 @@ import { MaterialController } from "../controllers/material.controller";
 import { validateBody } from "../middlewares/schema.middleware";
 import { createMaterialSchema, updateMaterialSchema } from "../schemas/material.schema";
 
-const materialRouter = Router();
+const materialRouter = Router({ mergeParams: true });
 const materialController = new MaterialController();
 
 materialRouter.get("/", (req, res) => materialController.getAllMaterials(req, res));

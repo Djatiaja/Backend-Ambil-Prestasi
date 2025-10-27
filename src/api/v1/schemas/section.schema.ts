@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-const SectionSchema = z.object({
+export const CreateSectionSchema = z.object({
     title: z.string()
         .min(10, 'Title cannot be less than 10 characters')
         .max(255, 'Title cannot exceed 255 characters'),
@@ -16,13 +16,8 @@ const SectionSchema = z.object({
         .optional(),
 });
 
-export const CreateSectionSchema = SectionSchema.extend({
-    classId: z.number()
-        .int('classID must be an integer')
-        .positive('classID must be positive'),
-});
 
-export const UpdateSectionSchema = SectionSchema.partial();
+export const UpdateSectionSchema = CreateSectionSchema.partial();
 
 export type CreateSectionInput = z.infer<typeof CreateSectionSchema>;
 export type UpdateSectionInput = z.infer<typeof UpdateSectionSchema>;

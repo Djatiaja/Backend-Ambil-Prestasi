@@ -23,8 +23,8 @@ router.use("/teachers", authMiddleware, verifyRole(["Admin", "Teacher"]), teache
 router.use("/dashboard", authMiddleware, verifyRole(["Admin"]), dashboardRouter);
 router.use("/classes", authMiddleware, verifyRole(["Admin", "Teacher"]), classRouter);
 router.use("/classes/:classId/sections", sectionRouter);
-router.use("/classes/:classId/sections/:sectionId/materials", materialRouter);
-router.use("/classes/:classId/sections/:sectionId/materials/:materialId/files", materialFileRouter);
+router.use("/classes/sections/:sectionId/materials", materialRouter);
+router.use("/classes/sections/materials/:materialId/files", materialFileRouter);
 router.use("/", authRouter)
 
 export default router;

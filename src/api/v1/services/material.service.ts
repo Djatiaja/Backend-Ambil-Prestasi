@@ -4,8 +4,8 @@ import { CreateMaterialDto, UpdateMaterialDto } from '../schemas/material.schema
 import { NotFoundError } from '../errors/notfound.error';
 
 export class MaterialService {
-    async getAllMaterials(): Promise<Material[]> {
-        return await materialRepository.findAll();
+    async getAllMaterials(sectionId: number): Promise<Material[]> {
+        return await materialRepository.findAll(sectionId);
     }
 
     async getMaterialById(id: number): Promise<Material> {
@@ -16,8 +16,8 @@ export class MaterialService {
         return material;
     }
 
-    async createMaterial(data: CreateMaterialDto): Promise<Material> {
-        return await materialRepository.create({ ...data, xp: 10 });
+    async createMaterial(data: CreateMaterialDto, sectionId: number): Promise<Material> {
+        return await materialRepository.create({ ...data, xp: 10, sectionId });
     }
 
     async updateMaterial(id: number, data: UpdateMaterialDto): Promise<Material> {

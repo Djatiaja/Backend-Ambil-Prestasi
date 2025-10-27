@@ -8,7 +8,7 @@ const sectionRouter = Router({ mergeParams: true });
 sectionRouter.get('/', sectionController.getSections);
 sectionRouter.get('/:sectionID', sectionController.getSection);
 sectionRouter.post('/', validateBody(CreateSectionSchema), sectionController.createSection);
-sectionRouter.put('/:sectionID', validateBody(UpdateSectionSchema), sectionController.updateSection);
+sectionRouter.patch('/:sectionID', validateBody(UpdateSectionSchema), sectionController.updateSection);
 sectionRouter.delete('/:sectionID', sectionController.deleteSection);
 
 export default sectionRouter;

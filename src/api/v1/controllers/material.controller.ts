@@ -8,7 +8,8 @@ export class MaterialController {
 
     async getAllMaterials(req: Request, res: Response) {
         try {
-            const materials = await materialService.getAllMaterials();
+            const sectionId = parseInt(req.params.sectionId);
+            const materials = await materialService.getAllMaterials(sectionId);
             return sendResponse({
                 res,
                 statusCode: 200,
@@ -30,7 +31,7 @@ export class MaterialController {
 
     async getMaterialById(req: Request, res: Response) {
         try {
-            const id = parseInt(req.params.materialID);
+            const id = parseInt(req.params.materialId);
             const material = await materialService.getMaterialById(id);
             return sendResponse({
                 res,
@@ -54,7 +55,7 @@ export class MaterialController {
 
     async createMaterial(req: Request, res: Response) {
         try {
-            const material = await materialService.createMaterial(req.body);
+            const material = await materialService.createMaterial(req.body, parseInt(req.params.sectionId));
             return sendResponse({
                 res,
                 statusCode: 201,
@@ -76,7 +77,7 @@ export class MaterialController {
 
     async updateMaterial(req: Request, res: Response) {
         try {
-            const id = parseInt(req.params.materialID);
+            const id = parseInt(req.params.materialId);
             const material = await materialService.updateMaterial(id, req.body);
             return sendResponse({
                 res,
@@ -100,14 +101,14 @@ export class MaterialController {
 
     async deleteMaterial(req: Request, res: Response) {
         try {
-            const id = parseInt(req.params.materialID);
+            const id = parseInt(req.params.materialId);
             const material = await materialService.deleteMaterial(id);
             return sendResponse({
                 res,
                 statusCode: 200,
                 success: true,
                 message: 'Material deleted successfully',
-                data: material,
+                data: null,
             });
         } catch (error) {
             const statusCode = error instanceof NotFoundError ? 404 : 500;

@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import { sendResponse } from '../helpers/baseResponse';
 import { CreateSectionInput, UpdateSectionInput } from '../schemas/section.schema';
 import sectionService from '../services/section.service';
+import classService from '../services/class.service';
 
 class SectionController {
     async getSections(req: Request, res: Response) {
@@ -60,16 +61,19 @@ class SectionController {
     async createSection(req: Request, res: Response) {
         try {
             const { classId } = req.params;
-            if (!classId || typeof classId !== 'string') {
+
+            const classVar = await classService.getClassById(parseInt(classId));
+            if (!classVar) {
                 return sendResponse({
                     res,
-                    statusCode: 400,
+                    statusCode: 404,
                     success: false,
-                    message: 'classId is required',
+                    message: 'Class not found',
                     data: null,
                 });
             }
-            const section = await sectionService.createSection(req.body as CreateSectionInput, classId);
+
+            const section = await sectionService.createSection(req.body as CreateSectionInput, parseInt(classId));
             return sendResponse({
                 res,
                 statusCode: 201,

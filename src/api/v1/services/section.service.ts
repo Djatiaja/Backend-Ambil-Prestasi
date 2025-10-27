@@ -72,10 +72,10 @@ class SectionService {
         }
     }
 
-    async createSection(data: CreateSectionInput, classId: string): Promise<Section> {
+    async createSection(data: CreateSectionInput, classId: number): Promise<Section> {
         try {
             const lastSection = await prisma.section.findFirst({
-                where: { classId: parseInt(classId) },
+                where: { classId },
                 orderBy: { order: 'desc' },
             });
 
@@ -85,7 +85,7 @@ class SectionService {
                 data: {
                     title: data.title,
                     description: data.description,
-                    classId: parseInt(classId),
+                    classId,
                     order: newOrder,
                 },
             });
