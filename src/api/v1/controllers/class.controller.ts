@@ -170,7 +170,10 @@ export const updateClass = async (req: Request, res: Response) => {
 
 export const deleteClass = async (req: Request, res: Response) => {
     try {
+        console.log("Received request to delete class with ID:");
+
         const classId = parseInt(req.params.id);
+
         const deleted = await classService.deleteClass(classId);
 
         if (!deleted) {
