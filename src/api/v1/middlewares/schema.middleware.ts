@@ -5,9 +5,12 @@ import { sendResponse } from "../helpers/baseResponse";
 export const validateBody =
     (schema: ZodSchema) => async (request: Request, response: Response, next: NextFunction) => {
         try {
-            console.log("request body: ", request.body);
-            const data = await schema.parseAsync(request.body);
-            request.body = data;
+            const payload = {
+                ...request.body,
+                ...(request.file ? { file: request.file } : {}),
+            };
+
+            const data = await schema.parseAsync(payload);
             next();
         } catch (err: unknown) {
             if (err instanceof ZodError) {

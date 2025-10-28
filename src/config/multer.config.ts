@@ -1,16 +1,7 @@
 import multer from "multer";
-import path from "path";
-import { uuidv4 } from "zod";
-// Define storage configuration
-const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, "./uploads/"); // Save files to the 'uploads' directory
-    },
-    filename: (req, file, cb) => {
-        const unique = Date.now() + "-" + Math.round(Math.random() * 1e9);
-        cb(null, `${unique}-${file.originalname}`);
-    },
-});
+
+// ✅ Konfigurasi multer dengan memory storage
+const storage = multer.memoryStorage();
 
 const fileFilter = (req: Express.Request, file: Express.Multer.File, cb: multer.FileFilterCallback) => {
     const allowedTypes = [
@@ -29,10 +20,12 @@ const fileFilter = (req: Express.Request, file: Express.Multer.File, cb: multer.
     }
 };
 
-export const upload = multer({
-    storage: storage,
-    fileFilter: fileFilter,
-    limits: {
-        fileSize: 100 * 1024 * 1024, // 100 MB file size limit
-    },
-});
+// ✅ Batas ukuran file (contoh: 500 MB)
+const limits = {
+    fileSize: 500 * 1024 * 1024, // 500 MB
+};
+
+// ✅ Export konfigurasi multer
+const upload = multer({ storage, fileFilter, limits });
+
+export default upload;

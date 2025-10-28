@@ -2,7 +2,7 @@ import { Router } from "express";
 import materialFileController from "../controllers/materialFile.controller";
 import { validateBody } from "../middlewares/schema.middleware";
 import { createMaterialFileSchema, updateMaterialFileSchema } from "../schemas/materialFile.schema";
-import { upload } from "../../../config/multer.config";
+import upload from "../../../config/multer.config";
 
 const materialFileRouter = Router({ mergeParams: true });
 
