@@ -5,6 +5,7 @@ import { sendResponse } from '../helpers/baseResponse';
 import { JwtPayload } from '../types/auth.type';
 import { registerUserDto } from '../schemas/auth.schema';
 import roleRepository from '../repositories/role.repository';
+import userService from '../services/user.service';
 
 export class AuthController {
     private authService: AuthService;
@@ -20,7 +21,7 @@ export class AuthController {
 
 
             const payload: JwtPayload = { user_id: user.id };
-            const token = jwt.sign(payload, process.env.JWT_SECRET!, { expiresIn: '1h' });
+            const token = jwt.sign(payload, process.env.JWT_SECRET!, { expiresIn: '24h' });
             const role = await roleRepository.findRoleById(user.roleId);
             if (isSameCredentials) {
                 return sendResponse({
@@ -173,4 +174,28 @@ export class AuthController {
             });
         }
     };
+
+    checkRole = async (req: Request, res: Response) => {
+        try {
+            const userId = (req.user as JwtPayload).user_id;
+            const user = await userService.getUserById(userId);
+            const role = await roleRepository.findRoleById(user?.roleId || 3);
+            return sendResponse({
+                res,
+                statusCode: 200,
+                success: true,
+                message: 'User role fetched successfully',
+                data: { role: role?.name || null },
+            });
+        }
+        catch (error: any) {
+            return sendResponse({
+                res,
+                statusCode: 500,
+                success: false,
+                message: 'Server error',
+                data: null,
+            });
+        }
+    }
 }
