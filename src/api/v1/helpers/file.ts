@@ -1,16 +1,16 @@
 import fs from "fs";
 import path from "path";
-import { v4 as uuidv4 } from "uuid";
+import { randomUUID as uuidv4 } from "crypto";
 
 export function saveFile(file: Express.Multer.File): string {
     // ✅ Pastikan folder upload ada
     const uploadDir = path.resolve("uploads");
     fs.mkdirSync(uploadDir, { recursive: true });
-
-    // ✅ Buat nama file unik agar tidak tertimpa
+    // ✅ Buat nama file unik agar tidak tertimpa (dengan timestamp)
     const ext = path.extname(file.originalname);
     const baseName = path.basename(file.originalname, ext);
-    const uniqueName = `${baseName}-${uuidv4()}${ext}`;
+    const timestamp = new Date().toISOString().replace(/[:.]/g, "-");
+    const uniqueName = `${baseName}-${timestamp}-${uuidv4()}${ext}`;
 
     // ✅ Tentukan path penyimpanan absolut
     const uploadPath = path.join(uploadDir, uniqueName);
