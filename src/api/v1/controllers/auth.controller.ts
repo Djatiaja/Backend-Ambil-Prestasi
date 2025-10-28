@@ -4,6 +4,7 @@ import { AuthService } from '../services/auth.service';
 import { sendResponse } from '../helpers/baseResponse';
 import { JwtPayload } from '../types/auth.type';
 import { registerUserDto } from '../schemas/auth.schema';
+import roleRepository from '../repositories/role.repository';
 
 export class AuthController {
     private authService: AuthService;
@@ -20,14 +21,14 @@ export class AuthController {
 
             const payload: JwtPayload = { user_id: user.id };
             const token = jwt.sign(payload, process.env.JWT_SECRET!, { expiresIn: '1h' });
-
+            const role = await roleRepository.findRoleById(user.roleId);
             if (isSameCredentials) {
                 return sendResponse({
                     res,
                     statusCode: 200,
                     success: true,
                     message: 'Login successful, please update your password',
-                    data: { token, isSameCredentials: true },
+                    data: { token, isSameCredentials: true, role: role?.name || null },
                 });
             }
 
@@ -36,7 +37,7 @@ export class AuthController {
                 statusCode: 200,
                 success: true,
                 message: 'Login successful',
-                data: { token },
+                data: { token, role: role?.name || null },
             });
         } catch (error: any) {
             console.log(error)
