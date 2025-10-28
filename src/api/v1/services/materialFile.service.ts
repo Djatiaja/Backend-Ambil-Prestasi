@@ -5,7 +5,7 @@ import path from "path";
 import materialFileRepository from "../repositories/materialFile.repository";
 import prisma from "../../../database";
 import { CreateMaterialFileDto, UpdateMaterialFileDto } from "../schemas/materialFile.schema";
-import e from "express";
+import { deleteFile } from "../helpers/file";
 
 export class MaterialFileService {
     async getAllMaterialFiles(): Promise<Material_File[]> {
@@ -43,7 +43,7 @@ export class MaterialFileService {
 
         if (filePath && materialFile.path) {
             try {
-                await fs.unlink(path.join(process.cwd(), materialFile.path));
+                deleteFile(materialFile.path);
             } catch (error) {
                 console.warn(`Failed to delete old file: ${materialFile.path}`, error);
             }
@@ -57,7 +57,6 @@ export class MaterialFileService {
         return await materialFileRepository.update(id, {
             title: dto.title || materialFile.title,
             path: filePath || materialFile.path,
-            materialId: materialId || materialFile.materialId,
         });
     }
 

@@ -70,4 +70,6 @@ export const resendOTPSchema = z.object({
     email: z.email(),
 });
 
+
+export type registerUserDto = z.infer<typeof registerSchema>;
 export type OTPInput = z.infer<typeof OTPSchema>;

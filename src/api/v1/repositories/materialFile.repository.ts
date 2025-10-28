@@ -19,7 +19,7 @@ export class MaterialFileRepository {
         });
     }
 
-    async update(id: number, data: Partial<{ title: string; path: string; materialId: number }>): Promise<Material_File | null> {
+    async update(id: number, data: Partial<{ title: string; path: string }>): Promise<Material_File | null> {
         return await prisma.material_File.update({
             where: { id },
             data,

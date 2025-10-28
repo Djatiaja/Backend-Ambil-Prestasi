@@ -3,6 +3,7 @@ import jwt from 'jsonwebtoken';
 import { AuthService } from '../services/auth.service';
 import { sendResponse } from '../helpers/baseResponse';
 import { JwtPayload } from '../types/auth.type';
+import { registerUserDto } from '../schemas/auth.schema';
 
 export class AuthController {
     private authService: AuthService;
@@ -131,8 +132,7 @@ export class AuthController {
 
     register = async (req: Request, res: Response) => {
         try {
-            const { username, name, email, password } = req.body;
-            const user = await this.authService.register(username, name, email, password);
+            const user = await this.authService.register(req.body as registerUserDto);
             return sendResponse({
                 res,
                 statusCode: 201,

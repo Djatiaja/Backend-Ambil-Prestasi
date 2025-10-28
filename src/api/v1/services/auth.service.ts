@@ -4,6 +4,7 @@ import { sendOTPEmail } from '../helpers/email';
 import userService from './user.service';
 import tokenService from './token.service';
 import otpService from './otp.service';
+import { registerUserDto } from '../schemas/auth.schema';
 
 export class AuthService {
     async login(usernameoremail: string, password: string): Promise<{ user: User; isSameCredentials: boolean }> {
@@ -20,7 +21,7 @@ export class AuthService {
         return { user, isSameCredentials };
     }
 
-    async register(name: string, email: string, password: string, username?: string,): Promise<Partial<User>> {
+    async register({ name, email, password, username }: registerUserDto): Promise<Partial<User>> {
         if (!username) {
             username = email.split('@')[0];
         }

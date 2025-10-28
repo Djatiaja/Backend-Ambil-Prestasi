@@ -2,8 +2,8 @@ import { Request, Response } from "express";
 import { sendResponse } from "../helpers/baseResponse";
 import materialFileService from "../services/materialFile.service";
 import { CreateMaterialFileDto, UpdateMaterialFileDto } from "../schemas/materialFile.schema";
-import path from "path";
-import fs from "fs";
+import { imageType, optimizeImage } from "../helpers/imageCompress";
+import { saveFile } from "../helpers/file";
 
 export class MaterialFileController {
 
@@ -59,19 +59,17 @@ export class MaterialFileController {
 
             const file = req.file;
 
-            // 1️⃣ Cek apakah ada file
             if (!file) {
                 return res.status(400).json({ error: "No file uploaded" });
             }
 
-            // 3️⃣ Simpan manual ke folder
-            const uploadPath = path.join("uploads", file.originalname);
-            fs.mkdirSync("uploads", { recursive: true });
-            fs.writeFileSync(uploadPath, file.buffer);
-            console.log("Uploaded file path:", uploadPath);
-            if (!uploadPath) {
-                throw new Error("File upload failed");
-            }
+            const type = imageType.THUMBNAIL;
+
+            const optimizedBuffer = await optimizeImage(file.buffer, file.mimetype, type);
+            file.buffer = optimizedBuffer;
+
+            const uploadPath = await saveFile(file);
+
             const materialFile = await materialFileService.createMaterialFile(dto, uploadPath, materialId);
             sendResponse({
                 res,
@@ -97,9 +95,21 @@ export class MaterialFileController {
 
             const id = parseInt(req.params.fileID);
             const dto: UpdateMaterialFileDto = req.body;
+            const file = req.file;
+            let uploadPath: string | undefined = undefined;
+            if (file) {
+
+                const type = imageType.THUMBNAIL;
+
+                const optimizedBuffer = await optimizeImage(file.buffer, file.mimetype, type);
+                file.buffer = optimizedBuffer;
+
+                uploadPath = await saveFile(file);
+
+            }
+
             const materialId = parseInt(req.params.materialId);
-            const filePath = req.file ? `uploads/${req.file.filename}` : undefined;
-            const materialFile = await materialFileService.updateMaterialFile(id, dto, materialId, filePath);
+            const materialFile = await materialFileService.updateMaterialFile(id, dto, materialId, uploadPath);
             sendResponse({
                 res,
                 statusCode: 200,
