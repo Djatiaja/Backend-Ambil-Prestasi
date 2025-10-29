@@ -28,12 +28,7 @@ export const getClasses = async (req: Request, res: Response) => {
     try {
         const page = parseInt(req.query.page as string) || 1;
         const limit = 10;
-        const teacher = await getTestTeacher();
-
-        if (!teacher) {
-            throw new Error("Test teacher not found");
-        }
-        const userId = teacher.id
+        const userId = req.user!.id!;
 
         const { classes, totalItems } = await classService.getClasses(userId, page, limit);
         const meta = {
@@ -42,11 +37,13 @@ export const getClasses = async (req: Request, res: Response) => {
             totalPages: Math.ceil(totalItems / limit),
             itemsPerPage: limit
         }
+
         const data = classes.map(cls => ({
             id: cls.id,
             name: cls.name,
             description: cls.description,
-            image_path: cls.image_path
+            image_path: cls.image_path,
+            image_path_relative: cls.image_path_relative,
         }))
 
         sendResponse({ res, statusCode: 200, success: true, message: "Get Classes", data: data, meta: meta })
@@ -66,6 +63,7 @@ export const getClassById = async (req: Request, res: Response) => {
     try {
         const classId = parseInt(req.params.id);
         const classData = await classService.getClassById(classId);
+        const userId = req.user!.id!;
 
         if (!classData) {
             return res.status(404).json({
