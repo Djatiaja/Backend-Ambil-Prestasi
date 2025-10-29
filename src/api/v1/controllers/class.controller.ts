@@ -71,12 +71,16 @@ export const getClassById = async (req: Request, res: Response) => {
                 message: "Class not found",
             });
         }
+        const studentsInClass = await classService.getAllStudentsInClass(classId);
+
 
         const data = {
             id: classData.id,
             name: classData.name,
             description: classData.description,
-            image_path: classData.image_path
+            image_path: classData.image_path,
+            image_path_relative: classData.image_path_relative,
+            students: studentsInClass
         }
 
         sendResponse({ res, statusCode: 200, message: "Class found", success: true, data })

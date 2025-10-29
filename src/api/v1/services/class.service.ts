@@ -61,6 +61,11 @@ class ClassService {
         await classRepository.deleteClass(classId);
         return true;
     }
+
+    async getAllStudentsInClass(classId: number) {
+        return await classRepository.getStudentsInClass(classId);
+    }
+
 }
 
 export default new ClassService();

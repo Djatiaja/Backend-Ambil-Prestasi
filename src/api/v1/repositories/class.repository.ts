@@ -1,3 +1,4 @@
+import { class_role } from "@prisma/client";
 import prisma from "../../../database";
 
 class ClassRepository {
@@ -79,6 +80,21 @@ class ClassRepository {
         await prisma.class.delete({
             where: { id: classId },
         });
+    }
+
+    async getStudentsInClass(classId: number) {
+        const students = await prisma.user.findMany({
+            where: {
+                User_Class: {
+                    some: {
+                        classId: classId,
+                        role: class_role.Student
+                    },
+                }
+            }
+        });
+
+        return students;
     }
 }
 
