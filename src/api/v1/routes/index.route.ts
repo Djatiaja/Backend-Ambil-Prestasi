@@ -9,9 +9,10 @@ import { User } from "@prisma/client";
 import materialRouter from "./material.route";
 import materialFileRouter from "./materialFile.route";
 import sectionRouter from "./section.route";
+import upload from "../../../config/multer.config";
 
 const router = Router();
-
+upload;
 declare module "express-serve-static-core" {
     interface Request {
         user?: Partial<User>;
