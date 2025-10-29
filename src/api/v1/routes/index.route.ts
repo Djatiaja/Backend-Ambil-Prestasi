@@ -10,6 +10,7 @@ import materialRouter from "./material.route";
 import materialFileRouter from "./materialFile.route";
 import sectionRouter from "./section.route";
 import upload from "../../../config/multer.config";
+import fileRouter from "./file.route";
 
 const router = Router();
 upload;
@@ -29,7 +30,6 @@ router.use("/classes/:classId/sections", sectionRouter);
 router.use("/classes/sections/:sectionId/materials", materialRouter);
 router.use("/classes/sections/materials/:materialId/files", materialFileRouter);
 router.use("/", authRouter)
-
 
 
 export default router;
