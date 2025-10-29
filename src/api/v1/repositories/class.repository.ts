@@ -1,5 +1,6 @@
 import { class_role } from "@prisma/client";
 import prisma from "../../../database";
+import { safeUserFields } from "./user.repository";
 
 class ClassRepository {
     async getCount(userId?: string) {
@@ -28,7 +29,7 @@ class ClassRepository {
             },
         });
 
-        return createdClass;
+        return { ...createdClass, image_path_relative: `${(process.env.APP_URL || "http://localhost").replace(/\/$/, "")}:${process.env.PORT || 3001}/${createdClass.image_path}`.replace(/\/$/, "") };
     }
 
 
@@ -91,7 +92,8 @@ class ClassRepository {
                         role: class_role.Student
                     },
                 }
-            }
+            },
+            select: safeUserFields
         });
 
         return students;

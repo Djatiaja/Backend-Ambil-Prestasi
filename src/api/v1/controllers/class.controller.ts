@@ -122,15 +122,15 @@ export const createClass = async (req: Request, res: Response) => {
 
         const createdClass = await classService.createClass(userId!, { name, description, image_path: uploadPath });
 
-        const response: BaseResponse<Partial<ClassDto>> = {
+        const response: BaseResponse<Partial<ClassDto> & { image_path_relative?: string }> = {
             success: true,
             message: "Class created successfully",
             data: {
                 id: createdClass.id,
                 name: createdClass.name,
                 description: createdClass.description,
-                image_path: createdClass.image_path
-
+                image_path: createdClass.image_path,
+                image_path_relative: createdClass.image_path_relative
             },
         };
 

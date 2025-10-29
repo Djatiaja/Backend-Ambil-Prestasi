@@ -1,20 +1,20 @@
 import { User } from "@prisma/client";
 import prisma from "../../../database";
-import { hash } from "bcrypt";
 
+export const safeUserFields = {
+    id: true,
+    name: true,
+    email: true,
+    username: true,
+    profileImage: true,
+};
 
 const SALT_ROUNDS = 10
 class UserRepository {
     async findUserById(userId: string) {
         return await prisma.user.findFirst({
             where: { id: userId },
-            select: {
-                id: true,
-                name: true,
-                email: true,
-                username: true,
-                profileImage: true
-            },
+            select: safeUserFields,
         });
     }
 
@@ -34,12 +34,7 @@ class UserRepository {
                         { username: { contains: search } },
                     ],
                 },
-                select: {
-                    id: true,
-                    name: true,
-                    username: true,
-                    email: true,
-                },
+                select: safeUserFields,
                 orderBy: {
                     name: "asc"
                 }
@@ -54,12 +49,7 @@ class UserRepository {
                     name: roleName,
                 },
             },
-            select: {
-                id: true,
-                name: true,
-                email: true,
-                username: true,
-            },
+            select: safeUserFields,
             orderBy: {
                 name: "asc"
             }
@@ -93,12 +83,7 @@ class UserRepository {
                 profileImage: profileImage || "https://ui-avatars.com/api/?name=" + encodeURIComponent(name) + "&background=random",
                 roleId: roleData.id,
             },
-            select: {
-                id: true,
-                name: true,
-                email: true,
-                username: true
-            },
+            select: safeUserFields,
         });
     }
 
@@ -106,12 +91,7 @@ class UserRepository {
         return await prisma.user.update({
             where: { id: userId },
             data,
-            select: {
-                id: true,
-                name: true,
-                email: true,
-                username: true
-            },
+            select: safeUserFields,
         });
     }
 
