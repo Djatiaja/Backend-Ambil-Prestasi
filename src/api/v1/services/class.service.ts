@@ -2,6 +2,7 @@ import { class_role } from "@prisma/client";
 import classRepository from "../repositories/class.repository";
 import userService from "./user.service";
 import userClassService from "./userClass.service";
+import { BaseResponse } from "../types/responseType";
 
 interface ClassData {
     name?: string;
@@ -17,7 +18,7 @@ class ClassService {
     async getClasses(userId: string, page: number, limit: number) {
         const skip = (page - 1) * limit;
         const [classes, totalItems] = await Promise.all([
-            classRepository.getClasses(userId, skip, limit),
+            classRepository.getClasses(skip, limit, undefined, userId),
             classRepository.getCount(userId),
         ]);
         return { classes, totalItems };
@@ -66,6 +67,21 @@ class ClassService {
         return await classRepository.getStudentsInClass(classId);
     }
 
+    async getAllClasses(data: { search?: string; limit?: number; page?: number }) {
+        const { search, limit = 10, page = 1 } = data;
+        const skip = (page - 1) * limit;
+        const classes = await classRepository.getClasses(skip, limit, search);
+        const totalItems = await classRepository.getCount(undefined, search);
+
+        const meta: BaseResponse<any>["meta"] = {
+            totalItems,
+            itemsPerPage: limit,
+            totalPages: limit ? Math.ceil(totalItems / limit) : 1,
+            currentPage: page
+        };
+
+        return { classes, meta };
+    }
 }
 
 export default new ClassService();

@@ -12,7 +12,7 @@ export const classesSeed = async () => {
             data: {
                 name: randWord(),
                 description: randWord({ length: 30 }).join(" "),
-                image_path: "/test.png"
+                image_path: "files/public/placeholder.png",
             }
         });
     }
