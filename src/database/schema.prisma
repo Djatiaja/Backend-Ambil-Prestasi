@@ -63,6 +63,7 @@ model User {
   quiz_attempt    Quiz_Attempt[]
   token           Reset_Token[]
   OTP             OTP_Token[]
+  FileToken       FileToken[]
 }
 
 model Xp {
@@ -128,13 +129,14 @@ model Material {
 }
 
 model Material_File {
-  id         Int      @id @default(autoincrement())
+  id         Int         @id @default(autoincrement())
   title      String
   path       String
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
+  createdAt  DateTime    @default(now())
+  updatedAt  DateTime    @updatedAt
   materialId Int
-  Material   Material @relation(fields: [materialId], references: [id], onDelete: Cascade)
+  Material   Material    @relation(fields: [materialId], references: [id], onDelete: Cascade)
+  FileToken  FileToken[]
 }
 
 model User_Material {
@@ -273,4 +275,14 @@ model OTP_Token {
   createdAt DateTime @default(now())
   userId    String
   User      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model FileToken {
+  id             Int           @id @default(autoincrement())
+  token          String        @unique
+  expireAt       DateTime
+  Material_File  Material_File @relation(fields: [materialFileId], references: [id], onDelete: Cascade)
+  materialFileId Int
+  User           User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId         String
 }

@@ -6,6 +6,7 @@ import userClassService from "./userClass.service";
 interface ClassData {
     name?: string;
     description?: string;
+    image_path?: string;
 }
 
 class ClassService {
@@ -26,13 +27,13 @@ class ClassService {
         return await classRepository.findClassById(classId);
     }
 
-    async createClass(teacherId: string, data: { name: string; description: string, image_url: string }) {
+    async createClass(teacherId: string, data: { name: string; description: string, image_path: string }) {
         const user = await userService.getUserById(teacherId);
         if (!user) {
             throw new Error("User not found");
         }
 
-        const createdClass = await classRepository.createClass(data.name, data.description, data.image_url);
+        const createdClass = await classRepository.createClass(data.name, data.description, data.image_path);
         await userClassService.assignClass(user.id, createdClass.id, class_role.Teacher);
 
         return createdClass;
@@ -47,6 +48,7 @@ class ClassService {
         return await classRepository.updateClass(classId, {
             name: data.name || existingClass.name,
             description: data.description || existingClass.description,
+            image_path: data.image_path || existingClass.image_path,
         });
     }
 

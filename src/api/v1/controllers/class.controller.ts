@@ -3,8 +3,8 @@ import classService from "../services/class.service";
 import { BaseResponse } from "../types/responseType";
 import { sendResponse } from "../helpers/baseResponse";
 import prisma from "../../../database";
-import { error } from "console";
-import { teacherCreateSchema } from "../schemas/teacher.schema";
+import { imageType, optimizeImage } from "../helpers/imageCompress";
+import { saveFile } from "../helpers/file";
 
 interface ClassDto {
     id: number;
@@ -102,13 +102,23 @@ export const createClass = async (req: Request, res: Response) => {
                 errors: { validation: "Name and description are required" },
             });
         }
-        const teacher = await getTestTeacher();
-        if (!teacher) {
-            throw error
-        }
-        const userId = teacher.id
+        const userId = req.user!.id
 
-        const createdClass = await classService.createClass(userId, { name, description, image_url: "/image.png" });
+        const file = req.file;
+
+
+        if (!file) {
+            return res.status(400).json({ error: "No file uploaded" });
+        }
+
+        const type = imageType.THUMBNAIL;
+
+        const optimizedBuffer = await optimizeImage(file.buffer, file.mimetype, type);
+        file.buffer = optimizedBuffer;
+
+        const uploadPath = await saveFile(file);
+
+        const createdClass = await classService.createClass(userId!, { name, description, image_path: uploadPath });
 
         const response: BaseResponse<Partial<ClassDto>> = {
             success: true,
@@ -138,7 +148,19 @@ export const updateClass = async (req: Request, res: Response) => {
         const classId = parseInt(req.params.id);
         const { name, description } = req.body;
 
-        const updatedClass = await classService.updateClass(classId, { name, description });
+        const file = req.file;
+
+        let uploadPath: string | undefined = undefined;
+        if (file) {
+            const type = imageType.THUMBNAIL;
+
+            const optimizedBuffer = await optimizeImage(file.buffer, file.mimetype, type);
+            file.buffer = optimizedBuffer;
+
+            uploadPath = await saveFile(file);
+        }
+
+        const updatedClass = await classService.updateClass(classId, { name, description, image_path: uploadPath });
 
         if (!updatedClass) {
             return res.status(404).json({

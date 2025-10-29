@@ -83,7 +83,7 @@ CREATE TABLE `Material` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `title` VARCHAR(191) NOT NULL,
     `content` LONGTEXT NOT NULL,
-    `xp` INTEGER NOT NULL,
+    `xp` INTEGER NOT NULL DEFAULT 10,
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updatedAt` DATETIME(3) NOT NULL,
     `sectionId` INTEGER NOT NULL,
@@ -94,6 +94,7 @@ CREATE TABLE `Material` (
 -- CreateTable
 CREATE TABLE `Material_File` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `title` VARCHAR(191) NOT NULL,
     `path` VARCHAR(191) NOT NULL,
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updatedAt` DATETIME(3) NOT NULL,
@@ -248,6 +249,18 @@ CREATE TABLE `OTP_Token` (
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
+-- CreateTable
+CREATE TABLE `FileToken` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `token` VARCHAR(191) NOT NULL,
+    `expireAt` DATETIME(3) NOT NULL,
+    `materialFileId` INTEGER NOT NULL,
+    `userId` VARCHAR(191) NOT NULL,
+
+    UNIQUE INDEX `FileToken_token_key`(`token`),
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
 -- AddForeignKey
 ALTER TABLE `User` ADD CONSTRAINT `User_roleId_fkey` FOREIGN KEY (`roleId`) REFERENCES `Role`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
@@ -316,3 +329,9 @@ ALTER TABLE `Reset_Token` ADD CONSTRAINT `Reset_Token_userId_fkey` FOREIGN KEY (
 
 -- AddForeignKey
 ALTER TABLE `OTP_Token` ADD CONSTRAINT `OTP_Token_userId_fkey` FOREIGN KEY (`userId`) REFERENCES `User`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `FileToken` ADD CONSTRAINT `FileToken_materialFileId_fkey` FOREIGN KEY (`materialFileId`) REFERENCES `Material_File`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `FileToken` ADD CONSTRAINT `FileToken_userId_fkey` FOREIGN KEY (`userId`) REFERENCES `User`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;

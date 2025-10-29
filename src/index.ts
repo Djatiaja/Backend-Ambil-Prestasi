@@ -1,6 +1,7 @@
 import express from "express";
 import router from "./api/v1/routes/index.route";
 import cors from "cors";
+import fileRouter from "./api/v1/routes/file.route";
 
 const app = express();
 
@@ -23,7 +24,8 @@ app.use(
         credentials: true,
     })
 );
-
+app.use("/files", fileRouter);
 app.use("/api/v1", router);
+
 
 export default app;

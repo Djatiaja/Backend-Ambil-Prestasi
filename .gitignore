@@ -29,5 +29,5 @@ coverage/
 
 /src/generated/prisma
 
-uploads/*
-!uploads/.gitkeep
+files/*
+!files/.gitkeep
