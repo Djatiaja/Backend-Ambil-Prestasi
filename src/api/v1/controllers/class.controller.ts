@@ -96,7 +96,7 @@ export const getClassById = async (req: Request, res: Response) => {
 
 export const createClass = async (req: Request, res: Response) => {
     try {
-        const { name, description } = req.body;
+        const { name, description, categoryId } = req.body;
         if (!name || !description) {
             return res.status(400).json({
                 success: false,
@@ -120,7 +120,7 @@ export const createClass = async (req: Request, res: Response) => {
 
         const uploadPath = await saveFile(file);
 
-        const createdClass = await classService.createClass(userId!, { name, description, image_path: uploadPath });
+        const createdClass = await classService.createClass(userId!, { name, description, image_path: uploadPath, categoryId: parseInt(categoryId) });
 
         const response: BaseResponse<Partial<ClassDto> & { image_path_relative?: string }> = {
             success: true,

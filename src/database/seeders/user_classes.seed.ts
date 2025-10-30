@@ -2,6 +2,7 @@ import { class_role } from "@prisma/client";
 import prisma from "..";
 import { matkuls } from "./classes.seed";
 import { randWord } from "@ngneat/falso"; // ✅ use randWords instead of randWord
+import { randomInt } from "crypto";
 
 export const user_classesSeed = async () => {
     console.log("\n🌱 Seeding user_classes...");
@@ -53,6 +54,7 @@ export const user_classesSeed = async () => {
                 name: matkul,
                 description: randWord({ length: 30 }).join(" "),
                 image_path: "files/public/placeholder.png",
+                categoryId: randomInt(1, 4), // assuming category IDs 1 to 4 exist
             },
         });
         matakuliahs.push(newClass);

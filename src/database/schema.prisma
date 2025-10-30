@@ -79,6 +79,8 @@ model Xp {
 
 model Class {
   id          Int          @id @default(autoincrement())
+  categoryId  Int
+  Category    category     @relation(fields: [categoryId], references: [id], onDelete: Cascade)
   name        String
   description String       @db.LongText
   image_path  String
@@ -285,4 +287,13 @@ model FileToken {
   materialFileId Int
   User           User          @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId         String
+}
+
+model category {
+  id        Int      @id @default(autoincrement())
+  name      String   @unique
+  deleted   Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  Class     Class[]
 }

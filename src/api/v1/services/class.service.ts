@@ -28,13 +28,13 @@ class ClassService {
         return await classRepository.findClassById(classId);
     }
 
-    async createClass(teacherId: string, data: { name: string; description: string, image_path: string }) {
+    async createClass(teacherId: string, data: { name: string; description: string, image_path: string, categoryId: number }) {
         const user = await userService.getUserById(teacherId);
         if (!user) {
             throw new Error("User not found");
         }
 
-        const createdClass = await classRepository.createClass(data.name, data.description, data.image_path);
+        const createdClass = await classRepository.createClass(data.name, data.description, data.image_path, data.categoryId);
         await userClassService.assignClass(user.id, createdClass.id, class_role.Teacher);
 
         return createdClass;

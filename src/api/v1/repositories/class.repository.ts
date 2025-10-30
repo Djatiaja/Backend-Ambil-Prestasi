@@ -52,12 +52,13 @@ class ClassRepository {
         });
     }
 
-    async createClass(name: string, description: string, image_path: string) {
+    async createClass(name: string, description: string, image_path: string, categoryId: number) {
         const createdClass = await prisma.class.create({
             data: {
                 name,
                 description,
                 image_path: image_path,
+                categoryId: categoryId
             },
             select: safeClassFields
         });

@@ -36,3 +36,4 @@ files/public/*
 
 files/protected/*
 !files/protected/.gitkeep
+todo.txt

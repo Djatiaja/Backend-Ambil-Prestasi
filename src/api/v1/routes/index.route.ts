@@ -12,6 +12,7 @@ import sectionRouter from "./section.route";
 import upload from "../../../config/multer.config";
 import fileRouter from "./file.route";
 import publicRouter from "./public.route";
+import categoryRouter from "./category.route";
 
 const router = Router();
 upload;
@@ -32,6 +33,7 @@ router.use("/classes/sections/:sectionId/materials", materialRouter);
 router.use("/classes/sections/materials/:materialId/files", materialFileRouter);
 router.use("/", authRouter)
 router.use("/public", publicRouter)
+router.use("/category", authMiddleware, verifyRole(["Admin"]), categoryRouter);
 
 
 export default router;
