@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import classService from "../services/class.service";
 import { sendResponse } from "../helpers/baseResponse";
+import categoryService from "../services/category.service";
 
 
 
@@ -16,6 +17,11 @@ class PublicController {
 
     async getBanners(req: Request, res: Response) {
         sendResponse({ res, statusCode: 200, success: true, data: "Public Banners Endpoint", message: "Banners retrieved successfully" });
+    }
+
+    async getCategories(req: Request, res: Response) {
+        const categories = await categoryService.getAllCategories();
+        sendResponse({ res, statusCode: 200, success: true, data: categories, message: "Categories retrieved successfully" });
     }
 }
 

@@ -44,6 +44,7 @@ export const getClasses = async (req: Request, res: Response) => {
             description: cls.description,
             image_path: cls.image_path,
             image_path_relative: cls.image_path_relative,
+            categoryId: cls.categoryId
         }))
 
         sendResponse({ res, statusCode: 200, success: true, message: "Get Classes", data: data, meta: meta })
@@ -122,7 +123,7 @@ export const createClass = async (req: Request, res: Response) => {
 
         const createdClass = await classService.createClass(userId!, { name, description, image_path: uploadPath, categoryId: parseInt(categoryId) });
 
-        const response: BaseResponse<Partial<ClassDto> & { image_path_relative?: string }> = {
+        const response: BaseResponse<Partial<ClassDto> & { image_path_relative?: string, categoryId?: number }> = {
             success: true,
             message: "Class created successfully",
             data: {
@@ -130,7 +131,8 @@ export const createClass = async (req: Request, res: Response) => {
                 name: createdClass.name,
                 description: createdClass.description,
                 image_path: createdClass.image_path,
-                image_path_relative: createdClass.image_path_relative
+                image_path_relative: createdClass.image_path_relative,
+                categoryId: createdClass.categoryId
             },
         };
 

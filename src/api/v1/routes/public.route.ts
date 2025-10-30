@@ -4,8 +4,6 @@ import publicController from "../controllers/public.controller";
 
 const publicRouter = Router();
 publicRouter.get("/classes", publicController.getClasses);
-publicRouter.get("/banners", (req, res) => {
-    res.send("Public Banners Endpoint");
-});
+publicRouter.get("/categories", publicController.getCategories);
 
 export default publicRouter;

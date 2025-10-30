@@ -7,6 +7,7 @@ export const safeClassFields = {
     name: true,
     description: true,
     image_path: true,
+    categoryId: true,
 };
 
 class ClassRepository {
@@ -58,7 +59,7 @@ class ClassRepository {
                 name,
                 description,
                 image_path: image_path,
-                categoryId: categoryId
+                categoryId: categoryId,
             },
             select: safeClassFields
         });
@@ -115,18 +116,20 @@ class ClassRepository {
                             userId: userId
                         }
                     },
-                    OR: search ? [
-                        {
-                            name: {
-                                contains: search,
-                            }
-                        },
-                        {
-                            description: {
-                                contains: search,
-                            }
-                        }
-                    ] : [],
+                    AND: search ? {
+                        OR: [
+                            {
+                                name: {
+                                    contains: search,
+                                }
+                            },
+                            {
+                                description: {
+                                    contains: search,
+                                }
+                            },
+                        ]
+                    } : {}
                 },
                 skip,
                 take,
@@ -136,7 +139,6 @@ class ClassRepository {
                 select: safeClassFields,
             });
         }
-
         return classes.map((classData) => {
             const appUrl = (process.env.APP_URL || "http://localhost").replace(/\/$/, "") + `:${process.env.PORT || 3001}`;
             const imagePathRelative = `${appUrl}/${classData.image_path}`.replace(/\/$/, "");

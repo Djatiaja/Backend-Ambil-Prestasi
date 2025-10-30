@@ -33,7 +33,7 @@ router.use("/classes/sections/:sectionId/materials", materialRouter);
 router.use("/classes/sections/materials/:materialId/files", materialFileRouter);
 router.use("/", authRouter)
 router.use("/public", publicRouter)
-router.use("/category", authMiddleware, verifyRole(["Admin"]), categoryRouter);
+router.use("/categories", authMiddleware, verifyRole(["Admin"]), categoryRouter);
 
 
 export default router;
