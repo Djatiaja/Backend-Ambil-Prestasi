@@ -179,13 +179,13 @@ export class AuthController {
         try {
             const userId = (req.user as JwtPayload).user_id;
             const user = await userService.getUserById(userId);
-            const role = await roleRepository.findRoleById(user?.roleId || 3);
+            const role = req.role;
             return sendResponse({
                 res,
                 statusCode: 200,
                 success: true,
                 message: 'User role fetched successfully',
-                data: { role: role?.name || null },
+                data: { role: role || null },
             });
         }
         catch (error: any) {

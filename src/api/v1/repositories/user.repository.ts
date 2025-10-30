@@ -119,7 +119,11 @@ class UserRepository {
             where: { id: userId },
             include: { role: true },
         });
-        return user?.role.name || "Student";
+        if (!user || !user.role) {
+            throw new Error("User or role not found");
+        }
+
+        return user.role.name;
     }
 
 }
