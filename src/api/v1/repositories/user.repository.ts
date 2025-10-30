@@ -1,4 +1,4 @@
-import { User } from "@prisma/client";
+import { User, user_status } from "@prisma/client";
 import prisma from "../../../database";
 
 export const safeUserFields = {
@@ -7,6 +7,11 @@ export const safeUserFields = {
     email: true,
     username: true,
     profileImage: true,
+    roleId: true,
+    telp: true,
+    status: true,
+    specialization: true,
+    bio: true,
 };
 
 const SALT_ROUNDS = 10
@@ -69,7 +74,7 @@ class UserRepository {
     }
 
 
-    async createUser(data: { name: string; email: string; password: string; role: string; username: string; profileImage?: string; }) {
+    async createUser(data: { name: string; email: string; password: string; role: string; username: string; profileImage?: string; telp?: string; status?: user_status; specialization?: string; bio?: string }): Promise<Partial<User>> {
         const { name, email, password, role, username, profileImage } = data;
         const roleData = await prisma.role.findUnique({ where: { name: role } });
         if (!roleData) throw new Error("Role not found");
@@ -82,6 +87,10 @@ class UserRepository {
                 username,
                 profileImage: profileImage || "https://ui-avatars.com/api/?name=" + encodeURIComponent(name) + "&background=random",
                 roleId: roleData.id,
+                telp: data.telp,
+                status: data.status ?? user_status.ACTIVE,
+                specialization: data.specialization,
+                bio: data.bio,
             },
             select: safeUserFields,
         });

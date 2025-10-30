@@ -5,6 +5,10 @@ export const teacherCreateSchema = z.object({
     name: z.string().min(4).max(100),
     username: z.string().min(4).max(50),
     email: z.string().email(),
+    telp: z.string().min(10).max(15),
+    status: z.enum(["ACTIVE", "INACTIVE"]),
+    specialization: z.string().max(255),
+    bio: z.string().max(1000),
 }).superRefine(async (data, context) => {
     const existingEmail = await userRepository.getUser({ email: data.email });
     if (existingEmail) {
@@ -32,6 +36,10 @@ export const teacherUpdateSchema = (userId: string) =>
         name: z.string().min(4).max(100).optional(),
         username: z.string().min(4).max(50).optional(),
         email: z.string().email().optional(),
+        telp: z.string().min(10).max(15).optional(),
+        status: z.enum(["ACTIVE", "INACTIVE"]).optional(),
+        specialization: z.string().max(255).optional(),
+        bio: z.string().max(1000).optional(),
     }).superRefine(async (data, context) => {
         // Check email uniqueness
         if (data.email) {

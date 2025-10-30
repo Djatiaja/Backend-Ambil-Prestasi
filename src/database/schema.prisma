@@ -36,6 +36,11 @@ enum otp_type {
   EmailVerification
 }
 
+enum user_status {
+  ACTIVE
+  INACTIVE
+}
+
 model Role {
   id        Int      @id @default(autoincrement())
   name      String   @unique
@@ -51,6 +56,10 @@ model User {
   name            String
   password        String
   profileImage    String
+  telp            String?
+  status          user_status?      @default(ACTIVE)
+  specialization  String?
+  bio             String?
   verified_at     DateTime?
   createdAt       DateTime          @default(now())
   updatedAt       DateTime          @updatedAt
