@@ -3,6 +3,7 @@ import classService from "../services/class.service";
 import { sendResponse } from "../helpers/baseResponse";
 import categoryService from "../services/category.service";
 import sectionService from "../services/section.service";
+import materialService from "../services/material.service";
 
 
 
@@ -43,6 +44,17 @@ class PublicController {
     async getCategories(req: Request, res: Response) {
         const categories = await categoryService.getAllCategories();
         sendResponse({ res, statusCode: 200, success: true, data: categories, message: "Categories retrieved successfully" });
+    }
+
+    async getMaterialById(req: Request, res: Response) {
+        const materialId = req.params.id;
+        if (Number.isNaN(Number(materialId))) {
+            return sendResponse({ res, statusCode: 400, success: false, message: "Invalid material ID", data: null });
+        }
+
+        const material = await materialService.getMaterialById(Number(materialId));
+
+        sendResponse({ res, statusCode: 200, success: true, data: material, message: "Material retrieved successfully" });
     }
 }
 

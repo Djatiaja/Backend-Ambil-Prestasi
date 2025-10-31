@@ -21,6 +21,12 @@ export class MaterialService {
     async getMaterialById(id: number): Promise<Material> {
         const material = await materialRepository.findById(id);
         if (!material) throw new NotFoundError("Material not found");
+
+        material.thumnail_path = `${env.APP_URL}:${env.PORT}/${material.thumnail_path}`;
+        material.templatePath = `${env.APP_URL}:${env.PORT}/${material.templatePath}`;
+        material.video_path = `${env.APP_URL}:${env.PORT}/${material.video_path}`;
+        material.materialFilePath = `${env.APP_URL}:${env.PORT}/${material.materialFilePath}`;
+        material.ringkasanPath = `${env.APP_URL}:${env.PORT}/${material.ringkasanPath}`;
         return material;
     }
 
