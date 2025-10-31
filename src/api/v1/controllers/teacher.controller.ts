@@ -53,13 +53,13 @@ export const getTeacherById = async (req: Request, res: Response) => {
 export const updateTeacher = async (req: Request, res: Response) => {
     try {
         const { id } = req.params;
-        const { name, email, username } = req.body as TeacherUpdateDTO;
+        const { name, email, username, status, telp, specialization, bio } = req.body as TeacherUpdateDTO;
 
         const existingTeacher = await userService.getUserById(id);
         if (!existingTeacher || existingTeacher.role.name !== "Teacher") {
             return sendResponse({ res, statusCode: 404, success: false, message: "Teacher not found", data: null });
         }
-        const updatedTeacher = await userService.updateUser(id, { name, email, username });
+        const updatedTeacher = await userService.updateUser(id, { name, email, username, status, telp, specialization, bio });
         sendResponse({ res, statusCode: 200, success: true, message: "Teacher updated successfully", data: updatedTeacher });
     } catch (error) {
         sendResponse({ res, statusCode: 500, success: false, message: "Error updating teacher", data: null });
