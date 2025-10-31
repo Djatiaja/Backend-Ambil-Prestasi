@@ -4,9 +4,18 @@ import materialRepository from "../repositories/material.repository";
 import { CreateMaterialDto, UpdateMaterialDto } from "../schemas/material.schema";
 import { NotFoundError } from "../errors/notfound.error";
 import { deleteFile, saveFile } from "../helpers/file";
+import { env } from "process";
 export class MaterialService {
     async getAllMaterials(sectionId: number): Promise<Material[]> {
-        return await materialRepository.findAll(sectionId);
+        const materials = await materialRepository.findAll(sectionId);
+        materials.forEach(material => {
+            material.thumnail_path = `${env.APP_URL}:${env.PORT}/${material.thumnail_path}`;
+            material.templatePath = `${env.APP_URL}:${env.PORT}/${material.templatePath}`;
+            material.video_path = `${env.APP_URL}:${env.PORT}/${material.video_path}`;
+            material.materialFilePath = `${env.APP_URL}:${env.PORT}/${material.materialFilePath}`;
+            material.ringkasanPath = `${env.APP_URL}:${env.PORT}/${material.ringkasanPath}`;
+        });
+        return materials;
     }
 
     async getMaterialById(id: number): Promise<Material> {
@@ -25,6 +34,7 @@ export class MaterialService {
             video_path: saveFile(data.video, false),
             materialFilePath: saveFile(data.materialFile, false),
             ringkasanPath: saveFile(data.ringkasan, false),
+            thumnail_path: saveFile(data.thumnail, false),
         };
 
         return await materialRepository.create({
@@ -38,32 +48,36 @@ export class MaterialService {
 
     /** UPDATE – only replace files that are uploaded */
     async updateMaterial(id: number, data: UpdateMaterialDto): Promise<Material> {
-        // const existing = await materialRepository.findById(id);
-        // if (!existing) throw new NotFoundError("Material not found");
+        const existing = await materialRepository.findById(id);
+        if (!existing) throw new NotFoundError("Material not found");
 
-        // const updatePayload: Partial<Material> = {};
+        const updatePayload: Partial<Material> = {};
 
-        // if (data.title) updatePayload.title = data.title;
-        // if (data.content) updatePayload.content = data.content;
+        if (data.title) updatePayload.title = data.title;
+        if (data.content) updatePayload.content = data.content;
 
-        // // ---- FILE REPLACEMENT ----
-        // const replace = async (
-        //   newFile: Express.Multer.File | undefined,
-        //   oldPath: string | null,
-        //   field: keyof Material
-        // ) => {
-        //   if (newFile) {
-        //     deleteFile(oldPath ?? "");
-        //     updatePayload[field] = saveFile(newFile, false);
-        //   }
-        // };
+        if (data.template) {
+            deleteFile(existing.templatePath);
+            updatePayload.templatePath = saveFile(data.template, false);
+        }
+        if (data.video) {
+            deleteFile(existing.video_path);
+            updatePayload.video_path = saveFile(data.video, false);
+        }
+        if (data.materialFile) {
+            deleteFile(existing.materialFilePath);
+            updatePayload.materialFilePath = saveFile(data.materialFile, false);
+        }
+        if (data.ringkasan) {
+            deleteFile(existing.ringkasanPath);
+            updatePayload.ringkasanPath = saveFile(data.ringkasan, false);
+        }
+        if (data.thumnail) {
+            deleteFile(existing.thumnail_path);
+            updatePayload.thumnail_path = saveFile(data.thumnail, false);
+        }
 
-        // await replace(data.template, existing.templatePath, "templatePath");
-        // await replace(data.video, existing.video_path, "video_path");
-        // await replace(data.materialFile, existing.materialFilePath, "materialFilePath");
-        // await replace(data.ringkasan, existing.ringkasanPath, "ringkasanPath");
-
-        return await materialRepository.findById(id) as Material;
+        return await materialRepository.update(id, updatePayload);
     }
 
     /** DELETE */

@@ -5,19 +5,12 @@ export class MaterialRepository {
     async findAll(sectionId: number): Promise<Material[]> {
         return await prisma.material.findMany({
             where: { sectionId },
-            include: {
-                Material_File: true,
-            },
         });
     }
 
     async findById(id: number): Promise<Material | null> {
-        return await prisma.material.findUnique({
+        return await prisma.material.findFirst({
             where: { id },
-            include: {
-                Section: true,
-                Material_File: true,
-            },
         });
     }
 
@@ -30,12 +23,10 @@ export class MaterialRepository {
         video_path: string;
         materialFilePath: string;
         ringkasanPath: string;
+        thumnail_path: string;
     }): Promise<Material> {
         return await prisma.material.create({
             data,
-            include: {
-                Material_File: true,
-            },
         });
     }
 
@@ -50,14 +41,12 @@ export class MaterialRepository {
             video_path: string;
             materialFilePath: string;
             ringkasanPath: string;
+            thumnail_path: string;
         }>
     ): Promise<Material> {
         return await prisma.material.update({
             where: { id },
             data,
-            include: {
-                Material_File: true,
-            },
         });
     }
 

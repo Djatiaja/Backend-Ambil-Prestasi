@@ -4,7 +4,7 @@ import { CreateSectionInput, UpdateSectionInput } from '../schemas/section.schem
 const prisma = new PrismaClient();
 
 class SectionService {
-    async getAllSections(classId: string): Promise<Partial<Section>[]> {
+    async getAllSections(classId: string) {
         try {
             return await prisma.section.findMany({
                 where: { classId: parseInt(classId) },
@@ -19,24 +19,10 @@ class SectionService {
                             id: true,
                             title: true,
                             content: true,
-                            Material_File: {
-                                select: {
-                                    id: true,
-                                    path: true,
-                                },
-                            },
+                            thumnail_path: true,
                         },
                     },
-                    Assignment: {
-                        select: {
-                            id: true,
-                            title: true,
-                            description: true,
-                            close_at: true,
-                            open_at: true,
-                        }
 
-                    },
                     Quiz: {
                         select: {
                             id: true,

@@ -1,5 +1,5 @@
-// schemas/material.schema.ts
 import { z } from 'zod';
+import { imageSchema } from './image.schema';
 
 const MAX_MATERIAL_SIZE = 50 * 1024 * 1024; // 50MB
 const MAX_VIDEO_SIZE = 100 * 1024 * 1024; // 100MB
@@ -41,6 +41,7 @@ const videoFileSchema = z
 export const createMaterialSchema = z.object({
     title: z.string().min(1, "Judul wajib diisi").max(255, "Judul terlalu panjang"),
     content: z.string().min(1, "Konten wajib diisi"),
+    thumnail: imageSchema,
     template: materialFileSchema,
     video: videoFileSchema,
     materialFile: materialFileSchema,
@@ -50,6 +51,7 @@ export const createMaterialSchema = z.object({
 export const updateMaterialSchema = z.object({
     title: z.string().min(1).max(255).optional(),
     content: z.string().min(1).optional(),
+    thumnail: imageSchema.optional(),
     template: materialFileSchema.optional(),
     video: videoFileSchema.optional(),
     materialFile: materialFileSchema.optional(),

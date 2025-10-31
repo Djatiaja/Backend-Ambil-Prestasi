@@ -14,6 +14,7 @@ const uploadMaterial = upload.fields([
     { name: "materialFile", maxCount: 1 },
     { name: "ringkasan", maxCount: 1 },
     { name: "template", maxCount: 1 },
+    { name: "thumnail", maxCount: 1 },
 ]);
 
 materialRouter.get("/", controller.getAllMaterials.bind(controller));

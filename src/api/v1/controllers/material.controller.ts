@@ -115,8 +115,17 @@ export class MaterialController {
 
     async updateMaterial(req: Request, res: Response) {
         try {
-            const id = parseInt(req.params.materialId);
-            const material = await materialService.updateMaterial(id, req.body);
+            const id = req.params.materialId;
+            if (Number.isNaN(parseInt(id))) {
+                return sendResponse({
+                    res,
+                    statusCode: 400,
+                    success: false,
+                    message: "Invalid material ID",
+                    data: null,
+                });
+            }
+            const material = await materialService.updateMaterial(Number(id), req.body);
             return sendResponse({
                 res,
                 statusCode: 200,
