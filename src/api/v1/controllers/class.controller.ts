@@ -64,7 +64,6 @@ export const getClassById = async (req: Request, res: Response) => {
     try {
         const classId = parseInt(req.params.id);
         const classData = await classService.getClassById(classId);
-        const userId = req.user!.id!;
 
         if (!classData) {
             return res.status(404).json({
@@ -196,7 +195,6 @@ export const updateClass = async (req: Request, res: Response) => {
 
 export const deleteClass = async (req: Request, res: Response) => {
     try {
-        console.log("Received request to delete class with ID:");
 
         const classId = parseInt(req.params.id);
 

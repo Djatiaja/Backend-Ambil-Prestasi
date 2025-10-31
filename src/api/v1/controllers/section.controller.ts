@@ -17,6 +17,17 @@ class SectionController {
                     data: null,
                 });
             }
+            const classVar = await classService.getClassById(parseInt(classId));
+            if (!classVar) {
+                return sendResponse({
+                    res,
+                    statusCode: 404,
+                    success: false,
+                    message: 'Class not found',
+                    data: null,
+                });
+            }
+
             const sections = await sectionService.getAllSections(classId);
             return sendResponse({
                 res,
@@ -40,6 +51,16 @@ class SectionController {
         try {
             const { sectionID } = req.params;
             const section = await sectionService.getSectionById(sectionID);
+            if (!section) {
+                return sendResponse({
+                    res,
+                    statusCode: 404,
+                    success: false,
+                    message: 'Section not found',
+                    data: null,
+                });
+            }
+
             return sendResponse({
                 res,
                 statusCode: 200,
@@ -95,6 +116,16 @@ class SectionController {
     async updateSection(req: Request, res: Response) {
         try {
             const { sectionID } = req.params;
+            const checkSection = await sectionService.getSectionById(sectionID);
+            if (!checkSection) {
+                return sendResponse({
+                    res,
+                    statusCode: 404,
+                    success: false,
+                    message: 'Section not found',
+                    data: null,
+                });
+            }
             const section = await sectionService.updateSection(sectionID, req.body as UpdateSectionInput);
             return sendResponse({
                 res,

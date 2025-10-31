@@ -127,16 +127,20 @@ model Section {
 }
 
 model Material {
-  id            Int             @id @default(autoincrement())
-  title         String
-  content       String          @db.LongText
-  xp            Int             @default(10)
-  createdAt     DateTime        @default(now())
-  updatedAt     DateTime        @updatedAt
-  sectionId     Int
-  Section       Section         @relation(fields: [sectionId], references: [id], onDelete: Cascade)
-  Material_File Material_File[]
-  User_Material User_Material[]
+  id               Int             @id @default(autoincrement())
+  title            String
+  content          String          @db.LongText
+  xp               Int             @default(10)
+  video_path       String
+  materialFilePath String
+  ringkasanPath    String
+  templatePath     String
+  createdAt        DateTime        @default(now())
+  updatedAt        DateTime        @updatedAt
+  sectionId        Int
+  Section          Section         @relation(fields: [sectionId], references: [id], onDelete: Cascade)
+  Material_File    Material_File[]
+  User_Material    User_Material[]
 }
 
 model Material_File {

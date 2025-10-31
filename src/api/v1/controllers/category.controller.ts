@@ -53,7 +53,6 @@ class CategoryController {
     async deleteCategory(req: Request, res: Response) {
         try {
             const categoryId = parseInt(req.params.id);
-            console.log("Deleting category with ID:", categoryId);
             const deleted = await categoryService.deleteCategory(categoryId);
             if (!deleted) {
                 return sendResponse({ res, statusCode: 404, success: false, message: "Category Not Found", data: null });

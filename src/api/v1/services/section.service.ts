@@ -53,7 +53,7 @@ class SectionService {
         }
     }
 
-    async getSectionById(sectionId: string): Promise<Section> {
+    async getSectionById(sectionId: string): Promise<Section | null> {
         try {
             const section = await prisma.section.findUnique({
                 where: { id: parseInt(sectionId) },
@@ -63,9 +63,6 @@ class SectionService {
                     Quiz: true,
                 },
             });
-            if (!section) {
-                throw new Error('Section not found');
-            }
             return section;
         } catch (error: any) {
             throw new Error(`Failed to fetch section: ${error.message}`);

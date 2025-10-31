@@ -1,37 +1,45 @@
+// middlewares/schema.middleware.ts
 import { NextFunction, Request, Response } from "express";
 import { ZodError, ZodSchema } from "zod";
 import { sendResponse } from "../helpers/baseResponse";
 
 export const validateBody =
     (schema: ZodSchema) =>
-        async (request: Request, response: Response, next: NextFunction) => {
-            const payload = {
-                ...request.body,
-                ...(request.file ? { file: request.file } : {}),
-            };
+        async (req: Request, res: Response, next: NextFunction) => {
+            const payload: Record<string, any> = { ...req.body };
+
+            // Handle upload.fields() → req.files is Record<string, Express.Multer.File[]>
+            if (req.files && typeof req.files === "object" && !Array.isArray(req.files)) {
+                Object.entries(req.files).forEach(([key, files]) => {
+                    payload[key] = files[0]; // kita hanya izinkan 1 file per field
+                });
+            }
+
+            // Handle upload.single()
+            if (req.file) {
+                payload.file = req.file;
+            }
+            console.log("Validation payload:", payload);
 
             const result = await schema.safeParseAsync(payload);
-
             if (!result.success) {
                 const errors: Record<string, string[]> = {};
-
                 result.error.issues.forEach((issue) => {
-                    const field = issue.path.join(".") || "global";
-                    if (!errors[field]) errors[field] = [];
-                    errors[field].push(issue.message);
+                    const path = issue.path.join(".") || "global";
+                    errors[path] ??= [];
+                    errors[path].push(issue.message);
                 });
 
                 return sendResponse({
-                    res: response,
+                    res,
                     statusCode: 400,
                     success: false,
-                    message: "Request validation failed",
+                    message: "Validasi gagal",
                     data: null,
                     errors,
                 });
             }
 
-            // ✅ Validation passed, attach parsed data to request for next handler
-            request.body = result.data;
+            req.body = result.data; // override body dengan data yang sudah divalidasi
             next();
         };

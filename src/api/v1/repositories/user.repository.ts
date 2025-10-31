@@ -124,7 +124,7 @@ class UserRepository {
     }
 
     async getUserRole(userId: string): Promise<string> {
-        const user = await prisma.user.findUnique({
+        const user = await prisma.user.findFirst({
             where: { id: userId },
             include: { role: true },
         });

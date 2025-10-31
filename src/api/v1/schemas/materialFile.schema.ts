@@ -1,18 +1,25 @@
 import { z } from "zod";
 
-export const pdfSchema = z.any()
-    .refine((file) => !!file, "File harus disertakan.")
-    .refine((file) => ["application/pdf"].includes(file.mimetype), {
-        message: "Format file tidak valid. Gunakan PDF.",
+export const materialFileSchema = z
+    .custom<Express.Multer.File>()
+    .refine((file) => !!file, {
+        message: "File harus disertakan.",
     })
-    .refine((file) => file.size <= 100 * 1024 * 1024, {
-        message: "Ukuran file maksimal 100MB.",
+    .refine(
+        (file) =>
+            !!file && ["application/pdf", "application/vnd.openxmlformats-officedocument.wordprocessingml.document", "application/vnd.openxmlformats-officedocument.presentationml.presentation"].includes(file.mimetype),
+        {
+            message: "Format file tidak valid. Gunakan PDF, docx, pptx.",
+        }
+    )
+    .refine((file) => !!file && file.size <= 50 * 1024 * 1024, {
+        message: "Ukuran file maksimal 5MB.",
     });
 
 
 export const createMaterialFileSchema = z.object({
     title: z.string().min(3, "Judul minimal 3 karakter."),
-    file: pdfSchema
+    file: materialFileSchema
 });
 
 export const updateMaterialFileSchema = createMaterialFileSchema.partial();
