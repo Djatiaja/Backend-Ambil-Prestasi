@@ -99,6 +99,12 @@ export class MaterialService {
 
         return await materialRepository.delete(id);
     }
+
+    async getTeacherByMaterialId(materialId: number) {
+        const teacher = await materialRepository.findTeacherByMaterialId(materialId);
+        if (!teacher) throw new NotFoundError("Teacher not found for the given material ID");
+        return teacher;
+    }
 }
 
 export default new MaterialService();

@@ -19,6 +19,8 @@ const uploadMaterial = upload.fields([
 
 materialRouter.get("/", controller.getAllMaterials.bind(controller));
 
+materialRouter.get("/:materialId", controller.getMaterialById.bind(controller));
+
 materialRouter.post(
     "/",
     uploadMaterial,

@@ -54,7 +54,17 @@ export class MaterialController {
     async getMaterialById(req: Request, res: Response) {
         try {
             const id = parseInt(req.params.materialId);
+            if (Number.isNaN(id)) {
+                return sendResponse({
+                    res,
+                    statusCode: 400,
+                    success: false,
+                    message: 'Invalid material ID',
+                    data: null,
+                });
+            }
             const material = await materialService.getMaterialById(id);
+            const teacher = await materialService.getTeacherByMaterialId(id);
 
             if (!material) {
                 sendResponse({

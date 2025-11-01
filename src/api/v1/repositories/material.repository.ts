@@ -55,6 +55,12 @@ export class MaterialRepository {
             where: { id },
         });
     }
+
+    async findTeacherByMaterialId(materialId: number) {
+        return await prisma.material.findUnique({
+            where: { id: materialId },
+        }).Section().Class().User_Class({ where: { role: 'Teacher' } });
+    }
 }
 
 export default new MaterialRepository();
