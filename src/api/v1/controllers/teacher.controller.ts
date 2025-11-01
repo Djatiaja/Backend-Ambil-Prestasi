@@ -15,7 +15,7 @@ export const getAllTeachers = async (req: Request, res: Response) => {
             return sendResponse({ res: res, statusCode: 400, success: false, message: "Invalid page number", data: null });
         }
 
-        const { users: teachers, meta } = await userService.getAllUsers({ role: "Teacher", isDeleted: false, limit, page, search });
+        const { users: teachers, meta } = await userService.getAllUsers({ role: "Teacher", isDeleted: false, limit, page, search, isActive: true });
 
         sendResponse({ res: res, statusCode: 200, success: true, message: "Teachers fetched successfully", data: teachers, meta: meta });
     } catch (error) {

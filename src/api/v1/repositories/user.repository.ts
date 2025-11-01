@@ -23,7 +23,7 @@ class UserRepository {
         });
     }
 
-    async getUsers(roleName?: string, limit: number = 10, page: number = 1, search?: string): Promise<Partial<User>[]> {
+    async getUsers(roleName?: string, limit: number = 10, page: number = 1, search?: string, isActive?: boolean): Promise<Partial<User>[]> {
         if (search) {
 
             return await prisma.user.findMany({
@@ -38,6 +38,9 @@ class UserRepository {
                         { email: { contains: search } },
                         { username: { contains: search } },
                     ],
+                    ...(isActive !== undefined && {
+                        status: isActive ? user_status.ACTIVE : user_status.INACTIVE,
+                    })
                 },
                 select: safeUserFields,
                 orderBy: {
@@ -53,6 +56,9 @@ class UserRepository {
                 role: {
                     name: roleName,
                 },
+                ...(isActive !== undefined && {
+                    status: isActive ? user_status.ACTIVE : user_status.INACTIVE,
+                })
             },
             select: safeUserFields,
             orderBy: {
@@ -104,7 +110,7 @@ class UserRepository {
         });
     }
 
-    async countUsers(data: { roleName?: string; search?: string }): Promise<number> {
+    async countUsers(data: { roleName?: string; search?: string, isActive?: boolean }): Promise<number> {
         return await prisma.user.count({
             where: {
                 ...(data.roleName && {
@@ -117,8 +123,12 @@ class UserRepository {
                         { username: { contains: data.search } },
                         { name: { contains: data.search } },
                         { email: { contains: data.search } },
+
                     ],
                 }),
+                ...(data.isActive !== undefined && {
+                    status: data.isActive ? user_status.ACTIVE : user_status.INACTIVE,
+                })
             },
         });
     }
