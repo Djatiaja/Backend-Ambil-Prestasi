@@ -1,0 +1,45 @@
+services:
+  node-app:
+    build: .
+    container_name: node-app
+    env_file:
+      - .env
+    volumes:
+      - ./files:/app/files
+    depends_on:
+      - mysql
+    expose:
+      - "3000"
+    restart: always
+
+  mysql:
+    image: mysql:8.0
+    container_name: mysql
+    env_file:
+      - .env
+    ports:
+      - "3307:3307"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    restart: always
+
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./files:/app/files
+    depends_on:
+      - node-app
+    restart: always
+
+  certbot:
+    image: certbot/certbot
+    volumes:
+      - ./nginx/certbot:/etc/letsencrypt
+    command: certonly --webroot --webroot-path=/app/files -d yourdomain.com --email your@email.com --agree-tos --no-eff-email
+
+volumes:
+  mysql_data:
