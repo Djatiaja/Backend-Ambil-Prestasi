@@ -6,11 +6,11 @@ WORKDIR /app
 
 # Salin file package.json dan install dependency
 COPY package*.json ./
-RUN npm install --production --ignore-scripts
+RUN npm install 
 
 # Salin semua kode proyek (kecuali yang diabaikan oleh .dockerignore)
 COPY . .
-RUN npm run build
+RUN npm run build 
 
 # Expose port (ganti sesuai kebutuhan)
 EXPOSE 3000
