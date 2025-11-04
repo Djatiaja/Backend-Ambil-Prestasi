@@ -7,6 +7,7 @@ WORKDIR /app
 # Salin file package.json dan install dependency
 COPY package*.json ./
 RUN npm install 
+RUN npm run migrate
 
 # Salin semua kode proyek (kecuali yang diabaikan oleh .dockerignore)
 COPY . .
