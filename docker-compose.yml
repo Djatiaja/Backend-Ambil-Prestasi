@@ -1,7 +1,17 @@
 services:
+
+  mysql:
+    image: mysql:8.0
+    env_file:
+      - .env
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    restart: always
+
   node-app:
     build: .
-    container_name: node-app
     env_file:
       - .env
     volumes:
@@ -12,20 +22,8 @@ services:
       - "3000"
     restart: always
 
-  mysql:
-    image: mysql:8.0
-    container_name: mysql
-    env_file:
-      - .env
-    ports:
-      - "3307:3306" # host:container
-    volumes:
-      - mysql_data:/var/lib/mysql
-    restart: always
-
   nginx:
     image: nginx:latest
-    container_name: nginx
     ports:
       - "80:80"
     volumes:

@@ -18,7 +18,12 @@ export const materialsSeed = async () => {
                     title: randWord({ length: 5 }).join(' '),
                     content: randWord({ length: 15 }).join(' '),
                     xp: Math.floor(Math.random() * 100) + 1,
-                    sectionId: section.id
+                    sectionId: section.id,
+                    thumnail_path: '',
+                    video_path: '',
+                    materialFilePath: '',
+                    ringkasanPath: '',
+                    templatePath: ''
                 }
             });
         }
