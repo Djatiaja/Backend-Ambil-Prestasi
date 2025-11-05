@@ -11,6 +11,7 @@ authRouter.post('/login', validateBody(loginSchema), authController.login);
 authRouter.post('/register', validateBody(registerSchema), authController.register);
 authRouter.post('/verify-otp', validateBody(OTPSchema), authController.verifyOTP);
 authRouter.get('/verify-role', authMiddleware, authController.checkRole);
+authRouter.post('/logout', authMiddleware, authController.logout);
 authRouter.post('/resend-otp', validateBody(resendOTPSchema), authController.resendOTP);
 authRouter.post('/forgot-password', validateBody(forgotPasswordSchema), authController.forgotPassword);
 authRouter.patch('/reset-password', validateBody(resetPasswordSchema), authController.resetPassword);

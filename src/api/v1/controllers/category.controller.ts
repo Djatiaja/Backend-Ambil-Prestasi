@@ -8,7 +8,7 @@ class CategoryController {
         try {
             const categories = await categoryService.getAllCategories();
             sendResponse({ res, statusCode: 200, success: true, message: "Get All Categories", data: categories });
-        } catch (error) {
+        } catch {
             sendResponse({ res, statusCode: 500, success: false, message: "Failed to Get Categories", data: null });
         }
     }
@@ -21,7 +21,7 @@ class CategoryController {
                 return sendResponse({ res, statusCode: 404, success: false, message: "Category Not Found", data: null });
             }
             sendResponse({ res, statusCode: 200, success: true, message: "Get Category", data: category });
-        } catch (error) {
+        } catch {
             sendResponse({ res, statusCode: 500, success: false, message: "Failed to Get Category", data: null });
         }
     }
@@ -31,7 +31,7 @@ class CategoryController {
             const { name } = req.body;
             const newCategory = await categoryService.createCategory(name);
             sendResponse({ res, statusCode: 201, success: true, message: "Category Created", data: newCategory });
-        } catch (error) {
+        } catch {
             sendResponse({ res, statusCode: 500, success: false, message: "Failed to Create Category", data: null });
         }
     }
@@ -45,7 +45,7 @@ class CategoryController {
                 return sendResponse({ res, statusCode: 404, success: false, message: "Category Not Found", data: null });
             }
             sendResponse({ res, statusCode: 200, success: true, message: "Category Updated", data: updatedCategory });
-        } catch (error) {
+        } catch {
             sendResponse({ res, statusCode: 500, success: false, message: "Failed to Update Category", data: null });
         }
     }

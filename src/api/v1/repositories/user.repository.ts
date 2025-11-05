@@ -14,7 +14,7 @@ export const safeUserFields = {
     bio: true,
 };
 
-const SALT_ROUNDS = 10
+// SALT_ROUNDS removed — not used in this repository file. Keep hashing logic in service layer when needed.
 class UserRepository {
     async findUserById(userId: string) {
         return await prisma.user.findFirst({

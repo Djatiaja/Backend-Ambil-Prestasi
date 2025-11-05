@@ -64,8 +64,6 @@ export class MaterialController {
                 });
             }
             const material = await materialService.getMaterialById(id);
-            const teacher = await materialService.getTeacherByMaterialId(id);
-
             if (!material) {
                 sendResponse({
                     res,
@@ -159,7 +157,7 @@ export class MaterialController {
     async deleteMaterial(req: Request, res: Response) {
         try {
             const id = parseInt(req.params.materialId);
-            const material = await materialService.deleteMaterial(id);
+            await materialService.deleteMaterial(id);
             return sendResponse({
                 res,
                 statusCode: 200,

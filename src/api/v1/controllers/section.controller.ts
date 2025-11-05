@@ -36,12 +36,13 @@ class SectionController {
                 message: 'Sections retrieved successfully',
                 data: sections,
             });
-        } catch (error: any) {
+        } catch (error: unknown) {
+            const msg = error instanceof Error ? error.message : String(error);
             return sendResponse({
                 res,
                 statusCode: 500,
                 success: false,
-                message: error.message,
+                message: msg,
                 data: null,
             });
         }
@@ -68,12 +69,13 @@ class SectionController {
                 message: 'Section retrieved successfully',
                 data: section,
             });
-        } catch (error: any) {
+        } catch (error: unknown) {
+            const msg = error instanceof Error ? error.message : String(error);
             return sendResponse({
                 res,
-                statusCode: error.message.includes('not found') ? 404 : 500,
+                statusCode: msg.includes('not found') ? 404 : 500,
                 success: false,
-                message: error.message,
+                message: msg,
                 data: null,
             });
         }
@@ -102,12 +104,13 @@ class SectionController {
                 message: 'Section created successfully',
                 data: section,
             });
-        } catch (error: any) {
+        } catch (error: unknown) {
+            const msg = error instanceof Error ? error.message : String(error);
             return sendResponse({
                 res,
                 statusCode: 500,
                 success: false,
-                message: error.message,
+                message: msg,
                 data: null,
             });
         }
@@ -134,12 +137,13 @@ class SectionController {
                 message: 'Section updated successfully',
                 data: section,
             });
-        } catch (error: any) {
+        } catch (error: unknown) {
+            const msg = error instanceof Error ? error.message : String(error);
             return sendResponse({
                 res,
-                statusCode: error.message.includes('not found') ? 404 : 500,
+                statusCode: msg.includes('not found') ? 404 : 500,
                 success: false,
-                message: error.message,
+                message: msg,
                 data: null,
             });
         }
@@ -156,12 +160,13 @@ class SectionController {
                 message: 'Section deleted successfully',
                 data: null,
             });
-        } catch (error: any) {
+        } catch (error: unknown) {
+            const msg = error instanceof Error ? error.message : String(error);
             return sendResponse({
                 res,
-                statusCode: error.message.includes('not found') ? 404 : 500,
+                statusCode: msg.includes('not found') ? 404 : 500,
                 success: false,
-                message: error.message,
+                message: msg,
                 data: null,
             });
         }

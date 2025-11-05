@@ -17,14 +17,15 @@ export class MaterialFileController {
                 message: "Material files retrieved successfully",
                 data: materialFiles,
             });
-        } catch (error: any) {
+        } catch (error: unknown) {
+            const msg = error instanceof Error ? error.message : String(error);
             sendResponse({
                 res,
                 statusCode: 500,
                 success: false,
                 message: "Failed to retrieve material files",
                 data: null,
-                errors: { general: [error.message] },
+                errors: { general: [msg] },
             });
         }
     }
@@ -40,14 +41,15 @@ export class MaterialFileController {
                 message: "Material file retrieved successfully",
                 data: materialFile,
             });
-        } catch (error: any) {
+        } catch (error: unknown) {
+            const msg = error instanceof Error ? error.message : String(error);
             sendResponse({
                 res,
                 statusCode: 404,
                 success: false,
                 message: "Material file not found",
                 data: null,
-                errors: { general: [error.message] },
+                errors: { general: [msg] },
             });
         }
     }
@@ -78,14 +80,15 @@ export class MaterialFileController {
                 message: "Material file created successfully",
                 data: materialFile,
             });
-        } catch (error: any) {
+        } catch (error: unknown) {
+            const msg = error instanceof Error ? error.message : String(error);
             sendResponse({
                 res,
                 statusCode: 400,
                 success: false,
                 message: "Failed to create material file",
                 data: null,
-                errors: { general: [error.message] },
+                errors: { general: [msg] },
             });
         }
     }
@@ -117,14 +120,15 @@ export class MaterialFileController {
                 message: "Material file updated successfully",
                 data: materialFile,
             });
-        } catch (error: any) {
+        } catch (error: unknown) {
+            const msg = error instanceof Error ? error.message : String(error);
             sendResponse({
                 res,
                 statusCode: 404,
                 success: false,
                 message: "Material file not found",
                 data: null,
-                errors: { general: [error.message] },
+                errors: { general: [msg] },
             });
         }
     }
@@ -140,14 +144,15 @@ export class MaterialFileController {
                 message: "Material file deleted successfully",
                 data: null,
             });
-        } catch (error: any) {
+        } catch (error: unknown) {
+            const msg = error instanceof Error ? error.message : String(error);
             sendResponse({
                 res,
                 statusCode: 404,
                 success: false,
                 message: "Material file not found",
                 data: null,
-                errors: { general: [error.message] },
+                errors: { general: [msg] },
             });
         }
     }

@@ -7,7 +7,7 @@ export const getHomeData = async (req: Request, res: Response) => {
     try {
         const data = await dashboardService.getDashboardData();
         sendResponse({ res: res, statusCode: 200, success: true, message: "dashboard fetched successfully", data: data });
-    } catch (error) {
+    } catch {
         sendResponse({ res: res, statusCode: 500, success: false, message: "Error fetching dashboard", data: null });
     }
 }

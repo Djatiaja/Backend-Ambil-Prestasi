@@ -1,4 +1,4 @@
-import { PrismaClient, Material_File } from "@prisma/client";
+import { Material_File } from "@prisma/client";
 import prisma from "../../../database";
 
 

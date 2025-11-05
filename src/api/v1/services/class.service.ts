@@ -73,7 +73,7 @@ class ClassService {
         const classes = await classRepository.getClasses(skip, limit, search);
         const totalItems = await classRepository.getCount(undefined, search);
 
-        const meta: BaseResponse<any>["meta"] = {
+        const meta: BaseResponse<unknown>["meta"] = {
             totalItems,
             itemsPerPage: limit,
             totalPages: limit ? Math.ceil(totalItems / limit) : 1,

@@ -1,12 +1,12 @@
 // middlewares/schema.middleware.ts
 import { NextFunction, Request, Response } from "express";
-import { ZodError, ZodSchema } from "zod";
+import { ZodSchema } from "zod";
 import { sendResponse } from "../helpers/baseResponse";
 
 export const validateBody =
     (schema: ZodSchema) =>
         async (req: Request, res: Response, next: NextFunction) => {
-            const payload: Record<string, any> = { ...req.body };
+            const payload: Record<string, unknown> = { ...req.body };
 
             // Handle upload.fields() → req.files is Record<string, Express.Multer.File[]>
             if (req.files && typeof req.files === "object" && !Array.isArray(req.files)) {

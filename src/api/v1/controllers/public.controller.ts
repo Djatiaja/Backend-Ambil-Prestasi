@@ -29,7 +29,7 @@ class PublicController {
                 if (material.thumnail_path) {
                     material.thumnail_path = `${process.env.BASE_URL}/files/${material.thumnail_path}`;
                 }
-            }); 1
+            });
         });
 
         const data = { ...classData, sections };

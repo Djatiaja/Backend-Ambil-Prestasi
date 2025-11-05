@@ -3,9 +3,6 @@ import app from "../../src";
 import { BaseResponse } from "../../src/api/v1/types/responseType";
 import classRepository from "../../src/api/v1/repositories/class.repository";
 import * as classController from "../../src/api/v1/controllers/class.controller";
-import prisma from "../../src/database";
-import { hash } from "crypto";
-import { randPastDate } from "@ngneat/falso";
 
 interface ClassDto {
     id: number;

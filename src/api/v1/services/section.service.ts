@@ -34,8 +34,9 @@ class SectionService {
                     }
                 }
             });
-        } catch (error: any) {
-            throw new Error(`Failed to fetch sections: ${error.message}`);
+        } catch (error: unknown) {
+            const msg = error instanceof Error ? error.message : String(error);
+            throw new Error(`Failed to fetch sections: ${msg}`);
         }
     }
 
@@ -50,8 +51,9 @@ class SectionService {
                 },
             });
             return section;
-        } catch (error: any) {
-            throw new Error(`Failed to fetch section: ${error.message}`);
+        } catch (error: unknown) {
+            const msg = error instanceof Error ? error.message : String(error);
+            throw new Error(`Failed to fetch section: ${msg}`);
         }
     }
 
@@ -72,8 +74,9 @@ class SectionService {
                     order: newOrder,
                 },
             });
-        } catch (error: any) {
-            throw new Error(`Failed to create section: ${error.message}`);
+        } catch (error: unknown) {
+            const msg = error instanceof Error ? error.message : String(error);
+            throw new Error(`Failed to create section: ${msg}`);
         }
     }
 
@@ -89,8 +92,9 @@ class SectionService {
                 where: { id: parseInt(sectionId) },
                 data,
             });
-        } catch (error: any) {
-            throw new Error(`Failed to update section: ${error.message}`);
+        } catch (error: unknown) {
+            const msg = error instanceof Error ? error.message : String(error);
+            throw new Error(`Failed to update section: ${msg}`);
         }
     }
 
@@ -105,8 +109,9 @@ class SectionService {
             return await prisma.section.delete({
                 where: { id: parseInt(sectionId) },
             });
-        } catch (error: any) {
-            throw new Error(`Failed to delete section: ${error.message}`);
+        } catch (error: unknown) {
+            const msg = error instanceof Error ? error.message : String(error);
+            throw new Error(`Failed to delete section: ${msg}`);
         }
     }
 }

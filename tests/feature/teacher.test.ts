@@ -1,8 +1,7 @@
 import supertest from "supertest";
 import app from "../../src";
-import { Role, User } from "@prisma/client";
+import { User } from "@prisma/client";
 import prisma from "../../src/database";
-import { usersSeed } from "../../src/database/seeders/users.seed";
 
 
 const generateToken = async (role: string, userId: string) => {
@@ -359,16 +358,15 @@ describe("Feature Guru", () => {
     });
 
     describe("Role: Guru", () => {
-        let teacherToken: string;
-        let teacher: User;
-        let teacherRole: Role | null;
+    let teacherToken: string;
+    let teacher: User;
 
         beforeEach(async () => {
             const existing = await prisma.user.findUnique({ where: { username: "teacheruser" } });
             if (existing) {
                 await prisma.user.delete({ where: { id: existing.id } });
             }
-            teacherRole = await prisma.role.findFirst({ where: { name: "Teacher" } });
+            // teacherRole not needed in these tests
             teacher = await createTestUser("Teacher", {
                 name: "Teacher User",
                 email: "teacher.user@example.com",

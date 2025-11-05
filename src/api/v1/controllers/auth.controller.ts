@@ -14,7 +14,7 @@ export class AuthController {
         this.authService = new AuthService();
     }
 
-    login = async (req: Request, res: Response) => {
+    login = async (req: Request, res: Response): Promise<Response> => {
         try {
             const { usernameoremail, password } = req.body;
             const { user, isSameCredentials } = await this.authService.login(usernameoremail, password);
@@ -40,19 +40,19 @@ export class AuthController {
                 message: 'Login successful',
                 data: { token, role: role?.name || null },
             });
-        } catch (error: any) {
-            console.log(error)
+        } catch (error: unknown) {
+            const msg = error instanceof Error ? error.message : String(error);
             return sendResponse({
                 res,
                 statusCode: 401,
                 success: false,
-                message: error.message || 'Invalid credentials',
+                message: msg || 'Invalid credentials',
                 data: null,
             });
         }
     };
 
-    forgotPassword = async (req: Request, res: Response) => {
+    forgotPassword = async (req: Request, res: Response): Promise<Response> => {
         try {
             const { email } = req.body;
             const isSent = await this.authService.forgotPassword(email);
@@ -73,20 +73,19 @@ export class AuthController {
                 message: 'Password reset OTP sent',
                 data: null,
             });
-        } catch (error: any) {
-            console.log(error)
+        } catch (error: unknown) {
+            const msg = error instanceof Error ? error.message : String(error);
             return sendResponse({
                 res,
                 statusCode: 500,
                 success: false,
-                message: 'Server error',
+                message: msg || 'Server error',
                 data: null,
-
             });
         }
     };
 
-    verifyOTP = async (req: Request, res: Response) => {
+    verifyOTP = async (req: Request, res: Response): Promise<Response> => {
         try {
             const { email, code } = req.body;
             const token = await this.authService.verifyOTP(email, code);
@@ -98,18 +97,19 @@ export class AuthController {
                 message: 'OTP verified successfully',
                 data: token ? { reset_token: token } : null,
             });
-        } catch (error: any) {
+        } catch (error: unknown) {
+            const msg = error instanceof Error ? error.message : String(error);
             return sendResponse({
                 res,
                 statusCode: 400,
                 success: false,
-                message: error.message || 'Invalid or expired OTP',
+                message: msg || 'Invalid or expired OTP',
                 data: null,
             });
         }
     };
 
-    resetPassword = async (req: Request, res: Response) => {
+    resetPassword = async (req: Request, res: Response): Promise<Response> => {
         try {
             const { reset_token, newPassword } = req.body;
             await this.authService.resetPassword(reset_token, newPassword);
@@ -120,19 +120,20 @@ export class AuthController {
                 message: 'Password reset successful',
                 data: null,
             });
-        } catch (error: any) {
+        } catch (error: unknown) {
+            const msg = error instanceof Error ? error.message : String(error);
             return sendResponse({
                 res,
                 statusCode: 400,
                 success: false,
-                message: error.message || 'Invalid or expired token',
+                message: msg || 'Invalid or expired token',
                 data: null,
             });
         }
     };
 
 
-    register = async (req: Request, res: Response) => {
+    register = async (req: Request, res: Response): Promise<Response> => {
         try {
             const user = await this.authService.register(req.body as registerUserDto);
             return sendResponse({
@@ -142,18 +143,19 @@ export class AuthController {
                 message: 'User registered successfully',
                 data: user,
             });
-        } catch (error: any) {
+        } catch (error: unknown) {
+            const msg = error instanceof Error ? error.message : String(error);
             return sendResponse({
                 res,
                 statusCode: 500,
                 success: false,
-                message: error.message || 'Server error',
+                message: msg || 'Server error',
                 data: null,
             });
         }
     }
 
-    resendOTP = async (req: Request, res: Response) => {
+    resendOTP = async (req: Request, res: Response): Promise<Response> => {
         try {
             const { email } = req.body;
             await this.authService.resendOTP(email);
@@ -164,21 +166,32 @@ export class AuthController {
                 message: 'OTP resent successfully',
                 data: null,
             });
-        } catch (error: any) {
+        } catch (error: unknown) {
+            const msg = error instanceof Error ? error.message : String(error);
             return sendResponse({
                 res,
                 statusCode: 400,
                 success: false,
-                message: error.message || 'User not found',
+                message: msg || 'User not found',
                 data: null,
             });
         }
     };
 
-    checkRole = async (req: Request, res: Response) => {
+    checkRole = async (req: Request, res: Response): Promise<Response> => {
         try {
             const userId = (req.user as JwtPayload).user_id;
             const user = await userService.getUserById(userId);
+            if (!user) {
+                return sendResponse({
+                    res,
+                    statusCode: 404,
+                    success: false,
+                    message: 'User not found',
+                    data: null,
+                });
+            }
+
             const role = req.role;
             return sendResponse({
                 res,
@@ -188,14 +201,38 @@ export class AuthController {
                 data: { role: role || null },
             });
         }
-        catch (error: any) {
+        catch (error: unknown) {
+            const msg = error instanceof Error ? error.message : String(error);
             return sendResponse({
                 res,
                 statusCode: 500,
                 success: false,
-                message: 'Server error',
+                message: msg || 'Server error',
                 data: null,
             });
         }
     }
+
+    // Logout endpoint - stateless JWTs used in this project, so logout simply instructs client to drop token.
+    logout = async (req: Request, res: Response): Promise<Response> => {
+        try {
+            // If you later add refresh tokens or server-side session storage, revoke here.
+            return sendResponse({
+                res,
+                statusCode: 200,
+                success: true,
+                message: 'Logout successful',
+                data: null,
+            });
+        } catch (error: unknown) {
+            const msg = error instanceof Error ? error.message : String(error);
+            return sendResponse({
+                res,
+                statusCode: 500,
+                success: false,
+                message: msg || 'Server error',
+                data: null,
+            });
+        }
+    };
 }

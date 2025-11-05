@@ -1,4 +1,4 @@
-import { Reset_Token, User } from "@prisma/client";
+import { Reset_Token } from "@prisma/client";
 import { generateResetToken } from "../helpers/token";
 import tokenRepository from "../repositories/token.repository";
 import userService from "./user.service";

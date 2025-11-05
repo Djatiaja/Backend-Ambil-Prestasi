@@ -18,7 +18,7 @@ export const getAllTeachers = async (req: Request, res: Response) => {
         const { users: teachers, meta } = await userService.getAllUsers({ role: "Teacher", isDeleted: false, limit, page, search, isActive: true });
 
         sendResponse({ res: res, statusCode: 200, success: true, message: "Teachers fetched successfully", data: teachers, meta: meta });
-    } catch (error) {
+    } catch {
         sendResponse({ res: res, statusCode: 500, success: false, message: "Error fetching teachers", data: null });
     }
 };
@@ -29,7 +29,7 @@ export const createTeacher = async (req: Request, res: Response) => {
 
         const newTeacher = await userService.createUser({ name, email, password: username, role: "Teacher", username: username || email, telp, status, specialization, bio });
         sendResponse({ res, statusCode: 201, success: true, message: "Teacher created successfully", data: newTeacher });
-    } catch (error) {
+    } catch (error: unknown) {
         console.error(req.body, error);
         sendResponse({ res, statusCode: 500, success: false, message: "Error creating teacher", data: null });
     }
@@ -44,7 +44,7 @@ export const getTeacherById = async (req: Request, res: Response) => {
             return sendResponse({ res, statusCode: 404, success: false, message: "Teacher not found", data: null });
         }
         sendResponse({ res, statusCode: 200, success: true, message: "Teacher fetched successfully", data: teacher });
-    } catch (error) {
+    } catch {
         sendResponse({ res, statusCode: 500, success: false, message: "Error fetching teacher", data: null });
     }
 
@@ -61,7 +61,7 @@ export const updateTeacher = async (req: Request, res: Response) => {
         }
         const updatedTeacher = await userService.updateUser(id, { name, email, username, status, telp, specialization, bio });
         sendResponse({ res, statusCode: 200, success: true, message: "Teacher updated successfully", data: updatedTeacher });
-    } catch (error) {
+    } catch {
         sendResponse({ res, statusCode: 500, success: false, message: "Error updating teacher", data: null });
     }
 };
@@ -76,7 +76,7 @@ export const deleteTeacher = async (req: Request, res: Response) => {
 
         await userService.deleteUser(id);
         sendResponse({ res, statusCode: 200, success: true, message: "Teacher deleted successfully", data: null });
-    } catch (error) {
+    } catch {
         sendResponse({ res, statusCode: 500, success: false, message: "Error deleting teacher", data: null });
     }
 

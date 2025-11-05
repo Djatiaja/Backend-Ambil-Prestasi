@@ -3,7 +3,6 @@ import { NextFunction, Request, Response } from "express";
 import { sendResponse } from "../helpers/baseResponse";
 import { JwtPayload } from "../types/auth.type";
 import { userRepository } from "../repositories/user.repository";
-import roleRepository from "../repositories/role.repository";
 
 const JWT_SECRET = process.env.JWT_SECRET ?? "";
 

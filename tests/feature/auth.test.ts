@@ -9,7 +9,7 @@ describe('Feature Auth', () => {
     const baseUrl = '/api/v1';
     let user: User;
     let password: string;
-    let token: string;
+    // token intentionally not stored globally in this test file
 
     beforeAll(async () => {
 
@@ -70,7 +70,7 @@ describe('Feature Auth', () => {
             console.log("Login response:", res.body);
             expect(res.status).toBe(200);
             expect(res.body.data["token"]).toBeDefined();
-            token = res.body.data["token"];
+            // token available in response but not needed elsewhere in this test
         });
 
         it('should fail login with invalid credentials', async () => {
