@@ -358,8 +358,8 @@ describe("Feature Guru", () => {
     });
 
     describe("Role: Guru", () => {
-    let teacherToken: string;
-    let teacher: User;
+        let teacherToken: string;
+        let teacher: User;
 
         beforeEach(async () => {
             const existing = await prisma.user.findUnique({ where: { username: "teacheruser" } });

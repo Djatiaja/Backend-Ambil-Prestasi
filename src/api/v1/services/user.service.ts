@@ -7,7 +7,7 @@ import { userRepository } from "../repositories/user.repository";
 
 class UserService {
     async getAllUsers(data: { role: string, limit?: number, page?: number, isDeleted?: boolean, search?: string, isActive?: boolean }) {
-    const { role, limit, page, search, isActive } = data;
+        const { role, limit, page, search, isActive } = data;
         const users = await userRepository.getUsers(role, limit ?? 10, page ?? 1, search, isActive);
         const userCount = await userRepository.countUsers({ roleName: role, search, isActive });
 

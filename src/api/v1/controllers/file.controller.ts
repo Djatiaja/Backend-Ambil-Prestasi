@@ -8,7 +8,7 @@ export class FileController {
     async AccessPublicFile(req: Request, res: Response) {
         const { filename } = req.params;
 
-    // intentional
+        // intentional
         const filePath = path.join(process.cwd(), "files", "public", filename);
 
         if (!fs.existsSync(filePath)) {

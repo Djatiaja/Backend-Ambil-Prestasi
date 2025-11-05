@@ -1,20 +1,22 @@
-# Gunakan base image Node.js
-FROM node:18-alpine
+FROM node:18
 
-# Tentukan direktori kerja di dalam container
 WORKDIR /app
 
-# Salin file package.json dan install dependency
+# Install dependencies
 COPY package*.json ./
-RUN npm install 
+RUN npm install
 
-RUN npm run migrate
-# Salin semua kode proyek (kecuali yang diabaikan oleh .dockerignore)
+# Copy the rest of your source code
 COPY . .
-RUN npm run build 
 
-# Expose port (ganti sesuai kebutuhan)
+# Generate Prisma client before migrate/build
+RUN npx prisma generate
+
+# Run migrations (now the schema exists inside container)
+RUN npm run migrate
+
+# Build TypeScript
+RUN npm run build
+
 EXPOSE 3000
-
-# Jalankan aplikasi
 CMD ["npm", "start"]
