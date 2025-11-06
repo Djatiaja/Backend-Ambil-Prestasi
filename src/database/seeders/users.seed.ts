@@ -28,7 +28,7 @@ export const usersSeed = async () => {
         }
     });
 
-    for (let index = 0; index < 200; index++) {
+    for (let index = 0; index < 4; index++) {
         await prisma.user.create({
             data: {
                 username: `teacher${index + 1}`,
@@ -46,7 +46,7 @@ export const usersSeed = async () => {
         });
     }
 
-    for (let index = 0; index < 1000; index++) {
+    for (let index = 0; index < 50; index++) {
         await prisma.user.create({
             data: {
                 username: `student${index + 1}`,
