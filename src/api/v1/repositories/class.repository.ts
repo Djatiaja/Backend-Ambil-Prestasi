@@ -64,7 +64,7 @@ class ClassRepository {
             select: safeClassFields
         });
 
-        return { ...createdClass, image_path_relative: `${(process.env.APP_URL || "http://localhost").replace(/\/$/, "")}:${process.env.PORT || 3001}/${createdClass.image_path}`.replace(/\/$/, "") };
+        return { ...createdClass, image_path_relative: `${(process.env.APP_URL || "http://localhost").replace(/\/$/, "")}/${createdClass.image_path}`.replace(/\/$/, "") };
     }
 
 
@@ -76,7 +76,7 @@ class ClassRepository {
 
         if (!classData) return null;
 
-        const appUrl = (process.env.APP_URL || "http://localhost").replace(/\/$/, "") + `:${process.env.PORT || 3001}`;
+        const appUrl = (process.env.APP_URL || "http://localhost").replace(/\/$/, "");
         const imagePathRelative = `${appUrl}/${classData.image_path}`.replace(/\/$/, "");
 
         return { ...classData, image_path_relative: imagePathRelative };
@@ -140,7 +140,7 @@ class ClassRepository {
             });
         }
         return classes.map((classData) => {
-            const appUrl = (process.env.APP_URL || "http://localhost").replace(/\/$/, "") + `:${process.env.PORT || 3001}`;
+            const appUrl = (process.env.APP_URL || "http://localhost").replace(/\/$/, "");
             const imagePathRelative = `${appUrl}/${classData.image_path}`.replace(/\/$/, "");
 
             return { ...classData, image_path_relative: imagePathRelative };

@@ -9,11 +9,11 @@ export class MaterialService {
     async getAllMaterials(sectionId: number): Promise<Material[]> {
         const materials = await materialRepository.findAll(sectionId);
         materials.forEach(material => {
-            material.thumnail_path = `${env.APP_URL}:${env.PORT}/${material.thumnail_path}`;
-            material.templatePath = `${env.APP_URL}:${env.PORT}/${material.templatePath}`;
-            material.video_path = `${env.APP_URL}:${env.PORT}/${material.video_path}`;
-            material.materialFilePath = `${env.APP_URL}:${env.PORT}/${material.materialFilePath}`;
-            material.ringkasanPath = `${env.APP_URL}:${env.PORT}/${material.ringkasanPath}`;
+            material.thumnail_path = `${env.APP_URL}/${material.thumnail_path}`;
+            material.templatePath = `${env.APP_URL}/${material.templatePath}`;
+            material.video_path = `${env.APP_URL}/${material.video_path}`;
+            material.materialFilePath = `${env.APP_URL}/${material.materialFilePath}`;
+            material.ringkasanPath = `${env.APP_URL}/${material.ringkasanPath}`;
         });
         return materials;
     }
@@ -22,11 +22,11 @@ export class MaterialService {
         const material = await materialRepository.findById(id);
         if (!material) throw new NotFoundError("Material not found");
 
-        material.thumnail_path = `${env.APP_URL}:${env.PORT}/${material.thumnail_path}`;
-        material.templatePath = `${env.APP_URL}:${env.PORT}/${material.templatePath}`;
-        material.video_path = `${env.APP_URL}:${env.PORT}/${material.video_path}`;
-        material.materialFilePath = `${env.APP_URL}:${env.PORT}/${material.materialFilePath}`;
-        material.ringkasanPath = `${env.APP_URL}:${env.PORT}/${material.ringkasanPath}`;
+        material.thumnail_path = `${env.APP_URL}/${material.thumnail_path}`;
+        material.templatePath = `${env.APP_URL}/${material.templatePath}`;
+        material.video_path = `${env.APP_URL}/${material.video_path}`;
+        material.materialFilePath = `${env.APP_URL}/${material.materialFilePath}`;
+        material.ringkasanPath = `${env.APP_URL}/${material.ringkasanPath}`;
         return material;
     }
 
