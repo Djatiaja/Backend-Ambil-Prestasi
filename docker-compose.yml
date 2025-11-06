@@ -1,6 +1,7 @@
 services:
 
   mysql:
+    container_name: mysql
     image: mysql:8.0
     env_file:
       - .env
@@ -11,6 +12,7 @@ services:
     restart: always
 
   node-app:
+    container_name: node-app
     build: .
     env_file:
       - .env
@@ -23,6 +25,7 @@ services:
     restart: always
 
   nginx:
+    container_name: nginx
     image: nginx:latest
     ports:
       - "80:80"
@@ -32,12 +35,6 @@ services:
     depends_on:
       - node-app
     restart: always
-
-  certbot:
-    image: certbot/certbot
-    volumes:
-      - ./nginx/certbot:/etc/letsencrypt
-    command: certonly --webroot --webroot-path=/app/files -d yourdomain.com --email your@email.com --agree-tos --no-eff-email
 
 volumes:
   mysql_data:
