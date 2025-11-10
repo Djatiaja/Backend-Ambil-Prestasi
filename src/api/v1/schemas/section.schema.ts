@@ -2,7 +2,7 @@ import { z } from 'zod';
 
 export const CreateSectionSchema = z.object({
     title: z.string()
-        .min(10, 'Title cannot be less than 10 characters')
+        .min(2, 'Title cannot be less than 10 characters')
         .max(255, 'Title cannot exceed 255 characters'),
 
     description: z.string()

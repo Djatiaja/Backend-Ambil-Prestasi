@@ -56,6 +56,15 @@ class PublicController {
 
         sendResponse({ res, statusCode: 200, success: true, data: material, message: "Material retrieved successfully" });
     }
+
+    async getSectionById(req: Request, res: Response) {
+        const sectionId = req.params.id;
+
+
+        const section = await sectionService.getSectionById(sectionId);
+
+        sendResponse({ res, statusCode: 200, success: true, data: section, message: "Section retrieved successfully" });
+    }
 }
 
 export default new PublicController();
