@@ -11,6 +11,9 @@ import materialFileRouter from "./materialFile.route";
 import sectionRouter from "./section.route";
 import publicRouter from "./public.route";
 import categoryRouter from "./category.route";
+import redeemRouter from "./redeem.route";
+import testRouter from "./test.route";
+import studentRouter from "./student.route";
 
 const router = Router();
 declare module "express-serve-static-core" {
@@ -31,6 +34,11 @@ router.use("/classes/sections/materials/:materialId/files", materialFileRouter);
 router.use("/", authRouter)
 router.use("/public", publicRouter)
 router.use("/categories", authMiddleware, verifyRole(["Admin", "Teacher"]), categoryRouter);
+router.use("/redeem", authMiddleware, verifyRole(["Admin", "Student"]), redeemRouter);
+
+router.use("/students", authMiddleware, verifyRole(["Student"]), studentRouter);
+router.use("/test", testRouter);
+
 
 
 export default router;

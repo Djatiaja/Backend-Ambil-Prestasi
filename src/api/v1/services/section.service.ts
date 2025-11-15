@@ -22,16 +22,6 @@ class SectionService {
                             thumnail_path: true,
                         },
                     },
-
-                    Quiz: {
-                        select: {
-                            id: true,
-                            title: true,
-                            description: true,
-                            close_at: true,
-                            open_at: true,
-                        }
-                    }
                 }
             });
         } catch (error: unknown) {
@@ -45,9 +35,7 @@ class SectionService {
             const section = await prisma.section.findUnique({
                 where: { id: parseInt(sectionId) },
                 include: {
-                    Material: true,
-                    Assignment: true,
-                    Quiz: true,
+                    Material: true
                 },
             });
             return section;

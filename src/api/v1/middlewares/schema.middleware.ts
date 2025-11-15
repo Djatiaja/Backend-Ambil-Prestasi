@@ -19,7 +19,6 @@ export const validateBody =
             if (req.file) {
                 payload.file = req.file;
             }
-            console.log("Validation payload:", payload);
 
             const result = await schema.safeParseAsync(payload);
             if (!result.success) {

@@ -5,8 +5,7 @@ import fileController from "../controllers/file.controller";
 const fileRouter = Router();
 
 fileRouter.get("/public/:filename", fileController.AccessPublicFile);
-fileRouter.get("/private", fileController.AccessProtectedFile);
-fileRouter.post("/download", fileController.DownloadFile);
+fileRouter.get("/private/:token", fileController.AccessProtectedFile);
 
 
 export default fileRouter;
