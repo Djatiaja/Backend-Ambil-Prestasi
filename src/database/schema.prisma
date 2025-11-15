@@ -146,7 +146,6 @@ model Material {
   Section          Section         @relation(fields: [sectionId], references: [id], onDelete: Cascade)
   Material_File    Material_File[]
   User_Material    User_Material[]
-  reviews          Review[]
 }
 
 model Material_File {
@@ -359,15 +358,13 @@ model RedeemHistory {
 }
 
 model Review {
-  id         Int       @id @default(autoincrement())
-  userId     String
-  materialId Int?
-  classId    Int?
-  rating     Int // 1-5
-  comment    String?   @db.Text
-  createdAt  DateTime  @default(now())
-  updatedAt  DateTime  @updatedAt
-  User       User      @relation(fields: [userId], references: [id], onDelete: Cascade)
-  Material   Material? @relation(fields: [materialId], references: [id], onDelete: SetNull)
-  Class      Class?    @relation(fields: [classId], references: [id], onDelete: SetNull)
+  id        Int      @id @default(autoincrement())
+  userId    String
+  classId   Int
+  rating    Int // 1-5
+  comment   String?  @db.Text
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  User      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  Class     Class    @relation(fields: [classId], references: [id], onDelete: Cascade)
 }

@@ -4,6 +4,7 @@ import { sendResponse } from "../helpers/baseResponse";
 import categoryService from "../services/category.service";
 import sectionService from "../services/section.service";
 import materialService from "../services/material.service";
+import { ReviewService } from "../services/review.service";
 
 
 
@@ -31,8 +32,9 @@ class PublicController {
                 }
             });
         });
+        const averageRatingData = await ReviewService.getClassAverageRating(Number(classId));
 
-        const data = { ...classData, sections };
+        const data = { ...classData, sections, averageRating: averageRatingData.averageRating, totalReviews: averageRatingData.totalReviews };
 
         sendResponse({ res, statusCode: 200, success: true, data, message: "Class retrieved successfully" });
     }

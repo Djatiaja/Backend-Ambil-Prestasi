@@ -14,6 +14,8 @@ import categoryRouter from "./category.route";
 import redeemRouter from "./redeem.route";
 import testRouter from "./test.route";
 import studentRouter from "./student.route";
+import reviewRouter from "./review.route";
+import fileRouter from "./file.route";
 
 const router = Router();
 declare module "express-serve-static-core" {
@@ -37,6 +39,8 @@ router.use("/categories", authMiddleware, verifyRole(["Admin", "Teacher"]), cate
 router.use("/redeem", authMiddleware, verifyRole(["Admin", "Student"]), redeemRouter);
 
 router.use("/students", authMiddleware, verifyRole(["Student"]), studentRouter);
+router.use("/reviews", reviewRouter);
+router.use("/files", fileRouter);
 router.use("/test", testRouter);
 
 
