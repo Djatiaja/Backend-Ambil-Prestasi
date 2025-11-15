@@ -50,29 +50,32 @@ model Role {
 }
 
 model User {
-  id              String            @id @default(uuid())
-  email           String            @unique
-  username        String            @unique
-  name            String
-  password        String
-  profileImage    String
-  telp            String?
-  status          user_status?      @default(ACTIVE)
-  specialization  String?
-  bio             String?
-  verified_at     DateTime?
-  createdAt       DateTime          @default(now())
-  updatedAt       DateTime          @updatedAt
-  role            Role              @relation(fields: [roleId], references: [id], onDelete: Cascade)
-  roleId          Int
-  xps             Xp[]
-  User_Class      User_Class[]
-  User_Material   User_Material[]
-  user_assignment User_Assignment[]
-  quiz_attempt    Quiz_Attempt[]
-  token           Reset_Token[]
-  OTP             OTP_Token[]
-  FileToken       FileToken[]
+  id                String              @id @default(uuid())
+  email             String              @unique
+  username          String              @unique
+  name              String
+  password          String
+  profileImage      String
+  telp              String?
+  status            user_status?        @default(ACTIVE)
+  specialization    String?
+  bio               String?
+  verified_at       DateTime?
+  createdAt         DateTime            @default(now())
+  updatedAt         DateTime            @updatedAt
+  role              Role                @relation(fields: [roleId], references: [id], onDelete: Cascade)
+  roleId            Int
+  xps               Xp[]
+  User_Class        User_Class[]
+  User_Material     User_Material[]
+  user_assignment   User_Assignment[]
+  quiz_attempt      Quiz_Attempt[]
+  token             Reset_Token[]
+  OTP               OTP_Token[]
+  FileToken         FileToken[]
+  userSubscriptions User_Subscription[]
+  redeemHistories   RedeemHistory[]
+  reviews           Review[]
 }
 
 model Xp {
@@ -97,6 +100,7 @@ model Class {
   updatedAt   DateTime     @updatedAt
   User_Class  User_Class[]
   Section     Section[]
+  reviews     Review[]
 }
 
 model User_Class {
@@ -142,6 +146,7 @@ model Material {
   Section          Section         @relation(fields: [sectionId], references: [id], onDelete: Cascade)
   Material_File    Material_File[]
   User_Material    User_Material[]
+  reviews          Review[]
 }
 
 model Material_File {
@@ -310,4 +315,59 @@ model category {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   Class     Class[]
+}
+
+// prisma/schema.prisma
+enum subscription_status {
+  ACTIVE
+  EXPIRED
+  CANCELLED
+}
+
+model User_Subscription {
+  id        String              @id @default(uuid())
+  userId    String
+  startAt   DateTime            @default(now())
+  endAt     DateTime
+  status    subscription_status @default(ACTIVE)
+  createdAt DateTime            @default(now())
+  updatedAt DateTime            @updatedAt
+  User      User                @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model RedeemCode {
+  id           Int             @id @default(autoincrement())
+  code         String          @unique
+  durationDays Int
+  maxUses      Int             @default(1)
+  usedCount    Int             @default(0)
+  expiresAt    DateTime?
+  createdAt    DateTime        @default(now())
+  updatedAt    DateTime        @updatedAt
+  histories    RedeemHistory[]
+}
+
+model RedeemHistory {
+  id         String     @id @default(uuid())
+  userId     String
+  codeId     Int
+  redeemedAt DateTime   @default(now())
+  User       User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  Code       RedeemCode @relation(fields: [codeId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, codeId])
+}
+
+model Review {
+  id         Int       @id @default(autoincrement())
+  userId     String
+  materialId Int?
+  classId    Int?
+  rating     Int // 1-5
+  comment    String?   @db.Text
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+  User       User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  Material   Material? @relation(fields: [materialId], references: [id], onDelete: SetNull)
+  Class      Class?    @relation(fields: [classId], references: [id], onDelete: SetNull)
 }
