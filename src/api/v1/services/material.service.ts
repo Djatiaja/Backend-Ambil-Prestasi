@@ -40,7 +40,7 @@ export class MaterialService {
             video_path: saveFile(data.video, true),
             materialFilePath: saveFile(data.materialFile, true),
             ringkasanPath: saveFile(data.ringkasan, true),
-            thumnail_path: saveFile(data.thumnail, true),
+            thumnail_path: saveFile(data.thumnail, false),
         };
 
         return await materialRepository.create({
@@ -80,7 +80,7 @@ export class MaterialService {
         }
         if (data.thumnail) {
             deleteFile(existing.thumnail_path);
-            updatePayload.thumnail_path = saveFile(data.thumnail, true);
+            updatePayload.thumnail_path = saveFile(data.thumnail, false);
         }
 
         return await materialRepository.update(id, updatePayload);
@@ -103,8 +103,22 @@ export class MaterialService {
     async getTeacherByMaterialId(materialId: number) {
         const teacher = await materialRepository.findTeacherByMaterialId(materialId);
         if (!teacher) throw new NotFoundError("Teacher not found for the given material ID");
-        return teacher;
     }
+
+    async getMaterialProgress(userId: string, materialId: number): Promise<{ id: number; is_completed: boolean } | null> {
+        return await materialRepository.getMaterialProgress(userId, materialId);
+    }
+
+    async completeMaterial(userId: string, materialId: number): Promise<{ id: number; is_completed: boolean }> {
+        // Check if material exists
+        const material = await materialRepository.findById(materialId);
+        if (!material) throw new NotFoundError("Material not found");
+
+        // Mark as completed
+        return await materialRepository.completeMaterial(userId, materialId);
+    }
+
+
 }
 
 export default new MaterialService();

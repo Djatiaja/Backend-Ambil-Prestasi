@@ -95,6 +95,7 @@ export class MaterialRepository {
             },
         });
     }
+
 }
 
 export default new MaterialRepository();

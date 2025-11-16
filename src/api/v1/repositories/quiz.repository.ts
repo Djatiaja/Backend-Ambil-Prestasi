@@ -130,7 +130,7 @@ export class QuizRepository {
 
     // === Submit ===
     static async startQuizAttempt(userId: string, quizId: number) {
-        return prisma.quiz_Attempt.create({
+        const attempt = await prisma.quiz_Attempt.create({
             data: {
                 userId,
                 quizId,
@@ -140,13 +140,30 @@ export class QuizRepository {
                 quiz: {
                     include: {
                         quiz_question: {
-                            include: { quiz_answer: true },
+                            include: {
+                                quiz_answer: {
+                                    select: {
+                                        id: true,
+                                        answer: true
+                                    },
+                                },
+                            },
                             orderBy: { id: 'asc' },
                         },
                     },
                 },
             },
         });
+
+        // Filter out answers for Essay type questions
+        if (attempt.quiz.quiz_question) {
+            attempt.quiz.quiz_question = attempt.quiz.quiz_question.map((question) => ({
+                ...question,
+                quiz_answer: question.type === 'Essay' ? [] : question.quiz_answer,
+            }));
+        }
+
+        return attempt;
     }
 
     static async getAttemptById(attemptId: number) {
@@ -171,6 +188,82 @@ export class QuizRepository {
                 },
             },
         });
+    }
+
+    static async getAttemptQuestions(attemptId: number) {
+        const attempt = await prisma.quiz_Attempt.findUnique({
+            where: { id: attemptId },
+            include: {
+                quiz: {
+                    include: {
+                        quiz_question: {
+                            include: {
+                                quiz_answer: {
+                                    select: {
+                                        id: true,
+                                        answer: true,
+                                    },
+                                },
+                            },
+                            orderBy: { id: 'asc' },
+                        },
+                    },
+                },
+                attemp_answer: {
+                    include: {
+                        quiz_question: true,
+                        attemp_multiple_answer: {
+                            include: {
+                                quiz_answer: {
+                                    select: {
+                                        id: true,
+                                        answer: true,
+                                    },
+                                },
+                            },
+                        },
+                    },
+                },
+            },
+        });
+
+        if (!attempt) return null;
+
+        // Return questions with saved answers
+        return {
+            attemptId: attempt.id,
+            quizId: attempt.quizId,
+            quizTitle: attempt.quiz.title,
+            timeLimit: attempt.quiz.time_limit,
+            startedAt: attempt.started_at,
+            submittedAt: attempt.submitted_at,
+            questions: attempt.quiz.quiz_question.map((question) => {
+                const savedAnswer = attempt.attemp_answer.find(
+                    (ans) => ans.questionId === question.id
+                );
+
+                return {
+                    id: question.id,
+                    question: question.question,
+                    type: question.type,
+                    points: question.points,
+                    // Don't return answers for Essay type questions
+                    answers: question.type === 'Essay' ? [] : question.quiz_answer.map((ans) => ({
+                        id: ans.id,
+                        answer: ans.answer,
+                    })),
+                    savedAnswer: savedAnswer
+                        ? {
+                            answer: savedAnswer.answer,
+                            path: savedAnswer.path,
+                            selectedAnswerIds: savedAnswer.attemp_multiple_answer.map(
+                                (ma) => ma.answerId
+                            ),
+                        }
+                        : null,
+                };
+            }),
+        };
     }
 
     static async saveAnswer(data: {

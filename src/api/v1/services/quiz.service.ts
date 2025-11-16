@@ -74,6 +74,7 @@ export class QuizService {
         const ongoingAttempt = attempts.find((a) => a.submitted_at === null);
         if (ongoingAttempt) {
             // Check if time limit exceeded
+            const now = new Date();
             const timeElapsed = now.getTime() - ongoingAttempt.started_at.getTime();
             const timeLimitMs = quiz.time_limit * 60 * 1000;
 
@@ -162,5 +163,24 @@ export class QuizService {
 
     static async getMyAttempts(userId: string, quizId: number) {
         return QuizRepository.getStudentAttempts(userId, quizId);
+    }
+
+    static async getAttemptQuestions(userId: string, attemptId: number) {
+        const attempt = await QuizRepository.getAttemptById(attemptId);
+        if (!attempt) {
+            throw new Error('Attempt tidak ditemukan');
+        }
+
+        // Verify user owns this attempt
+        if (attempt.userId !== userId) {
+            throw new Error('Anda tidak memiliki akses ke attempt ini');
+        }
+
+        // Don't allow if already submitted
+        if (attempt.submitted_at) {
+            throw new Error('Quiz sudah disubmit, tidak bisa diubah lagi');
+        }
+
+        return QuizRepository.getAttemptQuestions(attemptId);
     }
 }

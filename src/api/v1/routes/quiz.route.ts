@@ -20,7 +20,7 @@ const router = Router({ mergeParams: true });
 router.get(
     '/',
     authMiddleware,
-    verifyRole(['Teacher']),
+    verifyRole(['Teacher', "Admin"]),
     QuizController.getQuizzesByMaterial
 );
 
@@ -28,42 +28,42 @@ router.get(
 router.post(
     '/',
     authMiddleware,
-    verifyRole(['Teacher']),
+    verifyRole(['Teacher', "Admin"]),
     validateBody(createQuizSchema),
     QuizController.createQuiz
 );
 
 // Get quiz by ID
-router.get('/:id', authMiddleware, verifyRole(['Teacher']), QuizController.getQuiz);
+router.get('/:id', authMiddleware, verifyRole(['Teacher', "Admin"]), QuizController.getQuiz);
 
 router.put(
     '/:id',
     authMiddleware,
-    verifyRole(['Teacher']),
+    verifyRole(['Teacher', "Admin"]),
     validateBody(updateQuizSchema),
     QuizController.updateQuiz
 );
 
-router.delete('/:id', authMiddleware, verifyRole(['Teacher']), QuizController.deleteQuiz);
+router.delete('/:id', authMiddleware, verifyRole(['Teacher', "Admin"]), QuizController.deleteQuiz);
 
 router.post(
     '/:quizId/questions',
     authMiddleware,
-    verifyRole(['Teacher']),
+    verifyRole(['Teacher', "Admin"]),
     validateBody(createQuestionSchema),
     QuizController.createQuestion
 );
 router.put(
     '/questions/:questionId',
     authMiddleware,
-    verifyRole(['Teacher']),
+    verifyRole(['Teacher', "Admin"]),
     validateBody(updateQuestionSchema),
     QuizController.updateQuestion
 );
 router.delete(
     '/questions/:questionId',
     authMiddleware,
-    verifyRole(['Teacher']),
+    verifyRole(['Teacher', "Admin"]),
     QuizController.deleteQuestion
 );
 
@@ -72,7 +72,6 @@ router.delete(
 router.post(
     '/start',
     authMiddleware,
-    verifyRole(['Student']),
     validateBody(startQuizAttemptSchema),
     QuizController.startQuizAttempt
 );
@@ -81,7 +80,6 @@ router.post(
 router.post(
     '/save-answer',
     authMiddleware,
-    verifyRole(['Student']),
     validateBody(saveAnswerSchema),
     QuizController.saveAnswer
 );
@@ -90,7 +88,6 @@ router.post(
 router.post(
     '/submit',
     authMiddleware,
-    verifyRole(['Student']),
     validateBody(submitQuizSchema),
     QuizController.submitQuiz
 );
@@ -99,7 +96,6 @@ router.post(
 router.get(
     '/attempts/:attemptId/result',
     authMiddleware,
-    verifyRole(['Student']),
     QuizController.getAttemptResult
 );
 
@@ -107,8 +103,14 @@ router.get(
 router.get(
     '/my-attempts/:quizId',
     authMiddleware,
-    verifyRole(['Student']),
     QuizController.getMyAttempts
+);
+
+// Get all questions for an attempt (resume failed attempt)
+router.get(
+    '/attempts/:attemptId/questions',
+    authMiddleware,
+    QuizController.getAttemptQuestions
 );
 
 export default router;

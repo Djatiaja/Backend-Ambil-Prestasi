@@ -40,12 +40,6 @@ export class ReviewService {
     }> {
         const { rating, comment } = dto;
 
-        // Check enrollment
-        const isEnrolled = await this.verifyEnrollment(userId, classId);
-        if (!isEnrolled) {
-            throw new Error('You must be enrolled in this class to write a review');
-        }
-
         // Check if user already reviewed this class
         const existingReview = await ReviewRepository.findByUserAndClass(userId, classId);
         if (existingReview) {

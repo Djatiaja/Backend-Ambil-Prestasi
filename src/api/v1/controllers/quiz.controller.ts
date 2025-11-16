@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { sendResponse } from '../helpers/baseResponse';
 import { QuizService } from '../services/quiz.service';
+import materialService from '../services/material.service';
 
 export class QuizController {
     // === TEACHER: Quiz ===
@@ -10,8 +11,14 @@ export class QuizController {
             if (isNaN(materialId)) {
                 throw new Error('Invalid material ID');
             }
+            const material = await materialService.getMaterialById(materialId);
+            if (!material) {
+                throw new Error('Material not found');
+            }
 
             const quizzes = await QuizService.getQuizzesByMaterial(materialId);
+
+
             return sendResponse({
                 res,
                 statusCode: 200,
@@ -33,10 +40,11 @@ export class QuizController {
     static async createQuiz(req: Request, res: Response) {
         try {
             const materialId = parseInt(req.params.materialId);
+            const material = await materialService.getMaterialById(materialId);
+            if (!material) {
+                throw new Error('Material not found');
+            }
 
-            console.log('Params:', req.params);
-            console.log('Parsed materialId:', materialId);
-            console.log('Body:', req.body);
 
             if (isNaN(materialId) || !materialId) {
                 return sendResponse({
@@ -150,6 +158,12 @@ export class QuizController {
             if (isNaN(quizId)) {
                 throw new Error('Invalid quiz ID');
             }
+
+            const quiz = await QuizService.getQuizById(quizId);
+            if (!quiz) {
+                throw new Error('Quiz not found');
+            }
+
             const question = await QuizService.createQuestion(quizId, req.body);
             return sendResponse({
                 res,
@@ -332,6 +346,31 @@ export class QuizController {
             return sendResponse({
                 res,
                 statusCode: 500,
+                success: false,
+                message: (error as Error).message,
+                data: null,
+            });
+        }
+    }
+
+    static async getAttemptQuestions(req: Request, res: Response) {
+        try {
+            const attemptId = parseInt(req.params.attemptId);
+            if (isNaN(attemptId)) {
+                throw new Error('Invalid attempt ID');
+            }
+            const questions = await QuizService.getAttemptQuestions(req.user!.id!, attemptId);
+            return sendResponse({
+                res,
+                statusCode: 200,
+                success: true,
+                message: 'Attempt questions retrieved',
+                data: questions,
+            });
+        } catch (error) {
+            return sendResponse({
+                res,
+                statusCode: 400,
                 success: false,
                 message: (error as Error).message,
                 data: null,
