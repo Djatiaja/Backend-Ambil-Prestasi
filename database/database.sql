@@ -1,7 +1,7 @@
 /*M!999999\- enable the sandbox mode */ 
 -- MariaDB dump 10.19-12.0.2-MariaDB, for Linux (x86_64)
 --
--- Host: localhost    Database: ambil_prestasi
+-- Host: localhost    Database: sekolah_alam
 -- ------------------------------------------------------
 -- Server version	12.0.2-MariaDB
 
@@ -145,20 +145,20 @@ LOCK TABLES `Class` WRITE;
 /*!40000 ALTER TABLE `Class` DISABLE KEYS */;
 set autocommit=0;
 INSERT INTO `Class` VALUES
-(1,1,'omnis','vitae reiciendis nostrum id repellat fugit sunt repellat voluptatibus commodi repellat consequatur voluptatibus quia necessitatibus reiciendis aliquid deserunt voluptate ducimus rerum fugiat ullam consequatur quos ullam rerum fugit enim aut','files/public/placeholder.png','2025-11-06 15:23:16.027','2025-11-06 15:23:16.027'),
-(2,1,'quia','asperiores aut ullam nulla enim quos neque fugiat neque occaecati et quas exercitationem ipsum in sunt possimus cupiditate non deserunt sunt est voluptate labore unde sequi laborum possimus labore possimus','files/public/placeholder.png','2025-11-06 15:23:16.028','2025-11-06 15:23:16.028'),
-(3,1,'ipsum','asperiores repellat in enim voluptatem labore eos ullam at exercitationem id dicta eos cupiditate unde id fugit esse necessitatibus ducimus error deserunt blanditiis magnam hic nihil neque cupiditate hic consectetur','files/public/placeholder.png','2025-11-06 15:23:16.030','2025-11-06 15:23:16.030'),
-(4,1,'dolores','hic quas voluptatem consectetur id nemo laborum voluptatem rerum aliquid neque fugiat maiores sit vitae non nemo consequuntur omnis non repellat asperiores nemo occaecati esse est est dicta quas quia','files/public/placeholder.png','2025-11-06 15:23:16.031','2025-11-06 15:23:16.031'),
-(5,1,'sed','exercitationem enim unde excepturi nemo hic rerum quos labore id sapiente nemo laborum sed ipsum eos unde omnis quae exercitationem est nostrum esse reiciendis vel et non aliquid voluptate maiores','files/public/placeholder.png','2025-11-06 15:23:16.032','2025-11-06 15:23:16.032'),
-(6,1,'fugit','occaecati aut vel commodi consequatur dolores enim nihil sapiente hic necessitatibus laborum laborum occaecati numquam beatae nostrum possimus esse ipsum non in sapiente numquam error commodi esse deserunt vel possimus','files/public/placeholder.png','2025-11-06 15:23:16.033','2025-11-06 15:23:16.033'),
-(7,1,'ullam','consequatur quia sequi dolores possimus esse commodi sit eos rerum omnis reiciendis esse exercitationem fugiat possimus nostrum enim necessitatibus consequuntur quasi aliquid nostrum aut reiciendis id consectetur aut beatae voluptatibus','files/public/placeholder.png','2025-11-06 15:23:16.034','2025-11-06 15:23:16.034'),
-(8,1,'cupiditate','reiciendis et doloribus sunt dicta maiores qui sed sapiente consequatur dicta neque aut sit facilis ipsum voluptatem in reiciendis error quia asperiores fugit deserunt quia voluptatem reiciendis asperiores unde error','files/public/placeholder.png','2025-11-06 15:23:16.035','2025-11-06 15:23:16.035'),
-(9,1,'repellat','aliquid consequatur voluptate magnam numquam quia possimus sequi dicta eos commodi neque nulla consequatur fugiat exercitationem magnam nemo dolores nulla doloribus vel maiores qui repellat rerum non consequuntur id sunt','files/public/placeholder.png','2025-11-06 15:23:16.036','2025-11-06 15:23:16.036'),
-(10,1,'laborum','excepturi voluptatibus rerum nulla quas eos omnis dicta voluptatibus ducimus numquam et dicta asperiores voluptate asperiores qui ipsum vitae neque occaecati quas magnam magnam asperiores sit dicta doloribus dolores occaecati','files/public/placeholder.png','2025-11-06 15:23:16.037','2025-11-06 15:23:16.037'),
-(11,2,'PPK','hic possimus nostrum quos sequi voluptatem omnis deserunt ipsum ullam maiores vel enim id tenetur quos necessitatibus quasi unde aut sunt id sunt voluptatem ipsum sed voluptate esse magnam est','files/public/placeholder.png','2025-11-06 15:23:16.149','2025-11-06 15:23:16.149'),
-(12,1,'Pancasila','ipsum sequi labore repellat occaecati possimus blanditiis aliquid id non repellat dicta consequatur fugiat nostrum eos aut at voluptatem occaecati id aut reiciendis enim in non nulla nemo vel maiores','files/public/placeholder.png','2025-11-06 15:23:16.150','2025-11-06 15:23:16.150'),
-(13,3,'Agama','non at dicta quas quae occaecati quasi occaecati reiciendis maiores facilis vitae ipsum quasi consectetur quos sapiente quasi hic id hic quia labore unde tenetur ducimus quae repellat unde error','files/public/placeholder.png','2025-11-06 15:23:16.151','2025-11-06 15:23:16.151'),
-(14,1,'Bahasa Indonesia','quia quae enim voluptatem nostrum fugit quaerat possimus nihil tenetur enim eos eos at labore et voluptatibus excepturi quia vel quasi voluptate nulla possimus sunt sed labore blanditiis ullam consectetur','files/public/placeholder.png','2025-11-06 15:23:16.152','2025-11-06 15:23:16.152');
+(1,1,'repellat','at voluptatem magnam omnis non repellat vel rerum at ipsum occaecati sunt doloribus quae blanditiis ducimus ipsum error unde exercitationem sit nostrum error consequatur quia omnis beatae nulla ipsum neque','files/public/placeholder.png','2025-11-15 12:07:00.666','2025-11-15 12:07:00.666'),
+(2,1,'voluptate','nihil at quia possimus voluptatibus commodi voluptate voluptatibus sit omnis at quos dicta nemo tenetur fugiat sit consectetur exercitationem beatae consequatur blanditiis necessitatibus sunt sapiente nulla omnis sapiente enim sequi','files/public/placeholder.png','2025-11-15 12:07:00.668','2025-11-15 12:07:00.668'),
+(3,1,'vel','deserunt enim esse nulla ullam voluptate commodi quaerat est ipsum hic doloribus excepturi exercitationem repellat hic occaecati sunt unde asperiores numquam error ullam sequi nulla consequatur occaecati nemo error labore','files/public/placeholder.png','2025-11-15 12:07:00.669','2025-11-15 12:07:00.669'),
+(4,1,'asperiores','unde at eos doloribus nostrum et excepturi laborum consequuntur possimus asperiores sequi ipsum nihil beatae tenetur error commodi sequi doloribus possimus fugit sed exercitationem repellat neque ullam fugit nulla at','files/public/placeholder.png','2025-11-15 12:07:00.670','2025-11-15 12:07:00.670'),
+(5,1,'repellat','error sapiente possimus ipsum ipsum sequi dolores repellat at consequuntur repellat at rerum voluptatem labore nulla possimus error labore sunt tenetur unde sequi aliquid nostrum repellat nulla fugit sunt voluptatibus','files/public/placeholder.png','2025-11-15 12:07:00.671','2025-11-15 12:07:00.671'),
+(6,1,'ducimus','beatae quae vitae exercitationem vitae beatae et consectetur beatae cupiditate id hic et ipsum voluptate numquam doloribus sed aliquid numquam occaecati in necessitatibus in beatae qui sed nihil magnam asperiores','files/public/placeholder.png','2025-11-15 12:07:00.672','2025-11-15 12:07:00.672'),
+(7,1,'ducimus','necessitatibus fugiat voluptatem quos dolores nihil quos quos maiores eos sit qui dolores aut nemo at dicta nostrum omnis at ipsum exercitationem sed dolores est esse id aliquid unde quae','files/public/placeholder.png','2025-11-15 12:07:00.673','2025-11-15 12:07:00.673'),
+(8,1,'nostrum','sequi possimus fugit at maiores cupiditate beatae dolores hic neque deserunt laborum neque sed exercitationem deserunt voluptatem nemo dolores sed possimus et unde dicta ullam cupiditate sunt reiciendis nostrum blanditiis','files/public/placeholder.png','2025-11-15 12:07:00.674','2025-11-15 12:07:00.674'),
+(9,1,'fugiat','beatae dicta occaecati ducimus rerum consequuntur in non omnis maiores quas quasi sequi non exercitationem non commodi aliquid nemo nostrum vel laborum cupiditate repellat in voluptatibus fugit non nihil nostrum','files/public/placeholder.png','2025-11-15 12:07:00.675','2025-11-15 12:07:00.675'),
+(10,1,'dolores','reiciendis exercitationem beatae non tenetur consectetur voluptate enim nihil facilis sapiente possimus reiciendis aliquid reiciendis nihil non hic aliquid consectetur sed facilis qui quos blanditiis voluptate fugiat sit nulla sequi','files/public/placeholder.png','2025-11-15 12:07:00.677','2025-11-15 12:07:00.677'),
+(11,2,'PPK','magnam aut asperiores sequi necessitatibus tenetur unde ipsum esse qui esse ipsum nulla vel error vitae quae ducimus voluptatibus id numquam ipsum numquam est sed aut exercitationem facilis magnam repellat','files/public/placeholder.png','2025-11-15 12:07:00.802','2025-11-15 12:07:00.802'),
+(12,3,'Pancasila','rerum repellat sequi sed tenetur nulla est excepturi fugiat nihil nemo quia fugit vitae id occaecati asperiores possimus numquam asperiores vel consequatur consectetur esse possimus eos commodi in dicta maiores','files/public/placeholder.png','2025-11-15 12:07:00.803','2025-11-15 12:07:00.803'),
+(13,3,'Agama','quaerat labore dolores quaerat voluptatem consectetur et sapiente quasi est cupiditate laborum fugiat dicta labore commodi nemo beatae qui sequi occaecati occaecati neque eos in in occaecati at in occaecati','files/public/placeholder.png','2025-11-15 12:07:00.804','2025-11-15 12:07:00.804'),
+(14,3,'Bahasa Indonesia','vel enim neque blanditiis sed rerum quos necessitatibus voluptatem vitae beatae quae dicta consequuntur id consectetur sit ipsum laborum quaerat laborum laborum voluptate possimus possimus beatae laborum vitae error consectetur','files/public/placeholder.png','2025-11-15 12:07:00.805','2025-11-15 12:07:00.805');
 /*!40000 ALTER TABLE `Class` ENABLE KEYS */;
 UNLOCK TABLES;
 commit;
@@ -208,14 +208,14 @@ CREATE TABLE `Material` (
   `title` varchar(191) NOT NULL,
   `content` longtext NOT NULL,
   `xp` int(11) NOT NULL DEFAULT 10,
-  `createdAt` datetime(3) NOT NULL DEFAULT current_timestamp(3),
-  `updatedAt` datetime(3) NOT NULL,
-  `sectionId` int(11) NOT NULL,
+  `thumnail_path` varchar(191) NOT NULL,
+  `video_path` varchar(191) NOT NULL,
   `materialFilePath` varchar(191) NOT NULL,
   `ringkasanPath` varchar(191) NOT NULL,
   `templatePath` varchar(191) NOT NULL,
-  `video_path` varchar(191) NOT NULL,
-  `thumnail_path` varchar(191) NOT NULL,
+  `createdAt` datetime(3) NOT NULL DEFAULT current_timestamp(3),
+  `updatedAt` datetime(3) NOT NULL,
+  `sectionId` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `Material_sectionId_fkey` (`sectionId`),
   CONSTRAINT `Material_sectionId_fkey` FOREIGN KEY (`sectionId`) REFERENCES `Section` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
@@ -428,6 +428,69 @@ UNLOCK TABLES;
 commit;
 
 --
+-- Table structure for table `RedeemCode`
+--
+
+DROP TABLE IF EXISTS `RedeemCode`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `RedeemCode` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `code` varchar(191) NOT NULL,
+  `durationDays` int(11) NOT NULL,
+  `maxUses` int(11) NOT NULL DEFAULT 1,
+  `usedCount` int(11) NOT NULL DEFAULT 0,
+  `expiresAt` datetime(3) DEFAULT NULL,
+  `createdAt` datetime(3) NOT NULL DEFAULT current_timestamp(3),
+  `updatedAt` datetime(3) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `RedeemCode_code_key` (`code`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `RedeemCode`
+--
+
+LOCK TABLES `RedeemCode` WRITE;
+/*!40000 ALTER TABLE `RedeemCode` DISABLE KEYS */;
+set autocommit=0;
+/*!40000 ALTER TABLE `RedeemCode` ENABLE KEYS */;
+UNLOCK TABLES;
+commit;
+
+--
+-- Table structure for table `RedeemHistory`
+--
+
+DROP TABLE IF EXISTS `RedeemHistory`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `RedeemHistory` (
+  `id` varchar(191) NOT NULL,
+  `userId` varchar(191) NOT NULL,
+  `codeId` int(11) NOT NULL,
+  `redeemedAt` datetime(3) NOT NULL DEFAULT current_timestamp(3),
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `RedeemHistory_userId_codeId_key` (`userId`,`codeId`),
+  KEY `RedeemHistory_codeId_fkey` (`codeId`),
+  CONSTRAINT `RedeemHistory_codeId_fkey` FOREIGN KEY (`codeId`) REFERENCES `RedeemCode` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `RedeemHistory_userId_fkey` FOREIGN KEY (`userId`) REFERENCES `User` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `RedeemHistory`
+--
+
+LOCK TABLES `RedeemHistory` WRITE;
+/*!40000 ALTER TABLE `RedeemHistory` DISABLE KEYS */;
+set autocommit=0;
+/*!40000 ALTER TABLE `RedeemHistory` ENABLE KEYS */;
+UNLOCK TABLES;
+commit;
+
+--
 -- Table structure for table `Reset_Token`
 --
 
@@ -459,6 +522,43 @@ UNLOCK TABLES;
 commit;
 
 --
+-- Table structure for table `Review`
+--
+
+DROP TABLE IF EXISTS `Review`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `Review` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `userId` varchar(191) NOT NULL,
+  `materialId` int(11) DEFAULT NULL,
+  `classId` int(11) DEFAULT NULL,
+  `rating` int(11) NOT NULL,
+  `comment` text DEFAULT NULL,
+  `createdAt` datetime(3) NOT NULL DEFAULT current_timestamp(3),
+  `updatedAt` datetime(3) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `Review_userId_fkey` (`userId`),
+  KEY `Review_materialId_fkey` (`materialId`),
+  KEY `Review_classId_fkey` (`classId`),
+  CONSTRAINT `Review_classId_fkey` FOREIGN KEY (`classId`) REFERENCES `Class` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT `Review_materialId_fkey` FOREIGN KEY (`materialId`) REFERENCES `Material` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT `Review_userId_fkey` FOREIGN KEY (`userId`) REFERENCES `User` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Review`
+--
+
+LOCK TABLES `Review` WRITE;
+/*!40000 ALTER TABLE `Review` DISABLE KEYS */;
+set autocommit=0;
+/*!40000 ALTER TABLE `Review` ENABLE KEYS */;
+UNLOCK TABLES;
+commit;
+
+--
 -- Table structure for table `Role`
 --
 
@@ -483,9 +583,9 @@ LOCK TABLES `Role` WRITE;
 /*!40000 ALTER TABLE `Role` DISABLE KEYS */;
 set autocommit=0;
 INSERT INTO `Role` VALUES
-(1,'Admin','2025-11-06 15:23:15.876','2025-11-06 15:23:15.876'),
-(2,'Teacher','2025-11-06 15:23:15.876','2025-11-06 15:23:15.876'),
-(3,'Student','2025-11-06 15:23:15.876','2025-11-06 15:23:15.876');
+(1,'Admin','2025-11-15 12:07:00.482','2025-11-15 12:07:00.482'),
+(2,'Teacher','2025-11-15 12:07:00.482','2025-11-15 12:07:00.482'),
+(3,'Student','2025-11-15 12:07:00.482','2025-11-15 12:07:00.482');
 /*!40000 ALTER TABLE `Role` ENABLE KEYS */;
 UNLOCK TABLES;
 commit;
@@ -536,14 +636,14 @@ CREATE TABLE `User` (
   `name` varchar(191) NOT NULL,
   `password` varchar(191) NOT NULL,
   `profileImage` varchar(191) NOT NULL,
+  `telp` varchar(191) DEFAULT NULL,
+  `status` enum('ACTIVE','INACTIVE') DEFAULT 'ACTIVE',
+  `specialization` varchar(191) DEFAULT NULL,
+  `bio` varchar(191) DEFAULT NULL,
   `verified_at` datetime(3) DEFAULT NULL,
   `createdAt` datetime(3) NOT NULL DEFAULT current_timestamp(3),
   `updatedAt` datetime(3) NOT NULL,
   `roleId` int(11) NOT NULL,
-  `bio` varchar(191) DEFAULT NULL,
-  `specialization` varchar(191) DEFAULT NULL,
-  `status` enum('ACTIVE','INACTIVE') DEFAULT 'ACTIVE',
-  `telp` varchar(191) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `User_email_key` (`email`),
   UNIQUE KEY `User_username_key` (`username`),
@@ -560,62 +660,62 @@ LOCK TABLES `User` WRITE;
 /*!40000 ALTER TABLE `User` DISABLE KEYS */;
 set autocommit=0;
 INSERT INTO `User` VALUES
-('072f2189-bbd4-43e8-a68f-f2c574f6296f','student49@example.com','student49','Evgeniy.Flores10','$2b$10$OGnnEL14E5f.L/1UAJh.NebYwRY1BeCDp9OYx15CphjKflLcV48EO','https://ui-avatars.com/api/?name=Student+49&background=random','2025-11-06 15:23:16.021','2024-01-15 06:17:47.840','2025-11-06 15:23:16.022',3,NULL,NULL,'ACTIVE',NULL),
-('0d7b4179-3429-4e5b-98b6-4aaa90baf418','student15@example.com','student15','Kun.Óskarsson','$2b$10$OGnnEL14E5f.L/1UAJh.NebYwRY1BeCDp9OYx15CphjKflLcV48EO','https://ui-avatars.com/api/?name=Student+15&background=random','2025-11-06 15:23:15.974','2024-06-30 05:52:09.330','2025-11-06 15:23:15.975',3,NULL,NULL,'ACTIVE',NULL),
-('108ea388-fb6c-4001-827a-b21b18ba2105','student29@example.com','student29','Elena_Werner','$2b$10$OGnnEL14E5f.L/1UAJh.NebYwRY1BeCDp9OYx15CphjKflLcV48EO','https://ui-avatars.com/api/?name=Student+29&background=random','2025-11-06 15:23:15.995','2025-07-26 20:37:43.248','2025-11-06 15:23:15.996',3,NULL,NULL,'ACTIVE',NULL),
-('1418b530-69c5-485d-a731-c80b65e3fc88','student19@example.com','student19','Alberto_Marková','$2b$10$OGnnEL14E5f.L/1UAJh.NebYwRY1BeCDp9OYx15CphjKflLcV48EO','https://ui-avatars.com/api/?name=Student+19&background=random','2025-11-06 15:23:15.979','2024-07-02 09:45:57.889','2025-11-06 15:23:15.980',3,NULL,NULL,'ACTIVE',NULL),
-('17d557af-ebd1-4916-896a-927c809b904b','student18@example.com','student18','Kai_Sangthong2','$2b$10$OGnnEL14E5f.L/1UAJh.NebYwRY1BeCDp9OYx15CphjKflLcV48EO','https://ui-avatars.com/api/?name=Student+18&background=random','2025-11-06 15:23:15.978','2023-10-25 15:16:04.440','2025-11-06 15:23:15.979',3,NULL,NULL,'ACTIVE',NULL),
-('18deaa6d-44bc-46e1-996b-1211154c6ee2','student4@example.com','student4','Takeshi.Achieng51','$2b$10$OGnnEL14E5f.L/1UAJh.NebYwRY1BeCDp9OYx15CphjKflLcV48EO','https://ui-avatars.com/api/?name=Student+4&background=random','2025-11-06 15:23:15.957','2021-11-11 23:54:10.090','2025-11-06 15:23:15.958',3,NULL,NULL,'ACTIVE',NULL),
-('1b49ca1e-b41c-4b0c-9d4d-8a091e934715','student34@example.com','student34','Anah.Magnússon30','$2b$10$OGnnEL14E5f.L/1UAJh.NebYwRY1BeCDp9OYx15CphjKflLcV48EO','https://ui-avatars.com/api/?name=Student+34&background=random','2025-11-06 15:23:16.002','2020-12-25 17:15:25.553','2025-11-06 15:23:16.002',3,NULL,NULL,'ACTIVE',NULL),
-('28f206ea-8377-4d56-93d7-4171ea2174e9','teacher2@example.com','teacher2','Jianhua.Guðmundsdóttir74','$2b$10$OGnnEL14E5f.L/1UAJh.NebYwRY1BeCDp9OYx15CphjKflLcV48EO','https://ui-avatars.com/api/?name=Teacher+2&background=random','2025-11-06 15:23:15.948','2021-01-21 22:16:57.021','2025-11-06 15:23:15.949',2,'Experienced math teacher with a passion for helping students succeed.','Mathematics','ACTIVE','08123456789'),
-('339954e0-23d5-4316-8aca-c61d60214450','student22@example.com','student22','Koshi_Hájek','$2b$10$OGnnEL14E5f.L/1UAJh.NebYwRY1BeCDp9OYx15CphjKflLcV48EO','https://ui-avatars.com/api/?name=Student+22&background=random','2025-11-06 15:23:15.984','2024-02-07 03:21:25.613','2025-11-06 15:23:15.985',3,NULL,NULL,'ACTIVE',NULL),
-('349b2c55-d6ed-43ef-a75c-4065310e10e8','student31@example.com','student31','Abubakar_Friðriksson33','$2b$10$OGnnEL14E5f.L/1UAJh.NebYwRY1BeCDp9OYx15CphjKflLcV48EO','https://ui-avatars.com/api/?name=Student+31&background=random','2025-11-06 15:23:15.998','2025-03-06 01:43:44.250','2025-11-06 15:23:15.998',3,NULL,NULL,'ACTIVE',NULL),
-('352ee7ec-dd3c-418a-90ac-efc648f3ed19','student38@example.com','student38','Urai.Mendoza19','$2b$10$OGnnEL14E5f.L/1UAJh.NebYwRY1BeCDp9OYx15CphjKflLcV48EO','https://ui-avatars.com/api/?name=Student+38&background=random','2025-11-06 15:23:16.007','2023-08-12 15:02:45.370','2025-11-06 15:23:16.007',3,NULL,NULL,'ACTIVE',NULL),
-('3544cc6d-9f07-435f-829f-15236f0abaa9','student8@example.com','student8','Dorota.Santiago','$2b$10$OGnnEL14E5f.L/1UAJh.NebYwRY1BeCDp9OYx15CphjKflLcV48EO','https://ui-avatars.com/api/?name=Student+8&background=random','2025-11-06 15:23:15.964','2024-08-27 17:16:35.156','2025-11-06 15:23:15.964',3,NULL,NULL,'ACTIVE',NULL),
-('354f6e1f-31fd-41be-bb38-e9e11d7784c2','student9@example.com','student9','Usha.Hauksdóttir70','$2b$10$OGnnEL14E5f.L/1UAJh.NebYwRY1BeCDp9OYx15CphjKflLcV48EO','https://ui-avatars.com/api/?name=Student+9&background=random','2025-11-06 15:23:15.965','2023-04-01 07:37:24.241','2025-11-06 15:23:15.966',3,NULL,NULL,'ACTIVE',NULL),
-('35d80f38-23a7-4087-a7e9-7b3803c99ded','teachertestaccexample.com','teachertestacc','teachertestacc','$2b$10$OGnnEL14E5f.L/1UAJh.NebYwRY1BeCDp9OYx15CphjKflLcV48EO','https://ui-avatars.com/api/?name=teachertestacc&background=random','2025-11-06 15:23:16.024','2024-12-05 21:51:26.227','2025-11-06 15:23:16.024',2,NULL,NULL,'ACTIVE',NULL),
-('3a3d4e27-6bb4-4d10-b7d3-26ce984b632f','student27@example.com','student27','Hiroshi.Abe16','$2b$10$OGnnEL14E5f.L/1UAJh.NebYwRY1BeCDp9OYx15CphjKflLcV48EO','https://ui-avatars.com/api/?name=Student+27&background=random','2025-11-06 15:23:15.992','2024-03-31 22:41:31.639','2025-11-06 15:23:15.993',3,NULL,NULL,'ACTIVE',NULL),
-('3fad4ac6-f4db-4b5b-9b70-fdfb1083a6ef','student32@example.com','student32','Pushpa_Shi40','$2b$10$OGnnEL14E5f.L/1UAJh.NebYwRY1BeCDp9OYx15CphjKflLcV48EO','https://ui-avatars.com/api/?name=Student+32&background=random','2025-11-06 15:23:15.999','2025-04-20 16:01:04.921','2025-11-06 15:23:16.000',3,NULL,NULL,'ACTIVE',NULL),
-('427d46ef-2302-45d6-907b-a07b875f5c8e','student2@example.com','student2','Katsumi_Nguyen','$2b$10$OGnnEL14E5f.L/1UAJh.NebYwRY1BeCDp9OYx15CphjKflLcV48EO','https://ui-avatars.com/api/?name=Student+2&background=random','2025-11-06 15:23:15.954','2025-06-06 10:28:32.560','2025-11-06 15:23:15.955',3,NULL,NULL,'ACTIVE',NULL),
-('42807b48-738f-4d77-a7a8-dbbf444c242f','student45@example.com','student45','Amit.Őri','$2b$10$OGnnEL14E5f.L/1UAJh.NebYwRY1BeCDp9OYx15CphjKflLcV48EO','https://ui-avatars.com/api/?name=Student+45&background=random','2025-11-06 15:23:16.017','2023-09-25 14:19:25.816','2025-11-06 15:23:16.017',3,NULL,NULL,'ACTIVE',NULL),
-('435ff6c6-ee27-4ce8-98e3-9fadb48785fa','student20@example.com','student20','Carol.Hernández91','$2b$10$OGnnEL14E5f.L/1UAJh.NebYwRY1BeCDp9OYx15CphjKflLcV48EO','https://ui-avatars.com/api/?name=Student+20&background=random','2025-11-06 15:23:15.981','2021-10-29 08:04:46.543','2025-11-06 15:23:15.981',3,NULL,NULL,'ACTIVE',NULL),
-('507dba8a-4900-49dd-b017-cb3487ec404e','student13@example.com','student13','Fran.Černý41','$2b$10$OGnnEL14E5f.L/1UAJh.NebYwRY1BeCDp9OYx15CphjKflLcV48EO','https://ui-avatars.com/api/?name=Student+13&background=random','2025-11-06 15:23:15.971','2023-01-04 07:59:45.136','2025-11-06 15:23:15.972',3,NULL,NULL,'ACTIVE',NULL),
-('5398dfdb-d1cc-49fa-a285-73bb9ed061f7','teacher1@example.com','teacher1','Lin.Brouwer99','$2b$10$OGnnEL14E5f.L/1UAJh.NebYwRY1BeCDp9OYx15CphjKflLcV48EO','https://ui-avatars.com/api/?name=Teacher+1&background=random','2025-11-06 15:23:15.946','2024-07-31 21:56:45.316','2025-11-06 15:23:15.947',2,'Experienced math teacher with a passion for helping students succeed.','Mathematics','ACTIVE','08123456789'),
-('632f13ef-f740-4690-956f-c3238b58eab8','teacher4@example.com','teacher4','Dariusz.Pillay','$2b$10$OGnnEL14E5f.L/1UAJh.NebYwRY1BeCDp9OYx15CphjKflLcV48EO','https://ui-avatars.com/api/?name=Teacher+4&background=random','2025-11-06 15:23:15.951','2022-04-30 01:08:27.744','2025-11-06 15:23:15.952',2,'Experienced math teacher with a passion for helping students succeed.','Mathematics','ACTIVE','08123456789'),
-('694ddf23-a785-4d63-a31a-23846e3bccf8','student43@example.com','student43','Xiaohong_Keller','$2b$10$OGnnEL14E5f.L/1UAJh.NebYwRY1BeCDp9OYx15CphjKflLcV48EO','https://ui-avatars.com/api/?name=Student+43&background=random','2025-11-06 15:23:16.014','2024-10-11 18:12:06.202','2025-11-06 15:23:16.015',3,NULL,NULL,'ACTIVE',NULL),
-('6cc027ca-cb68-47ef-bb4c-bb8a7bd635a7','student10@example.com','student10','Herbert.Hu63','$2b$10$OGnnEL14E5f.L/1UAJh.NebYwRY1BeCDp9OYx15CphjKflLcV48EO','https://ui-avatars.com/api/?name=Student+10&background=random','2025-11-06 15:23:15.967','2021-01-05 04:25:00.741','2025-11-06 15:23:15.968',3,NULL,NULL,'ACTIVE',NULL),
-('79875a7a-7ad6-465c-94de-77f34765331d','student11@example.com','student11','Somchai_Mizrahi91','$2b$10$OGnnEL14E5f.L/1UAJh.NebYwRY1BeCDp9OYx15CphjKflLcV48EO','https://ui-avatars.com/api/?name=Student+11&background=random','2025-11-06 15:23:15.968','2022-01-30 16:25:04.715','2025-11-06 15:23:15.969',3,NULL,NULL,'ACTIVE',NULL),
-('7b525afc-fe38-48c5-b998-e130b4ffbe7c','student23@example.com','student23','Takashi_Sharabi','$2b$10$OGnnEL14E5f.L/1UAJh.NebYwRY1BeCDp9OYx15CphjKflLcV48EO','https://ui-avatars.com/api/?name=Student+23&background=random','2025-11-06 15:23:15.986','2025-05-10 08:27:01.838','2025-11-06 15:23:15.987',3,NULL,NULL,'ACTIVE',NULL),
-('7cb78a48-b7e9-458b-ba46-24b3656580c9','student6@example.com','student6','Dennis.Zheng','$2b$10$OGnnEL14E5f.L/1UAJh.NebYwRY1BeCDp9OYx15CphjKflLcV48EO','https://ui-avatars.com/api/?name=Student+6&background=random','2025-11-06 15:23:15.961','2022-04-09 02:28:20.053','2025-11-06 15:23:15.961',3,NULL,NULL,'ACTIVE',NULL),
-('7d754900-6d1e-4c27-a749-005daf5310d6','student50@example.com','student50','Elisabeth.Odhiambo','$2b$10$OGnnEL14E5f.L/1UAJh.NebYwRY1BeCDp9OYx15CphjKflLcV48EO','https://ui-avatars.com/api/?name=Student+50&background=random','2025-11-06 15:23:16.023','2022-07-07 00:27:52.498','2025-11-06 15:23:16.023',3,NULL,NULL,'ACTIVE',NULL),
-('80c7fffe-f9f5-40c7-8bd2-59562a64dd56','student36@example.com','student36','Maryam.Kikuchi80','$2b$10$OGnnEL14E5f.L/1UAJh.NebYwRY1BeCDp9OYx15CphjKflLcV48EO','https://ui-avatars.com/api/?name=Student+36&background=random','2025-11-06 15:23:16.004','2024-10-03 01:01:04.291','2025-11-06 15:23:16.005',3,NULL,NULL,'ACTIVE',NULL),
-('81812e49-a080-4156-b887-233efefa9497','student5@example.com','student5','Magda_Serrano','$2b$10$OGnnEL14E5f.L/1UAJh.NebYwRY1BeCDp9OYx15CphjKflLcV48EO','https://ui-avatars.com/api/?name=Student+5&background=random','2025-11-06 15:23:15.959','2024-07-13 04:51:09.160','2025-11-06 15:23:15.960',3,NULL,NULL,'ACTIVE',NULL),
-('834b7992-dab3-45e8-9446-126bd8ba1cd7','student1@example.com','student1','Jose_Kowalczyk57','$2b$10$OGnnEL14E5f.L/1UAJh.NebYwRY1BeCDp9OYx15CphjKflLcV48EO','https://ui-avatars.com/api/?name=Student+1&background=random','2025-11-06 15:23:15.953','2024-09-23 10:39:58.712','2025-11-06 15:23:15.954',3,NULL,NULL,'ACTIVE',NULL),
-('88e8fe25-2eda-48ed-93d5-70981bfc64e9','student46@example.com','student46','Sunthon.Ødegård88','$2b$10$OGnnEL14E5f.L/1UAJh.NebYwRY1BeCDp9OYx15CphjKflLcV48EO','https://ui-avatars.com/api/?name=Student+46&background=random','2025-11-06 15:23:16.018','2021-07-17 18:28:09.896','2025-11-06 15:23:16.019',3,NULL,NULL,'ACTIVE',NULL),
-('89416d85-3527-4ecd-afe8-b3123e72f020','student24@example.com','student24','Blessing.Roberts48','$2b$10$OGnnEL14E5f.L/1UAJh.NebYwRY1BeCDp9OYx15CphjKflLcV48EO','https://ui-avatars.com/api/?name=Student+24&background=random','2025-11-06 15:23:15.987','2024-08-14 08:04:16.664','2025-11-06 15:23:15.988',3,NULL,NULL,'ACTIVE',NULL),
-('8e196413-e826-41ad-8ce1-69a435a117ac','student25@example.com','student25','Jason.Őzse','$2b$10$OGnnEL14E5f.L/1UAJh.NebYwRY1BeCDp9OYx15CphjKflLcV48EO','https://ui-avatars.com/api/?name=Student+25&background=random','2025-11-06 15:23:15.989','2023-01-10 09:33:09.416','2025-11-06 15:23:15.990',3,NULL,NULL,'ACTIVE',NULL),
-('97caeb80-b9c1-4d10-a6bf-f6327e8aa548','student21@example.com','student21','Mitsuo.Andreev51','$2b$10$OGnnEL14E5f.L/1UAJh.NebYwRY1BeCDp9OYx15CphjKflLcV48EO','https://ui-avatars.com/api/?name=Student+21&background=random','2025-11-06 15:23:15.982','2024-07-23 14:57:10.357','2025-11-06 15:23:15.983',3,NULL,NULL,'ACTIVE',NULL),
-('a03db7fa-ac7f-4981-b1e1-f41ad6b38b8e','student37@example.com','student37','Mitsuo_Núñez72','$2b$10$OGnnEL14E5f.L/1UAJh.NebYwRY1BeCDp9OYx15CphjKflLcV48EO','https://ui-avatars.com/api/?name=Student+37&background=random','2025-11-06 15:23:16.006','2024-03-12 06:34:29.252','2025-11-06 15:23:16.006',3,NULL,NULL,'ACTIVE',NULL),
-('a1fb966a-f98f-479b-bfec-e9ceab2a385a','student28@example.com','student28','Joan_Černá','$2b$10$OGnnEL14E5f.L/1UAJh.NebYwRY1BeCDp9OYx15CphjKflLcV48EO','https://ui-avatars.com/api/?name=Student+28&background=random','2025-11-06 15:23:15.994','2024-12-13 03:25:39.615','2025-11-06 15:23:15.994',3,NULL,NULL,'ACTIVE',NULL),
-('a2a454aa-e640-4a81-9409-b55880397c07','student44@example.com','student44','Yong_Atieno45','$2b$10$OGnnEL14E5f.L/1UAJh.NebYwRY1BeCDp9OYx15CphjKflLcV48EO','https://ui-avatars.com/api/?name=Student+44&background=random','2025-11-06 15:23:16.015','2020-11-08 01:13:17.993','2025-11-06 15:23:16.016',3,NULL,NULL,'ACTIVE',NULL),
-('ac31be76-a26c-45f5-8811-5b46d1832cc8','student35@example.com','student35','Aisha_Su99','$2b$10$OGnnEL14E5f.L/1UAJh.NebYwRY1BeCDp9OYx15CphjKflLcV48EO','https://ui-avatars.com/api/?name=Student+35&background=random','2025-11-06 15:23:16.003','2024-12-31 02:34:27.149','2025-11-06 15:23:16.004',3,NULL,NULL,'ACTIVE',NULL),
-('b4c9c922-dfbc-459a-962b-9324b044c407','student16@example.com','student16','Paulina_Thongsuk28','$2b$10$OGnnEL14E5f.L/1UAJh.NebYwRY1BeCDp9OYx15CphjKflLcV48EO','https://ui-avatars.com/api/?name=Student+16&background=random','2025-11-06 15:23:15.975','2021-08-17 02:54:54.187','2025-11-06 15:23:15.976',3,NULL,NULL,'ACTIVE',NULL),
-('ba40bbf9-6550-40d8-98dd-0d9985af7d4b','student42@example.com','student42','Yuval_Tang','$2b$10$OGnnEL14E5f.L/1UAJh.NebYwRY1BeCDp9OYx15CphjKflLcV48EO','https://ui-avatars.com/api/?name=Student+42&background=random','2025-11-06 15:23:16.013','2023-11-03 13:02:06.524','2025-11-06 15:23:16.013',3,NULL,NULL,'ACTIVE',NULL),
-('bd24467e-47de-4bfa-95b2-fdd663765fcf','student40@example.com','student40','Laxmi.Fischer8','$2b$10$OGnnEL14E5f.L/1UAJh.NebYwRY1BeCDp9OYx15CphjKflLcV48EO','https://ui-avatars.com/api/?name=Student+40&background=random','2025-11-06 15:23:16.009','2023-02-28 05:42:48.265','2025-11-06 15:23:16.010',3,NULL,NULL,'ACTIVE',NULL),
-('c18c9829-f9aa-41db-9c4a-476e9eeba797','student17@example.com','student17','Yakubu.Okeke70','$2b$10$OGnnEL14E5f.L/1UAJh.NebYwRY1BeCDp9OYx15CphjKflLcV48EO','https://ui-avatars.com/api/?name=Student+17&background=random','2025-11-06 15:23:15.977','2022-11-08 10:13:24.599','2025-11-06 15:23:15.977',3,NULL,NULL,'ACTIVE',NULL),
-('cb5fc2cb-fc66-4e50-bf3a-560d62a49dc3','student33@example.com','student33','Dennis.Helgadóttir84','$2b$10$OGnnEL14E5f.L/1UAJh.NebYwRY1BeCDp9OYx15CphjKflLcV48EO','https://ui-avatars.com/api/?name=Student+33&background=random','2025-11-06 15:23:16.000','2025-01-28 08:30:24.943','2025-11-06 15:23:16.001',3,NULL,NULL,'ACTIVE',NULL),
-('cbdee0d8-64f7-415d-ba0a-f79da3cf81f5','student7@example.com','student7','Edda.Clark','$2b$10$OGnnEL14E5f.L/1UAJh.NebYwRY1BeCDp9OYx15CphjKflLcV48EO','https://ui-avatars.com/api/?name=Student+7&background=random','2025-11-06 15:23:15.962','2023-02-14 23:21:05.907','2025-11-06 15:23:15.963',3,NULL,NULL,'ACTIVE',NULL),
-('cbf05492-d576-4456-b68c-15aed414f839','student41@example.com','student41','Fatima.Botha74','$2b$10$OGnnEL14E5f.L/1UAJh.NebYwRY1BeCDp9OYx15CphjKflLcV48EO','https://ui-avatars.com/api/?name=Student+41&background=random','2025-11-06 15:23:16.011','2023-12-10 11:17:49.095','2025-11-06 15:23:16.012',3,NULL,NULL,'ACTIVE',NULL),
-('d0ef1d4a-af57-40b6-b1df-b6f1d9eedbcb','student14@example.com','student14','Radha_Kamiński','$2b$10$OGnnEL14E5f.L/1UAJh.NebYwRY1BeCDp9OYx15CphjKflLcV48EO','https://ui-avatars.com/api/?name=Student+14&background=random','2025-11-06 15:23:15.973','2021-05-13 03:09:41.999','2025-11-06 15:23:15.973',3,NULL,NULL,'ACTIVE',NULL),
-('d3afcefb-5a21-4425-bc87-5a2171f63478','student48@example.com','student48','Kiran_Brouwer15','$2b$10$OGnnEL14E5f.L/1UAJh.NebYwRY1BeCDp9OYx15CphjKflLcV48EO','https://ui-avatars.com/api/?name=Student+48&background=random','2025-11-06 15:23:16.020','2022-02-18 13:41:36.716','2025-11-06 15:23:16.021',3,NULL,NULL,'ACTIVE',NULL),
-('d79f3b3e-aa3d-4b86-b8b4-7f22c1fe2732','student26@example.com','student26','Fumiko_Förster7','$2b$10$OGnnEL14E5f.L/1UAJh.NebYwRY1BeCDp9OYx15CphjKflLcV48EO','https://ui-avatars.com/api/?name=Student+26&background=random','2025-11-06 15:23:15.991','2021-04-13 23:05:00.665','2025-11-06 15:23:15.992',3,NULL,NULL,'ACTIVE',NULL),
-('dd3e6db4-d91f-4e40-a16d-dc8a8dcffe13','student3@example.com','student3','Frank.Jasiński','$2b$10$OGnnEL14E5f.L/1UAJh.NebYwRY1BeCDp9OYx15CphjKflLcV48EO','https://ui-avatars.com/api/?name=Student+3&background=random','2025-11-06 15:23:15.956','2022-04-09 18:02:35.661','2025-11-06 15:23:15.957',3,NULL,NULL,'ACTIVE',NULL),
-('ddc70559-65ac-4773-9e85-9b72ffac328a','student47@example.com','student47','Ko.Okafor51','$2b$10$OGnnEL14E5f.L/1UAJh.NebYwRY1BeCDp9OYx15CphjKflLcV48EO','https://ui-avatars.com/api/?name=Student+47&background=random','2025-11-06 15:23:16.019','2020-12-16 10:46:10.533','2025-11-06 15:23:16.020',3,NULL,NULL,'ACTIVE',NULL),
-('e6c23f85-19f5-428b-b204-d6b3b3983256','student39@example.com','student39','Frank_Thongkham','$2b$10$OGnnEL14E5f.L/1UAJh.NebYwRY1BeCDp9OYx15CphjKflLcV48EO','https://ui-avatars.com/api/?name=Student+39&background=random','2025-11-06 15:23:16.008','2023-12-11 08:37:51.845','2025-11-06 15:23:16.009',3,NULL,NULL,'ACTIVE',NULL),
-('eaa12362-d2ec-4df2-a21f-7e9346abd852','teacher3@example.com','teacher3','Sibusiso_Fialová83','$2b$10$OGnnEL14E5f.L/1UAJh.NebYwRY1BeCDp9OYx15CphjKflLcV48EO','https://ui-avatars.com/api/?name=Teacher+3&background=random','2025-11-06 15:23:15.950','2022-04-05 16:21:21.496','2025-11-06 15:23:15.950',2,'Experienced math teacher with a passion for helping students succeed.','Mathematics','ACTIVE','08123456789'),
-('ee5301f8-b9e1-41c9-9d14-f01e138f1d39','student12@example.com','student12','Anita_Keller83','$2b$10$OGnnEL14E5f.L/1UAJh.NebYwRY1BeCDp9OYx15CphjKflLcV48EO','https://ui-avatars.com/api/?name=Student+12&background=random','2025-11-06 15:23:15.970','2025-08-16 19:57:20.258','2025-11-06 15:23:15.971',3,NULL,NULL,'ACTIVE',NULL),
-('f5044aab-d139-422b-90d2-d38c07137b92','student30@example.com','student30','Stefan_Tomaszewski92','$2b$10$OGnnEL14E5f.L/1UAJh.NebYwRY1BeCDp9OYx15CphjKflLcV48EO','https://ui-avatars.com/api/?name=Student+30&background=random','2025-11-06 15:23:15.996','2023-08-09 07:49:04.211','2025-11-06 15:23:15.997',3,NULL,NULL,'ACTIVE',NULL),
-('f5a490cd-3983-4c0e-b4ec-c72dec0ec7f6','djamgt23@gmail.com','admin','Admin User','$2b$10$OGnnEL14E5f.L/1UAJh.NebYwRY1BeCDp9OYx15CphjKflLcV48EO','https://ui-avatars.com/api/?name=Admin+User&background=random','2025-11-06 15:23:15.942','2024-12-14 21:11:03.485','2025-11-06 15:23:15.944',1,NULL,NULL,'ACTIVE',NULL);
+('00a1db28-f527-489d-9b19-229aea075f8d','student42@example.com','student42','Yoshiko.Einarsdóttir','$2b$10$bocb6/CP3CabZt5rTJ.t7uMFJoE4egEFYYQLA36/4zmGrejISptqO','https://ui-avatars.com/api/?name=Student+42&background=random',NULL,'ACTIVE',NULL,NULL,'2025-11-15 12:07:00.631','2023-05-07 11:19:20.630','2025-11-15 12:07:00.632',3),
+('016258fa-823b-41fa-a5ab-3196e3b7643a','student10@example.com','student10','Jianping_Óskarsdóttir45','$2b$10$bocb6/CP3CabZt5rTJ.t7uMFJoE4egEFYYQLA36/4zmGrejISptqO','https://ui-avatars.com/api/?name=Student+10&background=random',NULL,'ACTIVE',NULL,NULL,'2025-11-15 12:07:00.582','2020-12-26 07:33:13.274','2025-11-15 12:07:00.582',3),
+('01825d1b-e2b1-4a99-8649-5357f12049e8','student37@example.com','student37','Lilja_Gunnarsdóttir66','$2b$10$bocb6/CP3CabZt5rTJ.t7uMFJoE4egEFYYQLA36/4zmGrejISptqO','https://ui-avatars.com/api/?name=Student+37&background=random',NULL,'ACTIVE',NULL,NULL,'2025-11-15 12:07:00.625','2023-04-25 12:59:40.209','2025-11-15 12:07:00.626',3),
+('04575c88-2900-4023-a9a9-51e904f920c9','student28@example.com','student28','Jianping_Abdullahi','$2b$10$bocb6/CP3CabZt5rTJ.t7uMFJoE4egEFYYQLA36/4zmGrejISptqO','https://ui-avatars.com/api/?name=Student+28&background=random',NULL,'ACTIVE',NULL,NULL,'2025-11-15 12:07:00.611','2023-10-02 11:49:08.368','2025-11-15 12:07:00.612',3),
+('07678e68-aa0e-4427-955c-1a6adb088f19','student30@example.com','student30','Bartosz_Peña6','$2b$10$bocb6/CP3CabZt5rTJ.t7uMFJoE4egEFYYQLA36/4zmGrejISptqO','https://ui-avatars.com/api/?name=Student+30&background=random',NULL,'ACTIVE',NULL,NULL,'2025-11-15 12:07:00.614','2022-09-29 22:46:58.076','2025-11-15 12:07:00.615',3),
+('0a33c931-b888-409f-86ff-9e44164e29ad','student24@example.com','student24','Noam_Ayutthaya52','$2b$10$bocb6/CP3CabZt5rTJ.t7uMFJoE4egEFYYQLA36/4zmGrejISptqO','https://ui-avatars.com/api/?name=Student+24&background=random',NULL,'ACTIVE',NULL,NULL,'2025-11-15 12:07:00.606','2021-05-16 20:09:55.150','2025-11-15 12:07:00.607',3),
+('153c441e-244f-410c-ac49-8544883a6169','teacher4@example.com','teacher4','Lalita_Kimura74','$2b$10$bocb6/CP3CabZt5rTJ.t7uMFJoE4egEFYYQLA36/4zmGrejISptqO','https://ui-avatars.com/api/?name=Teacher+4&background=random','08123456789','ACTIVE','Mathematics','Experienced math teacher with a passion for helping students succeed.','2025-11-15 12:07:00.564','2024-10-06 03:03:12.964','2025-11-15 12:07:00.565',2),
+('26ceedf4-3a5c-4212-ae04-b3cee5aa8cb3','student17@example.com','student17','Sara.Harðardóttir','$2b$10$bocb6/CP3CabZt5rTJ.t7uMFJoE4egEFYYQLA36/4zmGrejISptqO','https://ui-avatars.com/api/?name=Student+17&background=random',NULL,'ACTIVE',NULL,NULL,'2025-11-15 12:07:00.592','2025-05-30 21:01:35.521','2025-11-15 12:07:00.593',3),
+('27f9c1dc-a916-42a9-9080-41619142727d','student39@example.com','student39','Laxmi_Ono','$2b$10$bocb6/CP3CabZt5rTJ.t7uMFJoE4egEFYYQLA36/4zmGrejISptqO','https://ui-avatars.com/api/?name=Student+39&background=random',NULL,'ACTIVE',NULL,NULL,'2025-11-15 12:07:00.628','2022-12-03 12:22:15.671','2025-11-15 12:07:00.629',3),
+('2c17cb62-974b-4514-8660-2e344d449852','teacher2@example.com','teacher2','Johannes_Þorsteinsdóttir52','$2b$10$bocb6/CP3CabZt5rTJ.t7uMFJoE4egEFYYQLA36/4zmGrejISptqO','https://ui-avatars.com/api/?name=Teacher+2&background=random','08123456789','ACTIVE','Mathematics','Experienced math teacher with a passion for helping students succeed.','2025-11-15 12:07:00.560','2024-02-16 09:54:12.533','2025-11-15 12:07:00.561',2),
+('2dcc3f7f-e521-45b4-a87b-07fa0e245fd0','student15@example.com','student15','Xiaoli.Méndez','$2b$10$bocb6/CP3CabZt5rTJ.t7uMFJoE4egEFYYQLA36/4zmGrejISptqO','https://ui-avatars.com/api/?name=Student+15&background=random',NULL,'ACTIVE',NULL,NULL,'2025-11-15 12:07:00.590','2023-10-23 10:29:45.439','2025-11-15 12:07:00.590',3),
+('314d1995-c264-4e30-bc88-6beff8384009','student43@example.com','student43','Bunmi.Pugh','$2b$10$bocb6/CP3CabZt5rTJ.t7uMFJoE4egEFYYQLA36/4zmGrejISptqO','https://ui-avatars.com/api/?name=Student+43&background=random',NULL,'ACTIVE',NULL,NULL,'2025-11-15 12:07:00.633','2022-07-06 14:55:52.563','2025-11-15 12:07:00.634',3),
+('35c56a8b-a3d5-40ab-98ae-cc6053f95eb1','student46@example.com','student46','Andrew_Greenberg21','$2b$10$bocb6/CP3CabZt5rTJ.t7uMFJoE4egEFYYQLA36/4zmGrejISptqO','https://ui-avatars.com/api/?name=Student+46&background=random',NULL,'ACTIVE',NULL,NULL,'2025-11-15 12:07:00.657','2024-05-20 00:38:03.337','2025-11-15 12:07:00.657',3),
+('382f08a0-3bb2-495c-a6b8-75cd7582e16c','student6@example.com','student6','Somsak_Achieng','$2b$10$bocb6/CP3CabZt5rTJ.t7uMFJoE4egEFYYQLA36/4zmGrejISptqO','https://ui-avatars.com/api/?name=Student+6&background=random',NULL,'ACTIVE',NULL,NULL,'2025-11-15 12:07:00.576','2023-07-16 06:03:20.072','2025-11-15 12:07:00.576',3),
+('3be66a89-7580-47d3-a3af-517cfc898d1a','student48@example.com','student48','Nobuko.Kristinsdóttir37','$2b$10$bocb6/CP3CabZt5rTJ.t7uMFJoE4egEFYYQLA36/4zmGrejISptqO','https://ui-avatars.com/api/?name=Student+48&background=random',NULL,'ACTIVE',NULL,NULL,'2025-11-15 12:07:00.659','2024-06-22 10:36:47.974','2025-11-15 12:07:00.660',3),
+('3ed80369-c765-4c40-938c-aa85a05c392d','student18@example.com','student18','Nadezhda_Brown','$2b$10$bocb6/CP3CabZt5rTJ.t7uMFJoE4egEFYYQLA36/4zmGrejISptqO','https://ui-avatars.com/api/?name=Student+18&background=random',NULL,'ACTIVE',NULL,NULL,'2025-11-15 12:07:00.594','2022-08-10 17:20:21.093','2025-11-15 12:07:00.594',3),
+('4701b457-9bb4-490c-8cdb-b2930da04a55','student22@example.com','student22','Svetlana.Łuczak54','$2b$10$bocb6/CP3CabZt5rTJ.t7uMFJoE4egEFYYQLA36/4zmGrejISptqO','https://ui-avatars.com/api/?name=Student+22&background=random',NULL,'ACTIVE',NULL,NULL,'2025-11-15 12:07:00.603','2024-01-15 22:50:53.973','2025-11-15 12:07:00.603',3),
+('47a3a58f-a8e8-4d49-81fa-b43503b96448','student36@example.com','student36','Lilian.Mandal38','$2b$10$bocb6/CP3CabZt5rTJ.t7uMFJoE4egEFYYQLA36/4zmGrejISptqO','https://ui-avatars.com/api/?name=Student+36&background=random',NULL,'ACTIVE',NULL,NULL,'2025-11-15 12:07:00.623','2021-10-16 23:28:05.840','2025-11-15 12:07:00.624',3),
+('4938f6af-2bcc-4f72-8fa2-06af89f4c855','djamgt23@gmail.com','admin','Admin User','$2b$10$bocb6/CP3CabZt5rTJ.t7uMFJoE4egEFYYQLA36/4zmGrejISptqO','https://ui-avatars.com/api/?name=Admin+User&background=random',NULL,'ACTIVE',NULL,NULL,'2025-11-15 12:07:00.556','2025-05-14 16:55:26.580','2025-11-15 12:07:00.557',1),
+('4c39703c-a678-4e29-9c09-6c3267e9552c','student5@example.com','student5','Darya_Þorsteinsson','$2b$10$bocb6/CP3CabZt5rTJ.t7uMFJoE4egEFYYQLA36/4zmGrejISptqO','https://ui-avatars.com/api/?name=Student+5&background=random',NULL,'ACTIVE',NULL,NULL,'2025-11-15 12:07:00.574','2021-06-11 16:50:40.601','2025-11-15 12:07:00.575',3),
+('4d5825ba-35b0-40da-9468-15efea65118d','student50@example.com','student50','Lalita_Jimenez','$2b$10$bocb6/CP3CabZt5rTJ.t7uMFJoE4egEFYYQLA36/4zmGrejISptqO','https://ui-avatars.com/api/?name=Student+50&background=random',NULL,'ACTIVE',NULL,NULL,'2025-11-15 12:07:00.661','2024-05-20 15:33:09.287','2025-11-15 12:07:00.662',3),
+('4e5cde11-117e-41fb-903c-510a8a47aa42','student35@example.com','student35','Hong.Romanova','$2b$10$bocb6/CP3CabZt5rTJ.t7uMFJoE4egEFYYQLA36/4zmGrejISptqO','https://ui-avatars.com/api/?name=Student+35&background=random',NULL,'ACTIVE',NULL,NULL,'2025-11-15 12:07:00.622','2023-10-19 04:59:56.327','2025-11-15 12:07:00.622',3),
+('4e6f17af-37b7-4a34-8c9b-15807b0bf660','student2@example.com','student2','Hui.Pérez45','$2b$10$bocb6/CP3CabZt5rTJ.t7uMFJoE4egEFYYQLA36/4zmGrejISptqO','https://ui-avatars.com/api/?name=Student+2&background=random',NULL,'ACTIVE',NULL,NULL,'2025-11-15 12:07:00.567','2021-10-01 02:32:55.248','2025-11-15 12:07:00.568',3),
+('51308de2-922e-49af-a913-4bc98ca9970d','student7@example.com','student7','Sharon_Krüger','$2b$10$bocb6/CP3CabZt5rTJ.t7uMFJoE4egEFYYQLA36/4zmGrejISptqO','https://ui-avatars.com/api/?name=Student+7&background=random',NULL,'ACTIVE',NULL,NULL,'2025-11-15 12:07:00.577','2025-01-11 05:41:37.910','2025-11-15 12:07:00.578',3),
+('58de52d6-9d49-4780-a0f2-81e39d5fb278','student26@example.com','student26','Somphon.Smirnov','$2b$10$bocb6/CP3CabZt5rTJ.t7uMFJoE4egEFYYQLA36/4zmGrejISptqO','https://ui-avatars.com/api/?name=Student+26&background=random',NULL,'ACTIVE',NULL,NULL,'2025-11-15 12:07:00.608','2021-10-07 17:14:43.366','2025-11-15 12:07:00.609',3),
+('5ed0d9e2-21c7-4f44-a948-57aa4d2841d4','student8@example.com','student8','Kristinn_Kučerová16','$2b$10$bocb6/CP3CabZt5rTJ.t7uMFJoE4egEFYYQLA36/4zmGrejISptqO','https://ui-avatars.com/api/?name=Student+8&background=random',NULL,'ACTIVE',NULL,NULL,'2025-11-15 12:07:00.579','2024-10-27 22:01:08.594','2025-11-15 12:07:00.580',3),
+('655d1b89-af84-47c0-8ead-a783e5d0fd67','teacher1@example.com','teacher1','Lan.Castillo98','$2b$10$bocb6/CP3CabZt5rTJ.t7uMFJoE4egEFYYQLA36/4zmGrejISptqO','https://ui-avatars.com/api/?name=Teacher+1&background=random','08123456789','ACTIVE','Mathematics','Experienced math teacher with a passion for helping students succeed.','2025-11-15 12:07:00.559','2021-01-19 18:20:26.840','2025-11-15 12:07:00.560',2),
+('675d034f-1d8f-463b-9b07-075396edcc6d','student3@example.com','student3','Manuel.Kovalenko85','$2b$10$bocb6/CP3CabZt5rTJ.t7uMFJoE4egEFYYQLA36/4zmGrejISptqO','https://ui-avatars.com/api/?name=Student+3&background=random',NULL,'ACTIVE',NULL,NULL,'2025-11-15 12:07:00.570','2023-09-22 03:40:37.919','2025-11-15 12:07:00.571',3),
+('68336206-7295-4ea3-b3e3-404c886ad68f','student16@example.com','student16','Yasuo.Bjarnadóttir44','$2b$10$bocb6/CP3CabZt5rTJ.t7uMFJoE4egEFYYQLA36/4zmGrejISptqO','https://ui-avatars.com/api/?name=Student+16&background=random',NULL,'ACTIVE',NULL,NULL,'2025-11-15 12:07:00.591','2022-12-16 06:29:04.719','2025-11-15 12:07:00.592',3),
+('7369af8f-b771-4003-8990-8a7fdd2b7a0f','teacher3@example.com','teacher3','Ewa_Jacobs','$2b$10$bocb6/CP3CabZt5rTJ.t7uMFJoE4egEFYYQLA36/4zmGrejISptqO','https://ui-avatars.com/api/?name=Teacher+3&background=random','08123456789','ACTIVE','Mathematics','Experienced math teacher with a passion for helping students succeed.','2025-11-15 12:07:00.562','2021-01-11 18:06:08.504','2025-11-15 12:07:00.563',2),
+('7675d25d-8a88-4ef6-8fc4-37375e331f49','student34@example.com','student34','Nushi.Magnúsdóttir','$2b$10$bocb6/CP3CabZt5rTJ.t7uMFJoE4egEFYYQLA36/4zmGrejISptqO','https://ui-avatars.com/api/?name=Student+34&background=random',NULL,'ACTIVE',NULL,NULL,'2025-11-15 12:07:00.620','2023-06-09 06:33:50.527','2025-11-15 12:07:00.621',3),
+('7c9780f0-676e-43dd-8c83-6e800416b67f','student23@example.com','student23','Qiang.Möller','$2b$10$bocb6/CP3CabZt5rTJ.t7uMFJoE4egEFYYQLA36/4zmGrejISptqO','https://ui-avatars.com/api/?name=Student+23&background=random',NULL,'ACTIVE',NULL,NULL,'2025-11-15 12:07:00.604','2021-05-21 09:27:01.845','2025-11-15 12:07:00.605',3),
+('7cd57487-ce37-44af-b26f-5bf49564fe87','student40@example.com','student40','Yael_Klein','$2b$10$bocb6/CP3CabZt5rTJ.t7uMFJoE4egEFYYQLA36/4zmGrejISptqO','https://ui-avatars.com/api/?name=Student+40&background=random',NULL,'ACTIVE',NULL,NULL,'2025-11-15 12:07:00.629','2024-02-02 04:14:40.494','2025-11-15 12:07:00.630',3),
+('7e3275a7-7257-4f8d-b323-a857afe346b4','student38@example.com','student38','Maria-Isabel.Shapiro80','$2b$10$bocb6/CP3CabZt5rTJ.t7uMFJoE4egEFYYQLA36/4zmGrejISptqO','https://ui-avatars.com/api/?name=Student+38&background=random',NULL,'ACTIVE',NULL,NULL,'2025-11-15 12:07:00.627','2021-05-01 12:53:08.128','2025-11-15 12:07:00.627',3),
+('85f06818-69f7-42f6-8ea8-5d6ede651457','student12@example.com','student12','Josef.Vazquez33','$2b$10$bocb6/CP3CabZt5rTJ.t7uMFJoE4egEFYYQLA36/4zmGrejISptqO','https://ui-avatars.com/api/?name=Student+12&background=random',NULL,'ACTIVE',NULL,NULL,'2025-11-15 12:07:00.586','2022-08-11 19:58:16.701','2025-11-15 12:07:00.586',3),
+('8cd306b7-0d45-442b-a802-12cef6cc0807','student25@example.com','student25','Samuel_Ram','$2b$10$bocb6/CP3CabZt5rTJ.t7uMFJoE4egEFYYQLA36/4zmGrejISptqO','https://ui-avatars.com/api/?name=Student+25&background=random',NULL,'ACTIVE',NULL,NULL,'2025-11-15 12:07:00.607','2021-12-13 13:28:44.053','2025-11-15 12:07:00.608',3),
+('8f000216-9769-4b9d-bd01-88e5bf99f22e','student49@example.com','student49','Fernando.Okeke','$2b$10$bocb6/CP3CabZt5rTJ.t7uMFJoE4egEFYYQLA36/4zmGrejISptqO','https://ui-avatars.com/api/?name=Student+49&background=random',NULL,'ACTIVE',NULL,NULL,'2025-11-15 12:07:00.660','2024-04-04 09:09:43.787','2025-11-15 12:07:00.661',3),
+('92c81c93-6017-4864-84ae-a5655844876c','student31@example.com','student31','Nadezhda.Jónsdóttir24','$2b$10$bocb6/CP3CabZt5rTJ.t7uMFJoE4egEFYYQLA36/4zmGrejISptqO','https://ui-avatars.com/api/?name=Student+31&background=random',NULL,'ACTIVE',NULL,NULL,'2025-11-15 12:07:00.616','2025-04-06 21:08:20.540','2025-11-15 12:07:00.617',3),
+('98b48ecc-ccc7-4163-b84a-2298bda6e167','student29@example.com','student29','Blessing_Ðekić','$2b$10$bocb6/CP3CabZt5rTJ.t7uMFJoE4egEFYYQLA36/4zmGrejISptqO','https://ui-avatars.com/api/?name=Student+29&background=random',NULL,'ACTIVE',NULL,NULL,'2025-11-15 12:07:00.613','2025-09-28 05:26:14.414','2025-11-15 12:07:00.614',3),
+('9e532807-03d4-4a0e-8ef7-3a8c9d65dea4','student45@example.com','student45','Luis.Hassan','$2b$10$bocb6/CP3CabZt5rTJ.t7uMFJoE4egEFYYQLA36/4zmGrejISptqO','https://ui-avatars.com/api/?name=Student+45&background=random',NULL,'ACTIVE',NULL,NULL,'2025-11-15 12:07:00.655','2022-01-12 21:01:13.195','2025-11-15 12:07:00.656',3),
+('a31e71d6-322c-4873-a36c-369c44f7db2e','student27@example.com','student27','Hiroko.Gómez','$2b$10$bocb6/CP3CabZt5rTJ.t7uMFJoE4egEFYYQLA36/4zmGrejISptqO','https://ui-avatars.com/api/?name=Student+27&background=random',NULL,'ACTIVE',NULL,NULL,'2025-11-15 12:07:00.610','2025-03-19 07:00:50.522','2025-11-15 12:07:00.610',3),
+('b599b0f6-897d-4064-bac1-09d32aead703','student1@example.com','student1','Jianping.Ueda43','$2b$10$bocb6/CP3CabZt5rTJ.t7uMFJoE4egEFYYQLA36/4zmGrejISptqO','https://ui-avatars.com/api/?name=Student+1&background=random',NULL,'ACTIVE',NULL,NULL,'2025-11-15 12:07:00.566','2024-03-30 03:12:34.222','2025-11-15 12:07:00.567',3),
+('b72359aa-e925-41c5-a055-10a9a97de906','student21@example.com','student21','Peng.Möller','$2b$10$bocb6/CP3CabZt5rTJ.t7uMFJoE4egEFYYQLA36/4zmGrejISptqO','https://ui-avatars.com/api/?name=Student+21&background=random',NULL,'ACTIVE',NULL,NULL,'2025-11-15 12:07:00.601','2023-07-15 05:10:16.797','2025-11-15 12:07:00.602',3),
+('b7355031-c57b-49f9-8127-8a860465a734','student32@example.com','student32','Grace_Green47','$2b$10$bocb6/CP3CabZt5rTJ.t7uMFJoE4egEFYYQLA36/4zmGrejISptqO','https://ui-avatars.com/api/?name=Student+32&background=random',NULL,'ACTIVE',NULL,NULL,'2025-11-15 12:07:00.617','2022-10-31 15:07:59.142','2025-11-15 12:07:00.618',3),
+('bdd51f18-5669-43dc-bc4d-21faf411c282','student19@example.com','student19','Maria_Kristinsson28','$2b$10$bocb6/CP3CabZt5rTJ.t7uMFJoE4egEFYYQLA36/4zmGrejISptqO','https://ui-avatars.com/api/?name=Student+19&background=random',NULL,'ACTIVE',NULL,NULL,'2025-11-15 12:07:00.595','2022-10-01 22:16:12.400','2025-11-15 12:07:00.596',3),
+('beaf132b-9511-49d7-a32d-8e98cb6a57af','student41@example.com','student41','Nittaya.Jabłoński','$2b$10$bocb6/CP3CabZt5rTJ.t7uMFJoE4egEFYYQLA36/4zmGrejISptqO','https://ui-avatars.com/api/?name=Student+41&background=random',NULL,'ACTIVE',NULL,NULL,'2025-11-15 12:07:00.630','2022-08-21 03:46:21.785','2025-11-15 12:07:00.631',3),
+('d0dbf0d4-a075-42b0-a779-ea19585307e7','student44@example.com','student44','Thulani_Yamada','$2b$10$bocb6/CP3CabZt5rTJ.t7uMFJoE4egEFYYQLA36/4zmGrejISptqO','https://ui-avatars.com/api/?name=Student+44&background=random',NULL,'ACTIVE',NULL,NULL,'2025-11-15 12:07:00.634','2023-04-19 06:40:40.335','2025-11-15 12:07:00.635',3),
+('d3c392c7-216a-4766-8e05-4d6f42c06327','student33@example.com','student33','Sri_Njuguna4','$2b$10$bocb6/CP3CabZt5rTJ.t7uMFJoE4egEFYYQLA36/4zmGrejISptqO','https://ui-avatars.com/api/?name=Student+33&background=random',NULL,'ACTIVE',NULL,NULL,'2025-11-15 12:07:00.619','2025-06-10 00:10:09.894','2025-11-15 12:07:00.620',3),
+('dd0e9f29-4e6d-449d-ad35-b0ad862733fd','student20@example.com','student20','Ryan.Novotný72','$2b$10$bocb6/CP3CabZt5rTJ.t7uMFJoE4egEFYYQLA36/4zmGrejISptqO','https://ui-avatars.com/api/?name=Student+20&background=random',NULL,'ACTIVE',NULL,NULL,'2025-11-15 12:07:00.596','2021-02-13 12:53:09.625','2025-11-15 12:07:00.597',3),
+('ec5e9db4-4c8e-42e2-86ea-0de6fe4a2bd1','student13@example.com','student13','Gita_Pillay67','$2b$10$bocb6/CP3CabZt5rTJ.t7uMFJoE4egEFYYQLA36/4zmGrejISptqO','https://ui-avatars.com/api/?name=Student+13&background=random',NULL,'ACTIVE',NULL,NULL,'2025-11-15 12:07:00.587','2025-09-23 01:32:56.905','2025-11-15 12:07:00.588',3),
+('f0755d5f-ce2b-408c-841f-074372d61944','student9@example.com','student9','Rekha_Fischer18','$2b$10$bocb6/CP3CabZt5rTJ.t7uMFJoE4egEFYYQLA36/4zmGrejISptqO','https://ui-avatars.com/api/?name=Student+9&background=random',NULL,'ACTIVE',NULL,NULL,'2025-11-15 12:07:00.580','2021-02-01 03:52:42.569','2025-11-15 12:07:00.581',3),
+('f6144b99-5e9e-43c9-ba03-e19500987b86','student4@example.com','student4','Klaus_Begam','$2b$10$bocb6/CP3CabZt5rTJ.t7uMFJoE4egEFYYQLA36/4zmGrejISptqO','https://ui-avatars.com/api/?name=Student+4&background=random',NULL,'ACTIVE',NULL,NULL,'2025-11-15 12:07:00.573','2021-12-02 16:12:58.309','2025-11-15 12:07:00.574',3),
+('fb1ef359-12e9-4b32-910c-e557fd11009b','student47@example.com','student47','Frank.Van-den-Berg44','$2b$10$bocb6/CP3CabZt5rTJ.t7uMFJoE4egEFYYQLA36/4zmGrejISptqO','https://ui-avatars.com/api/?name=Student+47&background=random',NULL,'ACTIVE',NULL,NULL,'2025-11-15 12:07:00.658','2023-04-19 11:09:57.259','2025-11-15 12:07:00.659',3),
+('fc199e0c-eb12-4230-868b-23e43abff0ef','teachertestaccexample.com','teachertestacc','teachertestacc','$2b$10$bocb6/CP3CabZt5rTJ.t7uMFJoE4egEFYYQLA36/4zmGrejISptqO','https://ui-avatars.com/api/?name=teachertestacc&background=random',NULL,'ACTIVE',NULL,NULL,'2025-11-15 12:07:00.663','2024-09-06 12:19:14.132','2025-11-15 12:07:00.663',2),
+('ffe0b8eb-6022-482d-939b-1c74b92b96cf','student11@example.com','student11','Tomiko_Pospíšil','$2b$10$bocb6/CP3CabZt5rTJ.t7uMFJoE4egEFYYQLA36/4zmGrejISptqO','https://ui-avatars.com/api/?name=Student+11&background=random',NULL,'ACTIVE',NULL,NULL,'2025-11-15 12:07:00.584','2025-06-01 17:46:01.825','2025-11-15 12:07:00.585',3),
+('fffeaa9f-d69f-4422-897e-ed5d16e2324a','student14@example.com','student14','Sawat.Einarsson','$2b$10$bocb6/CP3CabZt5rTJ.t7uMFJoE4egEFYYQLA36/4zmGrejISptqO','https://ui-avatars.com/api/?name=Student+14&background=random',NULL,'ACTIVE',NULL,NULL,'2025-11-15 12:07:00.588','2025-01-06 13:15:28.645','2025-11-15 12:07:00.589',3);
 /*!40000 ALTER TABLE `User` ENABLE KEYS */;
 UNLOCK TABLES;
 commit;
@@ -686,160 +786,160 @@ LOCK TABLES `User_Class` WRITE;
 /*!40000 ALTER TABLE `User_Class` DISABLE KEYS */;
 set autocommit=0;
 INSERT INTO `User_Class` VALUES
-(1,'Teacher','5398dfdb-d1cc-49fa-a285-73bb9ed061f7',1,'2025-11-06 15:23:16.042','2025-11-06 15:23:16.042'),
-(2,'Student','3a3d4e27-6bb4-4d10-b7d3-26ce984b632f',1,'2025-11-06 15:23:16.044','2025-11-06 15:23:16.044'),
-(3,'Student','1418b530-69c5-485d-a731-c80b65e3fc88',1,'2025-11-06 15:23:16.046','2025-11-06 15:23:16.046'),
-(4,'Student','ac31be76-a26c-45f5-8811-5b46d1832cc8',1,'2025-11-06 15:23:16.047','2025-11-06 15:23:16.047'),
-(5,'Student','352ee7ec-dd3c-418a-90ac-efc648f3ed19',1,'2025-11-06 15:23:16.048','2025-11-06 15:23:16.048'),
-(6,'Student','ba40bbf9-6550-40d8-98dd-0d9985af7d4b',1,'2025-11-06 15:23:16.049','2025-11-06 15:23:16.049'),
-(7,'Student','d0ef1d4a-af57-40b6-b1df-b6f1d9eedbcb',1,'2025-11-06 15:23:16.050','2025-11-06 15:23:16.050'),
-(8,'Student','ddc70559-65ac-4773-9e85-9b72ffac328a',1,'2025-11-06 15:23:16.051','2025-11-06 15:23:16.051'),
-(9,'Student','a2a454aa-e640-4a81-9409-b55880397c07',1,'2025-11-06 15:23:16.052','2025-11-06 15:23:16.052'),
-(10,'Student','427d46ef-2302-45d6-907b-a07b875f5c8e',1,'2025-11-06 15:23:16.053','2025-11-06 15:23:16.053'),
-(11,'Student','42807b48-738f-4d77-a7a8-dbbf444c242f',1,'2025-11-06 15:23:16.054','2025-11-06 15:23:16.054'),
-(12,'Teacher','28f206ea-8377-4d56-93d7-4171ea2174e9',2,'2025-11-06 15:23:16.056','2025-11-06 15:23:16.056'),
-(13,'Student','17d557af-ebd1-4916-896a-927c809b904b',2,'2025-11-06 15:23:16.057','2025-11-06 15:23:16.057'),
-(14,'Student','cbf05492-d576-4456-b68c-15aed414f839',2,'2025-11-06 15:23:16.058','2025-11-06 15:23:16.058'),
-(15,'Student','072f2189-bbd4-43e8-a68f-f2c574f6296f',2,'2025-11-06 15:23:16.059','2025-11-06 15:23:16.059'),
-(16,'Student','ac31be76-a26c-45f5-8811-5b46d1832cc8',2,'2025-11-06 15:23:16.060','2025-11-06 15:23:16.060'),
-(17,'Student','f5044aab-d139-422b-90d2-d38c07137b92',2,'2025-11-06 15:23:16.061','2025-11-06 15:23:16.061'),
-(18,'Student','ba40bbf9-6550-40d8-98dd-0d9985af7d4b',2,'2025-11-06 15:23:16.062','2025-11-06 15:23:16.062'),
-(19,'Student','354f6e1f-31fd-41be-bb38-e9e11d7784c2',2,'2025-11-06 15:23:16.063','2025-11-06 15:23:16.063'),
-(20,'Student','349b2c55-d6ed-43ef-a75c-4065310e10e8',2,'2025-11-06 15:23:16.064','2025-11-06 15:23:16.064'),
-(21,'Student','88e8fe25-2eda-48ed-93d5-70981bfc64e9',2,'2025-11-06 15:23:16.065','2025-11-06 15:23:16.065'),
-(22,'Student','8e196413-e826-41ad-8ce1-69a435a117ac',2,'2025-11-06 15:23:16.066','2025-11-06 15:23:16.066'),
-(23,'Teacher','35d80f38-23a7-4087-a7e9-7b3803c99ded',3,'2025-11-06 15:23:16.067','2025-11-06 15:23:16.067'),
-(24,'Student','427d46ef-2302-45d6-907b-a07b875f5c8e',3,'2025-11-06 15:23:16.068','2025-11-06 15:23:16.068'),
-(25,'Student','8e196413-e826-41ad-8ce1-69a435a117ac',3,'2025-11-06 15:23:16.069','2025-11-06 15:23:16.069'),
-(26,'Student','e6c23f85-19f5-428b-b204-d6b3b3983256',3,'2025-11-06 15:23:16.070','2025-11-06 15:23:16.070'),
-(27,'Student','1418b530-69c5-485d-a731-c80b65e3fc88',3,'2025-11-06 15:23:16.071','2025-11-06 15:23:16.071'),
-(28,'Student','694ddf23-a785-4d63-a31a-23846e3bccf8',3,'2025-11-06 15:23:16.072','2025-11-06 15:23:16.072'),
-(29,'Student','88e8fe25-2eda-48ed-93d5-70981bfc64e9',3,'2025-11-06 15:23:16.073','2025-11-06 15:23:16.073'),
-(30,'Student','834b7992-dab3-45e8-9446-126bd8ba1cd7',3,'2025-11-06 15:23:16.074','2025-11-06 15:23:16.074'),
-(31,'Student','108ea388-fb6c-4001-827a-b21b18ba2105',3,'2025-11-06 15:23:16.074','2025-11-06 15:23:16.074'),
-(32,'Student','b4c9c922-dfbc-459a-962b-9324b044c407',3,'2025-11-06 15:23:16.075','2025-11-06 15:23:16.075'),
-(33,'Student','ba40bbf9-6550-40d8-98dd-0d9985af7d4b',3,'2025-11-06 15:23:16.076','2025-11-06 15:23:16.076'),
-(34,'Teacher','eaa12362-d2ec-4df2-a21f-7e9346abd852',4,'2025-11-06 15:23:16.077','2025-11-06 15:23:16.077'),
-(35,'Student','89416d85-3527-4ecd-afe8-b3123e72f020',4,'2025-11-06 15:23:16.078','2025-11-06 15:23:16.078'),
-(36,'Student','349b2c55-d6ed-43ef-a75c-4065310e10e8',4,'2025-11-06 15:23:16.079','2025-11-06 15:23:16.079'),
-(37,'Student','dd3e6db4-d91f-4e40-a16d-dc8a8dcffe13',4,'2025-11-06 15:23:16.080','2025-11-06 15:23:16.080'),
-(38,'Student','072f2189-bbd4-43e8-a68f-f2c574f6296f',4,'2025-11-06 15:23:16.081','2025-11-06 15:23:16.081'),
-(39,'Student','3a3d4e27-6bb4-4d10-b7d3-26ce984b632f',4,'2025-11-06 15:23:16.082','2025-11-06 15:23:16.082'),
-(40,'Student','6cc027ca-cb68-47ef-bb4c-bb8a7bd635a7',4,'2025-11-06 15:23:16.083','2025-11-06 15:23:16.083'),
-(41,'Student','cbf05492-d576-4456-b68c-15aed414f839',4,'2025-11-06 15:23:16.084','2025-11-06 15:23:16.084'),
-(42,'Student','d3afcefb-5a21-4425-bc87-5a2171f63478',4,'2025-11-06 15:23:16.085','2025-11-06 15:23:16.085'),
-(43,'Student','f5044aab-d139-422b-90d2-d38c07137b92',4,'2025-11-06 15:23:16.086','2025-11-06 15:23:16.086'),
-(44,'Student','88e8fe25-2eda-48ed-93d5-70981bfc64e9',4,'2025-11-06 15:23:16.087','2025-11-06 15:23:16.087'),
-(45,'Teacher','28f206ea-8377-4d56-93d7-4171ea2174e9',5,'2025-11-06 15:23:16.089','2025-11-06 15:23:16.089'),
-(46,'Student','3a3d4e27-6bb4-4d10-b7d3-26ce984b632f',5,'2025-11-06 15:23:16.090','2025-11-06 15:23:16.090'),
-(47,'Student','339954e0-23d5-4316-8aca-c61d60214450',5,'2025-11-06 15:23:16.091','2025-11-06 15:23:16.091'),
-(48,'Student','88e8fe25-2eda-48ed-93d5-70981bfc64e9',5,'2025-11-06 15:23:16.092','2025-11-06 15:23:16.092'),
-(49,'Student','bd24467e-47de-4bfa-95b2-fdd663765fcf',5,'2025-11-06 15:23:16.093','2025-11-06 15:23:16.093'),
-(50,'Student','cb5fc2cb-fc66-4e50-bf3a-560d62a49dc3',5,'2025-11-06 15:23:16.094','2025-11-06 15:23:16.094'),
-(51,'Student','834b7992-dab3-45e8-9446-126bd8ba1cd7',5,'2025-11-06 15:23:16.095','2025-11-06 15:23:16.095'),
-(52,'Student','ba40bbf9-6550-40d8-98dd-0d9985af7d4b',5,'2025-11-06 15:23:16.096','2025-11-06 15:23:16.096'),
-(53,'Student','b4c9c922-dfbc-459a-962b-9324b044c407',5,'2025-11-06 15:23:16.097','2025-11-06 15:23:16.097'),
-(54,'Student','427d46ef-2302-45d6-907b-a07b875f5c8e',5,'2025-11-06 15:23:16.098','2025-11-06 15:23:16.098'),
-(55,'Student','ac31be76-a26c-45f5-8811-5b46d1832cc8',5,'2025-11-06 15:23:16.099','2025-11-06 15:23:16.099'),
-(56,'Teacher','5398dfdb-d1cc-49fa-a285-73bb9ed061f7',6,'2025-11-06 15:23:16.099','2025-11-06 15:23:16.099'),
-(57,'Student','ac31be76-a26c-45f5-8811-5b46d1832cc8',6,'2025-11-06 15:23:16.100','2025-11-06 15:23:16.100'),
-(58,'Student','cb5fc2cb-fc66-4e50-bf3a-560d62a49dc3',6,'2025-11-06 15:23:16.101','2025-11-06 15:23:16.101'),
-(59,'Student','42807b48-738f-4d77-a7a8-dbbf444c242f',6,'2025-11-06 15:23:16.102','2025-11-06 15:23:16.102'),
-(60,'Student','18deaa6d-44bc-46e1-996b-1211154c6ee2',6,'2025-11-06 15:23:16.103','2025-11-06 15:23:16.103'),
-(61,'Student','dd3e6db4-d91f-4e40-a16d-dc8a8dcffe13',6,'2025-11-06 15:23:16.104','2025-11-06 15:23:16.104'),
-(62,'Student','1b49ca1e-b41c-4b0c-9d4d-8a091e934715',6,'2025-11-06 15:23:16.105','2025-11-06 15:23:16.105'),
-(63,'Student','694ddf23-a785-4d63-a31a-23846e3bccf8',6,'2025-11-06 15:23:16.106','2025-11-06 15:23:16.106'),
-(64,'Student','3fad4ac6-f4db-4b5b-9b70-fdfb1083a6ef',6,'2025-11-06 15:23:16.106','2025-11-06 15:23:16.106'),
-(65,'Student','7b525afc-fe38-48c5-b998-e130b4ffbe7c',6,'2025-11-06 15:23:16.107','2025-11-06 15:23:16.107'),
-(66,'Student','a2a454aa-e640-4a81-9409-b55880397c07',6,'2025-11-06 15:23:16.108','2025-11-06 15:23:16.108'),
-(67,'Teacher','5398dfdb-d1cc-49fa-a285-73bb9ed061f7',7,'2025-11-06 15:23:16.109','2025-11-06 15:23:16.109'),
-(68,'Student','354f6e1f-31fd-41be-bb38-e9e11d7784c2',7,'2025-11-06 15:23:16.110','2025-11-06 15:23:16.110'),
-(69,'Student','1418b530-69c5-485d-a731-c80b65e3fc88',7,'2025-11-06 15:23:16.111','2025-11-06 15:23:16.111'),
-(70,'Student','349b2c55-d6ed-43ef-a75c-4065310e10e8',7,'2025-11-06 15:23:16.111','2025-11-06 15:23:16.111'),
-(71,'Student','cb5fc2cb-fc66-4e50-bf3a-560d62a49dc3',7,'2025-11-06 15:23:16.112','2025-11-06 15:23:16.112'),
-(72,'Student','7cb78a48-b7e9-458b-ba46-24b3656580c9',7,'2025-11-06 15:23:16.113','2025-11-06 15:23:16.113'),
-(73,'Student','bd24467e-47de-4bfa-95b2-fdd663765fcf',7,'2025-11-06 15:23:16.114','2025-11-06 15:23:16.114'),
-(74,'Student','6cc027ca-cb68-47ef-bb4c-bb8a7bd635a7',7,'2025-11-06 15:23:16.115','2025-11-06 15:23:16.115'),
-(75,'Student','072f2189-bbd4-43e8-a68f-f2c574f6296f',7,'2025-11-06 15:23:16.116','2025-11-06 15:23:16.116'),
-(76,'Student','507dba8a-4900-49dd-b017-cb3487ec404e',7,'2025-11-06 15:23:16.117','2025-11-06 15:23:16.117'),
-(77,'Student','1b49ca1e-b41c-4b0c-9d4d-8a091e934715',7,'2025-11-06 15:23:16.118','2025-11-06 15:23:16.118'),
-(78,'Teacher','eaa12362-d2ec-4df2-a21f-7e9346abd852',8,'2025-11-06 15:23:16.119','2025-11-06 15:23:16.119'),
-(79,'Student','3a3d4e27-6bb4-4d10-b7d3-26ce984b632f',8,'2025-11-06 15:23:16.119','2025-11-06 15:23:16.119'),
-(80,'Student','7cb78a48-b7e9-458b-ba46-24b3656580c9',8,'2025-11-06 15:23:16.120','2025-11-06 15:23:16.120'),
-(81,'Student','427d46ef-2302-45d6-907b-a07b875f5c8e',8,'2025-11-06 15:23:16.121','2025-11-06 15:23:16.121'),
-(82,'Student','072f2189-bbd4-43e8-a68f-f2c574f6296f',8,'2025-11-06 15:23:16.122','2025-11-06 15:23:16.122'),
-(83,'Student','cb5fc2cb-fc66-4e50-bf3a-560d62a49dc3',8,'2025-11-06 15:23:16.123','2025-11-06 15:23:16.123'),
-(84,'Student','0d7b4179-3429-4e5b-98b6-4aaa90baf418',8,'2025-11-06 15:23:16.124','2025-11-06 15:23:16.124'),
-(85,'Student','3544cc6d-9f07-435f-829f-15236f0abaa9',8,'2025-11-06 15:23:16.125','2025-11-06 15:23:16.125'),
-(86,'Student','89416d85-3527-4ecd-afe8-b3123e72f020',8,'2025-11-06 15:23:16.126','2025-11-06 15:23:16.126'),
-(87,'Student','7b525afc-fe38-48c5-b998-e130b4ffbe7c',8,'2025-11-06 15:23:16.127','2025-11-06 15:23:16.127'),
-(88,'Student','ee5301f8-b9e1-41c9-9d14-f01e138f1d39',8,'2025-11-06 15:23:16.128','2025-11-06 15:23:16.128'),
-(89,'Teacher','28f206ea-8377-4d56-93d7-4171ea2174e9',9,'2025-11-06 15:23:16.129','2025-11-06 15:23:16.129'),
-(90,'Student','80c7fffe-f9f5-40c7-8bd2-59562a64dd56',9,'2025-11-06 15:23:16.130','2025-11-06 15:23:16.130'),
-(91,'Student','108ea388-fb6c-4001-827a-b21b18ba2105',9,'2025-11-06 15:23:16.131','2025-11-06 15:23:16.131'),
-(92,'Student','89416d85-3527-4ecd-afe8-b3123e72f020',9,'2025-11-06 15:23:16.132','2025-11-06 15:23:16.132'),
-(93,'Student','1418b530-69c5-485d-a731-c80b65e3fc88',9,'2025-11-06 15:23:16.133','2025-11-06 15:23:16.133'),
-(94,'Student','bd24467e-47de-4bfa-95b2-fdd663765fcf',9,'2025-11-06 15:23:16.134','2025-11-06 15:23:16.134'),
-(95,'Student','ddc70559-65ac-4773-9e85-9b72ffac328a',9,'2025-11-06 15:23:16.134','2025-11-06 15:23:16.134'),
-(96,'Student','dd3e6db4-d91f-4e40-a16d-dc8a8dcffe13',9,'2025-11-06 15:23:16.135','2025-11-06 15:23:16.135'),
-(97,'Student','7d754900-6d1e-4c27-a749-005daf5310d6',9,'2025-11-06 15:23:16.136','2025-11-06 15:23:16.136'),
-(98,'Student','072f2189-bbd4-43e8-a68f-f2c574f6296f',9,'2025-11-06 15:23:16.137','2025-11-06 15:23:16.137'),
-(99,'Student','d3afcefb-5a21-4425-bc87-5a2171f63478',9,'2025-11-06 15:23:16.138','2025-11-06 15:23:16.138'),
-(100,'Teacher','5398dfdb-d1cc-49fa-a285-73bb9ed061f7',10,'2025-11-06 15:23:16.139','2025-11-06 15:23:16.139'),
-(101,'Student','a2a454aa-e640-4a81-9409-b55880397c07',10,'2025-11-06 15:23:16.140','2025-11-06 15:23:16.140'),
-(102,'Student','89416d85-3527-4ecd-afe8-b3123e72f020',10,'2025-11-06 15:23:16.141','2025-11-06 15:23:16.141'),
-(103,'Student','88e8fe25-2eda-48ed-93d5-70981bfc64e9',10,'2025-11-06 15:23:16.142','2025-11-06 15:23:16.142'),
-(104,'Student','427d46ef-2302-45d6-907b-a07b875f5c8e',10,'2025-11-06 15:23:16.143','2025-11-06 15:23:16.143'),
-(105,'Student','435ff6c6-ee27-4ce8-98e3-9fadb48785fa',10,'2025-11-06 15:23:16.144','2025-11-06 15:23:16.144'),
-(106,'Student','e6c23f85-19f5-428b-b204-d6b3b3983256',10,'2025-11-06 15:23:16.145','2025-11-06 15:23:16.145'),
-(107,'Student','ddc70559-65ac-4773-9e85-9b72ffac328a',10,'2025-11-06 15:23:16.145','2025-11-06 15:23:16.145'),
-(108,'Student','c18c9829-f9aa-41db-9c4a-476e9eeba797',10,'2025-11-06 15:23:16.146','2025-11-06 15:23:16.146'),
-(109,'Student','1418b530-69c5-485d-a731-c80b65e3fc88',10,'2025-11-06 15:23:16.147','2025-11-06 15:23:16.147'),
-(110,'Student','97caeb80-b9c1-4d10-a6bf-f6327e8aa548',10,'2025-11-06 15:23:16.148','2025-11-06 15:23:16.148'),
-(111,'Teacher','35d80f38-23a7-4087-a7e9-7b3803c99ded',11,'2025-11-06 15:23:16.154','2025-11-06 15:23:16.154'),
-(112,'Student','cbf05492-d576-4456-b68c-15aed414f839',11,'2025-11-06 15:23:16.155','2025-11-06 15:23:16.155'),
-(113,'Student','1418b530-69c5-485d-a731-c80b65e3fc88',11,'2025-11-06 15:23:16.156','2025-11-06 15:23:16.156'),
-(114,'Student','c18c9829-f9aa-41db-9c4a-476e9eeba797',11,'2025-11-06 15:23:16.157','2025-11-06 15:23:16.157'),
-(115,'Student','8e196413-e826-41ad-8ce1-69a435a117ac',11,'2025-11-06 15:23:16.158','2025-11-06 15:23:16.158'),
-(116,'Student','3a3d4e27-6bb4-4d10-b7d3-26ce984b632f',11,'2025-11-06 15:23:16.158','2025-11-06 15:23:16.158'),
-(117,'Student','cbdee0d8-64f7-415d-ba0a-f79da3cf81f5',11,'2025-11-06 15:23:16.159','2025-11-06 15:23:16.159'),
-(118,'Student','d79f3b3e-aa3d-4b86-b8b4-7f22c1fe2732',11,'2025-11-06 15:23:16.160','2025-11-06 15:23:16.160'),
-(119,'Student','7cb78a48-b7e9-458b-ba46-24b3656580c9',11,'2025-11-06 15:23:16.161','2025-11-06 15:23:16.161'),
-(120,'Student','ac31be76-a26c-45f5-8811-5b46d1832cc8',11,'2025-11-06 15:23:16.162','2025-11-06 15:23:16.162'),
-(121,'Student','ee5301f8-b9e1-41c9-9d14-f01e138f1d39',11,'2025-11-06 15:23:16.163','2025-11-06 15:23:16.163'),
-(122,'Teacher','35d80f38-23a7-4087-a7e9-7b3803c99ded',12,'2025-11-06 15:23:16.164','2025-11-06 15:23:16.164'),
-(123,'Student','d0ef1d4a-af57-40b6-b1df-b6f1d9eedbcb',12,'2025-11-06 15:23:16.165','2025-11-06 15:23:16.165'),
-(124,'Student','d3afcefb-5a21-4425-bc87-5a2171f63478',12,'2025-11-06 15:23:16.165','2025-11-06 15:23:16.165'),
-(125,'Student','bd24467e-47de-4bfa-95b2-fdd663765fcf',12,'2025-11-06 15:23:16.166','2025-11-06 15:23:16.166'),
-(126,'Student','339954e0-23d5-4316-8aca-c61d60214450',12,'2025-11-06 15:23:16.167','2025-11-06 15:23:16.167'),
-(127,'Student','89416d85-3527-4ecd-afe8-b3123e72f020',12,'2025-11-06 15:23:16.168','2025-11-06 15:23:16.168'),
-(128,'Student','cb5fc2cb-fc66-4e50-bf3a-560d62a49dc3',12,'2025-11-06 15:23:16.169','2025-11-06 15:23:16.169'),
-(129,'Student','354f6e1f-31fd-41be-bb38-e9e11d7784c2',12,'2025-11-06 15:23:16.170','2025-11-06 15:23:16.170'),
-(130,'Student','cbf05492-d576-4456-b68c-15aed414f839',12,'2025-11-06 15:23:16.171','2025-11-06 15:23:16.171'),
-(131,'Student','1418b530-69c5-485d-a731-c80b65e3fc88',12,'2025-11-06 15:23:16.172','2025-11-06 15:23:16.172'),
-(132,'Student','cbdee0d8-64f7-415d-ba0a-f79da3cf81f5',12,'2025-11-06 15:23:16.173','2025-11-06 15:23:16.173'),
-(133,'Teacher','35d80f38-23a7-4087-a7e9-7b3803c99ded',13,'2025-11-06 15:23:16.174','2025-11-06 15:23:16.174'),
-(134,'Student','81812e49-a080-4156-b887-233efefa9497',13,'2025-11-06 15:23:16.175','2025-11-06 15:23:16.175'),
-(135,'Student','8e196413-e826-41ad-8ce1-69a435a117ac',13,'2025-11-06 15:23:16.176','2025-11-06 15:23:16.176'),
-(136,'Student','cbf05492-d576-4456-b68c-15aed414f839',13,'2025-11-06 15:23:16.176','2025-11-06 15:23:16.176'),
-(137,'Student','1b49ca1e-b41c-4b0c-9d4d-8a091e934715',13,'2025-11-06 15:23:16.177','2025-11-06 15:23:16.177'),
-(138,'Student','f5044aab-d139-422b-90d2-d38c07137b92',13,'2025-11-06 15:23:16.178','2025-11-06 15:23:16.178'),
-(139,'Student','3544cc6d-9f07-435f-829f-15236f0abaa9',13,'2025-11-06 15:23:16.179','2025-11-06 15:23:16.179'),
-(140,'Student','352ee7ec-dd3c-418a-90ac-efc648f3ed19',13,'2025-11-06 15:23:16.180','2025-11-06 15:23:16.180'),
-(141,'Student','694ddf23-a785-4d63-a31a-23846e3bccf8',13,'2025-11-06 15:23:16.181','2025-11-06 15:23:16.181'),
-(142,'Student','834b7992-dab3-45e8-9446-126bd8ba1cd7',13,'2025-11-06 15:23:16.182','2025-11-06 15:23:16.182'),
-(143,'Student','ddc70559-65ac-4773-9e85-9b72ffac328a',13,'2025-11-06 15:23:16.183','2025-11-06 15:23:16.183'),
-(144,'Teacher','35d80f38-23a7-4087-a7e9-7b3803c99ded',14,'2025-11-06 15:23:16.184','2025-11-06 15:23:16.184'),
-(145,'Student','80c7fffe-f9f5-40c7-8bd2-59562a64dd56',14,'2025-11-06 15:23:16.185','2025-11-06 15:23:16.185'),
-(146,'Student','072f2189-bbd4-43e8-a68f-f2c574f6296f',14,'2025-11-06 15:23:16.186','2025-11-06 15:23:16.186'),
-(147,'Student','cb5fc2cb-fc66-4e50-bf3a-560d62a49dc3',14,'2025-11-06 15:23:16.187','2025-11-06 15:23:16.187'),
-(148,'Student','7b525afc-fe38-48c5-b998-e130b4ffbe7c',14,'2025-11-06 15:23:16.187','2025-11-06 15:23:16.187'),
-(149,'Student','e6c23f85-19f5-428b-b204-d6b3b3983256',14,'2025-11-06 15:23:16.188','2025-11-06 15:23:16.188'),
-(150,'Student','a03db7fa-ac7f-4981-b1e1-f41ad6b38b8e',14,'2025-11-06 15:23:16.189','2025-11-06 15:23:16.189'),
-(151,'Student','ac31be76-a26c-45f5-8811-5b46d1832cc8',14,'2025-11-06 15:23:16.190','2025-11-06 15:23:16.190'),
-(152,'Student','81812e49-a080-4156-b887-233efefa9497',14,'2025-11-06 15:23:16.191','2025-11-06 15:23:16.191'),
-(153,'Student','f5044aab-d139-422b-90d2-d38c07137b92',14,'2025-11-06 15:23:16.192','2025-11-06 15:23:16.192'),
-(154,'Student','352ee7ec-dd3c-418a-90ac-efc648f3ed19',14,'2025-11-06 15:23:16.193','2025-11-06 15:23:16.193');
+(1,'Teacher','153c441e-244f-410c-ac49-8544883a6169',1,'2025-11-15 12:07:00.684','2025-11-15 12:07:00.684'),
+(2,'Student','9e532807-03d4-4a0e-8ef7-3a8c9d65dea4',1,'2025-11-15 12:07:00.686','2025-11-15 12:07:00.686'),
+(3,'Student','8f000216-9769-4b9d-bd01-88e5bf99f22e',1,'2025-11-15 12:07:00.688','2025-11-15 12:07:00.688'),
+(4,'Student','3ed80369-c765-4c40-938c-aa85a05c392d',1,'2025-11-15 12:07:00.689','2025-11-15 12:07:00.689'),
+(5,'Student','b7355031-c57b-49f9-8127-8a860465a734',1,'2025-11-15 12:07:00.690','2025-11-15 12:07:00.690'),
+(6,'Student','dd0e9f29-4e6d-449d-ad35-b0ad862733fd',1,'2025-11-15 12:07:00.691','2025-11-15 12:07:00.691'),
+(7,'Student','314d1995-c264-4e30-bc88-6beff8384009',1,'2025-11-15 12:07:00.692','2025-11-15 12:07:00.692'),
+(8,'Student','675d034f-1d8f-463b-9b07-075396edcc6d',1,'2025-11-15 12:07:00.693','2025-11-15 12:07:00.693'),
+(9,'Student','7cd57487-ce37-44af-b26f-5bf49564fe87',1,'2025-11-15 12:07:00.695','2025-11-15 12:07:00.695'),
+(10,'Student','4e5cde11-117e-41fb-903c-510a8a47aa42',1,'2025-11-15 12:07:00.696','2025-11-15 12:07:00.696'),
+(11,'Student','01825d1b-e2b1-4a99-8649-5357f12049e8',1,'2025-11-15 12:07:00.697','2025-11-15 12:07:00.697'),
+(12,'Teacher','7369af8f-b771-4003-8990-8a7fdd2b7a0f',2,'2025-11-15 12:07:00.698','2025-11-15 12:07:00.698'),
+(13,'Student','016258fa-823b-41fa-a5ab-3196e3b7643a',2,'2025-11-15 12:07:00.699','2025-11-15 12:07:00.699'),
+(14,'Student','4d5825ba-35b0-40da-9468-15efea65118d',2,'2025-11-15 12:07:00.700','2025-11-15 12:07:00.700'),
+(15,'Student','4e6f17af-37b7-4a34-8c9b-15807b0bf660',2,'2025-11-15 12:07:00.701','2025-11-15 12:07:00.701'),
+(16,'Student','27f9c1dc-a916-42a9-9080-41619142727d',2,'2025-11-15 12:07:00.702','2025-11-15 12:07:00.702'),
+(17,'Student','85f06818-69f7-42f6-8ea8-5d6ede651457',2,'2025-11-15 12:07:00.703','2025-11-15 12:07:00.703'),
+(18,'Student','382f08a0-3bb2-495c-a6b8-75cd7582e16c',2,'2025-11-15 12:07:00.704','2025-11-15 12:07:00.704'),
+(19,'Student','dd0e9f29-4e6d-449d-ad35-b0ad862733fd',2,'2025-11-15 12:07:00.705','2025-11-15 12:07:00.705'),
+(20,'Student','8f000216-9769-4b9d-bd01-88e5bf99f22e',2,'2025-11-15 12:07:00.706','2025-11-15 12:07:00.706'),
+(21,'Student','51308de2-922e-49af-a913-4bc98ca9970d',2,'2025-11-15 12:07:00.707','2025-11-15 12:07:00.707'),
+(22,'Student','7cd57487-ce37-44af-b26f-5bf49564fe87',2,'2025-11-15 12:07:00.708','2025-11-15 12:07:00.708'),
+(23,'Teacher','655d1b89-af84-47c0-8ead-a783e5d0fd67',3,'2025-11-15 12:07:00.709','2025-11-15 12:07:00.709'),
+(24,'Student','b7355031-c57b-49f9-8127-8a860465a734',3,'2025-11-15 12:07:00.710','2025-11-15 12:07:00.710'),
+(25,'Student','2dcc3f7f-e521-45b4-a87b-07fa0e245fd0',3,'2025-11-15 12:07:00.711','2025-11-15 12:07:00.711'),
+(26,'Student','ec5e9db4-4c8e-42e2-86ea-0de6fe4a2bd1',3,'2025-11-15 12:07:00.712','2025-11-15 12:07:00.712'),
+(27,'Student','8cd306b7-0d45-442b-a802-12cef6cc0807',3,'2025-11-15 12:07:00.713','2025-11-15 12:07:00.713'),
+(28,'Student','bdd51f18-5669-43dc-bc4d-21faf411c282',3,'2025-11-15 12:07:00.714','2025-11-15 12:07:00.714'),
+(29,'Student','3be66a89-7580-47d3-a3af-517cfc898d1a',3,'2025-11-15 12:07:00.715','2025-11-15 12:07:00.715'),
+(30,'Student','ffe0b8eb-6022-482d-939b-1c74b92b96cf',3,'2025-11-15 12:07:00.716','2025-11-15 12:07:00.716'),
+(31,'Student','fffeaa9f-d69f-4422-897e-ed5d16e2324a',3,'2025-11-15 12:07:00.717','2025-11-15 12:07:00.717'),
+(32,'Student','8f000216-9769-4b9d-bd01-88e5bf99f22e',3,'2025-11-15 12:07:00.718','2025-11-15 12:07:00.718'),
+(33,'Student','4d5825ba-35b0-40da-9468-15efea65118d',3,'2025-11-15 12:07:00.719','2025-11-15 12:07:00.719'),
+(34,'Teacher','655d1b89-af84-47c0-8ead-a783e5d0fd67',4,'2025-11-15 12:07:00.720','2025-11-15 12:07:00.720'),
+(35,'Student','85f06818-69f7-42f6-8ea8-5d6ede651457',4,'2025-11-15 12:07:00.720','2025-11-15 12:07:00.720'),
+(36,'Student','d3c392c7-216a-4766-8e05-4d6f42c06327',4,'2025-11-15 12:07:00.721','2025-11-15 12:07:00.721'),
+(37,'Student','dd0e9f29-4e6d-449d-ad35-b0ad862733fd',4,'2025-11-15 12:07:00.722','2025-11-15 12:07:00.722'),
+(38,'Student','8cd306b7-0d45-442b-a802-12cef6cc0807',4,'2025-11-15 12:07:00.723','2025-11-15 12:07:00.723'),
+(39,'Student','016258fa-823b-41fa-a5ab-3196e3b7643a',4,'2025-11-15 12:07:00.724','2025-11-15 12:07:00.724'),
+(40,'Student','00a1db28-f527-489d-9b19-229aea075f8d',4,'2025-11-15 12:07:00.725','2025-11-15 12:07:00.725'),
+(41,'Student','51308de2-922e-49af-a913-4bc98ca9970d',4,'2025-11-15 12:07:00.726','2025-11-15 12:07:00.726'),
+(42,'Student','7675d25d-8a88-4ef6-8fc4-37375e331f49',4,'2025-11-15 12:07:00.727','2025-11-15 12:07:00.727'),
+(43,'Student','01825d1b-e2b1-4a99-8649-5357f12049e8',4,'2025-11-15 12:07:00.728','2025-11-15 12:07:00.728'),
+(44,'Student','bdd51f18-5669-43dc-bc4d-21faf411c282',4,'2025-11-15 12:07:00.729','2025-11-15 12:07:00.729'),
+(45,'Teacher','655d1b89-af84-47c0-8ead-a783e5d0fd67',5,'2025-11-15 12:07:00.730','2025-11-15 12:07:00.730'),
+(46,'Student','27f9c1dc-a916-42a9-9080-41619142727d',5,'2025-11-15 12:07:00.731','2025-11-15 12:07:00.731'),
+(47,'Student','04575c88-2900-4023-a9a9-51e904f920c9',5,'2025-11-15 12:07:00.732','2025-11-15 12:07:00.732'),
+(48,'Student','b72359aa-e925-41c5-a055-10a9a97de906',5,'2025-11-15 12:07:00.732','2025-11-15 12:07:00.732'),
+(49,'Student','8f000216-9769-4b9d-bd01-88e5bf99f22e',5,'2025-11-15 12:07:00.734','2025-11-15 12:07:00.734'),
+(50,'Student','4e5cde11-117e-41fb-903c-510a8a47aa42',5,'2025-11-15 12:07:00.735','2025-11-15 12:07:00.735'),
+(51,'Student','016258fa-823b-41fa-a5ab-3196e3b7643a',5,'2025-11-15 12:07:00.736','2025-11-15 12:07:00.736'),
+(52,'Student','0a33c931-b888-409f-86ff-9e44164e29ad',5,'2025-11-15 12:07:00.737','2025-11-15 12:07:00.737'),
+(53,'Student','314d1995-c264-4e30-bc88-6beff8384009',5,'2025-11-15 12:07:00.738','2025-11-15 12:07:00.738'),
+(54,'Student','3be66a89-7580-47d3-a3af-517cfc898d1a',5,'2025-11-15 12:07:00.739','2025-11-15 12:07:00.739'),
+(55,'Student','b599b0f6-897d-4064-bac1-09d32aead703',5,'2025-11-15 12:07:00.740','2025-11-15 12:07:00.740'),
+(56,'Teacher','153c441e-244f-410c-ac49-8544883a6169',6,'2025-11-15 12:07:00.742','2025-11-15 12:07:00.742'),
+(57,'Student','27f9c1dc-a916-42a9-9080-41619142727d',6,'2025-11-15 12:07:00.742','2025-11-15 12:07:00.742'),
+(58,'Student','58de52d6-9d49-4780-a0f2-81e39d5fb278',6,'2025-11-15 12:07:00.743','2025-11-15 12:07:00.743'),
+(59,'Student','bdd51f18-5669-43dc-bc4d-21faf411c282',6,'2025-11-15 12:07:00.744','2025-11-15 12:07:00.744'),
+(60,'Student','b7355031-c57b-49f9-8127-8a860465a734',6,'2025-11-15 12:07:00.745','2025-11-15 12:07:00.745'),
+(61,'Student','5ed0d9e2-21c7-4f44-a948-57aa4d2841d4',6,'2025-11-15 12:07:00.747','2025-11-15 12:07:00.747'),
+(62,'Student','ffe0b8eb-6022-482d-939b-1c74b92b96cf',6,'2025-11-15 12:07:00.748','2025-11-15 12:07:00.748'),
+(63,'Student','0a33c931-b888-409f-86ff-9e44164e29ad',6,'2025-11-15 12:07:00.749','2025-11-15 12:07:00.749'),
+(64,'Student','dd0e9f29-4e6d-449d-ad35-b0ad862733fd',6,'2025-11-15 12:07:00.750','2025-11-15 12:07:00.750'),
+(65,'Student','3be66a89-7580-47d3-a3af-517cfc898d1a',6,'2025-11-15 12:07:00.751','2025-11-15 12:07:00.751'),
+(66,'Student','92c81c93-6017-4864-84ae-a5655844876c',6,'2025-11-15 12:07:00.752','2025-11-15 12:07:00.752'),
+(67,'Teacher','153c441e-244f-410c-ac49-8544883a6169',7,'2025-11-15 12:07:00.753','2025-11-15 12:07:00.753'),
+(68,'Student','0a33c931-b888-409f-86ff-9e44164e29ad',7,'2025-11-15 12:07:00.754','2025-11-15 12:07:00.754'),
+(69,'Student','a31e71d6-322c-4873-a36c-369c44f7db2e',7,'2025-11-15 12:07:00.754','2025-11-15 12:07:00.754'),
+(70,'Student','b7355031-c57b-49f9-8127-8a860465a734',7,'2025-11-15 12:07:00.755','2025-11-15 12:07:00.755'),
+(71,'Student','68336206-7295-4ea3-b3e3-404c886ad68f',7,'2025-11-15 12:07:00.756','2025-11-15 12:07:00.756'),
+(72,'Student','382f08a0-3bb2-495c-a6b8-75cd7582e16c',7,'2025-11-15 12:07:00.757','2025-11-15 12:07:00.757'),
+(73,'Student','4d5825ba-35b0-40da-9468-15efea65118d',7,'2025-11-15 12:07:00.758','2025-11-15 12:07:00.758'),
+(74,'Student','fb1ef359-12e9-4b32-910c-e557fd11009b',7,'2025-11-15 12:07:00.759','2025-11-15 12:07:00.759'),
+(75,'Student','92c81c93-6017-4864-84ae-a5655844876c',7,'2025-11-15 12:07:00.760','2025-11-15 12:07:00.760'),
+(76,'Student','58de52d6-9d49-4780-a0f2-81e39d5fb278',7,'2025-11-15 12:07:00.761','2025-11-15 12:07:00.761'),
+(77,'Student','3be66a89-7580-47d3-a3af-517cfc898d1a',7,'2025-11-15 12:07:00.762','2025-11-15 12:07:00.762'),
+(78,'Teacher','2c17cb62-974b-4514-8660-2e344d449852',8,'2025-11-15 12:07:00.764','2025-11-15 12:07:00.764'),
+(79,'Student','314d1995-c264-4e30-bc88-6beff8384009',8,'2025-11-15 12:07:00.765','2025-11-15 12:07:00.765'),
+(80,'Student','fb1ef359-12e9-4b32-910c-e557fd11009b',8,'2025-11-15 12:07:00.766','2025-11-15 12:07:00.766'),
+(81,'Student','7c9780f0-676e-43dd-8c83-6e800416b67f',8,'2025-11-15 12:07:00.768','2025-11-15 12:07:00.768'),
+(82,'Student','85f06818-69f7-42f6-8ea8-5d6ede651457',8,'2025-11-15 12:07:00.769','2025-11-15 12:07:00.769'),
+(83,'Student','3ed80369-c765-4c40-938c-aa85a05c392d',8,'2025-11-15 12:07:00.770','2025-11-15 12:07:00.770'),
+(84,'Student','5ed0d9e2-21c7-4f44-a948-57aa4d2841d4',8,'2025-11-15 12:07:00.771','2025-11-15 12:07:00.771'),
+(85,'Student','00a1db28-f527-489d-9b19-229aea075f8d',8,'2025-11-15 12:07:00.773','2025-11-15 12:07:00.773'),
+(86,'Student','d0dbf0d4-a075-42b0-a779-ea19585307e7',8,'2025-11-15 12:07:00.774','2025-11-15 12:07:00.774'),
+(87,'Student','92c81c93-6017-4864-84ae-a5655844876c',8,'2025-11-15 12:07:00.775','2025-11-15 12:07:00.775'),
+(88,'Student','fffeaa9f-d69f-4422-897e-ed5d16e2324a',8,'2025-11-15 12:07:00.775','2025-11-15 12:07:00.775'),
+(89,'Teacher','655d1b89-af84-47c0-8ead-a783e5d0fd67',9,'2025-11-15 12:07:00.777','2025-11-15 12:07:00.777'),
+(90,'Student','00a1db28-f527-489d-9b19-229aea075f8d',9,'2025-11-15 12:07:00.779','2025-11-15 12:07:00.779'),
+(91,'Student','01825d1b-e2b1-4a99-8649-5357f12049e8',9,'2025-11-15 12:07:00.780','2025-11-15 12:07:00.780'),
+(92,'Student','016258fa-823b-41fa-a5ab-3196e3b7643a',9,'2025-11-15 12:07:00.781','2025-11-15 12:07:00.781'),
+(93,'Student','3be66a89-7580-47d3-a3af-517cfc898d1a',9,'2025-11-15 12:07:00.782','2025-11-15 12:07:00.782'),
+(94,'Student','d0dbf0d4-a075-42b0-a779-ea19585307e7',9,'2025-11-15 12:07:00.783','2025-11-15 12:07:00.783'),
+(95,'Student','04575c88-2900-4023-a9a9-51e904f920c9',9,'2025-11-15 12:07:00.785','2025-11-15 12:07:00.785'),
+(96,'Student','5ed0d9e2-21c7-4f44-a948-57aa4d2841d4',9,'2025-11-15 12:07:00.787','2025-11-15 12:07:00.787'),
+(97,'Student','675d034f-1d8f-463b-9b07-075396edcc6d',9,'2025-11-15 12:07:00.788','2025-11-15 12:07:00.788'),
+(98,'Student','ec5e9db4-4c8e-42e2-86ea-0de6fe4a2bd1',9,'2025-11-15 12:07:00.789','2025-11-15 12:07:00.789'),
+(99,'Student','7675d25d-8a88-4ef6-8fc4-37375e331f49',9,'2025-11-15 12:07:00.790','2025-11-15 12:07:00.790'),
+(100,'Teacher','655d1b89-af84-47c0-8ead-a783e5d0fd67',10,'2025-11-15 12:07:00.791','2025-11-15 12:07:00.791'),
+(101,'Student','3ed80369-c765-4c40-938c-aa85a05c392d',10,'2025-11-15 12:07:00.792','2025-11-15 12:07:00.792'),
+(102,'Student','4c39703c-a678-4e29-9c09-6c3267e9552c',10,'2025-11-15 12:07:00.794','2025-11-15 12:07:00.794'),
+(103,'Student','fb1ef359-12e9-4b32-910c-e557fd11009b',10,'2025-11-15 12:07:00.795','2025-11-15 12:07:00.795'),
+(104,'Student','4d5825ba-35b0-40da-9468-15efea65118d',10,'2025-11-15 12:07:00.796','2025-11-15 12:07:00.796'),
+(105,'Student','92c81c93-6017-4864-84ae-a5655844876c',10,'2025-11-15 12:07:00.796','2025-11-15 12:07:00.796'),
+(106,'Student','4e5cde11-117e-41fb-903c-510a8a47aa42',10,'2025-11-15 12:07:00.797','2025-11-15 12:07:00.797'),
+(107,'Student','0a33c931-b888-409f-86ff-9e44164e29ad',10,'2025-11-15 12:07:00.798','2025-11-15 12:07:00.798'),
+(108,'Student','00a1db28-f527-489d-9b19-229aea075f8d',10,'2025-11-15 12:07:00.799','2025-11-15 12:07:00.799'),
+(109,'Student','7cd57487-ce37-44af-b26f-5bf49564fe87',10,'2025-11-15 12:07:00.800','2025-11-15 12:07:00.800'),
+(110,'Student','7c9780f0-676e-43dd-8c83-6e800416b67f',10,'2025-11-15 12:07:00.801','2025-11-15 12:07:00.801'),
+(111,'Teacher','fc199e0c-eb12-4230-868b-23e43abff0ef',11,'2025-11-15 12:07:00.807','2025-11-15 12:07:00.807'),
+(112,'Student','d3c392c7-216a-4766-8e05-4d6f42c06327',11,'2025-11-15 12:07:00.808','2025-11-15 12:07:00.808'),
+(113,'Student','382f08a0-3bb2-495c-a6b8-75cd7582e16c',11,'2025-11-15 12:07:00.809','2025-11-15 12:07:00.809'),
+(114,'Student','7c9780f0-676e-43dd-8c83-6e800416b67f',11,'2025-11-15 12:07:00.810','2025-11-15 12:07:00.810'),
+(115,'Student','ffe0b8eb-6022-482d-939b-1c74b92b96cf',11,'2025-11-15 12:07:00.811','2025-11-15 12:07:00.811'),
+(116,'Student','9e532807-03d4-4a0e-8ef7-3a8c9d65dea4',11,'2025-11-15 12:07:00.812','2025-11-15 12:07:00.812'),
+(117,'Student','675d034f-1d8f-463b-9b07-075396edcc6d',11,'2025-11-15 12:07:00.813','2025-11-15 12:07:00.813'),
+(118,'Student','b72359aa-e925-41c5-a055-10a9a97de906',11,'2025-11-15 12:07:00.814','2025-11-15 12:07:00.814'),
+(119,'Student','fb1ef359-12e9-4b32-910c-e557fd11009b',11,'2025-11-15 12:07:00.815','2025-11-15 12:07:00.815'),
+(120,'Student','016258fa-823b-41fa-a5ab-3196e3b7643a',11,'2025-11-15 12:07:00.816','2025-11-15 12:07:00.816'),
+(121,'Student','92c81c93-6017-4864-84ae-a5655844876c',11,'2025-11-15 12:07:00.817','2025-11-15 12:07:00.817'),
+(122,'Teacher','fc199e0c-eb12-4230-868b-23e43abff0ef',12,'2025-11-15 12:07:00.818','2025-11-15 12:07:00.818'),
+(123,'Student','7e3275a7-7257-4f8d-b323-a857afe346b4',12,'2025-11-15 12:07:00.819','2025-11-15 12:07:00.819'),
+(124,'Student','4e6f17af-37b7-4a34-8c9b-15807b0bf660',12,'2025-11-15 12:07:00.820','2025-11-15 12:07:00.820'),
+(125,'Student','a31e71d6-322c-4873-a36c-369c44f7db2e',12,'2025-11-15 12:07:00.821','2025-11-15 12:07:00.821'),
+(126,'Student','00a1db28-f527-489d-9b19-229aea075f8d',12,'2025-11-15 12:07:00.822','2025-11-15 12:07:00.822'),
+(127,'Student','04575c88-2900-4023-a9a9-51e904f920c9',12,'2025-11-15 12:07:00.823','2025-11-15 12:07:00.823'),
+(128,'Student','85f06818-69f7-42f6-8ea8-5d6ede651457',12,'2025-11-15 12:07:00.824','2025-11-15 12:07:00.824'),
+(129,'Student','35c56a8b-a3d5-40ab-98ae-cc6053f95eb1',12,'2025-11-15 12:07:00.824','2025-11-15 12:07:00.824'),
+(130,'Student','016258fa-823b-41fa-a5ab-3196e3b7643a',12,'2025-11-15 12:07:00.825','2025-11-15 12:07:00.825'),
+(131,'Student','beaf132b-9511-49d7-a32d-8e98cb6a57af',12,'2025-11-15 12:07:00.826','2025-11-15 12:07:00.826'),
+(132,'Student','b599b0f6-897d-4064-bac1-09d32aead703',12,'2025-11-15 12:07:00.827','2025-11-15 12:07:00.827'),
+(133,'Teacher','fc199e0c-eb12-4230-868b-23e43abff0ef',13,'2025-11-15 12:07:00.828','2025-11-15 12:07:00.828'),
+(134,'Student','8f000216-9769-4b9d-bd01-88e5bf99f22e',13,'2025-11-15 12:07:00.829','2025-11-15 12:07:00.829'),
+(135,'Student','4d5825ba-35b0-40da-9468-15efea65118d',13,'2025-11-15 12:07:00.830','2025-11-15 12:07:00.830'),
+(136,'Student','27f9c1dc-a916-42a9-9080-41619142727d',13,'2025-11-15 12:07:00.831','2025-11-15 12:07:00.831'),
+(137,'Student','3be66a89-7580-47d3-a3af-517cfc898d1a',13,'2025-11-15 12:07:00.832','2025-11-15 12:07:00.832'),
+(138,'Student','01825d1b-e2b1-4a99-8649-5357f12049e8',13,'2025-11-15 12:07:00.833','2025-11-15 12:07:00.833'),
+(139,'Student','26ceedf4-3a5c-4212-ae04-b3cee5aa8cb3',13,'2025-11-15 12:07:00.834','2025-11-15 12:07:00.834'),
+(140,'Student','675d034f-1d8f-463b-9b07-075396edcc6d',13,'2025-11-15 12:07:00.835','2025-11-15 12:07:00.835'),
+(141,'Student','bdd51f18-5669-43dc-bc4d-21faf411c282',13,'2025-11-15 12:07:00.835','2025-11-15 12:07:00.835'),
+(142,'Student','382f08a0-3bb2-495c-a6b8-75cd7582e16c',13,'2025-11-15 12:07:00.836','2025-11-15 12:07:00.836'),
+(143,'Student','04575c88-2900-4023-a9a9-51e904f920c9',13,'2025-11-15 12:07:00.837','2025-11-15 12:07:00.837'),
+(144,'Teacher','fc199e0c-eb12-4230-868b-23e43abff0ef',14,'2025-11-15 12:07:00.838','2025-11-15 12:07:00.838'),
+(145,'Student','51308de2-922e-49af-a913-4bc98ca9970d',14,'2025-11-15 12:07:00.839','2025-11-15 12:07:00.839'),
+(146,'Student','7cd57487-ce37-44af-b26f-5bf49564fe87',14,'2025-11-15 12:07:00.840','2025-11-15 12:07:00.840'),
+(147,'Student','5ed0d9e2-21c7-4f44-a948-57aa4d2841d4',14,'2025-11-15 12:07:00.841','2025-11-15 12:07:00.841'),
+(148,'Student','7c9780f0-676e-43dd-8c83-6e800416b67f',14,'2025-11-15 12:07:00.842','2025-11-15 12:07:00.842'),
+(149,'Student','dd0e9f29-4e6d-449d-ad35-b0ad862733fd',14,'2025-11-15 12:07:00.844','2025-11-15 12:07:00.844'),
+(150,'Student','8f000216-9769-4b9d-bd01-88e5bf99f22e',14,'2025-11-15 12:07:00.845','2025-11-15 12:07:00.845'),
+(151,'Student','9e532807-03d4-4a0e-8ef7-3a8c9d65dea4',14,'2025-11-15 12:07:00.846','2025-11-15 12:07:00.846'),
+(152,'Student','0a33c931-b888-409f-86ff-9e44164e29ad',14,'2025-11-15 12:07:00.847','2025-11-15 12:07:00.847'),
+(153,'Student','ec5e9db4-4c8e-42e2-86ea-0de6fe4a2bd1',14,'2025-11-15 12:07:00.848','2025-11-15 12:07:00.848'),
+(154,'Student','ffe0b8eb-6022-482d-939b-1c74b92b96cf',14,'2025-11-15 12:07:00.849','2025-11-15 12:07:00.849');
 /*!40000 ALTER TABLE `User_Class` ENABLE KEYS */;
 UNLOCK TABLES;
 commit;
@@ -874,6 +974,38 @@ LOCK TABLES `User_Material` WRITE;
 /*!40000 ALTER TABLE `User_Material` DISABLE KEYS */;
 set autocommit=0;
 /*!40000 ALTER TABLE `User_Material` ENABLE KEYS */;
+UNLOCK TABLES;
+commit;
+
+--
+-- Table structure for table `User_Subscription`
+--
+
+DROP TABLE IF EXISTS `User_Subscription`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `User_Subscription` (
+  `id` varchar(191) NOT NULL,
+  `userId` varchar(191) NOT NULL,
+  `startAt` datetime(3) NOT NULL DEFAULT current_timestamp(3),
+  `endAt` datetime(3) NOT NULL,
+  `status` enum('ACTIVE','EXPIRED','CANCELLED') NOT NULL DEFAULT 'ACTIVE',
+  `createdAt` datetime(3) NOT NULL DEFAULT current_timestamp(3),
+  `updatedAt` datetime(3) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `User_Subscription_userId_fkey` (`userId`),
+  CONSTRAINT `User_Subscription_userId_fkey` FOREIGN KEY (`userId`) REFERENCES `User` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `User_Subscription`
+--
+
+LOCK TABLES `User_Subscription` WRITE;
+/*!40000 ALTER TABLE `User_Subscription` DISABLE KEYS */;
+set autocommit=0;
+/*!40000 ALTER TABLE `User_Subscription` ENABLE KEYS */;
 UNLOCK TABLES;
 commit;
 
@@ -937,11 +1069,8 @@ LOCK TABLES `_prisma_migrations` WRITE;
 /*!40000 ALTER TABLE `_prisma_migrations` DISABLE KEYS */;
 set autocommit=0;
 INSERT INTO `_prisma_migrations` VALUES
-('497fab6a-5fd9-4660-ab1c-8905071cfe84','ea1cf889658b5e94a4c03f6b4247bd88478e77dc205644d96f5031fdbf83f88c','2025-11-06 15:23:13.121','20251031125129_add_thumnail_to_material',NULL,NULL,'2025-11-06 15:23:13.115',1),
-('9c45b5a9-7641-428c-876c-351027117010','178f8d459b6f6563fc29a56d4219281b697a65323bdfdd520dffb5097ab10e5e','2025-11-06 15:23:13.109','20251030154530_add_detail_user',NULL,NULL,'2025-11-06 15:23:13.102',1),
-('a4c102e5-6553-4a41-ae01-ea89d929c489','a030d79b9e017651752703e841b00dc98c9c1c8143dcec341ff4f360b25c6df5','2025-11-06 15:23:13.102','20251030122342_add_delete_at',NULL,NULL,'2025-11-06 15:23:13.095',1),
-('ef5f15ec-3c6a-4873-8fd7-99f190604154','fb6c6e1c134820bf382a994341b42514770004ebc5bc65b7dad0668ea2c421d3','2025-11-06 15:23:13.115','20251031115928_add_file_path_to_material',NULL,NULL,'2025-11-06 15:23:13.109',1),
-('f329ad55-fe34-462d-8f53-d5c7931356ee','37a1da5ffeb6800b7f3e00b820425e143ac01d4bc77f96930fec8bf8ba8d5621','2025-11-06 15:23:13.095','20251030074157_init',NULL,NULL,'2025-11-06 15:23:12.837',1);
+('9654500e-fb6a-4743-8679-f22f719fcc37','330c558dd59e57f5be2e0b739af7e167005897877a1e9b870d17154fc31ad60e','2025-11-15 12:06:57.611','20251115092106_remove_subscription_plan',NULL,NULL,'2025-11-15 12:06:57.593',1),
+('ddaad4c1-cfc0-4c30-8d3e-8ad6f9da1f4d','5d535f395498abb562d62c3d16a60924963a26c3c065d32a7a5e1f066075fcb1','2025-11-15 12:06:57.593','20251112144809_init',NULL,NULL,'2025-11-15 12:06:57.263',1);
 /*!40000 ALTER TABLE `_prisma_migrations` ENABLE KEYS */;
 UNLOCK TABLES;
 commit;
@@ -956,9 +1085,9 @@ DROP TABLE IF EXISTS `category`;
 CREATE TABLE `category` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(191) NOT NULL,
+  `deleted` tinyint(1) NOT NULL DEFAULT 0,
   `createdAt` datetime(3) NOT NULL DEFAULT current_timestamp(3),
   `updatedAt` datetime(3) NOT NULL,
-  `deleted` tinyint(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
   UNIQUE KEY `category_name_key` (`name`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -972,10 +1101,10 @@ LOCK TABLES `category` WRITE;
 /*!40000 ALTER TABLE `category` DISABLE KEYS */;
 set autocommit=0;
 INSERT INTO `category` VALUES
-(1,'Essay','2025-11-06 15:23:16.026','2025-11-06 15:23:16.026',0),
-(2,'Business Plan','2025-11-06 15:23:16.026','2025-11-06 15:23:16.026',0),
-(3,'Penelitian','2025-11-06 15:23:16.026','2025-11-06 15:23:16.026',0),
-(4,'Desain','2025-11-06 15:23:16.026','2025-11-06 15:23:16.026',0);
+(1,'Essay',0,'2025-11-15 12:07:00.665','2025-11-15 12:07:00.665'),
+(2,'Business Plan',0,'2025-11-15 12:07:00.665','2025-11-15 12:07:00.665'),
+(3,'Penelitian',0,'2025-11-15 12:07:00.665','2025-11-15 12:07:00.665'),
+(4,'Desain',0,'2025-11-15 12:07:00.665','2025-11-15 12:07:00.665');
 /*!40000 ALTER TABLE `category` ENABLE KEYS */;
 UNLOCK TABLES;
 commit;
@@ -989,4 +1118,4 @@ commit;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*M!100616 SET NOTE_VERBOSITY=@OLD_NOTE_VERBOSITY */;
 
--- Dump completed on 2025-11-06 22:44:00
+-- Dump completed on 2025-11-15 19:07:54

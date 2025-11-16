@@ -177,4 +177,76 @@ export class MaterialController {
             });
         }
     }
+
+    async completeMaterial(req: Request, res: Response) {
+        try {
+            const materialId = parseInt(req.params.materialId);
+            const userId = req.user!.id!;
+
+            if (Number.isNaN(materialId)) {
+                return sendResponse({
+                    res,
+                    statusCode: 400,
+                    success: false,
+                    message: 'Invalid material ID',
+                    data: null,
+                });
+            }
+
+            const result = await materialService.completeMaterial(userId, materialId);
+            return sendResponse({
+                res,
+                statusCode: 200,
+                success: true,
+                message: 'Material marked as completed',
+                data: result,
+            });
+        } catch (error) {
+            const statusCode = error instanceof NotFoundError ? 404 : 500;
+            return sendResponse({
+                res,
+                statusCode,
+                success: false,
+                message: error instanceof NotFoundError ? error.message : 'Failed to complete material',
+                data: null,
+                errors: { global: [(error as Error).message] },
+            });
+        }
+    }
+
+    async getMaterialProgress(req: Request, res: Response) {
+        try {
+            const materialId = parseInt(req.params.materialId);
+            const userId = req.user!.id!;
+
+            if (Number.isNaN(materialId)) {
+                return sendResponse({
+                    res,
+                    statusCode: 400,
+                    success: false,
+                    message: 'Invalid material ID',
+                    data: null,
+                });
+            }
+
+            const progress = await materialService.getMaterialProgress(userId, materialId);
+            return sendResponse({
+                res,
+                statusCode: 200,
+                success: true,
+                message: 'Material progress retrieved',
+                data: progress || { is_completed: false },
+            });
+        } catch (error) {
+            const statusCode = error instanceof NotFoundError ? 404 : 500;
+            return sendResponse({
+                res,
+                statusCode,
+                success: false,
+                message: error instanceof NotFoundError ? error.message : 'Failed to get material progress',
+                data: null,
+                errors: { global: [(error as Error).message] },
+            });
+        }
+    }
 }

@@ -61,6 +61,40 @@ export class MaterialRepository {
             where: { id: materialId },
         }).Section().Class().User_Class({ where: { role: 'Teacher' } });
     }
+
+    async completeMaterial(userId: string, materialId: number): Promise<{ id: number; is_completed: boolean }> {
+        return await prisma.user_Material.upsert({
+            where: {
+                userId_materialId: {
+                    userId,
+                    materialId,
+                },
+            },
+            create: {
+                userId,
+                materialId,
+                is_completed: true,
+            },
+            update: {
+                is_completed: true,
+            },
+            select: {
+                id: true,
+                is_completed: true,
+            },
+        });
+    }
+
+    async getMaterialProgress(userId: string, materialId: number) {
+        return await prisma.user_Material.findUnique({
+            where: {
+                userId_materialId: {
+                    userId,
+                    materialId,
+                },
+            },
+        });
+    }
 }
 
 export default new MaterialRepository();

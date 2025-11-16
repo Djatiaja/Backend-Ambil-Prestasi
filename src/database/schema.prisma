@@ -127,7 +127,6 @@ model Section {
   Class       Class        @relation(fields: [classId], references: [id], onDelete: Cascade)
   Material    Material[]
   Assignment  Assignment[]
-  Quiz        Quiz[]
 }
 
 model Material {
@@ -146,6 +145,7 @@ model Material {
   Section          Section         @relation(fields: [sectionId], references: [id], onDelete: Cascade)
   Material_File    Material_File[]
   User_Material    User_Material[]
+  quizzes          Quiz[]
 }
 
 model Material_File {
@@ -203,19 +203,18 @@ model User_Assignment {
 }
 
 model Quiz {
-  id            Int             @id @default(autoincrement())
+  id            Int      @id @default(autoincrement())
   title         String
-  description   String          @db.LongText
+  description   String   @db.LongText
   max_attempts  Int
   time_limit    Int // in minutes
-  open_at       DateTime
-  close_at      DateTime
   passing_grade Int
   xp            Int
-  createdAt     DateTime        @default(now())
-  updatedAt     DateTime        @updatedAt
-  sectionId     Int
-  Section       Section         @relation(fields: [sectionId], references: [id], onDelete: Cascade)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  materialId    Int
+  Material      Material        @relation(fields: [materialId], references: [id], onDelete: Cascade)
   quiz_question Quiz_Question[]
   quiz_attempt  Quiz_Attempt[]
 }
@@ -246,7 +245,10 @@ model Quiz_Answer {
 
 model Quiz_Attempt {
   id            Int             @id @default(autoincrement())
-  score         Int
+  score         Int?
+  started_at    DateTime        @default(now())
+  submitted_at  DateTime?
+  is_graded     Boolean         @default(false)
   createdAt     DateTime        @default(now())
   updatedAt     DateTime        @updatedAt
   userId        String

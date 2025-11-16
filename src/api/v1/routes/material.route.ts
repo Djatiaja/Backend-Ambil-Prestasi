@@ -4,6 +4,8 @@ import { validateBody } from "../middlewares/schema.middleware";
 import { createMaterialSchema, updateMaterialSchema } from "../schemas/material.schema";
 import { MaterialController } from "../controllers/material.controller";
 import upload from "../../../config/multer.config";
+import { authMiddleware } from "../middlewares/auth.middleware";
+import { verifyRole } from "../middlewares/verifyrole.middleware";
 
 const materialRouter = Router({ mergeParams: true });
 const controller = new MaterialController();
@@ -36,5 +38,6 @@ materialRouter.patch(
 );
 
 materialRouter.delete("/:materialId", controller.deleteMaterial.bind(controller));
+
 
 export default materialRouter;

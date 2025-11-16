@@ -6,6 +6,32 @@ import { requireActiveSubscription } from "../middlewares/verifySubscription.mid
 
 const studentRouter = Router();
 
-studentRouter.get("/materials/:id", authMiddleware, requireActiveSubscription, studentController.getMaterialById);
+// Material routes
+studentRouter.get("/materials/:id",
+    authMiddleware,
+    requireActiveSubscription,
+    studentController.getMaterialById
+);
+
+// Class enrollment routes
+studentRouter.post("/classes/:classId/enroll",
+    authMiddleware,
+    studentController.enrollClass
+);
+
+studentRouter.delete("/classes/:classId/unenroll",
+    authMiddleware,
+    studentController.unenrollClass
+);
+
+studentRouter.get("/classes/enrolled",
+    authMiddleware,
+    studentController.getEnrolledClasses
+);
+
+studentRouter.get("/classes/:classId/enrollment-status",
+    authMiddleware,
+    studentController.checkEnrollment
+);
 
 export default studentRouter;

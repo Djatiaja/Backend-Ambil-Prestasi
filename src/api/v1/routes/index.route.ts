@@ -16,6 +16,7 @@ import testRouter from "./test.route";
 import studentRouter from "./student.route";
 import reviewRouter from "./review.route";
 import fileRouter from "./file.route";
+import quizRouter from "./quiz.route";
 
 const router = Router();
 declare module "express-serve-static-core" {
@@ -31,8 +32,8 @@ router.use("/teachers", authMiddleware, verifyRole(["Admin", "Teacher"]), teache
 router.use("/dashboard", authMiddleware, verifyRole(["Admin"]), dashboardRouter);
 router.use("/classes", authMiddleware, verifyRole(["Admin", "Teacher"]), classRouter);
 router.use("/classes/:classId/sections", sectionRouter);
-router.use("/classes/sections/:sectionId/materials", materialRouter);
-router.use("/classes/sections/materials/:materialId/files", materialFileRouter);
+router.use("/classes/sections/:sectionId/materials", authMiddleware, verifyRole(["Teacher", "Admin"]), materialRouter);
+router.use("/classes/sections/materials/:materialId/quizzes", quizRouter);
 router.use("/", authRouter)
 router.use("/public", publicRouter)
 router.use("/categories", authMiddleware, verifyRole(["Admin", "Teacher"]), categoryRouter);

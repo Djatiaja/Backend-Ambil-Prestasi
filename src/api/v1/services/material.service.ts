@@ -36,11 +36,11 @@ export class MaterialService {
         sectionId: number
     ): Promise<Material> {
         const paths = {
-            templatePath: saveFile(data.template, false),
-            video_path: saveFile(data.video, false),
-            materialFilePath: saveFile(data.materialFile, false),
-            ringkasanPath: saveFile(data.ringkasan, false),
-            thumnail_path: saveFile(data.thumnail, false),
+            templatePath: saveFile(data.template, true),
+            video_path: saveFile(data.video, true),
+            materialFilePath: saveFile(data.materialFile, true),
+            ringkasanPath: saveFile(data.ringkasan, true),
+            thumnail_path: saveFile(data.thumnail, true),
         };
 
         return await materialRepository.create({
@@ -64,23 +64,23 @@ export class MaterialService {
 
         if (data.template) {
             deleteFile(existing.templatePath);
-            updatePayload.templatePath = saveFile(data.template, false);
+            updatePayload.templatePath = saveFile(data.template, true);
         }
         if (data.video) {
             deleteFile(existing.video_path);
-            updatePayload.video_path = saveFile(data.video, false);
+            updatePayload.video_path = saveFile(data.video, true);
         }
         if (data.materialFile) {
             deleteFile(existing.materialFilePath);
-            updatePayload.materialFilePath = saveFile(data.materialFile, false);
+            updatePayload.materialFilePath = saveFile(data.materialFile, true);
         }
         if (data.ringkasan) {
             deleteFile(existing.ringkasanPath);
-            updatePayload.ringkasanPath = saveFile(data.ringkasan, false);
+            updatePayload.ringkasanPath = saveFile(data.ringkasan, true);
         }
         if (data.thumnail) {
             deleteFile(existing.thumnail_path);
-            updatePayload.thumnail_path = saveFile(data.thumnail, false);
+            updatePayload.thumnail_path = saveFile(data.thumnail, true);
         }
 
         return await materialRepository.update(id, updatePayload);
