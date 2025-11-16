@@ -17,6 +17,7 @@ import studentRouter from "./student.route";
 import reviewRouter from "./review.route";
 import fileRouter from "./file.route";
 import quizRouter from "./quiz.route";
+import profileRouter from "./profile.route";
 
 const router = Router();
 declare module "express-serve-static-core" {
@@ -42,6 +43,7 @@ router.use("/redeem", authMiddleware, verifyRole(["Admin", "Student"]), redeemRo
 router.use("/students", authMiddleware, verifyRole(["Student"]), studentRouter);
 router.use("/reviews", reviewRouter);
 router.use("/files", fileRouter);
+router.use("/profile", profileRouter);
 router.use("/test", testRouter);
 
 

@@ -5,7 +5,6 @@ import { ReviewController } from "../controllers/review.controller";
 
 
 const publicRouter = Router();
-publicRouter.get("/classes", publicController.getClasses);
 publicRouter.get("/classes/:id", publicController.getClassById);
 publicRouter.get("/sections/:id", publicController.getSectionById);
 publicRouter.get('/classes/:classId/reviews', ReviewController.getByClass);
