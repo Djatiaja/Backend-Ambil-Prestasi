@@ -23,7 +23,8 @@ export const quiz_attemptSeed = async () => {
                 continue;
             }
 
-            if (user.User_Class[0].role === class_role.Student && (new Date() < quiz.open_at || new Date() > quiz.close_at)) {
+            // Skip if user is not enrolled in any class (removed time check)
+            if (user.User_Class.length === 0) {
                 continue;
             }
 
