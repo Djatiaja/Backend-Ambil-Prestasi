@@ -3,6 +3,7 @@ import path from "path";
 import * as fs from "fs";
 import prisma from "../../../database";
 import { SubscriptionService } from "../services/subscription.service";
+import { verifyFileToken } from "../helpers/fileToken";
 
 export class FileController {
     // GET /files/public/:filename
@@ -19,18 +20,43 @@ export class FileController {
         res.sendFile(filePath, { headers: { "X-Content-Type-Options": "nosniff" } });
     }
 
-    // GET /files/private  (signed URL – no JWT needed)
+    // GET /files/protected/:token - JWT-based file access
     async AccessProtectedFile(req: Request, res: Response): Promise<Response | void> {
-        const { filename } = req.params;
+        const { token } = req.params;
 
-        // intentional
-        const filePath = path.join(process.cwd(), "files", "public", filename);
+        // Verify JWT token
+        let decoded;
+        try {
+            decoded = verifyFileToken(token);
+        } catch (error) {
+            return res.status(401).json({
+                error: error instanceof Error ? error.message : "Invalid token"
+            });
+        }
 
-        if (!fs.existsSync(filePath)) {
+        // Extract file path from token
+        const filePath = decoded.path;
+
+        // Security check: ensure path doesn't contain directory traversal
+        if (filePath.includes("..")) {
+            return res.status(403).json({ error: "Invalid file path" });
+        }
+
+        // Security check: ensure path is within protected directory
+        if (!filePath.startsWith("files/protected/")) {
+            return res.status(403).json({ error: "Access denied" });
+        }
+
+        // Construct absolute file path
+        const absolutePath = path.join(process.cwd(), filePath);
+
+        // Check if file exists
+        if (!fs.existsSync(absolutePath)) {
             return res.status(404).json({ error: "File not found" });
         }
 
-        res.sendFile(filePath, { headers: { "X-Content-Type-Options": "nosniff" } });
+        // Stream the file with security headers
+        res.sendFile(absolutePath, { headers: { "X-Content-Type-Options": "nosniff" } });
     }
 
     async DownloadFile(req: Request, res: Response): Promise<Response | void> {

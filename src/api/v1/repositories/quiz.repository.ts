@@ -54,10 +54,14 @@ export class QuizRepository {
     }
 
     static async deleteQuiz(id: number) {
-        return prisma.$transaction(async (tx) => {
-            await tx.quiz_Question.deleteMany({ where: { quizId: id } });
-            return tx.quiz.delete({ where: { id } });
-        });
+        // Check if quiz exists first
+        const quiz = await prisma.quiz.findUnique({ where: { id } });
+        if (!quiz) {
+            throw new Error(`Quiz with ID ${id} not found`);
+        }
+
+        // Delete quiz - cascade will handle quiz_questions, quiz_attempts, and their related records
+        return prisma.quiz.delete({ where: { id } });
     }
 
     // === Question ===
