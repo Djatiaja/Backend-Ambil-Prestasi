@@ -13,7 +13,7 @@ app.use(express.urlencoded({ extended: true, limit: "500mb" }));
 
 const allowedOrigins = [
     "http://localhost:3000",
-    "https://ambilprestasi.vercel.app",
+    "https://ambilprestasi.my.id",
 ];
 
 // global CORS middleware with options success status for legacy browsers
