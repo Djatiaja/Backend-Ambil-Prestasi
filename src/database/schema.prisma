@@ -361,13 +361,14 @@ model RedeemHistory {
 }
 
 model Review {
-  id        Int      @id @default(autoincrement())
-  userId    String
-  classId   Int
-  rating    Int // 1-5
-  comment   String?  @db.Text
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  User      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  Class     Class    @relation(fields: [classId], references: [id], onDelete: Cascade)
+  id         Int      @id @default(autoincrement())
+  userId     String
+  classId    Int
+  rating     Int // 1-5
+  comment    String?  @db.Text
+  isApproved Boolean  @default(false)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  User       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  Class      Class    @relation(fields: [classId], references: [id], onDelete: Cascade)
 }

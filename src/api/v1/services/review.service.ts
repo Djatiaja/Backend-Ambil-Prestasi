@@ -54,7 +54,7 @@ export class ReviewService {
         });
 
         return {
-            message: 'Review created successfully',
+            message: 'Review created successfully. Waiting for admin approval.',
             data: review as ReviewWithRelations,
         };
     }
@@ -133,9 +133,17 @@ export class ReviewService {
     }
 
     // Student: Get own review for a class
-    static async getMyReview(userId: string, classId: number): Promise<ReviewWithRelations | null> {
+    static async getMyReview(userId: string, classId: number): Promise<Omit<ReviewWithRelations, 'isApproved'> | null> {
         const review = await ReviewRepository.findByUserAndClass(userId, classId);
-        return review as ReviewWithRelations | null;
+
+        if (!review) {
+            return null;
+        }
+
+        // Remove isApproved field to hide approval status from student
+        const { isApproved, ...reviewWithoutApproval } = review;
+
+        return reviewWithoutApproval as Omit<ReviewWithRelations, 'isApproved'>;
     }
 
     // Admin: Get all reviews
@@ -193,6 +201,42 @@ export class ReviewService {
             classId,
             averageRating: Number(averageRating.toFixed(2)),
             totalReviews,
+        };
+    }
+
+    // Admin: Approve review
+    static async approveReview(reviewId: number): Promise<{
+        message: string;
+        data: ReviewWithRelations;
+    }> {
+        const review = await ReviewRepository.findById(reviewId);
+        if (!review) {
+            throw new Error('Review not found');
+        }
+
+        const approved = await ReviewRepository.approve(reviewId);
+
+        return {
+            message: 'Review approved successfully',
+            data: approved as ReviewWithRelations,
+        };
+    }
+
+    // Admin: Unapprove/Reject review
+    static async unapproveReview(reviewId: number): Promise<{
+        message: string;
+        data: ReviewWithRelations;
+    }> {
+        const review = await ReviewRepository.findById(reviewId);
+        if (!review) {
+            throw new Error('Review not found');
+        }
+
+        const unapproved = await ReviewRepository.unapprove(reviewId);
+
+        return {
+            message: 'Review unapproved successfully',
+            data: unapproved as ReviewWithRelations,
         };
     }
 }

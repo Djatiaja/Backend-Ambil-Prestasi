@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { sendResponse } from "../helpers/baseResponse";
 import profileService from "../services/profile.service";
-import { saveFile } from "../helpers/file";
+import { deleteFile, saveFile } from "../helpers/file";
 
 class ProfileController {
     async getProfile(req: Request, res: Response) {
@@ -35,6 +35,7 @@ class ProfileController {
 
             // Handle profile image upload if file exists
             if (req.file) {
+                deleteFile(updateData.profileImage); // Delete old profile image
                 const uploadPath = saveFile(req.file, false); // Save to public folder
                 updateData.profileImage = uploadPath;
             }

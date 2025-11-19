@@ -74,7 +74,7 @@ class ProfileService {
             email: updatedUser.email,
             username: updatedUser.username,
             name: updatedUser.name,
-            profileImage: updatedUser.profileImage,
+            profileImage: `${env.APP_URL}/${updatedUser.profileImage}`,
             telp: updatedUser.telp,
             bio: updatedUser.bio,
             verified_at: updatedUser.verified_at,

@@ -32,6 +32,22 @@ reviewRouter.delete('/:id', authMiddleware, requireActiveSubscription, ReviewCon
 
 reviewRouter.get('/admin/all', authMiddleware, verifyRole(['Admin']), ReviewController.getAll);
 
+// Admin: Approve review
+reviewRouter.patch(
+    '/admin/:id/approve',
+    authMiddleware,
+    verifyRole(['Admin']),
+    ReviewController.approveReview
+);
+
+// Admin: Unapprove review
+reviewRouter.patch(
+    '/admin/:id/unapprove',
+    authMiddleware,
+    verifyRole(['Admin']),
+    ReviewController.unapproveReview
+);
+
 reviewRouter.delete(
     '/admin/:id',
     authMiddleware,

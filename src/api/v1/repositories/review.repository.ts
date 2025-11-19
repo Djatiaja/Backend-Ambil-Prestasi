@@ -106,7 +106,10 @@ export class ReviewRepository {
     static async getByClass(classId: number, limit: number, page: number): Promise<Review[]> {
         const skip = (page - 1) * limit;
         return prisma.review.findMany({
-            where: { classId },
+            where: {
+                classId,
+                isApproved: true // Only show approved reviews to public
+            },
             include: {
                 User: {
                     select: {
@@ -125,13 +128,19 @@ export class ReviewRepository {
 
     static async countByClass(classId: number): Promise<number> {
         return prisma.review.count({
-            where: { classId },
+            where: {
+                classId,
+                isApproved: true // Only count approved reviews
+            },
         });
     }
 
     static async getAverageRating(classId: number): Promise<number> {
         const result = await prisma.review.aggregate({
-            where: { classId },
+            where: {
+                classId,
+                isApproved: true // Only calculate from approved reviews
+            },
             _avg: {
                 rating: true,
             },
@@ -190,5 +199,53 @@ export class ReviewRepository {
             : {};
 
         return prisma.review.count({ where });
+    }
+
+    // Admin: Approve review
+    static async approve(id: number): Promise<Review> {
+        return prisma.review.update({
+            where: { id },
+            data: { isApproved: true },
+            include: {
+                User: {
+                    select: {
+                        id: true,
+                        name: true,
+                        username: true,
+                        profileImage: true,
+                    },
+                },
+                Class: {
+                    select: {
+                        id: true,
+                        name: true,
+                    },
+                },
+            },
+        });
+    }
+
+    // Admin: Reject/Unapprove review
+    static async unapprove(id: number): Promise<Review> {
+        return prisma.review.update({
+            where: { id },
+            data: { isApproved: false },
+            include: {
+                User: {
+                    select: {
+                        id: true,
+                        name: true,
+                        username: true,
+                        profileImage: true,
+                    },
+                },
+                Class: {
+                    select: {
+                        id: true,
+                        name: true,
+                    },
+                },
+            },
+        });
     }
 }

@@ -3,6 +3,7 @@ import classRepository from "../repositories/class.repository";
 import userService from "./user.service";
 import userClassService from "./userClass.service";
 import { BaseResponse } from "../types/responseType";
+import { ReviewRepository } from "../repositories/review.repository";
 
 interface ClassData {
     name?: string;
@@ -25,7 +26,19 @@ class ClassService {
     }
 
     async getClassById(classId: number) {
-        return await classRepository.findClassById(classId);
+        const classData = await classRepository.findClassById(classId);
+        if (!classData) {
+            return null;
+        }
+
+        const averageRating = await ReviewRepository.getAverageRating(classId);
+        const totalReviews = await ReviewRepository.countByClass(classId);
+
+        return {
+            ...classData,
+            averageRating: Number(averageRating.toFixed(2)),
+            totalReviews
+        };
     }
 
     async createClass(teacherId: string, data: { name: string; description: string, image_path: string, categoryId: number }) {
@@ -73,6 +86,19 @@ class ClassService {
         const classes = await classRepository.getClasses(skip, limit, search);
         const totalItems = await classRepository.getCount(undefined, search);
 
+        // Add average rating to each class
+        const classesWithRating = await Promise.all(
+            classes.map(async (classData) => {
+                const averageRating = await ReviewRepository.getAverageRating(classData.id);
+                const totalReviews = await ReviewRepository.countByClass(classData.id);
+                return {
+                    ...classData,
+                    averageRating: Number(averageRating.toFixed(2)),
+                    totalReviews
+                };
+            })
+        );
+
         const meta: BaseResponse<unknown>["meta"] = {
             totalItems,
             itemsPerPage: limit,
@@ -80,7 +106,7 @@ class ClassService {
             currentPage: page
         };
 
-        return { classes, meta };
+        return { classes: classesWithRating, meta };
     }
 }
 

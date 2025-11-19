@@ -314,4 +314,76 @@ export class ReviewController {
             });
         }
     }
+
+    // Admin: Approve review
+    static async approveReview(req: Request, res: Response): Promise<void> {
+        try {
+            const reviewId = parseInt(req.params.id);
+
+            if (isNaN(reviewId)) {
+                sendResponse({
+                    res,
+                    statusCode: 400,
+                    success: false,
+                    message: 'Invalid review ID',
+                    data: null,
+                });
+                return;
+            }
+
+            const result = await ReviewService.approveReview(reviewId);
+            sendResponse({
+                res,
+                statusCode: 200,
+                success: true,
+                message: result.message,
+                data: result.data,
+            });
+        } catch (err) {
+            const error = err as Error;
+            sendResponse({
+                res,
+                statusCode: 400,
+                success: false,
+                message: error.message,
+                data: null,
+            });
+        }
+    }
+
+    // Admin: Unapprove review
+    static async unapproveReview(req: Request, res: Response): Promise<void> {
+        try {
+            const reviewId = parseInt(req.params.id);
+
+            if (isNaN(reviewId)) {
+                sendResponse({
+                    res,
+                    statusCode: 400,
+                    success: false,
+                    message: 'Invalid review ID',
+                    data: null,
+                });
+                return;
+            }
+
+            const result = await ReviewService.unapproveReview(reviewId);
+            sendResponse({
+                res,
+                statusCode: 200,
+                success: true,
+                message: result.message,
+                data: result.data,
+            });
+        } catch (err) {
+            const error = err as Error;
+            sendResponse({
+                res,
+                statusCode: 400,
+                success: false,
+                message: error.message,
+                data: null,
+            });
+        }
+    }
 }
