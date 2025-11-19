@@ -233,6 +233,60 @@ export class QuizController {
         }
     }
 
+    static async getAllQuestions(req: Request, res: Response) {
+        try {
+            const quizId = parseInt(req.params.quizId);
+            if (isNaN(quizId)) {
+                throw new Error('Invalid quiz ID');
+            }
+            // Check if user is student (hide answers and explanation)
+            const isStudent = req.role === 'Student';
+            const questions = await QuizService.getAllQuestions(quizId, isStudent);
+            return sendResponse({
+                res,
+                statusCode: 200,
+                success: true,
+                message: 'Questions retrieved',
+                data: questions,
+            });
+        } catch (error) {
+            return sendResponse({
+                res,
+                statusCode: 500,
+                success: false,
+                message: (error as Error).message,
+                data: null,
+            });
+        }
+    }
+
+    static async getQuestionById(req: Request, res: Response) {
+        try {
+            const questionId = parseInt(req.params.questionId);
+            if (isNaN(questionId)) {
+                throw new Error('Invalid question ID');
+            }
+            // Check if user is student (hide answers and explanation)
+            const isStudent = req.role === 'Student';
+            const question = await QuizService.getQuestionById(questionId, isStudent);
+            return sendResponse({
+                res,
+                statusCode: 200,
+                success: true,
+                message: 'Question retrieved',
+                data: question,
+            });
+        } catch (error) {
+            return sendResponse({
+                res,
+                statusCode: 500,
+                success: false,
+                message: (error as Error).message,
+                data: null,
+            });
+        }
+    }
+
     // === STUDENT ===
     static async startQuizAttempt(req: Request, res: Response) {
         try {
@@ -366,6 +420,31 @@ export class QuizController {
                 success: true,
                 message: 'Attempt questions retrieved',
                 data: questions,
+            });
+        } catch (error) {
+            return sendResponse({
+                res,
+                statusCode: 400,
+                success: false,
+                message: (error as Error).message,
+                data: null,
+            });
+        }
+    }
+
+    static async getQuizReview(req: Request, res: Response) {
+        try {
+            const attemptId = parseInt(req.params.attemptId);
+            if (isNaN(attemptId)) {
+                throw new Error('Invalid attempt ID');
+            }
+            const review = await QuizService.getQuizReview(req.user!.id!, attemptId);
+            return sendResponse({
+                res,
+                statusCode: 200,
+                success: true,
+                message: 'Quiz review retrieved',
+                data: review,
             });
         } catch (error) {
             return sendResponse({

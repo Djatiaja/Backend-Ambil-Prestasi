@@ -22,6 +22,7 @@ export const createQuestionSchema = z.object({
     question: z.string().min(1, "Question is required"),
     type: z.enum(["MultipleChoice", "TrueFalse", "Essay"]),
     points: z.number().int().min(1, "Points must be >= 1"),
+    explanation: z.string().optional(),
     answers: z
         .array(answerSchema)
         .min(1)

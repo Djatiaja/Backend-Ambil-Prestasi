@@ -25,9 +25,9 @@ export const getAllTeachers = async (req: Request, res: Response) => {
 
 export const createTeacher = async (req: Request, res: Response) => {
     try {
-        const { name, email, username, telp, status, specialization, bio } = req.body as TeacherCreateDTO;
+        const { name, email, username, password, telp, status, specialization, bio } = req.body as TeacherCreateDTO;
 
-        const newTeacher = await userService.createUser({ name, email, password: username, role: "Teacher", username: username || email, telp, status, specialization, bio });
+        const newTeacher = await userService.createUser({ name, email, password, role: "Teacher", username: username || email, telp, status, specialization, bio });
         sendResponse({ res, statusCode: 201, success: true, message: "Teacher created successfully", data: newTeacher });
     } catch (error: unknown) {
         console.error(req.body, error);

@@ -72,6 +72,7 @@ export class QuizRepository {
                     question: data.question,
                     type: data.type as quiz_question_type,
                     points: data.points,
+                    explanation: data.explanation,
                     quizId,
                 },
             });
@@ -95,10 +96,11 @@ export class QuizRepository {
 
     static async updateQuestion(questionId: number, data: UpdateQuestionInput) {
         return prisma.$transaction(async (tx) => {
-            const updateData: Partial<CreateQuestionInput> = {};
-            if (data.question) updateData.question = data.question;
-            if (data.type) updateData.type = data.type;
-            if (data.points) updateData.points = data.points;
+            const updateData: any = {};
+            if (data.question !== undefined) updateData.question = data.question;
+            if (data.type !== undefined) updateData.type = data.type;
+            if (data.points !== undefined) updateData.points = data.points;
+            if (data.explanation !== undefined) updateData.explanation = data.explanation;
 
             await tx.quiz_Question.update({
                 where: { id: questionId },
@@ -130,6 +132,63 @@ export class QuizRepository {
             await tx.quiz_Answer.deleteMany({ where: { questionId } });
             return tx.quiz_Question.delete({ where: { id: questionId } });
         });
+    }
+
+    static async getAllQuestions(quizId: number, isStudent: boolean = false) {
+        const questions = await prisma.quiz_Question.findMany({
+            where: { quizId },
+            include: { 
+                quiz_answer: {
+                    select: {
+                        id: true,
+                        answer: true,
+                        is_correct: !isStudent, // Hide is_correct for students
+                        questionId: true,
+                        createdAt: true,
+                        updatedAt: true,
+                    }
+                }
+            },
+            orderBy: { id: 'asc' },
+        });
+
+        // Hide explanation for students
+        if (isStudent) {
+            return questions.map(q => ({
+                ...q,
+                explanation: undefined,
+            }));
+        }
+
+        return questions;
+    }
+
+    static async getQuestionById(questionId: number, isStudent: boolean = false) {
+        const question = await prisma.quiz_Question.findUnique({
+            where: { id: questionId },
+            include: { 
+                quiz_answer: {
+                    select: {
+                        id: true,
+                        answer: true,
+                        is_correct: !isStudent, // Hide is_correct for students
+                        questionId: true,
+                        createdAt: true,
+                        updatedAt: true,
+                    }
+                }
+            },
+        });
+
+        // Hide explanation for students
+        if (question && isStudent) {
+            return {
+                ...question,
+                explanation: undefined,
+            };
+        }
+
+        return question;
     }
 
     // === Submit ===
@@ -512,5 +571,89 @@ export class QuizRepository {
             },
             orderBy: { createdAt: 'desc' },
         });
+    }
+
+    static async getQuizReview(attemptId: number, userId: string) {
+        const attempt = await prisma.quiz_Attempt.findFirst({
+            where: { id: attemptId, userId },
+            include: {
+                quiz: {
+                    include: {
+                        quiz_question: {
+                            include: { quiz_answer: true },
+                            orderBy: { id: 'asc' },
+                        },
+                    },
+                },
+                attemp_answer: {
+                    include: {
+                        quiz_question: true,
+                        attemp_multiple_answer: {
+                            include: { quiz_answer: true },
+                        },
+                    },
+                },
+            },
+        });
+
+        if (!attempt) throw new Error('Attempt not found or unauthorized');
+        if (!attempt.submitted_at) throw new Error('Quiz not submitted yet');
+
+        // Format review with correct answers and explanations
+        const review = attempt.quiz.quiz_question.map((question) => {
+            const userAnswer = attempt.attemp_answer.find(
+                (ans) => ans.questionId === question.id
+            );
+
+            let isCorrect = false;
+            let correctAnswers: any[] = [];
+            let userAnswers: any[] = [];
+
+            if (question.type === 'MultipleChoice') {
+                correctAnswers = question.quiz_answer
+                    .filter((a) => a.is_correct)
+                    .map((a) => ({ id: a.id, answer: a.answer }));
+
+                userAnswers = userAnswer?.attemp_multiple_answer.map((a) => ({
+                    id: a.quiz_answer.id,
+                    answer: a.quiz_answer.answer,
+                })) || [];
+
+                const correctIds = correctAnswers.map((a) => a.id).sort();
+                const selectedIds = userAnswers.map((a) => a.id).sort();
+                isCorrect =
+                    correctIds.length === selectedIds.length &&
+                    correctIds.every((id, idx) => id === selectedIds[idx]);
+            } else if (question.type === 'TrueFalse') {
+                const correctAnswer = question.quiz_answer.find((a) => a.is_correct);
+                correctAnswers = correctAnswer ? [{ answer: correctAnswer.answer }] : [];
+                userAnswers = userAnswer?.answer ? [{ answer: userAnswer.answer }] : [];
+                isCorrect = userAnswer?.answer === correctAnswer?.answer;
+            } else if (question.type === 'Essay') {
+                userAnswers = userAnswer?.answer ? [{ answer: userAnswer.answer }] : [];
+                // Essay questions need manual grading
+                isCorrect = false;
+            }
+
+            return {
+                questionId: question.id,
+                question: question.question,
+                type: question.type,
+                points: question.points,
+                explanation: question.explanation,
+                correctAnswers,
+                userAnswers,
+                isCorrect,
+            };
+        });
+
+        return {
+            attemptId: attempt.id,
+            score: attempt.score,
+            totalScore: attempt.quiz.quiz_question.reduce((sum, q) => sum + q.points, 0),
+            isGraded: attempt.is_graded,
+            submittedAt: attempt.submitted_at,
+            review,
+        };
     }
 }

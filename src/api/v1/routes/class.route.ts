@@ -3,13 +3,14 @@ import { getClasses, getClassById, createClass, updateClass, deleteClass } from 
 import { validateBody } from "../middlewares/schema.middleware";
 import { createClassSchema, updateClassSchema } from "../schemas/class.schema";
 import upload from "../../../config/multer.config";
+import { verifyRole } from "../middlewares/verifyrole.middleware";
 
 const classRouter = Router();
 
 classRouter.get("/", getClasses);
-classRouter.get("/:id", getClassById);
-classRouter.post("/", upload.single("file"), validateBody(createClassSchema), createClass);
-classRouter.patch("/:id", upload.single("file"), validateBody(updateClassSchema), updateClass);
-classRouter.delete("/:id", deleteClass);
+classRouter.get("/:id", getClassById, verifyRole(["Admin", "Teacher"]));
+classRouter.post("/", verifyRole(["Admin", "Teacher"]), upload.single("file"), validateBody(createClassSchema), createClass);
+classRouter.patch("/:id", verifyRole(["Admin", "Teacher"]), upload.single("file"), validateBody(updateClassSchema), updateClass);
+classRouter.delete("/:id", verifyRole(["Admin", "Teacher"]), deleteClass);
 
 export default classRouter;

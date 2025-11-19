@@ -1,4 +1,4 @@
-import { User, user_status } from "@prisma/client";
+import { class_role, User, user_status } from "@prisma/client";
 import bcrypt from 'bcrypt';
 
 import prisma from "../../../database";
@@ -55,7 +55,7 @@ class UserService {
             throw new Error("Username already exists");
         }
 
-        return await userRepository.createUser({ name, email, password: hashedPassword, role, username, profileImage, telp, status, specialization, bio })
+        return await userRepository.createUser({ name, email, password: hashedPassword, role, username, profileImage, telp, status, specialization, bio, verified_at: role === class_role.Teacher ? new Date() : undefined });
     }
 
     async updateUser(id: string, data: Partial<User>) {

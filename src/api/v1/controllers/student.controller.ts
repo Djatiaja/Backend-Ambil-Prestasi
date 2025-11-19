@@ -3,6 +3,8 @@ import { sendResponse } from "../helpers/baseResponse";
 import materialService from "../services/material.service";
 import studentService from "../services/student.service";
 import { NotFoundError } from "../errors/notfound.error";
+import classService from "../services/class.service";
+import sectionService from "../services/section.service";
 
 
 class StudentController {
@@ -152,6 +154,30 @@ class StudentController {
             });
         } catch (error) {
             const message = error instanceof Error ? error.message : "Failed to check enrollment";
+            return sendResponse({
+                res,
+                statusCode: 500,
+                success: false,
+                message,
+                data: null,
+            });
+        }
+    }
+
+    async getAllSectionsForStudent(req: Request, res: Response) {
+        try {
+            const classId = req.params.classId;
+            const sections = await sectionService.getAllSections(classId);
+
+            return sendResponse({
+                res,
+                statusCode: 200,
+                success: true,
+                message: "Sections retrieved successfully",
+                data: sections,
+            });
+        } catch (error) {
+            const message = error instanceof Error ? error.message : "Failed to get sections";
             return sendResponse({
                 res,
                 statusCode: 500,

@@ -80,7 +80,7 @@ class UserRepository {
     }
 
 
-    async createUser(data: { name: string; email: string; password: string; role: string; username: string; profileImage?: string; telp?: string; status?: user_status; specialization?: string; bio?: string }): Promise<Partial<User>> {
+    async createUser(data: { name: string; email: string; password: string; role: string; username: string; profileImage?: string; telp?: string; status?: user_status; specialization?: string; bio?: string, verified_at?: Date }): Promise<Partial<User>> {
         const { name, email, password, role, username, profileImage } = data;
         const roleData = await prisma.role.findUnique({ where: { name: role } });
         if (!roleData) throw new Error("Role not found");
@@ -97,6 +97,7 @@ class UserRepository {
                 status: data.status ?? user_status.ACTIVE,
                 specialization: data.specialization,
                 bio: data.bio,
+                verified_at: data.verified_at,
             },
             select: safeUserFields,
         });

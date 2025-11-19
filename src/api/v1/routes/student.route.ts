@@ -2,6 +2,7 @@ import { Router } from "express";
 import studentController from "../controllers/student.controller";
 import { authMiddleware } from "../middlewares/auth.middleware";
 import { requireActiveSubscription } from "../middlewares/verifySubscription.middleware";
+import classService from "../services/class.service";
 
 
 const studentRouter = Router();
@@ -32,6 +33,12 @@ studentRouter.get("/classes/enrolled",
 studentRouter.get("/classes/:classId/enrollment-status",
     authMiddleware,
     studentController.checkEnrollment
+);
+
+studentRouter.get("/classes/sections",
+    authMiddleware,
+    requireActiveSubscription,
+    studentController.getAllSectionsForStudent
 );
 
 export default studentRouter;

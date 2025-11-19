@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { userRepository } from "../repositories/user.repository";
+import { PassThrough } from "stream";
 
 export const teacherCreateSchema = z.object({
     name: z.string().min(4).max(100),
@@ -7,6 +8,7 @@ export const teacherCreateSchema = z.object({
     email: z.string().email(),
     telp: z.string().min(10).max(15),
     status: z.enum(["ACTIVE", "INACTIVE"]),
+    password: z.string().min(6).max(100),
     specialization: z.string().max(255),
     bio: z.string().max(1000),
 }).superRefine(async (data, context) => {

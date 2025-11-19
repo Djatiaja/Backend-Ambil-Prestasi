@@ -58,6 +58,17 @@ export class QuizService {
         return QuizRepository.deleteQuestion(questionId);
     }
 
+    static async getAllQuestions(quizId: number, isStudent: boolean = false) {
+        await this.getQuizById(quizId);
+        return QuizRepository.getAllQuestions(quizId, isStudent);
+    }
+
+    static async getQuestionById(questionId: number, isStudent: boolean = false) {
+        const question = await QuizRepository.getQuestionById(questionId, isStudent);
+        if (!question) throw new Error('Question not found');
+        return question;
+    }
+
     // === Student ===
     static async startQuizAttempt(userId: string, data: StartQuizAttemptInput) {
         const quiz = await this.getQuizById(data.quizId);
@@ -182,5 +193,9 @@ export class QuizService {
         }
 
         return QuizRepository.getAttemptQuestions(attemptId);
+    }
+
+    static async getQuizReview(userId: string, attemptId: number) {
+        return QuizRepository.getQuizReview(attemptId, userId);
     }
 }

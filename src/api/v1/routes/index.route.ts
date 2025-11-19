@@ -31,10 +31,10 @@ declare module "express-serve-static-core" {
 
 router.use("/teachers", authMiddleware, verifyRole(["Admin", "Teacher"]), teacherRouter);
 router.use("/dashboard", authMiddleware, verifyRole(["Admin"]), dashboardRouter);
-router.use("/classes", authMiddleware, verifyRole(["Admin", "Teacher"]), classRouter);
+router.use("/classes", authMiddleware, verifyRole(["Admin", "Teacher", "Student"]), classRouter);
 router.use("/classes/:classId/sections", sectionRouter);
 router.use("/classes/sections/:sectionId/materials", authMiddleware, verifyRole(["Teacher", "Admin"]), materialRouter);
-router.use("/classes/sections/materials/:materialId/quizzes", quizRouter);
+router.use("/classes/sections/materials/:materialId/quizzes", authMiddleware, verifyRole(["Student", "Teacher", "Admin"]), quizRouter);
 router.use("/", authRouter)
 router.use("/public", publicRouter)
 router.use("/categories", authMiddleware, verifyRole(["Admin", "Teacher"]), categoryRouter);
