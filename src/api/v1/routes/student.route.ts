@@ -14,28 +14,7 @@ studentRouter.get("/materials/:id",
     studentController.getMaterialById
 );
 
-// Class enrollment routes
-studentRouter.post("/classes/:classId/enroll",
-    authMiddleware,
-    studentController.enrollClass
-);
-
-studentRouter.delete("/classes/:classId/unenroll",
-    authMiddleware,
-    studentController.unenrollClass
-);
-
-studentRouter.get("/classes/enrolled",
-    authMiddleware,
-    studentController.getEnrolledClasses
-);
-
-studentRouter.get("/classes/:classId/enrollment-status",
-    authMiddleware,
-    studentController.checkEnrollment
-);
-
-studentRouter.get("/classes/sections",
+studentRouter.get("/classes/sections/:classId",
     authMiddleware,
     requireActiveSubscription,
     studentController.getAllSectionsForStudent

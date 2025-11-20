@@ -168,7 +168,13 @@ class StudentController {
         try {
             const classId = req.params.classId;
             const sections = await sectionService.getAllSections(classId);
-
+            sections.forEach(section => {
+                section.Material.forEach(material => {
+                    if (material.thumnail_path) {
+                        material.thumnail_path = `${process.env.APP_URL}/${material.thumnail_path}`;
+                    }
+                });
+            });
             return sendResponse({
                 res,
                 statusCode: 200,

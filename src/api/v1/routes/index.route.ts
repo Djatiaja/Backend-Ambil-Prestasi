@@ -40,7 +40,7 @@ router.use("/public", publicRouter)
 router.use("/categories", authMiddleware, verifyRole(["Admin", "Teacher"]), categoryRouter);
 router.use("/redeem", authMiddleware, verifyRole(["Admin", "Student"]), redeemRouter);
 
-router.use("/students", authMiddleware, verifyRole(["Student"]), studentRouter);
+router.use("/students", authMiddleware, verifyRole(["Student", "Admin"]), studentRouter);
 router.use("/reviews", reviewRouter);
 router.use("/files", fileRouter);
 router.use("/profile", profileRouter);
