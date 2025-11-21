@@ -22,6 +22,63 @@ export class QuizRepository {
         });
     }
 
+    static async getQuizzesByMaterialForStudent(materialId: number, userId: string) {
+        const quizzes = await prisma.quiz.findMany({
+            where: { materialId },
+            select: {
+                id: true,
+                title: true,
+                description: true,
+                max_attempts: true,
+                time_limit: true,
+                passing_grade: true,
+                xp: true,
+                createdAt: true,
+                _count: {
+                    select: {
+                        quiz_question: true,
+                    },
+                },
+            },
+            orderBy: { createdAt: 'desc' },
+        });
+
+        // Get user's attempts for each quiz
+        const quizzesWithAttempts = await Promise.all(
+            quizzes.map(async (quiz) => {
+                const attempts = await prisma.quiz_Attempt.findMany({
+                    where: {
+                        quizId: quiz.id,
+                        userId,
+                        submitted_at: { not: null },
+                    },
+                    select: {
+                        id: true,
+                        score: true,
+                        is_graded: true,
+                        submitted_at: true,
+                    },
+                    orderBy: { submitted_at: 'desc' },
+                });
+
+                const bestScore = attempts.length > 0
+                    ? Math.max(...attempts.filter(a => a.score !== null).map(a => a.score!))
+                    : null;
+
+                return {
+                    ...quiz,
+                    totalQuestions: quiz._count.quiz_question,
+                    attemptsUsed: attempts.length,
+                    attemptsRemaining: quiz.max_attempts - attempts.length,
+                    bestScore,
+                    lastAttempt: attempts.length > 0 ? attempts[0] : null,
+                };
+            })
+        );
+
+        return quizzesWithAttempts;
+    }
+
     static async createQuiz(data: CreateQuizInput) {
         console.log('Creating quiz with data:', data);
         return prisma.quiz.create({
@@ -137,7 +194,7 @@ export class QuizRepository {
     static async getAllQuestions(quizId: number, isStudent: boolean = false) {
         const questions = await prisma.quiz_Question.findMany({
             where: { quizId },
-            include: { 
+            include: {
                 quiz_answer: {
                     select: {
                         id: true,
@@ -166,7 +223,7 @@ export class QuizRepository {
     static async getQuestionById(questionId: number, isStudent: boolean = false) {
         const question = await prisma.quiz_Question.findUnique({
             where: { id: questionId },
-            include: { 
+            include: {
                 quiz_answer: {
                     select: {
                         id: true,

@@ -175,6 +175,17 @@ class ClassRepository {
 
         return students;
     }
+
+    async isUserAssignedToClass(userId: string, classId: number, role?: class_role): Promise<boolean> {
+        const assignment = await prisma.user_Class.findFirst({
+            where: {
+                userId,
+                classId,
+                role: role || class_role.Teacher
+            }
+        });
+        return !!assignment;
+    }
 }
 
 export default new ClassRepository();

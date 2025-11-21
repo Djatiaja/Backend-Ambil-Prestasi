@@ -4,6 +4,37 @@ import { QuizService } from '../services/quiz.service';
 import materialService from '../services/material.service';
 
 export class QuizController {
+    // === STUDENT: Get Quizzes ===
+    static async getQuizzesByMaterialForStudent(req: Request, res: Response) {
+        try {
+            const materialId = parseInt(req.params.materialId);
+            if (isNaN(materialId)) {
+                throw new Error('Invalid material ID');
+            }
+
+            const quizzes = await QuizService.getQuizzesByMaterialForStudent(
+                materialId,
+                req.user!.id!
+            );
+
+            return sendResponse({
+                res,
+                statusCode: 200,
+                success: true,
+                message: 'Quizzes retrieved',
+                data: quizzes,
+            });
+        } catch (error) {
+            return sendResponse({
+                res,
+                statusCode: 500,
+                success: false,
+                message: (error as Error).message,
+                data: null,
+            });
+        }
+    }
+
     // === TEACHER: Quiz ===
     static async getQuizzesByMaterial(req: Request, res: Response) {
         try {

@@ -44,6 +44,21 @@ class CategoryRepository {
             select: safeCategoryFields,
         });
     }
+
+    async getDeletedCategories() {
+        return await prisma.category.findMany({
+            where: { deleted: true },
+            select: safeCategoryFields,
+        });
+    }
+
+    async restoreCategory(categoryId: number) {
+        return await prisma.category.update({
+            where: { id: categoryId },
+            data: { deleted: false },
+            select: safeCategoryFields,
+        });
+    }
 }
 
 export default new CategoryRepository();

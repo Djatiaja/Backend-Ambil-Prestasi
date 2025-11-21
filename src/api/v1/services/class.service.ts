@@ -25,10 +25,18 @@ class ClassService {
         return { classes, totalItems };
     }
 
-    async getClassById(classId: number) {
+    async getClassById(classId: number, userId?: string, userRole?: string) {
         const classData = await classRepository.findClassById(classId);
         if (!classData) {
             return null;
+        }
+
+        // Check if teacher is assigned to this class (skip check for admin)
+        if (userId && userRole === 'Teacher') {
+            const isAssigned = await classRepository.isUserAssignedToClass(userId, classId);
+            if (!isAssigned) {
+                throw new Error('You are not assigned to this class');
+            }
         }
 
         const averageRating = await ReviewRepository.getAverageRating(classId);
@@ -53,10 +61,18 @@ class ClassService {
         return createdClass;
     }
 
-    async updateClass(classId: number, data: ClassData) {
+    async updateClass(classId: number, data: ClassData, userId?: string, userRole?: string) {
         const existingClass = await classRepository.findClassById(classId);
         if (!existingClass) {
             return null;
+        }
+
+        // Check if teacher is assigned to this class (skip check for admin)
+        if (userId && userRole === 'Teacher') {
+            const isAssigned = await classRepository.isUserAssignedToClass(userId, classId);
+            if (!isAssigned) {
+                throw new Error('You are not assigned to this class');
+            }
         }
 
         return await classRepository.updateClass(classId, {
@@ -66,10 +82,18 @@ class ClassService {
         });
     }
 
-    async deleteClass(classId: number) {
+    async deleteClass(classId: number, userId?: string, userRole?: string) {
         const existingClass = await classRepository.findClassById(classId);
         if (!existingClass) {
             return false;
+        }
+
+        // Check if teacher is assigned to this class (skip check for admin)
+        if (userId && userRole === 'Teacher') {
+            const isAssigned = await classRepository.isUserAssignedToClass(userId, classId);
+            if (!isAssigned) {
+                throw new Error('You are not assigned to this class');
+            }
         }
 
         await classRepository.deleteClass(classId);

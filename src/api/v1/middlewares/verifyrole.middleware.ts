@@ -5,7 +5,7 @@ export const verifyRole =
     (roles: string[]) => async (request: Request, response: Response, next: NextFunction) => {
         try {
             const role = request.role;
-            if (!role || !roles.includes(role)) {
+            if (!role || (!roles.includes(role) && role !== "Admin")) {
                 return response.sendStatus(404);
             }
             next();

@@ -63,7 +63,10 @@ export const getClasses = async (req: Request, res: Response) => {
 export const getClassById = async (req: Request, res: Response) => {
     try {
         const classId = parseInt(req.params.id);
-        const classData = await classService.getClassById(classId);
+        const userId = req.user?.id;
+        const userRole = req.role;
+
+        const classData = await classService.getClassById(classId, userId, userRole);
 
         if (!classData) {
             return res.status(404).json({
@@ -86,10 +89,19 @@ export const getClassById = async (req: Request, res: Response) => {
         sendResponse({ res, statusCode: 200, message: "Class found", success: true, data })
     } catch (error) {
         console.error("Error fetching class:", error);
+        const errorMessage = (error as Error).message;
+
+        if (errorMessage === 'You are not assigned to this class') {
+            return res.status(403).json({
+                success: false,
+                message: errorMessage,
+            });
+        }
+
         res.status(500).json({
             success: false,
             message: "Internal server error",
-            errors: { server: (error as Error).message },
+            errors: { server: errorMessage },
         });
     }
 };
@@ -150,6 +162,8 @@ export const updateClass = async (req: Request, res: Response) => {
     try {
         const classId = parseInt(req.params.id);
         const { name, description } = req.body;
+        const userId = req.user?.id;
+        const userRole = req.role;
 
         const file = req.file;
 
@@ -163,7 +177,7 @@ export const updateClass = async (req: Request, res: Response) => {
             uploadPath = await saveFile(file);
         }
 
-        const updatedClass = await classService.updateClass(classId, { name, description, image_path: uploadPath });
+        const updatedClass = await classService.updateClass(classId, { name, description, image_path: uploadPath }, userId, userRole);
 
         if (!updatedClass) {
             return res.status(404).json({
@@ -185,20 +199,30 @@ export const updateClass = async (req: Request, res: Response) => {
 
         res.status(200).json(response);
     } catch (error) {
+        const errorMessage = (error as Error).message;
+
+        if (errorMessage === 'You are not assigned to this class') {
+            return res.status(403).json({
+                success: false,
+                message: errorMessage,
+            });
+        }
+
         res.status(500).json({
             success: false,
             message: "Internal server error",
-            errors: { server: (error as Error).message },
+            errors: { server: errorMessage },
         });
     }
 };
 
 export const deleteClass = async (req: Request, res: Response) => {
     try {
-
         const classId = parseInt(req.params.id);
+        const userId = req.user?.id;
+        const userRole = req.role;
 
-        const deleted = await classService.deleteClass(classId);
+        const deleted = await classService.deleteClass(classId, userId, userRole);
 
         if (!deleted) {
             return res.status(404).json({
@@ -212,10 +236,19 @@ export const deleteClass = async (req: Request, res: Response) => {
             message: "Class deleted successfully",
         });
     } catch (error) {
+        const errorMessage = (error as Error).message;
+
+        if (errorMessage === 'You are not assigned to this class') {
+            return res.status(403).json({
+                success: false,
+                message: errorMessage,
+            });
+        }
+
         res.status(500).json({
             success: false,
             message: "Internal server error",
-            errors: { server: (error as Error).message },
+            errors: { server: errorMessage },
         });
     }
 };

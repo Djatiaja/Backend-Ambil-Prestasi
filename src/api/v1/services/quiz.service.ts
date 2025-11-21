@@ -17,6 +17,19 @@ export class QuizService {
         return QuizRepository.getQuizzesByMaterial(materialId);
     }
 
+    static async getQuizzesByMaterialForStudent(materialId: number, userId: string) {
+        // Validate that material exists
+        const material = await prisma.material.findUnique({
+            where: { id: materialId },
+        });
+
+        if (!material) {
+            throw new Error(`Material with ID ${materialId} not found`);
+        }
+
+        return QuizRepository.getQuizzesByMaterialForStudent(materialId, userId);
+    }
+
     static async createQuiz(data: CreateQuizInput) {
         // Validate that material exists
         const material = await prisma.material.findUnique({

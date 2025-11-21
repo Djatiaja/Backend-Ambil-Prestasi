@@ -17,6 +17,13 @@ const router = Router({ mergeParams: true });
 
 
 // === STUDENT ===
+// Get all quizzes by material (student view)
+router.get(
+    '/student',
+    verifyRole(['Student']),
+    QuizController.getQuizzesByMaterialForStudent
+);
+
 // Start quiz attempt
 router.post(
     '/start',

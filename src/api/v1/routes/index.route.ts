@@ -7,7 +7,6 @@ import { authMiddleware } from "../middlewares/auth.middleware";
 import { verifyRole } from "../middlewares/verifyrole.middleware";
 import { User } from "@prisma/client";
 import materialRouter from "./material.route";
-import materialFileRouter from "./materialFile.route";
 import sectionRouter from "./section.route";
 import publicRouter from "./public.route";
 import categoryRouter from "./category.route";
