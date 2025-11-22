@@ -49,6 +49,12 @@ export class QuizService {
         return quiz;
     }
 
+    static async getQuizByIdForStudent(quizId: number, userId: string) {
+        const quiz = await QuizRepository.getQuizByIdForStudent(quizId, userId);
+        if (!quiz) throw new Error('Quiz not found');
+        return quiz;
+    }
+
     static async updateQuiz(id: number, data: UpdateQuizInput) {
         return QuizRepository.updateQuiz(id, data);
     }

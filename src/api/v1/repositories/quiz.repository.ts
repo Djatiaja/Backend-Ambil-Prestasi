@@ -106,6 +106,76 @@ export class QuizRepository {
         });
     }
 
+    static async getQuizByIdForStudent(quizId: number, userId: string) {
+        const quiz = await prisma.quiz.findUnique({
+            where: { id: quizId },
+            select: {
+                id: true,
+                title: true,
+                description: true,
+                max_attempts: true,
+                time_limit: true,
+                passing_grade: true,
+                xp: true,
+                materialId: true,
+                createdAt: true,
+                _count: {
+                    select: {
+                        quiz_question: true,
+                    },
+                },
+            },
+        });
+
+        if (!quiz) {
+            return null;
+        }
+
+        // Get user's attempts for this quiz
+        const attempts = await prisma.quiz_Attempt.findMany({
+            where: {
+                quizId,
+                userId,
+                submitted_at: { not: null },
+            },
+            select: {
+                id: true,
+                score: true,
+                is_graded: true,
+                started_at: true,
+                submitted_at: true,
+            },
+            orderBy: { submitted_at: 'desc' },
+        });
+
+        // Check if there's an ongoing attempt
+        const ongoingAttempt = await prisma.quiz_Attempt.findFirst({
+            where: {
+                quizId,
+                userId,
+                submitted_at: null,
+            },
+            select: {
+                id: true,
+                started_at: true,
+            },
+        });
+
+        const bestScore = attempts.length > 0
+            ? Math.max(...attempts.filter(a => a.score !== null).map(a => a.score!))
+            : null;
+
+        return {
+            ...quiz,
+            totalQuestions: quiz._count.quiz_question,
+            attemptsUsed: attempts.length,
+            attemptsRemaining: quiz.max_attempts - attempts.length,
+            bestScore,
+            attempts,
+            ongoingAttempt,
+        };
+    }
+
     static async updateQuiz(id: number, data: Partial<CreateQuizInput>) {
         return prisma.quiz.update({ where: { id }, data });
     }

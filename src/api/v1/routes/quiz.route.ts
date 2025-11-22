@@ -24,6 +24,13 @@ router.get(
     QuizController.getQuizzesByMaterialForStudent
 );
 
+// Get quiz detail by ID (student view)
+router.get(
+    '/detail/:quizId',
+    verifyRole(['Student']),
+    QuizController.getQuizByIdForStudent
+);
+
 // Start quiz attempt
 router.post(
     '/start',

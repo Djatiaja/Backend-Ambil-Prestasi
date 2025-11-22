@@ -35,6 +35,33 @@ export class QuizController {
         }
     }
 
+    static async getQuizByIdForStudent(req: Request, res: Response) {
+        try {
+            const quizId = parseInt(req.params.quizId);
+            if (isNaN(quizId)) {
+                throw new Error('Invalid quiz ID');
+            }
+
+            const quiz = await QuizService.getQuizByIdForStudent(quizId, req.user!.id!);
+
+            return sendResponse({
+                res,
+                statusCode: 200,
+                success: true,
+                message: 'Quiz detail retrieved',
+                data: quiz,
+            });
+        } catch (error) {
+            return sendResponse({
+                res,
+                statusCode: 404,
+                success: false,
+                message: (error as Error).message,
+                data: null,
+            });
+        }
+    }
+
     // === TEACHER: Quiz ===
     static async getQuizzesByMaterial(req: Request, res: Response) {
         try {
