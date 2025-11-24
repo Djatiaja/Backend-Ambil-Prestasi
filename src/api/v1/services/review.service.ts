@@ -133,17 +133,14 @@ export class ReviewService {
     }
 
     // Student: Get own review for a class
-    static async getMyReview(userId: string, classId: number): Promise<Omit<ReviewWithRelations, 'isApproved'> | null> {
+    static async getMyReview(userId: string, classId: number): Promise<ReviewWithRelations | null> {
         const review = await ReviewRepository.findByUserAndClass(userId, classId);
 
         if (!review) {
             return null;
         }
 
-        // Remove isApproved field to hide approval status from student
-        const { isApproved, ...reviewWithoutApproval } = review;
-
-        return reviewWithoutApproval as Omit<ReviewWithRelations, 'isApproved'>;
+        return review as ReviewWithRelations;
     }
 
     // Admin: Get all reviews
