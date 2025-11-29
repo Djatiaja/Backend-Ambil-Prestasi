@@ -33,8 +33,7 @@ router.get(
 
 // Start quiz attempt
 router.post(
-    '/start',
-    validateBody(startQuizAttemptSchema),
+    '/:quizId/start',
     QuizController.startQuizAttempt
 );
 

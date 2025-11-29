@@ -19,6 +19,12 @@ class CategoryService {
     }
 
     async deleteCategory(categoryId: number) {
+        // Check if category exists
+        const category = await categoryRepository.getCategoryById(categoryId);
+        if (!category) {
+            throw new Error('Category not found');
+        }
+
         return await categoryRepository.deleteCategory(categoryId);
     }
 

@@ -53,13 +53,30 @@ class CategoryController {
     async deleteCategory(req: Request, res: Response) {
         try {
             const categoryId = parseInt(req.params.id);
-            const deleted = await categoryService.deleteCategory(categoryId);
-            if (!deleted) {
-                return sendResponse({ res, statusCode: 404, success: false, message: "Category Not Found", data: null });
+            const result = await categoryService.deleteCategory(categoryId);
+
+            if (!result.canDelete) {
+                return sendResponse({
+                    res,
+                    statusCode: 400,
+                    success: false,
+                    message: `Cannot delete category. There are ${result.totalClasses} class(es) in this category`,
+                    data: {
+                        totalClasses: result.totalClasses,
+                        classes: result.classes,
+                    }
+                });
             }
-            sendResponse({ res, statusCode: 200, success: true, message: "Category Deleted", data: null });
+
+            sendResponse({ res, statusCode: 200, success: true, message: "Category Deleted Permanently", data: null });
         } catch (error) {
             console.error("Error deleting category:", error);
+            const errorMessage = (error as Error).message;
+
+            if (errorMessage === 'Category not found') {
+                return sendResponse({ res, statusCode: 404, success: false, message: errorMessage, data: null });
+            }
+
             sendResponse({ res, statusCode: 500, success: false, message: "Failed to Delete Category", data: null });
         }
     }

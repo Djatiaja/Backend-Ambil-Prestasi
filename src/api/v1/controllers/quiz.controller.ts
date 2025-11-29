@@ -348,7 +348,11 @@ export class QuizController {
     // === STUDENT ===
     static async startQuizAttempt(req: Request, res: Response) {
         try {
-            const attempt = await QuizService.startQuizAttempt(req.user!.id!, req.body);
+            const quizId = parseInt(req.params.quizId);
+            if (isNaN(quizId)) {
+                throw new Error('Invalid quiz ID');
+            }
+            const attempt = await QuizService.startQuizAttempt(req.user!.id!, { quizId });
             return sendResponse({
                 res,
                 statusCode: 201,
