@@ -9,7 +9,7 @@ const app = express();
 app.set("trust proxy", true);
 
 app.use(express.json());
-app.use(express.urlencoded({ extended: true, limit: "500mb" }));
+app.use(express.urlencoded({ extended: true, limit: "1024mb" }));
 
 const allowedOrigins = [
     "http://localhost:3000",
