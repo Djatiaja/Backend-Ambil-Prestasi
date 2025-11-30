@@ -1,7 +1,7 @@
 import { z } from 'zod';
 import { imageSchema } from './image.schema';
 
-const MAX_MATERIAL_SIZE = 50 * 1024 * 1024; // 50MB
+const MAX_MATERIAL_SIZE = 200 * 1024 * 1024; // 200MB
 const MAX_VIDEO_SIZE = 1000 * 1024 * 1024; // 1000MB
 
 const materialFileSchema = z
@@ -22,7 +22,7 @@ const materialFileSchema = z
         { message: "Format file tidak valid. Gunakan PDF, DOCX, atau PPTX." }
     )
     .refine((f) => f.size <= MAX_MATERIAL_SIZE, {
-        message: "Ukuran file maksimal 50MB.",
+        message: "Ukuran file maksimal 200MB.",
     });
 
 const videoFileSchema = z
@@ -35,7 +35,7 @@ const videoFileSchema = z
         { message: "Format video tidak valid. Gunakan MP4, MPEG, atau MOV." }
     )
     .refine((f) => f.size <= MAX_VIDEO_SIZE, {
-        message: "Ukuran video maksimal 100MB.",
+        message: "Ukuran video maksimal 1000MB.",
     });
 
 export const createMaterialSchema = z.object({
