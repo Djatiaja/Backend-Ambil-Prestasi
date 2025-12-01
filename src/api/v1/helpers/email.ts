@@ -46,7 +46,7 @@ export const sendOTPEmail = async (email: string, otp: string, message: string):
                 </p>
             </div>
             <p style="margin-top: 20px; font-size: 12px; color: #aaa;">
-                © ${new Date().getFullYear()} Your Company. All rights reserved.
+                © ${new Date().getFullYear()} Ambil Prestasi. All rights reserved.
             </p>
         </div>
     `;
