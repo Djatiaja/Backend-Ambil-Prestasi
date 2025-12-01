@@ -1,4 +1,6 @@
 import jwt from 'jsonwebtoken';
+import fs from 'fs';
+import path from 'path';
 
 const JWT_SECRET = process.env.JWT_SECRET ?? "";
 
@@ -11,9 +13,19 @@ interface FileTokenPayload {
  * Generate a JWT token for accessing protected files
  * @param filePath - The relative file path (e.g., "files/protected/video.mp4")
  * @param expirationMinutes - Token expiration time in minutes (default: 60)
- * @returns JWT token string
+ * @returns JWT token string or "File not found" if file doesn't exist or is empty string
  */
 export const generateFileToken = (filePath: string, expirationMinutes: number = 60): string => {
+    // Check if filePath is empty or file doesn't exist
+    if (!filePath || filePath === '') {
+        return 'File not found';
+    }
+
+    const absolutePath = path.join(process.cwd(), filePath);
+    if (!fs.existsSync(absolutePath)) {
+        return 'File not found';
+    }
+
     const expiredAt = Math.floor(Date.now() / 1000) + (expirationMinutes * 60);
 
     const payload: FileTokenPayload = {

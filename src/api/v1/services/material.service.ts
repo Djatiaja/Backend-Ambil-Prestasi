@@ -13,10 +13,15 @@ export class MaterialService {
         materials.forEach(material => {
             material.thumnail_path = `${env.APP_URL}/${material.thumnail_path}`;
             // Generate JWT tokens for protected files (valid for 60 minutes)
-            material.templatePath = `${env.APP_URL}/files/protected/${generateFileToken(material.templatePath, 60)}`;
-            material.video_path = `${env.APP_URL}/files/protected/${generateFileToken(material.video_path, 60)}`;
-            material.materialFilePath = `${env.APP_URL}/files/protected/${generateFileToken(material.materialFilePath, 60)}`;
-            material.ringkasanPath = `${env.APP_URL}/files/protected/${generateFileToken(material.ringkasanPath, 60)}`;
+            const templateToken = generateFileToken(material.templatePath, 60);
+            const videoToken = generateFileToken(material.video_path, 60);
+            const materialFileToken = generateFileToken(material.materialFilePath, 60);
+            const ringkasanToken = generateFileToken(material.ringkasanPath, 60);
+
+            material.templatePath = templateToken === 'File not found' ? 'File not found' : `${env.APP_URL}/files/protected/${templateToken}`;
+            material.video_path = videoToken === 'File not found' ? 'File not found' : `${env.APP_URL}/files/protected/${videoToken}`;
+            material.materialFilePath = materialFileToken === 'File not found' ? 'File not found' : `${env.APP_URL}/files/protected/${materialFileToken}`;
+            material.ringkasanPath = ringkasanToken === 'File not found' ? 'File not found' : `${env.APP_URL}/files/protected/${ringkasanToken}`;
         });
         return materials;
     }
@@ -27,10 +32,15 @@ export class MaterialService {
 
         material.thumnail_path = `${env.APP_URL}/${material.thumnail_path}`;
         // Generate JWT tokens for protected files (valid for 60 minutes)
-        material.templatePath = `${env.APP_URL}/files/protected/${generateFileToken(material.templatePath, 60)}`;
-        material.video_path = `${env.APP_URL}/files/protected/${generateFileToken(material.video_path, 60)}`;
-        material.materialFilePath = `${env.APP_URL}/files/protected/${generateFileToken(material.materialFilePath, 60)}`;
-        material.ringkasanPath = `${env.APP_URL}/files/protected/${generateFileToken(material.ringkasanPath, 60)}`;
+        const templateToken = generateFileToken(material.templatePath, 60);
+        const videoToken = generateFileToken(material.video_path, 60);
+        const materialFileToken = generateFileToken(material.materialFilePath, 60);
+        const ringkasanToken = generateFileToken(material.ringkasanPath, 60);
+
+        material.templatePath = templateToken === 'File not found' ? 'File not found' : `${env.APP_URL}/files/protected/${templateToken}`;
+        material.video_path = videoToken === 'File not found' ? 'File not found' : `${env.APP_URL}/files/protected/${videoToken}`;
+        material.materialFilePath = materialFileToken === 'File not found' ? 'File not found' : `${env.APP_URL}/files/protected/${materialFileToken}`;
+        material.ringkasanPath = ringkasanToken === 'File not found' ? 'File not found' : `${env.APP_URL}/files/protected/${ringkasanToken}`;
         return material;
     }
 
