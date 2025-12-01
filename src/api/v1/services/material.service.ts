@@ -40,10 +40,10 @@ export class MaterialService {
         sectionId: number
     ): Promise<Material> {
         const paths = {
-            templatePath: saveFile(data.template, true),
-            video_path: saveFile(data.video, true),
-            materialFilePath: saveFile(data.materialFile, true),
-            ringkasanPath: saveFile(data.ringkasan, true),
+            templatePath: data.template ? saveFile(data.template, true) : '',
+            video_path: data.video ? saveFile(data.video, true) : '',
+            materialFilePath: data.materialFile ? saveFile(data.materialFile, true) : '',
+            ringkasanPath: data.ringkasan ? saveFile(data.ringkasan, true) : '',
             thumnail_path: saveFile(data.thumnail, false),
         };
 

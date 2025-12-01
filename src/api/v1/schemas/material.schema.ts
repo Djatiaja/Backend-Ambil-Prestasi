@@ -42,10 +42,10 @@ export const createMaterialSchema = z.object({
     title: z.string().min(1, "Judul wajib diisi").max(255, "Judul terlalu panjang"),
     content: z.string().min(1, "Konten wajib diisi"),
     thumnail: imageSchema,
-    template: materialFileSchema,
-    video: videoFileSchema,
-    materialFile: materialFileSchema,
-    ringkasan: materialFileSchema,
+    template: materialFileSchema.optional(),
+    video: videoFileSchema.optional(),
+    materialFile: materialFileSchema.optional(),
+    ringkasan: materialFileSchema.optional(),
 });
 
 export const updateMaterialSchema = z.object({
