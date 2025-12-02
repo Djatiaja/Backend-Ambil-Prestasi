@@ -14,7 +14,14 @@ class SectionService {
                     title: true,
                     description: true,
                     order: true,
-                    Material: true,
+                    Material: {
+                        select: {
+                            id: true,
+                            title: true,
+                            content: true,
+                            thumnail_path: true,
+                        },
+                    },
                 }
             });
         } catch (error: unknown) {
