@@ -37,10 +37,10 @@ export class MaterialService {
         const materialFileToken = generateFileToken(material.materialFilePath, 60);
         const ringkasanToken = generateFileToken(material.ringkasanPath, 60);
 
-        material.templatePath = templateToken === 'File not found' ? 'File not found' : `${env.APP_URL}/files/protected/${templateToken}`;
-        material.video_path = videoToken === 'File not found' ? 'File not found' : `${env.APP_URL}/files/protected/${videoToken}`;
-        material.materialFilePath = materialFileToken === 'File not found' ? 'File not found' : `${env.APP_URL}/files/protected/${materialFileToken}`;
-        material.ringkasanPath = ringkasanToken === 'File not found' ? 'File not found' : `${env.APP_URL}/files/protected/${ringkasanToken}`;
+        material.templatePath = templateToken === 'File not found' ? '' : `${env.APP_URL}/files/protected/${templateToken}`;
+        material.video_path = videoToken === 'File not found' ? '' : `${env.APP_URL}/files/protected/${videoToken}`;
+        material.materialFilePath = materialFileToken === 'File not found' ? '' : `${env.APP_URL}/files/protected/${materialFileToken}`;
+        material.ringkasanPath = ringkasanToken === 'File not found' ? '' : `${env.APP_URL}/files/protected/${ringkasanToken}`;
         return material;
     }
 

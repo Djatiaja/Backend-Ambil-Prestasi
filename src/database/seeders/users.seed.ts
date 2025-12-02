@@ -28,38 +28,38 @@ export const usersSeed = async () => {
         }
     });
 
-    // for (let index = 0; index < 4; index++) {
-    //     await prisma.user.create({
-    //         data: {
-    //             username: `teacher${index + 1}`,
-    //             email: `teacher${index + 1}@example.com`,
-    //             name: randUserName(),
-    //             roleId: teacherRole.id,
-    //             profileImage: `https://ui-avatars.com/api/?name=Teacher+${index + 1}&background=random`,
-    //             telp: '08123456789',
-    //             specialization: 'Mathematics',
-    //             bio: 'Experienced math teacher with a passion for helping students succeed.',
-    //             verified_at: new Date(),
-    //             password: hashedPassword,
-    //             createdAt: randPastDate({ years: 5 }),
-    //         }
-    //     });
-    // }
+    for (let index = 0; index < 4; index++) {
+        await prisma.user.create({
+            data: {
+                username: `teacher${index + 1}`,
+                email: `teacher${index + 1}@example.com`,
+                name: randUserName(),
+                roleId: teacherRole.id,
+                profileImage: `https://ui-avatars.com/api/?name=Teacher+${index + 1}&background=random`,
+                telp: '08123456789',
+                specialization: 'Mathematics',
+                bio: 'Experienced math teacher with a passion for helping students succeed.',
+                verified_at: new Date(),
+                password: hashedPassword,
+                createdAt: randPastDate({ years: 5 }),
+            }
+        });
+    }
 
-    // for (let index = 0; index < 50; index++) {
-    //     await prisma.user.create({
-    //         data: {
-    //             username: `student${index + 1}`,
-    //             email: `student${index + 1}@example.com`,
-    //             name: randUserName(),
-    //             roleId: studentRole.id,
-    //             profileImage: `https://ui-avatars.com/api/?name=Student+${index + 1}&background=random`,
-    //             verified_at: new Date(),
-    //             password: hashedPassword,
-    //             createdAt: randPastDate({ years: 5 }),
-    //         }
-    //     });
-    // }
+    for (let index = 0; index < 50; index++) {
+        await prisma.user.create({
+            data: {
+                username: `student${index + 1}`,
+                email: `student${index + 1}@example.com`,
+                name: randUserName(),
+                roleId: studentRole.id,
+                profileImage: `https://ui-avatars.com/api/?name=Student+${index + 1}&background=random`,
+                verified_at: new Date(),
+                password: hashedPassword,
+                createdAt: randPastDate({ years: 5 }),
+            }
+        });
+    }
 
     // await prisma.user.create({
     //     data: {
