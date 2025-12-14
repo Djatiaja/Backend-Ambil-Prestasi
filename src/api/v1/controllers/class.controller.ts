@@ -44,7 +44,8 @@ export const getClasses = async (req: Request, res: Response) => {
             description: cls.description,
             image_path: cls.image_path,
             image_path_relative: cls.image_path_relative,
-            categoryId: cls.categoryId
+            categoryId: cls.categoryId,
+            sectionCount: cls._count.Section
         }))
 
         sendResponse({ res, statusCode: 200, success: true, message: "Get Classes", data: data, meta: meta })

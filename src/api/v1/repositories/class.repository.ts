@@ -8,6 +8,11 @@ export const safeClassFields = {
     description: true,
     image_path: true,
     categoryId: true,
+    _count: {
+        select: {
+            Section: true,
+        },
+    },
 };
 
 class ClassRepository {
